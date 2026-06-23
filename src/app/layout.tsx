@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CookieConsentRoot } from "@/components/cookie-consent/cookie-consent-root";
 import { BackToTop } from "@/components/layout/back-to-top";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -65,6 +66,7 @@ export default function RootLayout({
           {children}
           <BackToTop />
         </CookieConsentRoot>
+        <SpeedInsights sampleRate={0.25} />
       </body>
     </html>
   );
