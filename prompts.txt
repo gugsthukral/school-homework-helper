@@ -1,0 +1,21 @@
+I want all the page in .php like home, classes, subjects, etc. but see progress in localhost. and also create all the blog pages and update all the classes syllabus pages for current session 2026-27 as well, also implement signin/signup with google only
+
+
+Add all the subjects of classes 11 and 12 like medical, non-medical, commerce, etc. and also add EVS subjects for lower classes as well according to the current session 26-27
+
+
+add all the classes subjects update in select subject dropdown option In Homework Solver
+
+
+Add image/document upload option in homework solver, Math Solver and Grammar Checker, If end user uses our website in mobile/tablet then show camera option as well
+
+
+when end user get results from "Quiz Generator" then show print and download option in this tool
+
+
+add choose subject feild in "Quiz Generator" and if user select any subject without filling the topic(optional) the results should be shown according to the selected subject
+
+
+End user can use any AI tool only 2 times without login, after using 2 times it shows a message for SignIn to continue
+
+ok listen carefully, I want to deploy/live this project and I have already purchased a domain(www.schoolhomeworkhelper.com) and bluehost hosting plan, and I already assigned domain in blue hosting(c-panel) server, now give me step-by-step guide to live this project 

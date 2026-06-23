@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy-950: #06101f;
+  --color-navy-900: #0a1628;
+  --color-navy-800: #0f2744;
+  --color-navy-700: #163a63;
+  --color-sky-400: #4a9eff;
+  --color-sky-300: #7ab8ff;
+  --color-sky-200: #b8d9ff;
+  --color-orange-500: #f97316;
+  --color-orange-400: #fb923c;
+  --color-orange-600: #ea580c;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--color-navy-950);
+  color: #e8eef7;
+  overflow-x: clip;
+  min-width: 0;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-sky-300), var(--color-sky-400), var(--color-orange-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass-card {
+  background: rgba(15, 39, 68, 0.55);
+  border: 1px solid rgba(74, 158, 255, 0.15);
+  backdrop-filter: blur(12px);
+}
+
+.hero-glow {
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(74, 158, 255, 0.22), transparent 70%);
+}
+
+.section-glow {
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(249, 115, 22, 0.08), transparent 70%);
+}
+
+.prose-response {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.prose-response pre,
+.prose-response code {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+[id] {
+  scroll-margin-top: calc(60px + 5rem);
+}
+
+@media (min-width: 640px) {
+  [id] {
+    scroll-margin-top: calc(60px + 5.75rem);
+  }
+}
+
+@media (min-width: 768px) {
+  [id] {
+    scroll-margin-top: calc(60px + 6.5rem);
+  }
+}
