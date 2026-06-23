@@ -43,6 +43,13 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
+  verification: {
+    google: "vtaBwWyRbATOVYiugu6crxh5OUjB2-GI05Dge3tB45k",
+  },
 };
 
 export default function RootLayout({
