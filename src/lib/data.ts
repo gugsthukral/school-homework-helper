@@ -8,6 +8,14 @@ export const navLinks = [
 
 export const aiTools = [
   {
+    name: "Ask Anything",
+    description: "Ask any school question and get a clear AI tutor answer.",
+    icon: "MessageCircleQuestion",
+    href: "/tools/ask-anything",
+    color: "from-orange-500/20 to-sky-400/5",
+    accent: "text-orange-400",
+  },
+  {
     name: "Homework Solver",
     description: "Get step-by-step explanations for any homework question.",
     icon: "BookOpen",
@@ -22,6 +30,14 @@ export const aiTools = [
     href: "/tools/essay-generator",
     color: "from-orange-500/20 to-orange-500/5",
     accent: "text-orange-400",
+  },
+  {
+    name: "Calculator",
+    description: "Calculate expressions, percentages, and units with step-by-step help.",
+    icon: "SquareFunction",
+    href: "/tools/calculator",
+    color: "from-sky-400/20 to-orange-500/5",
+    accent: "text-sky-300",
   },
   {
     name: "Math Solver",
@@ -40,36 +56,20 @@ export const aiTools = [
     accent: "text-orange-400",
   },
   {
-    name: "Grammar Checker",
-    description: "Fix grammar and improve your English writing.",
-    icon: "SpellCheck",
-    href: "/tools/grammar-checker",
-    color: "from-sky-400/20 to-sky-400/5",
-    accent: "text-sky-400",
-  },
-  {
-    name: "Science Projects",
-    description: "Discover class-wise science project ideas.",
+    name: "School Projects",
+    description: "Discover class-wise school project ideas.",
     icon: "FlaskConical",
     href: "/tools/science-projects",
     color: "from-orange-500/20 to-orange-500/5",
     accent: "text-orange-400",
   },
   {
-    name: "Calculator",
-    description: "Calculate expressions, percentages, and units with step-by-step help.",
-    icon: "SquareFunction",
-    href: "/tools/calculator",
-    color: "from-sky-400/20 to-orange-500/5",
-    accent: "text-sky-300",
-  },
-  {
-    name: "Ask Anything",
-    description: "Ask any school question and get a clear AI tutor answer.",
-    icon: "MessageCircleQuestion",
-    href: "/tools/ask-anything",
-    color: "from-orange-500/20 to-sky-400/5",
-    accent: "text-orange-400",
+    name: "Grammar Checker",
+    description: "Fix grammar and improve your English writing.",
+    icon: "SpellCheck",
+    href: "/tools/grammar-checker",
+    color: "from-sky-400/20 to-sky-400/5",
+    accent: "text-sky-400",
   },
 ];
 

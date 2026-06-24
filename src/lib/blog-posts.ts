@@ -76,7 +76,7 @@ const rawFeaturedPosts: BlogPost[] = [  {
       {
         heading: "Generate Custom Ideas with AI",
         content:
-          "Use our Science Projects tool — select Class 8, enter your interest (e.g. electricity, plants), and get 5 detailed project ideas with materials and steps.",
+          "Use our School Projects tool — select Class 8, enter your interest (e.g. electricity, plants), and get 5 detailed project ideas with materials and steps.",
       },
     ],
   },

@@ -92,9 +92,9 @@ export const TOOL_SEO = {
     path: "/tools/grammar-checker",
   },
   "science-projects": {
-    title: "Science Project Ideas Generator",
+    title: "School Project Ideas Generator",
     description:
-      "Get class-wise science project ideas with materials, steps, and learning outcomes for CBSE students Class 1–12.",
+      "Get class-wise school project ideas with materials, steps, and learning outcomes for CBSE students Class 1–12.",
     keywords: [
       "science project ideas",
       "school science projects",

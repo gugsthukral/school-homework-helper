@@ -10,8 +10,8 @@ export const metadata: Metadata = buildPageMetadata(TOOL_SEO["science-projects"]
 export default function ScienceProjectsPage() {
   return (
     <ToolLayout
-      title="Science Project Ideas"
-      description="Discover fun, safe science project ideas tailored to your class level."
+      title="School Projects"
+      description="Discover fun, safe school project ideas tailored to your class level."
       icon={<FlaskConical className="h-7 w-7 text-orange-400" />}
     >
       <ScienceProjectsForm />

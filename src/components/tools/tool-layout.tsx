@@ -17,7 +17,7 @@ export function ToolLayout({ title, description, icon, children }: ToolLayoutPro
     <>
       <main className={cn("min-h-screen pb-20 sm:pb-16", SITE_HEADER_OFFSET_CLASS)}>
         <div className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-96" />
-        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <Link
             href="/#tools"
             className="mb-8 inline-flex items-center gap-2 text-sm text-sky-300/70 transition-colors hover:text-orange-400"

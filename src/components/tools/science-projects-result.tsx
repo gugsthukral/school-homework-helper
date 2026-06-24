@@ -225,7 +225,7 @@ export function ScienceProjectsResult({ projects, markdown, grade }: ScienceProj
         <div className="flex items-center gap-3">
           <FlaskConical className="h-5 w-5 text-sky-400" />
           <div>
-            <h2 className="font-semibold text-white">Science Project Ideas</h2>
+            <h2 className="font-semibold text-white">School Project Ideas</h2>
             <p className="text-xs text-sky-300/50">
               Class {grade} · {projects.length} project{projects.length !== 1 ? "s" : ""}
             </p>
@@ -234,7 +234,7 @@ export function ScienceProjectsResult({ projects, markdown, grade }: ScienceProj
         <ResultExportActions
           content={formatAllProjectsContent(projects, markdown)}
           fileName={`science-projects-class-${grade}`}
-          title="Science Project Ideas"
+          title="School Project Ideas"
           subtitle={`Class ${grade}`}
           showShare={false}
         />

@@ -43,7 +43,7 @@ const subjectMeta: Record<
     name: "Science",
     dbSlug: "science",
     toolHref: "/tools/science-projects",
-    toolLabel: "Science Projects",
+    toolLabel: "School Projects",
   },
   english: {
     name: "English",
@@ -276,7 +276,7 @@ function scienceProjectPages(): SeoPage[] {
         {
           heading: "Generate Custom Project Ideas",
           content:
-            "Tell our Science Projects AI your class level and interest area — get 5 detailed project ideas with materials, steps, and learning outcomes.",
+            "Tell our School Projects AI your class level and interest area — get 5 detailed project ideas with materials, steps, and learning outcomes.",
         },
       ],
       faqs: [
@@ -291,7 +291,7 @@ function scienceProjectPages(): SeoPage[] {
         },
       ],
       toolHref: "/tools/science-projects",
-      toolLabel: "Science Projects",
+      toolLabel: "School Projects",
     };
   });
 }

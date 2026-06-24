@@ -97,8 +97,8 @@ export default function AboutPage() {
 
       <section className="mt-16">
         <h2 className="mb-2 text-2xl font-bold text-white">Our AI Tools</h2>
-        <p className="mb-6 text-sky-200/60">Six tools to help with every type of schoolwork.</p>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <p className="mb-6 text-sky-200/60">Eight tools to help with every type of schoolwork.</p>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
           {aiTools.map((tool) => (
             <Link
               key={tool.href}

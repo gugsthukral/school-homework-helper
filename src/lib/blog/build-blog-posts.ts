@@ -14,10 +14,10 @@ function slugify(text: string) {
 function toolForSubject(subject: string): { href: string; label: string } {
   const map: Record<string, { href: string; label: string }> = {
     Mathematics: { href: "/tools/math-solver", label: "Math Solver" },
-    Science: { href: "/tools/science-projects", label: "Science Projects" },
+    Science: { href: "/tools/science-projects", label: "School Projects" },
     Physics: { href: "/tools/math-solver", label: "Math Solver" },
     Chemistry: { href: "/tools/homework-solver", label: "Homework Solver" },
-    Biology: { href: "/tools/science-projects", label: "Science Projects" },
+    Biology: { href: "/tools/science-projects", label: "School Projects" },
     English: { href: "/tools/essay-generator", label: "Essay Generator" },
     Hindi: { href: "/tools/grammar-checker", label: "Grammar Checker" },
     Punjabi: { href: "/tools/grammar-checker", label: "Grammar Checker" },

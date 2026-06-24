@@ -68,7 +68,7 @@ export function enrichFeaturedPost(post: BlogPost): BlogPost {
       {
         heading: "Free Tools on This Website",
         content:
-          "• **Homework Solver** — any subject, step-by-step\n• **Math Solver** — arithmetic to algebra\n• **Essay Generator** — learn essay structure\n• **Quiz Generator** — test yourself before exams\n• **Grammar Checker** — fix writing mistakes\n• **Science Projects** — project ideas by class",
+          "• **Homework Solver** — any subject, step-by-step\n• **Math Solver** — arithmetic to algebra\n• **Essay Generator** — learn essay structure\n• **Quiz Generator** — test yourself before exams\n• **Grammar Checker** — fix writing mistakes\n• **School Projects** — project ideas by class",
       },
     ],
     "board-exam-study-plan-class-10": [

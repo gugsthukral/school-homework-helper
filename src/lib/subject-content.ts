@@ -29,7 +29,7 @@ export const subjectList: SubjectInfo[] = [
       "Physics, chemistry, and biology explained simply with project ideas and homework solutions.",
     topics: ["Physics", "Chemistry", "Biology", "Environment", "Experiments", "Projects"],
     color: "border-orange-500/30 hover:border-orange-500/60",
-    recommendedTools: ["Science Projects", "Homework Solver", "Quiz Generator"],
+    recommendedTools: ["School Projects", "Homework Solver", "Quiz Generator"],
   },
   {
     slug: "english",
@@ -69,7 +69,7 @@ export const subjectList: SubjectInfo[] = [
       "Environmental Studies for Classes 1–5 — nature, community, health, and the world around us.",
     topics: ["Plants & Animals", "Food & Water", "Family & Community", "Maps & Environment", "Health & Habits", "Festivals & Culture"],
     color: "border-emerald-500/30 hover:border-emerald-500/60",
-    recommendedTools: ["Science Projects", "Homework Solver", "Quiz Generator"],
+    recommendedTools: ["School Projects", "Homework Solver", "Quiz Generator"],
   },
   {
     slug: "accountancy",

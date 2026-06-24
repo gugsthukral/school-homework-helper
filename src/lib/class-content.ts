@@ -46,7 +46,7 @@ export function getClassBySlug(slug: string) {
 export function getRecommendedToolsForClass(classNumber: number) {
   if (classNumber <= 4) {
     return aiTools.filter((t) =>
-      ["Homework Solver", "Math Solver", "Quiz Generator", "Science Projects"].includes(t.name)
+      ["Homework Solver", "Math Solver", "Quiz Generator", "School Projects"].includes(t.name)
     );
   }
   if (classNumber <= 8) {

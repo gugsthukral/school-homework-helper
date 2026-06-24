@@ -51,11 +51,11 @@ const SUBJECT_TOOLS: Record<string, { href: string; label: string }> = {
   english: { href: "/tools/essay-generator", label: "Essay Generator" },
   hindi: { href: "/tools/homework-solver", label: "Homework Solver" },
   science: { href: "/tools/homework-solver", label: "Homework Solver" },
-  evs: { href: "/tools/science-projects", label: "Science Projects" },
+  evs: { href: "/tools/science-projects", label: "School Projects" },
   "social-science": { href: "/tools/quiz-generator", label: "Quiz Generator" },
   physics: { href: "/tools/math-solver", label: "Math Solver" },
   chemistry: { href: "/tools/homework-solver", label: "Homework Solver" },
-  biology: { href: "/tools/science-projects", label: "Science Projects" },
+  biology: { href: "/tools/science-projects", label: "School Projects" },
 };
 
 export function getSubjectSlug(subjectName: string): string {

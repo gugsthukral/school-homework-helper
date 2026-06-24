@@ -4,14 +4,14 @@ import { SiteLogo } from "@/components/layout/site-logo";
 
 const footerLinks = {
   tools: [
+    { label: "Ask Anything", href: "/tools/ask-anything" },
     { label: "Homework Solver", href: "/tools/homework-solver" },
     { label: "Essay Generator", href: "/tools/essay-generator" },
+    { label: "Calculator", href: "/tools/calculator" },
     { label: "Math Solver", href: "/tools/math-solver" },
     { label: "Quiz Generator", href: "/tools/quiz-generator" },
+    { label: "School Projects", href: "/tools/science-projects" },
     { label: "Grammar Checker", href: "/tools/grammar-checker" },
-    { label: "Science Projects", href: "/tools/science-projects" },
-    { label: "Calculator", href: "/tools/calculator" },
-    { label: "Ask Anything", href: "/tools/ask-anything" },
   ],
   resources: [
     { label: "All Classes", href: "/classes" },
