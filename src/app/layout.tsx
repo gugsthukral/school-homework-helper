@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleTagsHead } from "@/components/analytics/google-tags-head";
 import { CookieConsentRoot } from "@/components/cookie-consent/cookie-consent-root";
 import { BackToTop } from "@/components/layout/back-to-top";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -28,6 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <GoogleTagsHead />
+      </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <SiteJsonLd />
         <CookieConsentRoot>
