@@ -30,6 +30,12 @@ const cookieTable = [
     duration: "Session / up to 1 year",
   },
   {
+    name: "Google Analytics (_ga, _gid)",
+    purpose: "Measure site traffic when you accept optional cookies or consent in Google's message.",
+    type: "Optional",
+    duration: "Up to 2 years",
+  },
+  {
     name: "Google AdSense & CMP (IAB TCF)",
     purpose:
       "Serve ads and collect consent in the EEA, UK, and Switzerland via Google’s certified consent message.",

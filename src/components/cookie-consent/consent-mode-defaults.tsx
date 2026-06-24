@@ -1,11 +1,11 @@
 import Script from "next/script";
-import { adsenseConfig } from "@/lib/adsense-config";
+import { googleTagsEnabled } from "@/lib/google-tags-config";
 
 /**
- * Must run before Google tags (AdSense) so Consent Mode v2 defaults apply.
+ * Must run before Google tags (AdSense, GA4) so Consent Mode v2 defaults apply.
  */
 export function ConsentModeDefaults() {
-  if (!adsenseConfig.enabled) return null;
+  if (!googleTagsEnabled()) return null;
 
   return (
     <Script id="google-consent-mode-defaults" strategy="beforeInteractive">
