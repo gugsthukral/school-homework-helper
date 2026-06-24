@@ -13,6 +13,7 @@ export function GoogleAnalytics() {
   return (
     <>
       <Script
+        async
         src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
         strategy="beforeInteractive"
       />
