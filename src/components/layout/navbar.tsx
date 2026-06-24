@@ -23,7 +23,7 @@ export function Navbar() {
       )}
       style={{ top: topBarHidden ? 0 : TOPBAR_HEIGHT }}
     >
-      <nav className="mx-auto flex min-h-[3.75rem] max-w-7xl items-center justify-between gap-3 px-4 py-2 sm:min-h-[5rem] sm:px-6 sm:py-3 md:min-h-[5.5rem] lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 sm:px-6 sm:py-3 lg:px-8">
         <Link
           href="/"
           className="group flex shrink-0 items-center transition-opacity hover:opacity-90"

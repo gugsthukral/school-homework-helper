@@ -132,7 +132,7 @@ export function SiteSearch({ variant = "desktop", onNavigate }: SiteSearchProps)
       )}
 
       {open && (
-        <div className="fixed inset-0 z-[100] flex items-start justify-center bg-navy-950/70 px-3 pt-[calc(60px+4.5rem)] backdrop-blur-sm sm:px-4 sm:pt-[calc(60px+5.5rem)] md:pt-[calc(60px+6.5rem)]">
+        <div className="fixed inset-0 z-[100] flex items-start justify-center bg-navy-950/70 px-3 pt-[10.5rem] backdrop-blur-sm sm:px-4 sm:pt-[11.75rem] md:pt-[12.5rem]">
           <div
             ref={panelRef}
             className="w-full max-w-xl overflow-hidden rounded-2xl border border-sky-400/20 bg-navy-900 shadow-2xl shadow-black/40"

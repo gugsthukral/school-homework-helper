@@ -18,6 +18,19 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  scroll-padding-top: 10.5rem;
+}
+
+@media (min-width: 640px) {
+  html {
+    scroll-padding-top: 11.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 12.5rem;
+  }
 }
 
 body {

@@ -23,13 +23,13 @@ export const socialLinks = [
 
 export const TOPBAR_HEIGHT = 60;
 
-/** Navbar content height (logo row + vertical padding) per breakpoint */
+/** Navbar row height (logo + vertical padding). Sync with SiteLogo header variant. */
 export const NAVBAR_HEIGHT = {
-  base: 60, // h-10 + py-2
-  sm: 80, // h-12 + py-3
-  md: 88, // h-16 + py-3
+  base: 88, // 140px logo + py-2
+  sm: 106, // 160px logo + py-3
+  md: 116, // 180px logo + py-3
 } as const;
 
-/** Space below fixed header so page content is not covered */
+/** Space below fixed header (top bar + navbar) so content is not covered */
 export const SITE_HEADER_OFFSET_CLASS =
-  "pt-[calc(60px+3.75rem+0.75rem)] sm:pt-[calc(60px+5rem+0.75rem)] md:pt-[calc(60px+5.5rem+1rem)]";
+  "pt-[10.5rem] sm:pt-[11.75rem] md:pt-[12.5rem]";
