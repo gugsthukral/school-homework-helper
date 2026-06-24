@@ -1,14 +1,6 @@
 import Link from "next/link";
-import { Atom, Globe2, Languages, Sigma, Type, type LucideIcon } from "lucide-react";
 import { subjects } from "@/lib/data";
-
-const iconMap: Record<string, LucideIcon> = {
-  Sigma,
-  Atom,
-  Languages,
-  Type,
-  Globe2,
-};
+import { SubjectIcon } from "@/components/shared/subject-icon";
 
 export function SubjectsSection() {
   return (
@@ -28,24 +20,24 @@ export function SubjectsSection() {
         </div>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {subjects.map((subject) => {
-            const Icon = iconMap[subject.icon] ?? Languages;
-            return (
-              <Link
-                key={subject.name}
-                href={subject.href}
-                className={`group flex items-center gap-4 rounded-2xl border bg-navy-900/40 p-5 transition-all hover:-translate-y-0.5 hover:bg-navy-800/50 hover:shadow-lg ${subject.color}`}
-              >
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400/20 to-orange-500/10">
-                  <Icon className="h-7 w-7 text-sky-400 transition-colors group-hover:text-orange-400" />
-                </span>
-                <div>
-                  <h3 className="text-lg font-semibold text-white">{subject.name}</h3>
-                  <p className="text-sm text-sky-300/50">Homework help &amp; resources</p>
-                </div>
-              </Link>
-            );
-          })}
+          {subjects.map((subject) => (
+            <Link
+              key={subject.name}
+              href={subject.href}
+              className={`group flex items-center gap-4 rounded-2xl border bg-navy-900/40 p-5 transition-all hover:-translate-y-0.5 hover:bg-navy-800/50 hover:shadow-lg ${subject.color}`}
+            >
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400/20 to-orange-500/10">
+                <SubjectIcon
+                  icon={subject.icon}
+                  className="h-7 w-7 text-sky-400 transition-colors group-hover:text-orange-400"
+                />
+              </span>
+              <div>
+                <h3 className="text-lg font-semibold text-white">{subject.name}</h3>
+                <p className="text-sm text-sky-300/50">Homework help &amp; resources</p>
+              </div>
+            </Link>
+          ))}
         </div>
 
         <div className="mt-10 flex justify-center">

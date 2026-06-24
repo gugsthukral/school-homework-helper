@@ -24,7 +24,7 @@ export const subjectList: SubjectInfo[] = [
   {
     slug: "science",
     name: "Science",
-    icon: "Atom",
+    icon: "TestTube",
     description:
       "Physics, chemistry, and biology explained simply with project ideas and homework solutions.",
     topics: ["Physics", "Chemistry", "Biology", "Environment", "Experiments", "Projects"],
@@ -34,7 +34,7 @@ export const subjectList: SubjectInfo[] = [
   {
     slug: "english",
     name: "English",
-    icon: "Languages",
+    icon: "Abc",
     description:
       "Essay writing, grammar, comprehension, and vocabulary help for all class levels.",
     topics: ["Grammar", "Essays", "Comprehension", "Vocabulary", "Letter Writing", "Literature"],
@@ -44,7 +44,7 @@ export const subjectList: SubjectInfo[] = [
   {
     slug: "hindi",
     name: "Hindi",
-    icon: "Type",
+    icon: "Hindi",
     description:
       "Hindi grammar, essay writing, and comprehension support for school students.",
     topics: ["व्याकरण", "निबंध", "अपठित गद्यांश", "पत्र लेखन", "कविता", "कहानी"],
@@ -54,7 +54,7 @@ export const subjectList: SubjectInfo[] = [
   {
     slug: "punjabi",
     name: "Punjabi",
-    icon: "Type",
+    icon: "Punjabi",
     description:
       "Punjabi language homework help including grammar, essays, and reading practice.",
     topics: ["ਵਿਆਕਰਣ", "ਲੇਖ", "ਪਠਨ", "ਸ਼ਬਦਾਵਲੀ", "ਕਵਿਤਾ", "ਕਹਾਣੀ"],
@@ -64,7 +64,7 @@ export const subjectList: SubjectInfo[] = [
   {
     slug: "evs",
     name: "EVS",
-    icon: "Atom",
+    icon: "TestTube",
     description:
       "Environmental Studies for Classes 1–5 — nature, community, health, and the world around us.",
     topics: ["Plants & Animals", "Food & Water", "Family & Community", "Maps & Environment", "Health & Habits", "Festivals & Culture"],

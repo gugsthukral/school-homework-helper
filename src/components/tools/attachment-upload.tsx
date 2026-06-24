@@ -9,6 +9,7 @@ import {
   ACCEPTED_FILE_TYPES,
   processUploadFile,
 } from "@/lib/attachment-utils";
+import { InputActionIconButton } from "@/components/tools/input-action-icon-button";
 import { cn } from "@/lib/utils";
 
 type AttachmentUploadProps = {
@@ -19,6 +20,8 @@ type AttachmentUploadProps = {
   error?: string;
   onError?: (message: string) => void;
   disabled?: boolean;
+  layout?: "standalone" | "inline";
+  className?: string;
 };
 
 function useMobileOrTablet() {
@@ -49,6 +52,8 @@ export function AttachmentUpload({
   error,
   onError,
   disabled = false,
+  layout = "standalone",
+  className,
 }: AttachmentUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
@@ -87,47 +92,31 @@ export function AttachmentUpload({
     }
   }
 
-  function removeImage(id: string) {
-    onImagesChange(images.filter((img) => img.id !== id));
-  }
+  const showCamera = layout === "inline" || isMobileOrTablet;
 
-  function removeDocument(name: string) {
-    onDocumentsChange(documents.filter((doc) => doc.name !== name));
-  }
+  const iconButtons = (
+    <>
+      <InputActionIconButton
+        icon={FileUp}
+        label="Upload image or document"
+        onClick={() => fileInputRef.current?.click()}
+        disabled={disabled || processing}
+        size={layout === "inline" ? "sm" : "default"}
+      />
+      {showCamera && (
+        <InputActionIconButton
+          icon={Camera}
+          label="Take photo"
+          onClick={() => cameraInputRef.current?.click()}
+          disabled={disabled || processing || images.length >= MAX_ATTACHMENTS}
+          size={layout === "inline" ? "sm" : "default"}
+        />
+      )}
+    </>
+  );
 
-  return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          disabled={disabled || processing}
-          onClick={() => fileInputRef.current?.click()}
-          className={cn(
-            "inline-flex items-center gap-2 rounded-xl border border-sky-400/25 bg-sky-400/5 px-4 py-2.5 text-sm font-medium text-sky-200 transition-colors hover:border-sky-400/50 hover:bg-sky-400/10",
-            (disabled || processing) && "cursor-not-allowed opacity-60"
-          )}
-        >
-          <FileUp className="h-4 w-4" />
-          Upload image / document
-        </button>
-
-        {isMobileOrTablet && (
-          <button
-            type="button"
-            disabled={disabled || processing || images.length >= MAX_ATTACHMENTS}
-            onClick={() => cameraInputRef.current?.click()}
-            className={cn(
-              "inline-flex items-center gap-2 rounded-xl border border-orange-500/30 bg-orange-500/10 px-4 py-2.5 text-sm font-medium text-orange-200 transition-colors hover:border-orange-500/50 hover:bg-orange-500/15",
-              (disabled || processing || images.length >= MAX_ATTACHMENTS) &&
-                "cursor-not-allowed opacity-60"
-            )}
-          >
-            <Camera className="h-4 w-4" />
-            Take photo
-          </button>
-        )}
-      </div>
-
+  const hiddenInputs = (
+    <>
       <input
         ref={fileInputRef}
         type="file"
@@ -144,70 +133,101 @@ export function AttachmentUpload({
         className="hidden"
         onChange={(e) => handleFiles(e.target.files)}
       />
+    </>
+  );
 
+  if (layout === "inline") {
+    return (
+      <div className={cn("flex items-center gap-1", className)}>
+        {hiddenInputs}
+        {iconButtons}
+      </div>
+    );
+  }
+
+  return (
+    <div className={cn("space-y-3", className)}>
+      <div className="flex flex-wrap items-center gap-2">{iconButtons}</div>
+      {hiddenInputs}
       <p className="text-xs text-sky-300/45">
         JPG, PNG, WEBP, PDF, or TXT · up to {MAX_ATTACHMENTS} images · max 5 MB per image
         {isMobileOrTablet ? " · Use camera on phone/tablet" : ""}
       </p>
+      <AttachmentPreviews
+        images={images}
+        onImagesChange={onImagesChange}
+        documents={documents}
+        onDocumentsChange={onDocumentsChange}
+      />
+      {processing && <p className="text-xs text-sky-300/60">Processing upload...</p>}
+      {error && <p className="text-xs text-red-300">{error}</p>}
+    </div>
+  );
+}
 
-      {(images.length > 0 || documents.length > 0) && (
-        <div className="space-y-3 rounded-xl border border-sky-400/15 bg-navy-950/40 p-3">
-          {images.length > 0 && (
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {images.map((img) => (
-                <div key={img.id} className="group relative overflow-hidden rounded-lg border border-sky-400/20">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={img.previewUrl}
-                    alt={img.name}
-                    className="h-24 w-full object-cover"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeImage(img.id)}
-                    className="absolute right-1 top-1 rounded-full bg-navy-950/80 p-1 text-sky-200 hover:text-white"
-                    aria-label={`Remove ${img.name}`}
-                  >
-                    <X className="h-3.5 w-3.5" />
-                  </button>
-                  <p className="truncate px-2 py-1 text-[10px] text-sky-300/60">{img.name}</p>
-                </div>
-              ))}
-            </div>
-          )}
+export function AttachmentPreviews({
+  images,
+  onImagesChange,
+  documents,
+  onDocumentsChange,
+}: Pick<AttachmentUploadProps, "images" | "onImagesChange" | "documents" | "onDocumentsChange">) {
+  function removeImage(id: string) {
+    onImagesChange(images.filter((img) => img.id !== id));
+  }
 
-          {documents.map((doc) => (
+  function removeDocument(name: string) {
+    onDocumentsChange(documents.filter((doc) => doc.name !== name));
+  }
+
+  if (images.length === 0 && documents.length === 0) return null;
+
+  return (
+    <div className="space-y-3 rounded-xl border border-sky-400/15 bg-navy-950/40 p-3">
+      {images.length > 0 && (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {images.map((img) => (
             <div
-              key={doc.name}
-              className="flex items-start justify-between gap-3 rounded-lg border border-sky-400/15 px-3 py-2"
+              key={img.id}
+              className="group relative overflow-hidden rounded-lg border border-sky-400/20"
             >
-              <div className="min-w-0">
-                <p className="flex items-center gap-1.5 text-sm font-medium text-sky-200">
-                  <FileText className="h-3.5 w-3.5 shrink-0 text-orange-400" />
-                  {doc.name}
-                </p>
-                <p className="mt-1 line-clamp-2 text-xs text-sky-300/50">{doc.text}</p>
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={img.previewUrl} alt={img.name} className="h-24 w-full object-cover" />
               <button
                 type="button"
-                onClick={() => removeDocument(doc.name)}
-                className="shrink-0 rounded-full p-1 text-sky-300/60 hover:text-white"
-                aria-label={`Remove ${doc.name}`}
+                onClick={() => removeImage(img.id)}
+                className="absolute right-1 top-1 rounded-full bg-navy-950/80 p-1 text-sky-200 hover:text-white"
+                aria-label={`Remove ${img.name}`}
               >
-                <X className="h-4 w-4" />
+                <X className="h-3.5 w-3.5" />
               </button>
+              <p className="truncate px-2 py-1 text-[10px] text-sky-300/60">{img.name}</p>
             </div>
           ))}
         </div>
       )}
 
-      {processing && (
-        <p className="text-xs text-sky-300/60">Processing upload...</p>
-      )}
-
-      {error && (
-        <p className="text-xs text-red-300">{error}</p>
-      )}
+      {documents.map((doc) => (
+        <div
+          key={doc.name}
+          className="flex items-start justify-between gap-3 rounded-lg border border-sky-400/15 px-3 py-2"
+        >
+          <div className="min-w-0">
+            <p className="flex items-center gap-1.5 text-sm font-medium text-sky-200">
+              <FileText className="h-3.5 w-3.5 shrink-0 text-orange-400" />
+              {doc.name}
+            </p>
+            <p className="mt-1 line-clamp-2 text-xs text-sky-300/50">{doc.text}</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => removeDocument(doc.name)}
+            className="shrink-0 rounded-full p-1 text-sky-300/60 hover:text-white"
+            aria-label={`Remove ${doc.name}`}
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      ))}
     </div>
   );
 }

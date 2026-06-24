@@ -5,8 +5,7 @@ import { Calculator } from "lucide-react";
 import { useAITool } from "@/hooks/use-ai-tool";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubmitButton } from "@/components/tools/submit-button";
-import { AttachmentUpload } from "@/components/tools/attachment-upload";
-import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
+import { AIToolInputField } from "@/components/tools/ai-tool-input-field";
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
 import {
   buildDocumentContext,
@@ -64,36 +63,25 @@ export function MathSolverForm() {
           </div>
         </div>
 
-        <div>
-          <FieldLabelWithVoice
-            htmlFor="problem"
-            onVoiceTranscript={(text) => setProblem((prev) => appendVoiceText(prev, text))}
-            voiceDisabled={loading}
-          >
-            Math Problem
-          </FieldLabelWithVoice>
-          <textarea
-            id="problem"
-            value={problem}
-            onChange={(e) => setProblem(e.target.value)}
-            placeholder="Type the problem, or upload a photo of the question..."
-            rows={4}
-            className={`${inputClassName} resize-none`}
-          />
-        </div>
-
-        <div>
-          <p className={labelClassName}>Upload image or document (optional)</p>
-          <AttachmentUpload
-            images={images}
-            onImagesChange={setImages}
-            documents={documents}
-            onDocumentsChange={setDocuments}
-            error={uploadError}
-            onError={setUploadError}
-            disabled={loading}
-          />
-        </div>
+        <AIToolInputField
+          id="problem"
+          label="Math Problem"
+          value={problem}
+          onChange={setProblem}
+          placeholder="Type the problem, or use the icons to speak or upload a photo..."
+          multiline
+          rows={4}
+          disabled={loading}
+          onVoiceTranscript={(text) => setProblem((prev) => appendVoiceText(prev, text))}
+          attachments={{
+            images,
+            onImagesChange: setImages,
+            documents,
+            onDocumentsChange: setDocuments,
+            error: uploadError,
+            onError: setUploadError,
+          }}
+        />
 
         <AIToolStatus
           error={error}

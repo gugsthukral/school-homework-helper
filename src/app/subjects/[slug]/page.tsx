@@ -1,29 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  Atom,
-  Globe2,
-  Languages,
-  Sigma,
-  Type,
-  type LucideIcon,
-} from "lucide-react";
 import { PageLayout } from "@/components/layout/page-layout";
+import { SubjectIcon } from "@/components/shared/subject-icon";
 import { ToolCardGrid, TopicPills } from "@/components/shared/resource-cards";
 import { ChapterLinkList } from "@/components/classes/chapter-link-list";
 import { classList } from "@/lib/class-content";
 import { getChaptersForSubjectPage } from "@/lib/chapters";
 import { getSubjectBySlug, getToolsForSubject, subjectList } from "@/lib/subject-content";
 import { buildPageMetadata } from "@/lib/seo-metadata";
-
-const iconMap: Record<string, LucideIcon> = {
-  Sigma,
-  Atom,
-  Languages,
-  Type,
-  Globe2,
-};
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -59,7 +44,6 @@ export default async function SubjectDetailPage({ params, searchParams }: Props)
   const subject = getSubjectBySlug(slug);
   if (!subject) notFound();
 
-  const Icon = iconMap[subject.icon] ?? Languages;
   const tools = getToolsForSubject(subject);
   const selectedClass = classParam ? Number(classParam) : null;
   const classChapters =
@@ -84,7 +68,7 @@ export default async function SubjectDetailPage({ params, searchParams }: Props)
 
       <div className="mb-10 flex items-center gap-4">
         <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-400/20 to-orange-500/10 ring-1 ring-sky-400/20">
-          <Icon className="h-8 w-8 text-sky-400" />
+          <SubjectIcon icon={subject.icon} className="h-8 w-8 text-sky-400" />
         </span>
       </div>
 

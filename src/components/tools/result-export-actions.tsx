@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Download, Printer } from "lucide-react";
 import { downloadTextFile, printResult } from "@/lib/export-result";
+import { ListenAudioButton } from "@/components/tools/listen-audio-button";
 import { ResultShareIcons } from "@/components/tools/result-share-icons";
 import { cn } from "@/lib/utils";
 
@@ -49,6 +50,7 @@ export function ResultExportActions({
     <div className={cn("flex w-full flex-col gap-3 sm:w-auto", className)}>
       {showExport && (
         <div className="flex flex-wrap items-center gap-2">
+          <ListenAudioButton text={content} />
           <button type="button" onClick={handlePrint} className={buttonClassName}>
             <Printer className="h-4 w-4" />
             Print

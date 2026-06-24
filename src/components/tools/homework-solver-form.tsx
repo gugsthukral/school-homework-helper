@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { BookOpen } from "lucide-react";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubjectSelect } from "@/components/tools/subject-select";
-import { AttachmentUpload } from "@/components/tools/attachment-upload";
-import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
+import { AIToolInputField } from "@/components/tools/ai-tool-input-field";
 import { SubmitButton } from "@/components/tools/submit-button";
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
 import { useAITool } from "@/hooks/use-ai-tool";
@@ -15,7 +14,6 @@ import {
   type UploadedImage,
 } from "@/lib/attachment-utils";
 import { getSubjectNamesForClass } from "@/lib/syllabus-2026-27";
-import { inputClassName, labelClassName } from "@/lib/tool-form-config";
 import { slugifyFileName } from "@/lib/export-result";
 import { appendVoiceText } from "@/lib/voice-text";
 
@@ -57,37 +55,28 @@ export function HomeworkSolverForm() {
           <SubjectSelect classNumber={grade} value={subject} onChange={setSubject} />
         </div>
 
-        <div>
-          <FieldLabelWithVoice
-            htmlFor="question"
-            onVoiceTranscript={(text) => setQuestion((prev) => appendVoiceText(prev, text))}
-            voiceDisabled={loading}
-          >
-            Your Homework Question
-          </FieldLabelWithVoice>
-          <textarea
-            id="question"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder="Type your question, or upload a photo / document below..."
-            rows={5}
-            className={`${inputClassName} resize-none`}
-          />
-          <p className="mt-1.5 text-xs text-sky-300/40">{question.length}/2000 characters</p>
-        </div>
-
-        <div>
-          <p className={labelClassName}>Upload image or document (optional)</p>
-          <AttachmentUpload
-            images={images}
-            onImagesChange={setImages}
-            documents={documents}
-            onDocumentsChange={setDocuments}
-            error={uploadError}
-            onError={setUploadError}
-            disabled={loading}
-          />
-        </div>
+        <AIToolInputField
+          id="question"
+          label="Your Homework Question"
+          value={question}
+          onChange={setQuestion}
+          placeholder="Type your question, or use the icons to speak or upload..."
+          multiline
+          rows={5}
+          disabled={loading}
+          onVoiceTranscript={(text) => setQuestion((prev) => appendVoiceText(prev, text))}
+          attachments={{
+            images,
+            onImagesChange: setImages,
+            documents,
+            onDocumentsChange: setDocuments,
+            error: uploadError,
+            onError: setUploadError,
+          }}
+          hint={
+            <p className="mt-1.5 text-xs text-sky-300/40">{question.length}/2000 characters</p>
+          }
+        />
 
         <AIToolStatus
           error={error}

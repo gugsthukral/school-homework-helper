@@ -5,10 +5,9 @@ import { useAITool } from "@/hooks/use-ai-tool";
 import { parseProjectsForDisplay } from "@/lib/science-project-media";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubmitButton } from "@/components/tools/submit-button";
-import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
+import { AIToolInputField } from "@/components/tools/ai-tool-input-field";
 import { AIEmptyState, AIErrorBanner, AIToolStatus } from "@/components/tools/ai-response";
 import { ScienceProjectsResult } from "@/components/tools/science-projects-result";
-import { inputClassName } from "@/lib/tool-form-config";
 import { appendVoiceText } from "@/lib/voice-text";
 
 export function ScienceProjectsForm() {
@@ -46,23 +45,15 @@ export function ScienceProjectsForm() {
       <form onSubmit={handleSubmit} className="glass-card space-y-5 rounded-2xl p-6 sm:p-8">
         <GradeSelect value={grade} onChange={setGrade} />
 
-        <div>
-          <FieldLabelWithVoice
-            htmlFor="interest"
-            onVoiceTranscript={(text) => setInterest((prev) => appendVoiceText(prev, text))}
-            voiceDisabled={loading}
-          >
-            Area of Interest (optional)
-          </FieldLabelWithVoice>
-          <input
-            id="interest"
-            type="text"
-            value={interest}
-            onChange={(e) => setInterest(e.target.value)}
-            placeholder="e.g. plants, electricity, space, chemistry"
-            className={inputClassName}
-          />
-        </div>
+        <AIToolInputField
+          id="interest"
+          label="Area of Interest (optional)"
+          value={interest}
+          onChange={setInterest}
+          placeholder="e.g. plants, electricity, space, chemistry"
+          disabled={loading}
+          onVoiceTranscript={(text) => setInterest((prev) => appendVoiceText(prev, text))}
+        />
 
         <AIToolStatus
           error={error}

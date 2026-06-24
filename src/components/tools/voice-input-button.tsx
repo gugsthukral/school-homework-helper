@@ -2,15 +2,22 @@
 
 import { Mic, MicOff } from "lucide-react";
 import { useVoiceInput } from "@/hooks/use-voice-input";
+import { InputActionIconButton } from "@/components/tools/input-action-icon-button";
 import { cn } from "@/lib/utils";
 
 type VoiceInputButtonProps = {
   onTranscript: (text: string) => void;
   disabled?: boolean;
+  compact?: boolean;
   className?: string;
 };
 
-export function VoiceInputButton({ onTranscript, disabled = false, className }: VoiceInputButtonProps) {
+export function VoiceInputButton({
+  onTranscript,
+  disabled = false,
+  compact = false,
+  className,
+}: VoiceInputButtonProps) {
   const { listening, supported, voiceError, startListening, stopListening, clearVoiceError } =
     useVoiceInput();
 
@@ -26,26 +33,27 @@ export function VoiceInputButton({ onTranscript, disabled = false, className }: 
     startListening(onTranscript);
   }
 
+  const button = (
+    <InputActionIconButton
+      icon={listening ? MicOff : Mic}
+      label={listening ? "Stop voice input" : "Voice input"}
+      onClick={handleClick}
+      disabled={disabled}
+      active={listening}
+      size={compact ? "sm" : "default"}
+    />
+  );
+
+  if (compact) {
+    return <div className={className}>{button}</div>;
+  }
+
   return (
-    <div className={cn("flex flex-col items-end gap-1", className)}>
-      <button
-        type="button"
-        onClick={handleClick}
-        disabled={disabled}
-        aria-pressed={listening}
-        aria-label={listening ? "Stop voice input" : "Start voice input"}
-        className={cn(
-          "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors",
-          listening
-            ? "border-orange-400/50 bg-orange-500/20 text-orange-300"
-            : "border-sky-400/25 bg-sky-400/10 text-sky-200 hover:border-sky-400/40 hover:text-white",
-          disabled && "cursor-not-allowed opacity-50"
-        )}
-      >
-        {listening ? <MicOff className="h-3.5 w-3.5" /> : <Mic className="h-3.5 w-3.5" />}
-        {listening ? "Listening..." : "Voice"}
-      </button>
-      {voiceError && <p className="max-w-[12rem] text-right text-xs text-red-400">{voiceError}</p>}
+    <div className={cn("flex flex-col items-center gap-1", className)}>
+      {button}
+      {voiceError && (
+        <p className="max-w-[9rem] text-center text-[10px] leading-tight text-red-400">{voiceError}</p>
+      )}
     </div>
   );
 }

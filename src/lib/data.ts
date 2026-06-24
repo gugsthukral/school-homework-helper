@@ -81,10 +81,10 @@ export const classes = Array.from({ length: 12 }, (_, i) => ({
 
 export const subjects = [
   { name: "Mathematics", icon: "Sigma", href: "/subjects/mathematics", color: "border-sky-400/30 hover:border-sky-400/60" },
-  { name: "Science", icon: "Atom", href: "/subjects/science", color: "border-orange-500/30 hover:border-orange-500/60" },
-  { name: "English", icon: "Languages", href: "/subjects/english", color: "border-sky-400/30 hover:border-sky-400/60" },
-  { name: "Hindi", icon: "Type", href: "/subjects/hindi", color: "border-orange-500/30 hover:border-orange-500/60" },
-  { name: "Punjabi", icon: "Type", href: "/subjects/punjabi", color: "border-sky-400/30 hover:border-sky-400/60" },
+  { name: "Science", icon: "TestTube", href: "/subjects/science", color: "border-orange-500/30 hover:border-orange-500/60" },
+  { name: "English", icon: "Abc", href: "/subjects/english", color: "border-sky-400/30 hover:border-sky-400/60" },
+  { name: "Hindi", icon: "Hindi", href: "/subjects/hindi", color: "border-orange-500/30 hover:border-orange-500/60" },
+  { name: "Punjabi", icon: "Punjabi", href: "/subjects/punjabi", color: "border-sky-400/30 hover:border-sky-400/60" },
   { name: "SST", icon: "Globe2", href: "/subjects/sst", color: "border-orange-500/30 hover:border-orange-500/60" },
 ];
 

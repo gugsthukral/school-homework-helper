@@ -4,15 +4,13 @@ import { useState } from "react";
 import { MessageCircleQuestion } from "lucide-react";
 import { useAITool } from "@/hooks/use-ai-tool";
 import { SubmitButton } from "@/components/tools/submit-button";
-import { AttachmentUpload } from "@/components/tools/attachment-upload";
-import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
+import { AIToolInputField } from "@/components/tools/ai-tool-input-field";
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
 import {
   buildDocumentContext,
   type DocumentExtract,
   type UploadedImage,
 } from "@/lib/attachment-utils";
-import { inputClassName, labelClassName } from "@/lib/tool-form-config";
 import { slugifyFileName } from "@/lib/export-result";
 import { appendVoiceText } from "@/lib/voice-text";
 
@@ -38,36 +36,25 @@ export function AskAnythingForm() {
   return (
     <div className="space-y-6">
       <form onSubmit={handleSubmit} className="glass-card space-y-5 rounded-2xl p-6 sm:p-8">
-        <div>
-          <FieldLabelWithVoice
-            htmlFor="question"
-            onVoiceTranscript={(text) => setQuestion((prev) => appendVoiceText(prev, text))}
-            voiceDisabled={loading}
-          >
-            Your Question
-          </FieldLabelWithVoice>
-          <textarea
-            id="question"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder="Ask anything about homework, concepts, exams, or school topics... (or use Voice)"
-            rows={5}
-            className={`${inputClassName} resize-none`}
-          />
-        </div>
-
-        <div>
-          <p className={labelClassName}>Upload image or document (optional)</p>
-          <AttachmentUpload
-            images={images}
-            onImagesChange={setImages}
-            documents={documents}
-            onDocumentsChange={setDocuments}
-            error={uploadError}
-            onError={setUploadError}
-            disabled={loading}
-          />
-        </div>
+        <AIToolInputField
+          id="question"
+          label="Your Question"
+          value={question}
+          onChange={setQuestion}
+          placeholder="Ask anything about homework, concepts, exams, or school topics..."
+          multiline
+          rows={5}
+          disabled={loading}
+          onVoiceTranscript={(text) => setQuestion((prev) => appendVoiceText(prev, text))}
+          attachments={{
+            images,
+            onImagesChange: setImages,
+            documents,
+            onDocumentsChange: setDocuments,
+            error: uploadError,
+            onError: setUploadError,
+          }}
+        />
 
         <AIToolStatus
           error={error}
@@ -95,7 +82,7 @@ export function AskAnythingForm() {
         />
       )}
       {!response && !loading && (
-        <AIEmptyState message="Ask any school question — type or tap Voice to speak your question." />
+        <AIEmptyState message="Ask any school question — type, speak, or upload a photo or document." />
       )}
     </div>
   );

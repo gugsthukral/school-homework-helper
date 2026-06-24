@@ -4,11 +4,10 @@ import { useState } from "react";
 import { SquareFunction } from "lucide-react";
 import { useAITool } from "@/hooks/use-ai-tool";
 import { SubmitButton } from "@/components/tools/submit-button";
-import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
+import { AIToolInputField } from "@/components/tools/ai-tool-input-field";
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
 import {
   calculatorTypes,
-  inputClassName,
   type CalculatorType,
 } from "@/lib/tool-form-config";
 import { slugifyFileName } from "@/lib/export-result";
@@ -64,25 +63,17 @@ export function CalculatorForm() {
           </div>
         </div>
 
-        <div>
-          <FieldLabelWithVoice
-            htmlFor="expression"
-            onVoiceTranscript={(text) => setExpression((prev) => appendVoiceText(prev, text))}
-            voiceDisabled={loading}
-          >
-            Enter Calculation
-          </FieldLabelWithVoice>
-          <input
-            id="expression"
-            type="text"
-            value={expression}
-            onChange={(e) => setExpression(e.target.value)}
-            placeholder={activeType.placeholder}
-            required
-            className={inputClassName}
-          />
-          <p className="mt-2 text-xs text-sky-300/50">{activeType.description}</p>
-        </div>
+        <AIToolInputField
+          id="expression"
+          label="Enter Calculation"
+          value={expression}
+          onChange={setExpression}
+          placeholder={activeType.placeholder}
+          required
+          disabled={loading}
+          onVoiceTranscript={(text) => setExpression((prev) => appendVoiceText(prev, text))}
+          hint={<p className="mt-2 text-xs text-sky-300/50">{activeType.description}</p>}
+        />
 
         <AIToolStatus
           error={error}
