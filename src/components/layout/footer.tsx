@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
+import { GooglePrivacyFooterLink } from "@/components/cookie-consent/google-privacy-footer-link";
 import { SiteLogo } from "@/components/layout/site-logo";
 
 const footerLinks = {
@@ -115,6 +116,7 @@ export function Footer() {
             <Link href="/cookies" className="text-sm text-sky-300/40 hover:text-sky-300">
               Cookie Policy
             </Link>
+            <GooglePrivacyFooterLink />
           </div>
         </div>
       </div>

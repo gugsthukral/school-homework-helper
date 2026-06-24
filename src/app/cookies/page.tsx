@@ -8,7 +8,7 @@ import { buildPageMetadata } from "@/lib/seo-metadata";
 
 export const metadata: Metadata = buildPageMetadata(PAGE_SEO.cookies);
 
-const LAST_UPDATED = "June 20, 2026";
+const LAST_UPDATED = "June 24, 2026";
 
 const cookieTable = [
   {
@@ -30,8 +30,15 @@ const cookieTable = [
     duration: "Session / up to 1 year",
   },
   {
+    name: "Google AdSense & CMP (IAB TCF)",
+    purpose:
+      "Serve ads and collect consent in the EEA, UK, and Switzerland via Google’s certified consent message.",
+    type: "Optional",
+    duration: "Varies by Google",
+  },
+  {
     name: "Google AdSense cookies",
-    purpose: "Serve and measure advertisements when you accept optional cookies.",
+    purpose: "Serve and measure advertisements when you accept optional cookies or consent in Google’s message.",
     type: "Optional",
     duration: "Varies by Google",
   },
@@ -59,14 +66,21 @@ export default function CookiePolicyPage() {
         <LegalSection title="2. How We Use Cookies">
           <p>
             School Homework Helper uses cookies to provide core features (such as guest AI usage
-            limits and sign-in) and, with your permission, to show advertisements through partners
-            like Google AdSense.
+            limits and sign-in) and, with your permission, to show advertisements through Google
+            AdSense.
           </p>
           <p>
-            When you first visit our site, a cookie banner appears at the bottom of the screen. You
-            can <strong className="text-sky-100">Accept</strong> all cookies or{" "}
-            <strong className="text-sky-100">Reject</strong> non-essential cookies. You can change
-            your choice at any time using the buttons below.
+            <strong className="text-sky-100">Visitors in India and other regions:</strong> a cookie
+            banner appears at the bottom of the screen. You can{" "}
+            <strong className="text-sky-100">Accept</strong> all cookies or{" "}
+            <strong className="text-sky-100">Reject</strong> non-essential cookies.
+          </p>
+          <p>
+            <strong className="text-sky-100">Visitors in the EEA, UK, and Switzerland:</strong>{" "}
+            Google&apos;s certified consent message (Privacy &amp; messaging, IAB TCF v2) handles ad
+            and cookie choices. Our site banner is hidden in those regions to avoid duplicate
+            prompts. Use <strong className="text-sky-100">Privacy &amp; cookie settings</strong> in
+            the footer or below to change your Google ad choices.
           </p>
           <CookiePreferenceActions className="pt-2" />
         </LegalSection>
@@ -114,8 +128,10 @@ export default function CookiePolicyPage() {
               These still apply if you reject optional cookies.
             </li>
             <li>
-              <strong className="text-sky-100">Optional cookies</strong> are used for advertising
-              and analytics. They are only enabled if you click Accept in the cookie banner.
+              <strong className="text-sky-100">Optional cookies</strong> are used for advertising.
+              They load only after you accept in our banner (outside the EEA/UK/CH) or consent in
+              Google&apos;s message (inside the EEA/UK/CH). We use Google Consent Mode v2 so ad tags
+              respect your choice.
             </li>
           </ul>
         </LegalSection>

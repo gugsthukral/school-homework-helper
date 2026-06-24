@@ -27,8 +27,9 @@ export function CookieConsentBanner() {
               We use cookies
             </h2>
             <p id="cookie-consent-description" className="mt-1 text-sm leading-relaxed text-sky-200/70">
-              We use essential cookies to run the site and optional cookies for ads and analytics.
-              You can accept all cookies or reject non-essential ones.{" "}
+              We use essential cookies to run the site. Optional cookies for ads are only enabled if
+              you accept below. Visitors in the EEA, UK, and Switzerland see Google&apos;s consent
+              message for ad choices.{" "}
               <Link href="/cookies" className="font-medium text-orange-400 hover:underline">
                 Cookie Policy
               </Link>

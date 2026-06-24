@@ -2,12 +2,13 @@
 
 import Script from "next/script";
 import { adsenseConfig } from "@/lib/adsense-config";
-import { useCookieConsent } from "@/components/cookie-consent/cookie-consent-context";
 
-export function ConditionalAdSenseScript() {
-  const { marketingAllowed } = useCookieConsent();
-
-  if (!adsenseConfig.enabled || !marketingAllowed) return null;
+/**
+ * AdSense must load for Google's certified CMP (Privacy & messaging) to appear.
+ * Consent Mode defaults deny ad storage until the user consents.
+ */
+export function AdSenseScript() {
+  if (!adsenseConfig.enabled) return null;
 
   return (
     <Script
