@@ -1,3 +1,5 @@
+import { calculatorTypes } from "@/lib/tool-form-config";
+
 export function buildHomeworkSolverPrompt(grade: number, question: string, subject?: string) {
   const subjectLine = subject ? `\nSubject: ${subject}` : "";
 
@@ -198,17 +200,20 @@ Rules:
 
 export const SCIENCE_PROJECTS_SYSTEM = buildScienceProjectsSystemPrompt(6);
 
-export function buildCalculatorPrompt(grade: number, expression: string, calcType: string) {
-  return `You are a smart school calculator assistant for a Class ${grade} student.
+export function buildCalculatorPrompt(expression: string, calcType: string) {
+  const typeLabel =
+    calculatorTypes.find((t) => t.value === calcType)?.label ?? calcType;
 
-Calculation type: ${calcType}
+  return `You are a smart school calculator assistant.
+
+Calculator mode: ${typeLabel}
 
 Expression or problem:
 ${expression}
 
 Rules:
 - Compute the correct numerical answer (show the exact result)
-- Show step-by-step working in simple language appropriate for Class ${grade}
+- Show step-by-step working in clear, simple language
 - For percentages, ratios, and unit conversions, explain each step clearly
 - Use markdown with **Final Answer** highlighted at the end
 - If the input is invalid, explain what to fix and give an example`;

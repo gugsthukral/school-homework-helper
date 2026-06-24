@@ -3,47 +3,64 @@
 import { useState } from "react";
 import { SquareFunction } from "lucide-react";
 import { useAITool } from "@/hooks/use-ai-tool";
-import { GradeSelect } from "@/components/tools/grade-select";
 import { SubmitButton } from "@/components/tools/submit-button";
 import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
-import { calculatorTypes, inputClassName, labelClassName } from "@/lib/tool-form-config";
+import {
+  calculatorTypes,
+  inputClassName,
+  type CalculatorType,
+} from "@/lib/tool-form-config";
 import { slugifyFileName } from "@/lib/export-result";
 import { appendVoiceText } from "@/lib/voice-text";
 
 export function CalculatorForm() {
   const [expression, setExpression] = useState("");
-  const [grade, setGrade] = useState(8);
-  const [calcType, setCalcType] = useState("basic");
+  const [calcType, setCalcType] = useState<CalculatorType>("basic");
   const { response, error, loading, submit, signInRequired, guestUsesRemaining, isAuthenticated } =
     useAITool("/api/calculator");
 
+  const activeType = calculatorTypes.find((t) => t.value === calcType) ?? calculatorTypes[0];
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    submit({ expression: expression.trim(), grade, calcType });
+    submit({ expression: expression.trim(), calcType });
   }
 
   return (
     <div className="space-y-6">
       <form onSubmit={handleSubmit} className="glass-card space-y-5 rounded-2xl p-6 sm:p-8">
-        <div className="grid gap-5 sm:grid-cols-2">
-          <GradeSelect value={grade} onChange={setGrade} />
-          <div>
-            <label htmlFor="calcType" className={labelClassName}>
-              Calculation Type
-            </label>
-            <select
-              id="calcType"
-              value={calcType}
-              onChange={(e) => setCalcType(e.target.value)}
-              className={inputClassName}
-            >
-              {calculatorTypes.map((t) => (
-                <option key={t.value} value={t.value}>
-                  {t.label}
-                </option>
-              ))}
-            </select>
+        <div>
+          <p className="mb-3 text-sm font-medium text-sky-200">Calculator Type</p>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {calculatorTypes.map((type) => {
+              const selected = calcType === type.value;
+              return (
+                <button
+                  key={type.value}
+                  type="button"
+                  onClick={() => setCalcType(type.value)}
+                  className={[
+                    "rounded-xl border px-3 py-3 text-left transition-colors",
+                    selected
+                      ? "border-sky-400/50 bg-sky-400/10 ring-2 ring-sky-400/20"
+                      : "border-sky-400/15 bg-navy-950/40 hover:border-sky-400/30 hover:bg-sky-400/5",
+                  ].join(" ")}
+                >
+                  <span
+                    className={[
+                      "block text-sm font-semibold",
+                      selected ? "text-sky-200" : "text-sky-100/90",
+                    ].join(" ")}
+                  >
+                    {type.label}
+                  </span>
+                  <span className="mt-1 block text-xs leading-snug text-sky-300/55">
+                    {type.description}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -60,13 +77,11 @@ export function CalculatorForm() {
             type="text"
             value={expression}
             onChange={(e) => setExpression(e.target.value)}
-            placeholder="e.g. 25% of 480, (12+8)×3, sqrt(144), 5 km to metres"
+            placeholder={activeType.placeholder}
             required
             className={inputClassName}
           />
-          <p className="mt-2 text-xs text-sky-300/50">
-            Supports arithmetic, percentages, ratios, scientific notation, and unit conversions.
-          </p>
+          <p className="mt-2 text-xs text-sky-300/50">{activeType.description}</p>
         </div>
 
         <AIToolStatus
@@ -89,13 +104,13 @@ export function CalculatorForm() {
           response={response}
           title="Calculation Result"
           icon={SquareFunction}
-          exportFileName={`calculator-${slugifyFileName(calcType)}-class-${grade}`}
-          exportSubtitle={`Class ${grade} · ${calculatorTypes.find((t) => t.value === calcType)?.label ?? calcType}`}
+          exportFileName={`calculator-${slugifyFileName(calcType)}`}
+          exportSubtitle={activeType.label}
           sharePath="/tools/calculator"
         />
       )}
       {!response && !loading && (
-        <AIEmptyState message="Type any calculation — get the answer with clear step-by-step working." />
+        <AIEmptyState message="Choose a calculator type, enter your expression, and get step-by-step working." />
       )}
     </div>
   );
