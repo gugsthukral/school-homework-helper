@@ -11,7 +11,7 @@ type BuildPageMetadataOptions = {
   title: string;
   description: string;
   path?: string;
-  keywords?: string | string[];
+  keywords?: string | readonly string[];
   type?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
@@ -34,11 +34,12 @@ export function buildPageMetadata({
   const baseUrl = getSiteUrl();
   const normalizedPath = path.startsWith("/") || path === "" ? path : `/${path}`;
   const url = `${baseUrl}${normalizedPath}`;
-  const keywordList = keywords
-    ? Array.isArray(keywords)
-      ? keywords
-      : keywords.split(",").map((k) => k.trim())
-    : DEFAULT_KEYWORDS;
+  const keywordList =
+    keywords === undefined
+      ? [...DEFAULT_KEYWORDS]
+      : typeof keywords === "string"
+        ? keywords.split(",").map((k) => k.trim())
+        : [...keywords];
   const imageUrl = `${baseUrl}${OG_IMAGE_PATH}`;
 
   return {

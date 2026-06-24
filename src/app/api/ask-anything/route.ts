@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { imagesFieldSchema } from "@/lib/attachment-schema";
-import { createAIToolRoute, VISION_SYSTEM } from "@/lib/create-ai-route";
+import { createAIToolRoute } from "@/lib/create-ai-route";
 import { buildAskAnythingPrompt, buildAskAnythingVisionPrompt } from "@/lib/prompts";
 
 const schema = z
@@ -19,8 +19,6 @@ export const POST = createAIToolRoute({
   toolName: "ask-anything",
   schema,
   getImages: (data) => data.images,
-  buildSystemPrompt: (data) =>
-    (data.images?.length ?? 0) > 0 ? VISION_SYSTEM : undefined,
   buildPrompt: ({ question, grade, subject, images }) => {
     const imageNote =
       images && images.length > 0
