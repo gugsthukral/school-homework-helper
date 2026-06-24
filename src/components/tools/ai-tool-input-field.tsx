@@ -63,7 +63,7 @@ export function AIToolInputField({
       return;
     }
     if (onVoiceTranscript) {
-      voice.startListening(onVoiceTranscript);
+      voice.startListening(onVoiceTranscript, value);
     }
   }
 

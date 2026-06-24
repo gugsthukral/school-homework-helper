@@ -154,7 +154,7 @@ export function useTextToSpeech() {
           return;
         }
         setSpeaking(false);
-        setError("Browser speech stopped early. Add SARVAM_API_KEY for better Hindi/Punjabi audio.");
+        setError("Browser speech stopped early. Add SARVAM_API_KEY for natural Indian language audio.");
       };
 
       window.speechSynthesis.speak(utterance);

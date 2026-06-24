@@ -1,4 +1,5 @@
 import { calculatorTypes } from "@/lib/tool-form-config";
+import { RESPOND_IN_USER_LANGUAGE_RULE } from "@/lib/indian-languages";
 
 export function buildHomeworkSolverPrompt(grade: number, question: string, subject?: string) {
   const subjectLine = subject ? `\nSubject: ${subject}` : "";
@@ -15,7 +16,8 @@ Rules:
 - Use simple language appropriate for Class ${grade}
 - Give final answer clearly at the end
 - Add quick revision notes (2-3 bullet points)
-- Use markdown formatting with headings and numbered steps`;
+- Use markdown formatting with headings and numbered steps
+${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 
 export function buildEssayGeneratorPrompt(grade: number, topic: string, wordCount: number) {
@@ -30,7 +32,8 @@ Use:
 Rules:
 - Easy language only, appropriate for Class ${grade}
 - Stay close to the requested word count
-- Use markdown headings for each section`;
+- Use markdown headings for each section
+${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 
 export function buildMathSolverPrompt(
@@ -48,7 +51,8 @@ Rules:
 - Use simple language appropriate for Class ${grade}
 - Highlight the final answer
 - Add 2-3 quick revision tips related to this type of problem
-- Use markdown formatting with numbered steps`;
+- Use markdown formatting with numbered steps
+${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 
 export function buildQuizGeneratorPrompt(
@@ -87,7 +91,8 @@ Rules:
 - Questions should match Class ${grade} difficulty
 - Cover different aspects of ${subject ? `${subject} and ` : ""}the chosen focus
 - Make distractors realistic but clearly wrong
-- Use easy language`;
+- Use easy language
+${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 
 export function buildGrammarCheckerPrompt(grade: number, text: string) {
@@ -103,7 +108,8 @@ Provide:
 
 Rules:
 - Use simple explanations appropriate for Class ${grade}
-- Use markdown formatting`;
+- Use markdown formatting
+${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 
 export function buildGrammarCheckerVisionPrompt(grade: number, typedText?: string) {
@@ -127,7 +133,8 @@ Provide your response in this format:
 Rules:
 - You MUST read and use the attached image(s). Never say you cannot read images.
 - Use simple explanations appropriate for Class ${grade}
-- Use markdown formatting`;
+- Use markdown formatting
+${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 
 function getScienceProjectsGradeGuidance(grade: number): string {
@@ -152,7 +159,8 @@ export function buildScienceProjectsSystemPrompt(grade: number) {
 Critical rules:
 - Every response must be tailored specifically to Class ${grade} — not generic ideas that could fit any class.
 - Class 6 ideas must be simpler than Class 12 ideas. Never reuse the same project titles or concepts across different class levels.
-- Return only valid JSON — no markdown fences, no commentary outside the JSON object.`;
+- Return only valid JSON — no markdown fences, no commentary outside the JSON object.
+- Write all student-facing text (titles, materials, steps, learningOutcome) in the same language the student used in their interest or request when provided; otherwise use simple English.`;
 }
 
 export function buildScienceProjectsPrompt(grade: number, interest?: string) {
@@ -195,7 +203,8 @@ Rules:
 - All 4 projects MUST cover completely different science topics (e.g. plants, magnets, water, light). Do NOT suggest four variations of the same theme (e.g. four LED or four electricity projects)
 - Each project title must be unique and specific to Class ${grade}
 - The Hard project must be noticeably more challenging than the Easy projects for Class ${grade}
-- Steps should be specific enough to follow with photos/diagrams`;
+- Steps should be specific enough to follow with photos/diagrams
+${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 
 export const SCIENCE_PROJECTS_SYSTEM = buildScienceProjectsSystemPrompt(6);
@@ -216,7 +225,8 @@ Rules:
 - Show step-by-step working in clear, simple language
 - For percentages, ratios, and unit conversions, explain each step clearly
 - Use markdown with **Final Answer** highlighted at the end
-- If the input is invalid, explain what to fix and give an example`;
+- If the input is invalid, explain what to fix and give an example
+${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 
 export function buildAskAnythingPrompt(question: string) {
@@ -231,7 +241,8 @@ Rules:
 - Use short paragraphs and bullet points where helpful
 - If the question is about homework or exams, include 1-2 study tips
 - Use markdown formatting
-- If the question is unclear, answer the most likely intent and note any assumptions`;
+- If the question is unclear, answer the most likely intent and note any assumptions
+${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 
 export function buildAskAnythingVisionPrompt(question: string) {
@@ -248,6 +259,7 @@ Your task:
 Rules:
 - You MUST use the attached image(s). Never say you cannot read images.
 - Use simple language and markdown formatting
-- Include step-by-step help when solving problems`;
+- Include step-by-step help when solving problems
+${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 

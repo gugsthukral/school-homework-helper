@@ -1,4 +1,5 @@
-import type { SpeechLang } from "@/lib/speech-segments";
+import type { SpeechLang } from "@/lib/indian-languages";
+import { isIndicSpeechLang } from "@/lib/indian-languages";
 
 /**
  * Remove punctuation that Sarvam/browser TTS often reads aloud
@@ -10,7 +11,7 @@ export function normalizeTextForSpeech(text: string, lang: SpeechLang): string {
     .replace(/\*\*/g, "")
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
 
-  if (lang === "pa-IN" || lang === "hi-IN") {
+  if (isIndicSpeechLang(lang)) {
     result = result
       // Danda / full stop variants
       .replace(/[।॥]/gu, " ")

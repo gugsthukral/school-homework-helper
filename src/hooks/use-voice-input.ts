@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { detectRecognitionLang } from "@/lib/indian-languages";
 
 function getSpeechRecognition() {
   if (typeof window === "undefined") return null;
@@ -57,56 +58,59 @@ export function useVoiceInput() {
     };
   }, []);
 
-  const startListening = useCallback((onTranscript: (text: string) => void) => {
-    const SpeechRecognitionCtor = getSpeechRecognition();
-    if (!SpeechRecognitionCtor) {
-      setVoiceError("Voice input is not supported in this browser. Try Chrome or Edge.");
-      return;
-    }
+  const startListening = useCallback(
+    (onTranscript: (text: string) => void, contextText = "") => {
+      const SpeechRecognitionCtor = getSpeechRecognition();
+      if (!SpeechRecognitionCtor) {
+        setVoiceError("Voice input is not supported in this browser. Try Chrome or Edge.");
+        return;
+      }
 
-    releaseRecognition(recognitionRef.current);
-    recognitionRef.current = null;
-    userStoppedRef.current = false;
-
-    const recognition = new SpeechRecognitionCtor();
-    recognition.lang = "en-IN";
-    recognition.interimResults = false;
-    recognition.continuous = false;
-
-    recognition.onstart = () => {
-      setVoiceError("");
-      setListening(true);
-    };
-
-    recognition.onend = () => {
-      setListening(false);
+      releaseRecognition(recognitionRef.current);
       recognitionRef.current = null;
-    };
+      userStoppedRef.current = false;
 
-    recognition.onerror = (event) => {
-      setListening(false);
-      recognitionRef.current = null;
-      if (userStoppedRef.current) return;
+      const recognition = new SpeechRecognitionCtor();
+      recognition.lang = detectRecognitionLang(contextText);
+      recognition.interimResults = false;
+      recognition.continuous = false;
 
-      const message = getVoiceErrorMessage(event.error);
-      if (message) setVoiceError(message);
-    };
+      recognition.onstart = () => {
+        setVoiceError("");
+        setListening(true);
+      };
 
-    recognition.onresult = (event) => {
-      const transcript = event.results[0]?.[0]?.transcript?.trim();
-      if (transcript) onTranscript(transcript);
-    };
+      recognition.onend = () => {
+        setListening(false);
+        recognitionRef.current = null;
+      };
 
-    recognitionRef.current = recognition;
+      recognition.onerror = (event) => {
+        setListening(false);
+        recognitionRef.current = null;
+        if (userStoppedRef.current) return;
 
-    try {
-      recognition.start();
-    } catch {
-      setListening(false);
-      recognitionRef.current = null;
-      setVoiceError("Could not start voice input. Tap the mic again.");
-    }
-  }, []);
+        const message = getVoiceErrorMessage(event.error);
+        if (message) setVoiceError(message);
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0]?.[0]?.transcript?.trim();
+        if (transcript) onTranscript(transcript);
+      };
+
+      recognitionRef.current = recognition;
+
+      try {
+        recognition.start();
+      } catch {
+        setListening(false);
+        recognitionRef.current = null;
+        setVoiceError("Could not start voice input. Tap the mic again.");
+      }
+    },
+    []
+  );
 
   const stopListening = useCallback(() => {
     userStoppedRef.current = true;
