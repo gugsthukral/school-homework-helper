@@ -105,7 +105,7 @@ export function AIToolInputField({
 
         {showVoice && voice.listening && (
           <div className="pointer-events-none absolute inset-x-0 bottom-9 z-10 px-3 sm:bottom-10 sm:px-3.5">
-            <VoiceInputVisualizer active analyserRef={voice.analyserRef} micReady={voice.micReady} />
+            <VoiceInputVisualizer active />
           </div>
         )}
 

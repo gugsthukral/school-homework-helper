@@ -7,112 +7,125 @@ function getSpeechRecognition() {
   return window.SpeechRecognition ?? window.webkitSpeechRecognition ?? null;
 }
 
+function getVoiceErrorMessage(code: string): string | null {
+  switch (code) {
+    case "aborted":
+      return null;
+    case "not-allowed":
+    case "service-not-allowed":
+      return "Microphone access was denied. Allow mic permission in your browser settings.";
+    case "audio-capture":
+      return "Microphone is busy. Close other apps using the mic and try again.";
+    case "no-speech":
+      return "No speech detected. Tap the mic and speak again.";
+    case "network":
+      return "Voice input needs internet. Check your connection and try again.";
+    default:
+      return "Could not capture voice. Try again or type instead.";
+  }
+}
+
+function releaseRecognition(recognition: SpeechRecognition | null) {
+  if (!recognition) return;
+  recognition.onstart = null;
+  recognition.onend = null;
+  recognition.onerror = null;
+  recognition.onresult = null;
+  try {
+    recognition.stop();
+  } catch {
+    try {
+      recognition.abort();
+    } catch {
+      // instance may already be stopped
+    }
+  }
+}
+
 export function useVoiceInput() {
   const recognitionRef = useRef<SpeechRecognition | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
-  const micCleanupRef = useRef<(() => void) | null>(null);
+  const userStoppedRef = useRef(false);
   const [listening, setListening] = useState(false);
-  const [micReady, setMicReady] = useState(false);
   const [supported, setSupported] = useState(false);
   const [voiceError, setVoiceError] = useState("");
-
-  const stopMicMonitor = useCallback(() => {
-    micCleanupRef.current?.();
-    micCleanupRef.current = null;
-    analyserRef.current = null;
-    setMicReady(false);
-  }, []);
-
-  const startMicMonitor = useCallback(async () => {
-    stopMicMonitor();
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const context = new AudioContext();
-      if (context.state === "suspended") {
-        await context.resume();
-      }
-      const source = context.createMediaStreamSource(stream);
-      const analyser = context.createAnalyser();
-      analyser.fftSize = 128;
-      analyser.smoothingTimeConstant = 0.72;
-      source.connect(analyser);
-      analyserRef.current = analyser;
-      setMicReady(true);
-
-      micCleanupRef.current = () => {
-        stream.getTracks().forEach((track) => track.stop());
-        source.disconnect();
-        analyser.disconnect();
-        void context.close();
-      };
-    } catch {
-      // Speech recognition may still work; visualizer falls back to animation.
-    }
-  }, [stopMicMonitor]);
 
   useEffect(() => {
     setSupported(Boolean(getSpeechRecognition()));
     return () => {
-      recognitionRef.current?.abort();
-      stopMicMonitor();
+      releaseRecognition(recognitionRef.current);
+      recognitionRef.current = null;
     };
-  }, [stopMicMonitor]);
+  }, []);
 
-  const startListening = useCallback(
-    (onTranscript: (text: string) => void) => {
-      const SpeechRecognitionCtor = getSpeechRecognition();
-      if (!SpeechRecognitionCtor) {
-        setVoiceError("Voice input is not supported in this browser. Try Chrome or Edge.");
-        return;
-      }
+  const startListening = useCallback((onTranscript: (text: string) => void) => {
+    const SpeechRecognitionCtor = getSpeechRecognition();
+    if (!SpeechRecognitionCtor) {
+      setVoiceError("Voice input is not supported in this browser. Try Chrome or Edge.");
+      return;
+    }
 
-      recognitionRef.current?.abort();
+    releaseRecognition(recognitionRef.current);
+    recognitionRef.current = null;
+    userStoppedRef.current = false;
 
-      const recognition = new SpeechRecognitionCtor();
-      recognition.lang = "en-IN";
-      recognition.interimResults = false;
-      recognition.continuous = false;
+    const recognition = new SpeechRecognitionCtor();
+    recognition.lang = "en-IN";
+    recognition.interimResults = false;
+    recognition.continuous = false;
 
-      recognition.onstart = () => {
-        setVoiceError("");
-        setListening(true);
-        void startMicMonitor();
-      };
+    recognition.onstart = () => {
+      setVoiceError("");
+      setListening(true);
+    };
 
-      recognition.onend = () => {
-        setListening(false);
-        stopMicMonitor();
-      };
+    recognition.onend = () => {
+      setListening(false);
+      recognitionRef.current = null;
+    };
 
-      recognition.onerror = () => {
-        setListening(false);
-        stopMicMonitor();
-        setVoiceError("Could not capture voice. Check microphone permission and try again.");
-      };
+    recognition.onerror = (event) => {
+      setListening(false);
+      recognitionRef.current = null;
+      if (userStoppedRef.current) return;
 
-      recognition.onresult = (event) => {
-        const transcript = event.results[0]?.[0]?.transcript?.trim();
-        if (transcript) onTranscript(transcript);
-      };
+      const message = getVoiceErrorMessage(event.error);
+      if (message) setVoiceError(message);
+    };
 
-      recognitionRef.current = recognition;
+    recognition.onresult = (event) => {
+      const transcript = event.results[0]?.[0]?.transcript?.trim();
+      if (transcript) onTranscript(transcript);
+    };
+
+    recognitionRef.current = recognition;
+
+    try {
       recognition.start();
-    },
-    [startMicMonitor, stopMicMonitor]
-  );
+    } catch {
+      setListening(false);
+      recognitionRef.current = null;
+      setVoiceError("Could not start voice input. Tap the mic again.");
+    }
+  }, []);
 
   const stopListening = useCallback(() => {
-    recognitionRef.current?.stop();
+    userStoppedRef.current = true;
+    const recognition = recognitionRef.current;
+    if (recognition) {
+      try {
+        recognition.stop();
+      } catch {
+        releaseRecognition(recognition);
+      }
+    }
     setListening(false);
-    stopMicMonitor();
-  }, [stopMicMonitor]);
+    recognitionRef.current = null;
+  }, []);
 
   return {
     listening,
     supported,
     voiceError,
-    analyserRef,
-    micReady,
     startListening,
     stopListening,
     clearVoiceError: () => setVoiceError(""),
