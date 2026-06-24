@@ -5,6 +5,7 @@ import { SpellCheck } from "lucide-react";
 import { useAITool } from "@/hooks/use-ai-tool";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubmitButton } from "@/components/tools/submit-button";
+import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
 import { AttachmentUpload } from "@/components/tools/attachment-upload";
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
 import {
@@ -13,6 +14,7 @@ import {
   type UploadedImage,
 } from "@/lib/attachment-utils";
 import { inputClassName, labelClassName } from "@/lib/tool-form-config";
+import { appendVoiceText } from "@/lib/voice-text";
 
 export function GrammarCheckerForm() {
   const [text, setText] = useState("");
@@ -41,9 +43,13 @@ export function GrammarCheckerForm() {
         <GradeSelect value={grade} onChange={setGrade} />
 
         <div>
-          <label htmlFor="text" className={labelClassName}>
+          <FieldLabelWithVoice
+            htmlFor="text"
+            onVoiceTranscript={(text) => setText((prev) => appendVoiceText(prev, text))}
+            voiceDisabled={loading}
+          >
             Your Writing
-          </label>
+          </FieldLabelWithVoice>
           <textarea
             id="text"
             value={text}

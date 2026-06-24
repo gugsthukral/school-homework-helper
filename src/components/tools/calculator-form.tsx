@@ -5,9 +5,11 @@ import { SquareFunction } from "lucide-react";
 import { useAITool } from "@/hooks/use-ai-tool";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubmitButton } from "@/components/tools/submit-button";
+import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
 import { calculatorTypes, inputClassName, labelClassName } from "@/lib/tool-form-config";
 import { slugifyFileName } from "@/lib/export-result";
+import { appendVoiceText } from "@/lib/voice-text";
 
 export function CalculatorForm() {
   const [expression, setExpression] = useState("");
@@ -46,9 +48,13 @@ export function CalculatorForm() {
         </div>
 
         <div>
-          <label htmlFor="expression" className={labelClassName}>
+          <FieldLabelWithVoice
+            htmlFor="expression"
+            onVoiceTranscript={(text) => setExpression((prev) => appendVoiceText(prev, text))}
+            voiceDisabled={loading}
+          >
             Enter Calculation
-          </label>
+          </FieldLabelWithVoice>
           <input
             id="expression"
             type="text"

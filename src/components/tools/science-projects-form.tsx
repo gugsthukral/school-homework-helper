@@ -5,9 +5,11 @@ import { useAITool } from "@/hooks/use-ai-tool";
 import { parseProjectsForDisplay } from "@/lib/science-project-media";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubmitButton } from "@/components/tools/submit-button";
+import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
 import { AIEmptyState, AIErrorBanner, AIToolStatus } from "@/components/tools/ai-response";
 import { ScienceProjectsResult } from "@/components/tools/science-projects-result";
-import { inputClassName, labelClassName } from "@/lib/tool-form-config";
+import { inputClassName } from "@/lib/tool-form-config";
+import { appendVoiceText } from "@/lib/voice-text";
 
 export function ScienceProjectsForm() {
   const [grade, setGrade] = useState(6);
@@ -45,9 +47,13 @@ export function ScienceProjectsForm() {
         <GradeSelect value={grade} onChange={setGrade} />
 
         <div>
-          <label htmlFor="interest" className={labelClassName}>
+          <FieldLabelWithVoice
+            htmlFor="interest"
+            onVoiceTranscript={(text) => setInterest((prev) => appendVoiceText(prev, text))}
+            voiceDisabled={loading}
+          >
             Area of Interest (optional)
-          </label>
+          </FieldLabelWithVoice>
           <input
             id="interest"
             type="text"

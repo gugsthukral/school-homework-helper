@@ -6,6 +6,7 @@ import { useAITool } from "@/hooks/use-ai-tool";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubmitButton } from "@/components/tools/submit-button";
 import { AttachmentUpload } from "@/components/tools/attachment-upload";
+import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
 import {
   buildDocumentContext,
@@ -14,6 +15,7 @@ import {
 } from "@/lib/attachment-utils";
 import { inputClassName, labelClassName, mathTypes } from "@/lib/tool-form-config";
 import { slugifyFileName } from "@/lib/export-result";
+import { appendVoiceText } from "@/lib/voice-text";
 
 export function MathSolverForm() {
   const [problem, setProblem] = useState("");
@@ -63,9 +65,13 @@ export function MathSolverForm() {
         </div>
 
         <div>
-          <label htmlFor="problem" className={labelClassName}>
+          <FieldLabelWithVoice
+            htmlFor="problem"
+            onVoiceTranscript={(text) => setProblem((prev) => appendVoiceText(prev, text))}
+            voiceDisabled={loading}
+          >
             Math Problem
-          </label>
+          </FieldLabelWithVoice>
           <textarea
             id="problem"
             value={problem}

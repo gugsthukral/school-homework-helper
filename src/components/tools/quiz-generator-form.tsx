@@ -13,6 +13,7 @@ import { GradeSelect } from "@/components/tools/grade-select";
 import { SubjectSelect } from "@/components/tools/subject-select";
 
 import { SubmitButton } from "@/components/tools/submit-button";
+import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
 
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
 
@@ -21,6 +22,7 @@ import { slugifyFileName } from "@/lib/export-result";
 import { getSubjectNamesForClass } from "@/lib/syllabus-2026-27";
 
 import { inputClassName, labelClassName, quizCountOptions } from "@/lib/tool-form-config";
+import { appendVoiceText } from "@/lib/voice-text";
 
 
 
@@ -132,11 +134,13 @@ export function QuizGeneratorForm() {
 
         <div>
 
-          <label htmlFor="topic" className={labelClassName}>
-
+          <FieldLabelWithVoice
+            htmlFor="topic"
+            onVoiceTranscript={(text) => setTopic((prev) => appendVoiceText(prev, text))}
+            voiceDisabled={loading}
+          >
             Quiz Topic <span className="text-sky-300/40">(optional)</span>
-
-          </label>
+          </FieldLabelWithVoice>
 
           <input
 

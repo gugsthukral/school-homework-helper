@@ -214,34 +214,31 @@ Rules:
 - If the input is invalid, explain what to fix and give an example`;
 }
 
-export function buildAskAnythingPrompt(grade: number, question: string, subject?: string) {
-  const subjectLine = subject ? `\nSubject context: ${subject}` : "";
-
-  return `You are a friendly, knowledgeable tutor for Indian CBSE students.
-Answer this question for a Class ${grade} student.${subjectLine}
+export function buildAskAnythingPrompt(question: string) {
+  return `You are a friendly, knowledgeable tutor for Indian CBSE school students (Classes 1–12).
+Answer this question with clear, age-appropriate language.
 
 Question:
 ${question}
 
 Rules:
-- Give a clear, accurate answer using simple language appropriate for Class ${grade}
+- Give a clear, accurate answer suitable for school students
 - Use short paragraphs and bullet points where helpful
 - If the question is about homework or exams, include 1-2 study tips
 - Use markdown formatting
 - If the question is unclear, answer the most likely intent and note any assumptions`;
 }
 
-export function buildAskAnythingVisionPrompt(grade: number, question: string, subject?: string) {
-  const subjectLine = subject ? `\nSubject context: ${subject}` : "";
+export function buildAskAnythingVisionPrompt(question: string) {
   const questionLine = question.trim()
     ? `\nThe student also wrote:\n${question}\n`
     : "";
 
-  return `The student uploaded image(s) with a school-related question for a Class ${grade} student.${subjectLine}${questionLine}
+  return `The student uploaded image(s) with a school-related question.${questionLine}
 
 Your task:
 1. Read and understand the attached image(s)
-2. Answer the question clearly for a Class ${grade} student
+2. Answer the question clearly for a school student (CBSE Classes 1–12)
 
 Rules:
 - You MUST use the attached image(s). Never say you cannot read images.

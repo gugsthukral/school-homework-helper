@@ -5,6 +5,7 @@ import { BookOpen } from "lucide-react";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubjectSelect } from "@/components/tools/subject-select";
 import { AttachmentUpload } from "@/components/tools/attachment-upload";
+import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
 import { SubmitButton } from "@/components/tools/submit-button";
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
 import { useAITool } from "@/hooks/use-ai-tool";
@@ -16,6 +17,7 @@ import {
 import { getSubjectNamesForClass } from "@/lib/syllabus-2026-27";
 import { inputClassName, labelClassName } from "@/lib/tool-form-config";
 import { slugifyFileName } from "@/lib/export-result";
+import { appendVoiceText } from "@/lib/voice-text";
 
 export function HomeworkSolverForm() {
   const [question, setQuestion] = useState("");
@@ -56,9 +58,13 @@ export function HomeworkSolverForm() {
         </div>
 
         <div>
-          <label htmlFor="question" className={labelClassName}>
+          <FieldLabelWithVoice
+            htmlFor="question"
+            onVoiceTranscript={(text) => setQuestion((prev) => appendVoiceText(prev, text))}
+            voiceDisabled={loading}
+          >
             Your Homework Question
-          </label>
+          </FieldLabelWithVoice>
           <textarea
             id="question"
             value={question}

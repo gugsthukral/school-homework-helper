@@ -5,9 +5,11 @@ import { PenLine } from "lucide-react";
 import { useAITool } from "@/hooks/use-ai-tool";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubmitButton } from "@/components/tools/submit-button";
+import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
 import { inputClassName, labelClassName, wordCountOptions } from "@/lib/tool-form-config";
 import { slugifyFileName } from "@/lib/export-result";
+import { appendVoiceText } from "@/lib/voice-text";
 
 export function EssayGeneratorForm() {
   const [topic, setTopic] = useState("");
@@ -46,9 +48,13 @@ export function EssayGeneratorForm() {
         </div>
 
         <div>
-          <label htmlFor="topic" className={labelClassName}>
+          <FieldLabelWithVoice
+            htmlFor="topic"
+            onVoiceTranscript={(text) => setTopic((prev) => appendVoiceText(prev, text))}
+            voiceDisabled={loading}
+          >
             Essay Topic
-          </label>
+          </FieldLabelWithVoice>
           <input
             id="topic"
             type="text"

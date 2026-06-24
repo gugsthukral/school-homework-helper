@@ -11,7 +11,7 @@ export default function AskAnythingPage() {
   return (
     <ToolLayout
       title="Ask Anything"
-      description="Ask any school question and get a clear, class-appropriate answer from your AI tutor."
+      description="Ask any school question and get a clear answer from your AI tutor. Type or use voice input."
       icon={<MessageCircleQuestion className="h-7 w-7 text-orange-400" />}
     >
       <AskAnythingForm />

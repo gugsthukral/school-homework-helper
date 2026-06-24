@@ -3,10 +3,9 @@
 import { useState } from "react";
 import { MessageCircleQuestion } from "lucide-react";
 import { useAITool } from "@/hooks/use-ai-tool";
-import { GradeSelect } from "@/components/tools/grade-select";
-import { SubjectSelect } from "@/components/tools/subject-select";
 import { SubmitButton } from "@/components/tools/submit-button";
 import { AttachmentUpload } from "@/components/tools/attachment-upload";
+import { FieldLabelWithVoice } from "@/components/tools/field-label-with-voice";
 import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
 import {
   buildDocumentContext,
@@ -15,11 +14,10 @@ import {
 } from "@/lib/attachment-utils";
 import { inputClassName, labelClassName } from "@/lib/tool-form-config";
 import { slugifyFileName } from "@/lib/export-result";
+import { appendVoiceText } from "@/lib/voice-text";
 
 export function AskAnythingForm() {
   const [question, setQuestion] = useState("");
-  const [grade, setGrade] = useState(8);
-  const [subject, setSubject] = useState("");
   const [images, setImages] = useState<UploadedImage[]>([]);
   const [documents, setDocuments] = useState<DocumentExtract[]>([]);
   const [uploadError, setUploadError] = useState("");
@@ -33,8 +31,6 @@ export function AskAnythingForm() {
     e.preventDefault();
     submit({
       question: fullQuestion,
-      grade,
-      subject: subject || undefined,
       images: images.length > 0 ? images.map((img) => img.dataUrl) : undefined,
     });
   }
@@ -42,25 +38,19 @@ export function AskAnythingForm() {
   return (
     <div className="space-y-6">
       <form onSubmit={handleSubmit} className="glass-card space-y-5 rounded-2xl p-6 sm:p-8">
-        <div className="grid gap-5 sm:grid-cols-2">
-          <GradeSelect value={grade} onChange={setGrade} />
-          <SubjectSelect
-            classNumber={grade}
-            value={subject}
-            onChange={setSubject}
-            id="askSubject"
-          />
-        </div>
-
         <div>
-          <label htmlFor="question" className={labelClassName}>
+          <FieldLabelWithVoice
+            htmlFor="question"
+            onVoiceTranscript={(text) => setQuestion((prev) => appendVoiceText(prev, text))}
+            voiceDisabled={loading}
+          >
             Your Question
-          </label>
+          </FieldLabelWithVoice>
           <textarea
             id="question"
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
-            placeholder="Ask anything about homework, concepts, exams, or school topics..."
+            placeholder="Ask anything about homework, concepts, exams, or school topics... (or use Voice)"
             rows={5}
             className={`${inputClassName} resize-none`}
           />
@@ -99,13 +89,13 @@ export function AskAnythingForm() {
           response={response}
           title="Answer"
           icon={MessageCircleQuestion}
-          exportFileName={`ask-${slugifyFileName(subject || "general")}-class-${grade}`}
-          exportSubtitle={`Class ${grade}${subject ? ` · ${subject}` : ""}`}
+          exportFileName={`ask-${slugifyFileName(question.slice(0, 40) || "question")}`}
+          exportSubtitle="Ask Anything"
           sharePath="/tools/ask-anything"
         />
       )}
       {!response && !loading && (
-        <AIEmptyState message="Ask any school question — Maths, Science, English, SST, or general study doubts." />
+        <AIEmptyState message="Ask any school question — type or tap Voice to speak your question." />
       )}
     </div>
   );
