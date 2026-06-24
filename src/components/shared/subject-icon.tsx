@@ -1,10 +1,12 @@
-import { Globe2, Sigma, TestTube2, type LucideIcon } from "lucide-react";
+import { BriefcaseBusiness, Landmark, Sigma, TestTube2, TrendingUp, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const lucideIconMap: Record<string, LucideIcon> = {
   Sigma,
   TestTube: TestTube2,
-  Globe2,
+  BriefcaseBusiness,
+  TrendingUp,
+  Landmark,
 };
 
 const letterIconMap: Record<string, string> = {

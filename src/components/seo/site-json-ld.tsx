@@ -15,7 +15,6 @@ export function SiteJsonLd() {
       "Eight AI tools for homework help, essays, maths, quizzes, school projects, grammar, calculator, and ask-anything tutoring — for CBSE Classes 1–12.",
     sameAs: [
       "https://www.facebook.com/",
-      "https://www.instagram.com/",
       "https://x.com/",
       "https://www.linkedin.com/",
     ],

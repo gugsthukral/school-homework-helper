@@ -1,10 +1,5 @@
 export const socialLinks = [
   {
-    label: "Instagram",
-    href: "https://www.instagram.com/",
-    icon: "instagram" as const,
-  },
-  {
     label: "Facebook",
     href: "https://www.facebook.com/",
     icon: "facebook" as const,

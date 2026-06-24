@@ -84,7 +84,7 @@ export const subjectList: SubjectInfo[] = [
   {
     slug: "business-studies",
     name: "Business Studies",
-    icon: "Globe2",
+    icon: "BriefcaseBusiness",
     description:
       "Business organisation, management, marketing, and finance for Classes 11–12 commerce students.",
     topics: ["Management", "Business Environment", "Marketing", "Finance", "Organising", "Consumer Protection"],
@@ -94,7 +94,7 @@ export const subjectList: SubjectInfo[] = [
   {
     slug: "economics",
     name: "Economics",
-    icon: "Globe2",
+    icon: "TrendingUp",
     description:
       "Microeconomics, macroeconomics, and statistics for Classes 11–12 commerce and arts streams.",
     topics: ["Demand & Supply", "National Income", "Statistics", "Money & Banking", "Government Budget", "Globalisation"],
@@ -104,7 +104,7 @@ export const subjectList: SubjectInfo[] = [
   {
     slug: "sst",
     name: "SST",
-    icon: "Globe2",
+    icon: "Landmark",
     description:
       "Social Studies covering history, geography, civics, and economics for Classes 6–12.",
     topics: ["History", "Geography", "Civics", "Economics", "Maps", "Current Affairs"],
