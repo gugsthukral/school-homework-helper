@@ -132,8 +132,11 @@ export function buildRootMetadata(): Metadata {
       },
     },
     icons: {
-      icon: "/favicon.png",
-      apple: "/favicon.png",
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/favicon.png", type: "image/png", sizes: "16x16" },
+      ],
+      apple: "/logo.png",
     },
     verification: {
       google: "vtaBwWyRbATOVYiugu6crxh5OUjB2-GI05Dge3tB45k",

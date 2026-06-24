@@ -56,11 +56,14 @@ Set these in your hosting dashboard (Vercel → Settings → Environment Variabl
 1. Log in to [supabase.com](https://supabase.com) → your project.
 2. Open **SQL Editor** and run `supabase/schema.sql` from this project.
 3. Enable **Google OAuth**: Authentication → Providers → Google → Enable.
-4. Add **Redirect URLs** (Authentication → URL Configuration):
+4. Set **Site URL** (Authentication → URL Configuration) — this is required and must be a full URL with `https://`:
+   - Production: `https://www.schoolhomeworkhelper.com`
+   - Do **not** use `schoolhomeworkhelper.com` without `https://` (causes "site url is improperly formatted").
+5. Add **Redirect URLs** on the same page:
    - `https://www.schoolhomeworkhelper.com/**`
    - `https://schoolhomeworkhelper.com/**`
    - `http://localhost:3000/**` (for local dev)
-5. Copy **Project URL**, **anon key**, and **service_role key** for env vars.
+6. Copy **Project URL**, **anon key**, and **service_role key** for env vars.
 
 ### 4. Google OAuth (Sign-In)
 
