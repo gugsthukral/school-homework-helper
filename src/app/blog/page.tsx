@@ -3,12 +3,10 @@ import Link from "next/link";
 import { BookOpen, Clock } from "lucide-react";
 import { PageLayout } from "@/components/layout/page-layout";
 import { blogPosts } from "@/lib/blog-posts";
+import { PAGE_SEO } from "@/lib/seo-config";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Blog | School Homework Helper",
-  description:
-    "Study tips, homework help articles, exam preparation guides, and learning resources for Classes 1–12.",
-};
+export const metadata: Metadata = buildPageMetadata(PAGE_SEO.blog);
 
 export default function BlogPage() {
   return (

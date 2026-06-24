@@ -17,6 +17,7 @@ import { getKeyTopicsForClass } from "@/lib/key-topics";
 import { seoPages } from "@/lib/seo-pages";
 import { getSyllabusForClass } from "@/lib/syllabus-2026-27";
 import { ACADEMIC_SESSION } from "@/lib/syllabus-2026-27";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -29,16 +30,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cls = getClassBySlug(slug);
   if (!cls) return { title: "Class Not Found" };
 
-  return {
+  return buildPageMetadata({
     title: `${cls.label} Syllabus ${ACADEMIC_SESSION} & Homework Help`,
-    description: `${cls.description} Updated CBSE syllabus for academic session ${ACADEMIC_SESSION}.`,
+    description: `${cls.description} Updated CBSE syllabus for academic session ${ACADEMIC_SESSION}. Chapter notes, key topics, and AI tools.`,
     keywords: [
       `${cls.label} homework help`,
       `${cls.label} maths questions`,
       `${cls.label} science homework`,
       `${cls.label} essay topics`,
+      `CBSE ${ACADEMIC_SESSION} ${cls.label}`,
     ],
-  };
+    path: `/classes/${slug}`,
+  });
 }
 
 export default async function ClassDetailPage({ params }: Props) {

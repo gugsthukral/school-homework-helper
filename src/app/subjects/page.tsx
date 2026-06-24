@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import { PageLayout } from "@/components/layout/page-layout";
 import { subjectList } from "@/lib/subject-content";
+import { PAGE_SEO } from "@/lib/seo-config";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 const iconMap: Record<string, LucideIcon> = {
   Sigma,
@@ -19,11 +21,7 @@ const iconMap: Record<string, LucideIcon> = {
   Globe2,
 };
 
-export const metadata: Metadata = {
-  title: "All Subjects | School Homework Helper",
-  description:
-    "Homework help for Mathematics, Science, English, Hindi, Punjabi, and Social Studies for Classes 1–12.",
-};
+export const metadata: Metadata = buildPageMetadata(PAGE_SEO.subjects);
 
 export default function SubjectsPage() {
   return (

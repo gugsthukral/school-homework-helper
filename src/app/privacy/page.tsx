@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageLayout } from "@/components/layout/page-layout";
 import { LegalSection } from "@/components/legal/legal-section";
+import { PAGE_SEO } from "@/lib/seo-config";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | School Homework Helper",
-  description:
-    "Learn how School Homework Helper collects, uses, and protects your information when you use our AI education tools.",
-};
+export const metadata: Metadata = buildPageMetadata(PAGE_SEO.privacy);
 
 const LAST_UPDATED = "June 20, 2026";
 

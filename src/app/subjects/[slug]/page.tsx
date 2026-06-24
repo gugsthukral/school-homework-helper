@@ -15,6 +15,7 @@ import { ChapterLinkList } from "@/components/classes/chapter-link-list";
 import { classList } from "@/lib/class-content";
 import { getChaptersForSubjectPage } from "@/lib/chapters";
 import { getSubjectBySlug, getToolsForSubject, subjectList } from "@/lib/subject-content";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 const iconMap: Record<string, LucideIcon> = {
   Sigma,
@@ -38,16 +39,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const subject = getSubjectBySlug(slug);
   if (!subject) return { title: "Subject Not Found" };
 
-  return {
-    title: `${subject.name} Homework Help | School Homework Helper`,
+  return buildPageMetadata({
+    title: `${subject.name} Homework Help & Study Resources`,
     description: subject.description,
     keywords: [
       `${subject.name} homework help`,
-      `class 5 ${subject.name.toLowerCase()}`,
-      `class 8 ${subject.name.toLowerCase()}`,
       `${subject.name} questions`,
+      `CBSE ${subject.name.toLowerCase()}`,
+      "class 1 to 12",
+      `${subject.name} study guide`,
     ],
-  };
+    path: `/subjects/${slug}`,
+  });
 }
 
 export default async function SubjectDetailPage({ params, searchParams }: Props) {

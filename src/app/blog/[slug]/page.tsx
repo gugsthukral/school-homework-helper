@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogArticle } from "@/components/blog/blog-article";
+import { BlogJsonLd } from "@/components/seo/blog-json-ld";
 import { blogPosts, getBlogPost } from "@/lib/blog-posts";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -14,17 +16,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getBlogPost(slug);
   if (!post) return { title: "Article Not Found" };
 
-  return {
+  return buildPageMetadata({
     title: post.title,
     description: post.excerpt,
-    keywords: [post.category, post.title, "school homework", "study tips"],
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: "article",
-      publishedTime: post.publishedAt,
-    },
-  };
+    keywords: [post.category, post.title, "school homework", "study tips", "CBSE", "exam preparation"],
+    path: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: post.publishedAt,
+  });
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -32,5 +31,10 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getBlogPost(slug);
   if (!post) notFound();
 
-  return <BlogArticle post={post} />;
+  return (
+    <>
+      <BlogJsonLd post={post} />
+      <BlogArticle post={post} />
+    </>
+  );
 }

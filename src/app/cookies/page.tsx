@@ -3,12 +3,10 @@ import Link from "next/link";
 import { PageLayout } from "@/components/layout/page-layout";
 import { LegalSection } from "@/components/legal/legal-section";
 import { CookiePreferenceActions } from "@/components/cookie-consent/cookie-preference-actions";
+import { PAGE_SEO } from "@/lib/seo-config";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Cookie Policy | School Homework Helper",
-  description:
-    "Learn how School Homework Helper uses cookies, what types we use, and how to manage your preferences.",
-};
+export const metadata: Metadata = buildPageMetadata(PAGE_SEO.cookies);
 
 const LAST_UPDATED = "June 20, 2026";
 

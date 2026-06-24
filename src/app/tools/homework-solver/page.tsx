@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import { BookOpen } from "lucide-react";
 import { ToolLayout } from "@/components/tools/tool-layout";
 import { HomeworkSolverForm } from "@/components/tools/homework-solver-form";
+import { TOOL_SEO } from "@/lib/seo-config";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Homework Solver | School Homework Helper",
-  description:
-    "Get step-by-step homework explanations for any question. AI-powered help for Classes 1 to 12.",
-};
+export const metadata: Metadata = buildPageMetadata(TOOL_SEO["homework-solver"]);
 
 export default function HomeworkSolverPage() {
   return (

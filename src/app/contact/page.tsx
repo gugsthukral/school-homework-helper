@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { Mail, MapPin, MessageSquare } from "lucide-react";
 import { PageLayout } from "@/components/layout/page-layout";
 import { ContactForm } from "@/components/contact/contact-form";
+import { PAGE_SEO } from "@/lib/seo-config";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Contact Us | School Homework Helper",
-  description: "Get in touch with School Homework Helper for support, feedback, or partnership inquiries.",
-};
+export const metadata: Metadata = buildPageMetadata(PAGE_SEO.contact);
 
 export default function ContactPage() {
   return (

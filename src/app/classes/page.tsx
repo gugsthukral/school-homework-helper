@@ -3,12 +3,19 @@ import Link from "next/link";
 import { PageLayout } from "@/components/layout/page-layout";
 import { classList } from "@/lib/class-content";
 import { ACADEMIC_SESSION } from "@/lib/syllabus-2026-27";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-export const metadata: Metadata = {
-  title: `All Classes — Syllabus ${ACADEMIC_SESSION} | School Homework Helper`,
-  description:
-    `Homework help and CBSE ${ACADEMIC_SESSION} syllabus for Class 1 to Class 12. Find resources for your grade level.`,
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: `All Classes — Syllabus ${ACADEMIC_SESSION}`,
+  description: `Homework help and CBSE ${ACADEMIC_SESSION} syllabus for Class 1 to Class 12. Chapter-wise notes, key topics, and AI study tools.`,
+  keywords: [
+    "class 1 to 12 syllabus",
+    `CBSE ${ACADEMIC_SESSION}`,
+    "homework help by class",
+    "NCERT chapters",
+  ],
+  path: "/classes",
+});
 
 export default function ClassesPage() {
   return (

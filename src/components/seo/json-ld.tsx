@@ -1,3 +1,6 @@
+import { getSiteUrl } from "@/lib/seo-metadata";
+import { SITE_NAME } from "@/lib/seo-config";
+
 type JsonLdProps = {
   page: {
     title: string;
@@ -9,7 +12,7 @@ type JsonLdProps = {
 };
 
 export function SeoJsonLd({ page }: JsonLdProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://schoolhomeworkhelper.com";
+  const baseUrl = getSiteUrl();
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -32,12 +35,12 @@ export function SeoJsonLd({ page }: JsonLdProps) {
     url: `${baseUrl}/${page.slug}`,
     publisher: {
       "@type": "Organization",
-      name: "School Homework Helper",
+      name: SITE_NAME,
       url: baseUrl,
     },
     author: {
       "@type": "Organization",
-      name: "School Homework Helper",
+      name: SITE_NAME,
     },
   };
 

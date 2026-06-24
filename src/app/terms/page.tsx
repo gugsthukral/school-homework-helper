@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageLayout } from "@/components/layout/page-layout";
 import { LegalSection } from "@/components/legal/legal-section";
+import { PAGE_SEO } from "@/lib/seo-config";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Terms of Service | School Homework Helper",
-  description:
-    "Read the terms and conditions for using School Homework Helper's AI education tools and website.",
-};
+export const metadata: Metadata = buildPageMetadata(PAGE_SEO.terms);
 
 const LAST_UPDATED = "June 20, 2026";
 

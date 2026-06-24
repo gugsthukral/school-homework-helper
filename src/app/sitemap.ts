@@ -15,7 +15,6 @@ const staticRoutes = [
   "/privacy",
   "/terms",
   "/cookies",
-  "/signin",
   "/classes",
   "/subjects",
   "/tools/homework-solver",

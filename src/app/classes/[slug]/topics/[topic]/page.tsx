@@ -5,8 +5,8 @@ import { getClassBySlug } from "@/lib/class-content";
 import {
   getKeyTopic,
   keyTopicsRegistry,
-  ACADEMIC_SESSION,
 } from "@/lib/key-topics";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 type Props = { params: Promise<{ slug: string; topic: string }> };
 
@@ -22,15 +22,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const entry = getKeyTopic(slug, topic);
   if (!entry) return { title: "Topic Not Found" };
 
-  return {
-    title: `Class ${entry.classNumber} ${entry.title} — ${entry.subjectName} (${ACADEMIC_SESSION})`,
+  return buildPageMetadata({
+    title: `Class ${entry.classNumber} ${entry.title} — ${entry.subjectName}`,
     description: entry.description,
     keywords: [
       `class ${entry.classNumber} ${entry.title.toLowerCase()}`,
       `class ${entry.classNumber} ${entry.subjectName.toLowerCase()}`,
       `key topics class ${entry.classNumber}`,
+      "CBSE study topics",
     ],
-  };
+    path: `/classes/${slug}/topics/${topic}`,
+  });
 }
 
 export default async function KeyTopicPage({ params }: Props) {

@@ -7,6 +7,7 @@ import {
   getChapter,
 } from "@/lib/chapters";
 import { ACADEMIC_SESSION } from "@/lib/syllabus-2026-27";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 type Props = {
   params: Promise<{ slug: string; subject: string; chapter: string }>;
@@ -25,15 +26,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const entry = getChapter(slug, subject, chapter);
   if (!entry) return { title: "Chapter Not Found" };
 
-  return {
+  return buildPageMetadata({
     title: `Class ${entry.classNumber} ${entry.subjectName}: ${entry.chapterTitle} (${ACADEMIC_SESSION})`,
     description: `Study Class ${entry.classNumber} ${entry.subjectName} Chapter ${entry.chapterNumber} — ${entry.chapterTitle}. CBSE NCERT syllabus ${ACADEMIC_SESSION} with notes, tips, and AI homework help.`,
     keywords: [
       `class ${entry.classNumber} ${entry.chapterTitle}`,
       `${entry.subjectName} chapter ${entry.chapterNumber}`,
       `class ${entry.classNumber} ${entry.subjectName} ${ACADEMIC_SESSION}`,
+      "NCERT chapter notes",
     ],
-  };
+    path: `/classes/${slug}/${subject}/${chapter}`,
+  });
 }
 
 export default async function ChapterPage({ params }: Props) {

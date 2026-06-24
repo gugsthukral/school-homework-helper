@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Footer } from "@/components/layout/footer";
 import { AdBanner } from "@/components/ads/ad-banner";
 import { Hero } from "@/components/home/hero";
@@ -8,6 +9,17 @@ import { HowItWorks } from "@/components/home/how-it-works";
 import { AudiencesSection } from "@/components/home/audiences-section";
 import { BlogPreview } from "@/components/home/blog-preview";
 import { CtaSection } from "@/components/home/cta-section";
+import { PAGE_SEO } from "@/lib/seo-config";
+import { buildPageMetadata } from "@/lib/seo-metadata";
+
+const homeSeo = PAGE_SEO.home;
+
+export const metadata: Metadata = buildPageMetadata({
+  title: homeSeo.title,
+  description: homeSeo.description,
+  keywords: [...homeSeo.keywords],
+  path: homeSeo.path,
+});
 
 export default function HomePage() {
   return (

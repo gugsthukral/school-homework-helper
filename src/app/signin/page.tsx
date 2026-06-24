@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 import { SiteLogo } from "@/components/layout/site-logo";
+import { PAGE_SEO } from "@/lib/seo-config";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Sign In",
-  description: "Sign in or sign up to School Homework Helper with your Google account.",
-};
+export const metadata: Metadata = buildPageMetadata(PAGE_SEO.signin);
 
 type Props = { searchParams: Promise<{ error?: string }> };
 

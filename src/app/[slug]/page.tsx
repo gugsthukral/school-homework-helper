@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SeoPageTemplate } from "@/components/seo/seo-page-template";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 import { getSeoPage, seoPages } from "@/lib/seo-pages";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -14,28 +15,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = getSeoPage(slug);
   if (!page) return { title: "Page Not Found" };
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://schoolhomeworkhelper.com";
-
-  return {
-    title: page.title,
+  return buildPageMetadata({
+    title: page.title.replace(/ \| School Homework Helper$/, ""),
     description: page.description,
     keywords: page.keywords,
-    alternates: {
-      canonical: `${baseUrl}/${page.slug}`,
-    },
-    openGraph: {
-      title: page.title,
-      description: page.description,
-      url: `${baseUrl}/${page.slug}`,
-      siteName: "School Homework Helper",
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: page.title,
-      description: page.description,
-    },
-  };
+    path: `/${page.slug}`,
+    type: "article",
+    absoluteTitle: page.title.includes("|"),
+  });
 }
 
 export default async function SeoLandingPage({ params }: Props) {

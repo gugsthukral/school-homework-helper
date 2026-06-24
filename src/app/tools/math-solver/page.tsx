@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { Calculator } from "lucide-react";
 import { ToolLayout } from "@/components/tools/tool-layout";
 import { MathSolverForm } from "@/components/tools/math-solver-form";
+import { TOOL_SEO } from "@/lib/seo-config";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Math Solver | School Homework Helper",
-  description: "Solve arithmetic, algebra, geometry, and word problems with step-by-step explanations.",
-};
+export const metadata: Metadata = buildPageMetadata(TOOL_SEO["math-solver"]);
 
 export default function MathSolverPage() {
   return (

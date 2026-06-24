@@ -9,6 +9,7 @@ import {
 } from "@/lib/chapters";
 import { getSyllabusForClass } from "@/lib/syllabus-2026-27";
 import { ACADEMIC_SESSION } from "@/lib/syllabus-2026-27";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 type Props = { params: Promise<{ slug: string; subject: string }> };
 
@@ -36,15 +37,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const subjectData = syllabus.find((s) => getSubjectSlug(s.name) === subject);
   if (!subjectData) return { title: "Not Found" };
 
-  return {
+  return buildPageMetadata({
     title: `Class ${cls.number} ${subjectData.name} Syllabus ${ACADEMIC_SESSION}`,
     description: `Class ${cls.number} ${subjectData.name} chapter-wise syllabus for CBSE session ${ACADEMIC_SESSION}. ${subjectData.chapters.length} chapters with notes and homework help.`,
     keywords: [
       `class ${cls.number} ${subjectData.name.toLowerCase()} syllabus`,
       `class ${cls.number} ${subject} chapters`,
       `CBSE ${ACADEMIC_SESSION} class ${cls.number}`,
+      `${subjectData.name} homework help`,
     ],
-  };
+    path: `/classes/${slug}/${subject}`,
+  });
 }
 
 export default async function ClassSubjectPage({ params }: Props) {

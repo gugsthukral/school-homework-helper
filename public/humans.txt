@@ -1,0 +1,11 @@
+/* TEAM */
+Site: School Homework Helper
+Location: India
+
+/* SITE */
+Standards: HTML5, CSS3, Next.js
+Components: React, TypeScript, Tailwind CSS
+Software: Next.js, Vercel, Supabase, OpenAI
+
+/* THANKS */
+Built for CBSE students Class 1–12

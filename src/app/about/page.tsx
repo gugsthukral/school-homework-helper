@@ -3,12 +3,10 @@ import Link from "next/link";
 import { GraduationCap, Heart, Sparkles, Target, Users, Zap } from "lucide-react";
 import { PageLayout } from "@/components/layout/page-layout";
 import { aiTools, stats } from "@/lib/data";
+import { PAGE_SEO } from "@/lib/seo-config";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-export const metadata: Metadata = {
-  title: "About Us | School Homework Helper",
-  description:
-    "Learn about School Homework Helper — an AI-powered education platform for students, parents, and teachers from Class 1 to 12.",
-};
+export const metadata: Metadata = buildPageMetadata(PAGE_SEO.about);
 
 const values = [
   {
