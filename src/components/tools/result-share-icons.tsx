@@ -18,6 +18,7 @@ type ResultShareIconsProps = {
   sharePath?: string;
   className?: string;
   showLabel?: boolean;
+  align?: "start" | "end";
 };
 
 const iconButtonClassName =
@@ -70,6 +71,7 @@ export function ResultShareIcons({
   sharePath,
   className,
   showLabel = false,
+  align = "end",
 }: ResultShareIconsProps) {
   const pathname = usePathname();
   const [copyMessage, setCopyMessage] = useState("");
@@ -124,13 +126,24 @@ export function ResultShareIcons({
   const feedback = copyMessage || shareMessage;
 
   return (
-    <div className={cn("flex flex-col items-end gap-1.5", className)}>
+    <div
+      className={cn(
+        "flex flex-col gap-2",
+        align === "end" ? "items-end" : "items-start",
+        className
+      )}
+    >
       {showLabel && (
-        <span className="text-[10px] font-semibold uppercase tracking-wide text-sky-300/50">
-          Share
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-sky-300/45">
+          Share result
         </span>
       )}
-      <div className="flex flex-wrap items-center justify-end gap-2">
+      <div
+        className={cn(
+          "flex flex-wrap items-center gap-2",
+          align === "end" ? "justify-end" : "justify-start"
+        )}
+      >
         <button
           type="button"
           onClick={handleWhatsAppShare}

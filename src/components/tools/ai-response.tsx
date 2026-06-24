@@ -26,19 +26,20 @@ export function AIResponseCard({
 
   return (
     <div className="glass-card animate-fade-up overflow-hidden rounded-2xl">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-sky-400/10 bg-sky-400/5 px-4 py-4 sm:px-6">
-        <div className="flex min-w-0 items-center gap-3">
+      <div className="border-b border-sky-400/10 bg-sky-400/5">
+        <div className="flex items-center gap-3 px-4 pt-4 sm:px-6">
           <Icon className="h-5 w-5 shrink-0 text-sky-400" />
           <h2 className="font-semibold text-white">{title}</h2>
         </div>
-        <ResultExportActions
-          content={response}
-          fileName={resolvedFileName}
-          title={title}
-          subtitle={exportSubtitle}
-          sharePath={sharePath}
-          className="w-full sm:w-auto"
-        />
+        <div className="px-4 pb-4 pt-3 sm:px-6">
+          <ResultExportActions
+            content={response}
+            fileName={resolvedFileName}
+            title={title}
+            subtitle={exportSubtitle}
+            sharePath={sharePath}
+          />
+        </div>
       </div>
       <div
         className="prose-response space-y-1 px-4 py-5 text-sm leading-relaxed text-sky-100/90 sm:px-6 sm:text-base"

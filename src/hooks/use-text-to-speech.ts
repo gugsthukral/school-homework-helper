@@ -28,6 +28,10 @@ export function useTextToSpeech() {
   const [speaking, setSpeaking] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [currentChunk, setCurrentChunk] = useState(0);
+  const [totalChunks, setTotalChunks] = useState(0);
+  const [activeAudio, setActiveAudio] = useState<HTMLAudioElement | null>(null);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
 
   const browserQueueRef = useRef<BrowserQueueItem[]>([]);
@@ -58,6 +62,7 @@ export function useTextToSpeech() {
   const cleanupAudio = useCallback(() => {
     if (audioRef.current) {
       audioRef.current.pause();
+      audioRef.current.ontimeupdate = null;
       audioRef.current.onended = null;
       audioRef.current.onerror = null;
       audioRef.current = null;
@@ -69,6 +74,10 @@ export function useTextToSpeech() {
     playIndexRef.current = 0;
     totalChunksRef.current = 0;
     isPlayingRef.current = false;
+    setActiveAudio(null);
+    setProgress(0);
+    setCurrentChunk(0);
+    setTotalChunks(0);
   }, []);
 
   const stop = useCallback(() => {
@@ -109,6 +118,12 @@ export function useTextToSpeech() {
 
   const speakBrowserSegment = useCallback(
     (item: BrowserQueueItem) => {
+      const queueLength = browserQueueRef.current.length;
+      const index = browserIndexRef.current;
+      setTotalChunks(queueLength);
+      setCurrentChunk(index + 1);
+      setProgress(queueLength > 0 ? index / queueLength : 0);
+
       const utterance = new SpeechSynthesisUtterance(item.text);
       utterance.lang = item.lang;
       utterance.rate = 1;
@@ -128,6 +143,7 @@ export function useTextToSpeech() {
           return;
         }
         setSpeaking(false);
+        setProgress(1);
       };
 
       utterance.onerror = () => {
@@ -158,6 +174,9 @@ export function useTextToSpeech() {
 
       browserQueueRef.current = queue;
       browserIndexRef.current = 0;
+      setTotalChunks(queue.length);
+      setCurrentChunk(1);
+      setProgress(0);
       setSpeaking(true);
       setError(null);
       speakBrowserSegment(queue[0]);
@@ -173,12 +192,23 @@ export function useTextToSpeech() {
       const url = audioUrlsRef.current.get(index);
       if (!url) return;
 
+      const total = totalChunksRef.current;
       isPlayingRef.current = true;
       setLoading(false);
       setSpeaking(true);
+      setTotalChunks(total);
+      setCurrentChunk(index + 1);
 
       const audio = new Audio(url);
       audioRef.current = audio;
+      setActiveAudio(audio);
+
+      audio.ontimeupdate = () => {
+        if (requestId !== requestIdRef.current || !audio.duration) return;
+        const chunkProgress = audio.currentTime / audio.duration;
+        const overall = total > 0 ? (index + chunkProgress) / total : chunkProgress;
+        setProgress(Math.min(1, overall));
+      };
 
       audio.onended = () => {
         if (requestId !== requestIdRef.current) return;
@@ -191,6 +221,7 @@ export function useTextToSpeech() {
         }
 
         setSpeaking(false);
+        setProgress(1);
         cleanupAudio();
       };
 
@@ -271,6 +302,7 @@ export function useTextToSpeech() {
           if (!line.trim()) continue;
           const chunk = JSON.parse(line) as StreamedChunk;
           totalChunksRef.current = chunk.total;
+          setTotalChunks(chunk.total);
           audioUrlsRef.current.set(
             chunk.index,
             URL.createObjectURL(base64ToBlob(chunk.audio, chunk.mimeType || "audio/mpeg"))
@@ -299,6 +331,9 @@ export function useTextToSpeech() {
       stop();
       const requestId = requestIdRef.current;
       setLoading(true);
+      setProgress(0);
+      setCurrentChunk(0);
+      setTotalChunks(0);
       setError(null);
 
       try {
@@ -329,6 +364,10 @@ export function useTextToSpeech() {
     speaking,
     loading,
     error,
+    progress,
+    currentChunk,
+    totalChunks,
+    activeAudio,
     supported: true,
   };
 }

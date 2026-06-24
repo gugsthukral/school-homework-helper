@@ -221,8 +221,8 @@ function StepGuideSection({
 export function ScienceProjectsResult({ projects, markdown, grade }: ScienceProjectsResultProps) {
   return (
     <div className="space-y-8">
-      <div className="glass-card flex flex-wrap items-center justify-between gap-3 rounded-2xl border-b border-sky-400/10 bg-sky-400/5 px-4 py-4 sm:px-6">
-        <div className="flex items-center gap-3">
+      <div className="glass-card overflow-hidden rounded-2xl border-b border-sky-400/10 bg-sky-400/5">
+        <div className="flex items-center gap-3 px-4 pt-4 sm:px-6">
           <FlaskConical className="h-5 w-5 text-sky-400" />
           <div>
             <h2 className="font-semibold text-white">School Project Ideas</h2>
@@ -231,13 +231,15 @@ export function ScienceProjectsResult({ projects, markdown, grade }: ScienceProj
             </p>
           </div>
         </div>
-        <ResultExportActions
-          content={formatAllProjectsContent(projects, markdown)}
-          fileName={`science-projects-class-${grade}`}
-          title="School Project Ideas"
-          subtitle={`Class ${grade}`}
-          showShare={false}
-        />
+        <div className="px-4 pb-4 pt-3 sm:px-6">
+          <ResultExportActions
+            content={formatAllProjectsContent(projects, markdown)}
+            fileName={`science-projects-class-${grade}`}
+            title="School Project Ideas"
+            subtitle={`Class ${grade}`}
+            showShare={false}
+          />
+        </div>
       </div>
 
       {projects.map((project, index) => (
@@ -300,14 +302,13 @@ export function ScienceProjectsResult({ projects, markdown, grade }: ScienceProj
 
             <StepGuideSection steps={project.steps} stepImages={project.stepImages} />
 
-            <div className="flex flex-wrap gap-2 border-t border-sky-400/10 pt-6">
+            <div className="border-t border-sky-400/10 pt-6">
               <ResultExportActions
                 content={formatProjectShareContent(project)}
                 fileName={`${slugifyFileName(project.title)}-class-${grade}`}
                 title={project.title}
                 subtitle={`Class ${grade} · ${project.difficulty} · Project ${index + 1}`}
                 showShare={false}
-                className="w-full sm:w-auto"
               />
             </div>
           </div>
