@@ -1,5 +1,6 @@
 import { getSiteUrl } from "@/lib/seo-metadata";
 import { SITE_NAME } from "@/lib/seo-config";
+import { aiTools } from "@/lib/data";
 
 export function SiteJsonLd() {
   const baseUrl = getSiteUrl();
@@ -11,7 +12,7 @@ export function SiteJsonLd() {
     url: baseUrl,
     logo: `${baseUrl}/logo.png`,
     description:
-      "AI-powered homework help and CBSE study resources for students from Class 1 to Class 12.",
+      "Eight AI tools for homework help, essays, maths, quizzes, school projects, grammar, calculator, and ask-anything tutoring — for CBSE Classes 1–12.",
     sameAs: [
       "https://www.facebook.com/",
       "https://www.instagram.com/",
@@ -26,7 +27,7 @@ export function SiteJsonLd() {
     name: SITE_NAME,
     url: baseUrl,
     description:
-      "Free AI homework help, math solver, essay generator, and NCERT chapter resources for CBSE Classes 1–12.",
+      "Free AI homework help with Ask Anything, Homework Solver, Essay Generator, Calculator, Math Solver, Quiz Generator, School Projects, and Grammar Checker for CBSE Classes 1–12.",
     publisher: {
       "@type": "Organization",
       name: SITE_NAME,
@@ -42,6 +43,20 @@ export function SiteJsonLd() {
     },
   };
 
+  const toolsListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${SITE_NAME} AI Tools`,
+    description: "Eight free AI study tools for CBSE students Class 1–12.",
+    numberOfItems: aiTools.length,
+    itemListElement: aiTools.map((tool, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: tool.name,
+      url: `${baseUrl}${tool.href}`,
+    })),
+  };
+
   return (
     <>
       <script
@@ -51,6 +66,10 @@ export function SiteJsonLd() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(toolsListSchema) }}
       />
     </>
   );

@@ -39,7 +39,7 @@ export default function TermsOfServicePage() {
           <p>
             School Homework Helper provides AI-powered educational tools for students from Class 1 to
             Class 12, including homework help, essay writing, math solving, quiz generation, grammar
-            checking, and science project ideas. The Service also includes class- and subject-based
+            checking, and school project ideas. The Service also includes class- and subject-based
             learning resources.
           </p>
           <p>
@@ -117,7 +117,7 @@ export default function TermsOfServicePage() {
         <LegalSection title="8. Third-Party Links and Services">
           <p>
             The Service may link to third-party websites, videos, or services (such as YouTube
-            resources in science projects). We are not responsible for the content, policies, or
+            resources in school projects). We are not responsible for the content, policies, or
             practices of third parties. Your use of third-party services is at your own risk.
           </p>
         </LegalSection>

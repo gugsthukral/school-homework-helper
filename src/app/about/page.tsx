@@ -17,7 +17,7 @@ const values = [
   {
     icon: Sparkles,
     title: "AI-Powered Help",
-    description: "Six smart tools that explain, generate, and check — not just give answers.",
+    description: "Eight smart tools that explain, generate, and check — not just give answers.",
   },
   {
     icon: Heart,

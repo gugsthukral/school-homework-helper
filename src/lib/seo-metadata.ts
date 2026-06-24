@@ -62,8 +62,8 @@ export function buildPageMetadata({
       images: [
         {
           url: imageUrl,
-          width: 250,
-          height: 91,
+          width: 196,
+          height: 100,
           alt: SITE_NAME,
         },
       ],
@@ -90,8 +90,8 @@ export function buildRootMetadata(): Metadata {
       template: `%s | ${SITE_NAME}`,
     },
     description:
-      "Free AI-powered homework help, essay generator, math solver, quizzes, and more for students from Class 1 to Class 12.",
-    keywords: DEFAULT_KEYWORDS,
+      "Free AI homework help with 8 tools — Ask Anything, Homework Solver, Essay Generator, Calculator, Math Solver, Quiz Generator, School Projects, and Grammar Checker for CBSE Classes 1–12.",
+    keywords: [...DEFAULT_KEYWORDS],
     applicationName: SITE_NAME,
     authors: [{ name: SITE_NAME, url: baseUrl }],
     creator: SITE_NAME,
@@ -103,13 +103,13 @@ export function buildRootMetadata(): Metadata {
       siteName: SITE_NAME,
       title: `${SITE_NAME} | AI Education for Classes 1–12`,
       description:
-        "Free AI-powered homework help, essay generator, math solver, quizzes, and NCERT study resources for CBSE Classes 1–12.",
+        "Free AI homework help with 8 tools — Ask Anything, Homework Solver, Essay Generator, Calculator, Math Solver, Quiz Generator, School Projects, and Grammar Checker plus NCERT study resources for CBSE Classes 1–12.",
       url: baseUrl,
       images: [
         {
           url: imageUrl,
-          width: 250,
-          height: 91,
+          width: 196,
+          height: 100,
           alt: SITE_NAME,
         },
       ],
@@ -118,7 +118,7 @@ export function buildRootMetadata(): Metadata {
       card: "summary_large_image",
       title: `${SITE_NAME} | AI Education for Classes 1–12`,
       description:
-        "Free AI homework help, math solver, essay generator, and study resources for CBSE Classes 1–12.",
+        "Free AI homework help — Ask Anything, Homework Solver, Essay Generator, Calculator, Math Solver, Quiz Generator, School Projects, and Grammar Checker for CBSE Classes 1–12.",
       images: [imageUrl],
     },
     robots: {

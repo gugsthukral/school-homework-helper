@@ -9,7 +9,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: SITE_NAME,
     short_name: "Homework Helper",
     description:
-      "AI-powered homework help and CBSE study resources for Classes 1–12.",
+      "Eight AI tools for homework help, calculator, ask anything, school projects, and CBSE study resources for Classes 1–12.",
     start_url: "/",
     display: "standalone",
     background_color: "#06101f",

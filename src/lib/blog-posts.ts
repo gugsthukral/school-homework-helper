@@ -46,15 +46,15 @@ const rawFeaturedPosts: BlogPost[] = [  {
   },
   {
     slug: "best-science-projects-class-8",
-    title: "Best Science Projects for Class 8",
+    title: "Best School & Science Projects for Class 8",
     category: "Science",
     readTime: "7 min read",
-    excerpt: "Creative and easy science project ideas perfect for Class 8 students.",
+    excerpt: "Creative and easy school and science project ideas perfect for Class 8 students.",
     publishedAt: "2026-06-03",
     author: "School Homework Helper",
     sections: [
       {
-        heading: "Choosing the Right Class 8 Science Project",
+        heading: "Choosing the Right Class 8 School Project",
         content:
           "Class 8 science covers force, pressure, friction, sound, chemical effects of electric current, and more. A good project demonstrates a clear scientific concept using simple, safe materials.",
       },

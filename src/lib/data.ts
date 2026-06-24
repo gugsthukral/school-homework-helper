@@ -92,7 +92,7 @@ export const steps = [
   {
     step: "01",
     title: "Choose Your Tool",
-    description: "Pick from 8 AI tools — homework solver, calculator, ask anything, and more.",
+    description: "Pick from 8 AI tools — Ask Anything, Homework Solver, Essay Generator, Calculator, and more.",
   },
   {
     step: "02",

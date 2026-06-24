@@ -3,7 +3,7 @@ export const SITE_NAME = "School Homework Helper";
 export const SITE_TAGLINE = "AI Education for Classes 1–12";
 
 export const DEFAULT_DESCRIPTION =
-  "Free AI-powered homework help, calculator, ask anything tutor, essay generator, math solver, grammar checker, quizzes, and NCERT study resources for CBSE students from Class 1 to Class 12.";
+  "Free AI homework help with 8 tools — Ask Anything, Homework Solver, Essay Generator, Calculator, Math Solver, Quiz Generator, School Projects, and Grammar Checker — plus NCERT study resources for CBSE Classes 1–12.";
 
 export const DEFAULT_KEYWORDS = [
   "school homework helper",
@@ -11,20 +11,36 @@ export const DEFAULT_KEYWORDS = [
   "AI homework help",
   "CBSE study guide",
   "class 1 to 12 homework",
-  "math solver",
+  "ask anything AI tutor",
+  "homework solver",
   "essay generator",
-  "grammar checker",
+  "AI calculator",
+  "math solver",
   "quiz generator",
+  "school project ideas",
   "science project ideas",
+  "grammar checker",
   "NCERT chapter notes",
   "board exam preparation",
   "online study help",
   "free homework help",
-  "AI calculator",
-  "ask anything AI tutor",
-];
+] as const;
 
 export const TOOL_SEO = {
+  "ask-anything": {
+    title: "Ask Anything — AI Tutor",
+    description:
+      "Ask any school question across subjects and get clear answers from an AI tutor. Type or use voice input — for CBSE Classes 1–12.",
+    keywords: [
+      "ask anything AI",
+      "homework questions",
+      "AI tutor",
+      "study help",
+      "CBSE doubt solver",
+      "voice homework help",
+    ],
+    path: "/tools/ask-anything",
+  },
   "homework-solver": {
     title: "AI Homework Solver",
     description:
@@ -52,6 +68,19 @@ export const TOOL_SEO = {
     ],
     path: "/tools/essay-generator",
   },
+  calculator: {
+    title: "AI Calculator",
+    description:
+      "Calculate arithmetic, percentages, scientific expressions, and unit conversions with clear step-by-step explanations for school students.",
+    keywords: [
+      "online calculator",
+      "percentage calculator",
+      "scientific calculator",
+      "unit converter",
+      "school maths calculator",
+    ],
+    path: "/tools/calculator",
+  },
   "math-solver": {
     title: "AI Math Solver",
     description:
@@ -78,6 +107,20 @@ export const TOOL_SEO = {
     ],
     path: "/tools/quiz-generator",
   },
+  "science-projects": {
+    title: "School Projects — AI Idea Generator",
+    description:
+      "Get class-wise school and science project ideas with materials, steps, and learning outcomes for CBSE students Class 1–12.",
+    keywords: [
+      "school project ideas",
+      "school projects",
+      "science project ideas",
+      "class 8 science project",
+      "CBSE science exhibition",
+      "DIY school projects",
+    ],
+    path: "/tools/science-projects",
+  },
   "grammar-checker": {
     title: "AI Grammar Checker",
     description:
@@ -91,45 +134,6 @@ export const TOOL_SEO = {
     ],
     path: "/tools/grammar-checker",
   },
-  "science-projects": {
-    title: "School Project Ideas Generator",
-    description:
-      "Get class-wise school project ideas with materials, steps, and learning outcomes for CBSE students Class 1–12.",
-    keywords: [
-      "science project ideas",
-      "school science projects",
-      "class 8 science project",
-      "CBSE science exhibition",
-      "DIY science experiments",
-    ],
-    path: "/tools/science-projects",
-  },
-  calculator: {
-    title: "AI Calculator",
-    description:
-      "Calculate arithmetic, percentages, scientific expressions, and unit conversions with clear step-by-step explanations for school students.",
-    keywords: [
-      "online calculator",
-      "percentage calculator",
-      "scientific calculator",
-      "unit converter",
-      "school maths calculator",
-    ],
-    path: "/tools/calculator",
-  },
-  "ask-anything": {
-    title: "Ask Anything — AI Tutor",
-    description:
-      "Ask any school question across subjects and get clear, class-appropriate answers from an AI tutor for CBSE Classes 1–12.",
-    keywords: [
-      "ask anything AI",
-      "homework questions",
-      "AI tutor",
-      "study help",
-      "CBSE doubt solver",
-    ],
-    path: "/tools/ask-anything",
-  },
 } as const;
 
 export const PAGE_SEO = {
@@ -142,7 +146,7 @@ export const PAGE_SEO = {
   about: {
     title: "About Us",
     description:
-      "Learn about School Homework Helper — an AI-powered education platform helping students, parents, and teachers from Class 1 to Class 12 across India.",
+      "Learn about School Homework Helper — eight AI tools and CBSE study resources helping students, parents, and teachers from Class 1 to Class 12 across India.",
     keywords: [
       "about school homework helper",
       "AI education platform",

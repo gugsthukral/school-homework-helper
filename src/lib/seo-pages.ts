@@ -253,19 +253,21 @@ function scienceProjectPages(): SeoPage[] {
       type: "science-projects" as const,
       classNumber: classNum,
       subject: "science" as const,
-      title: `Class ${classNum} Science Projects | Ideas, Materials & Steps`,
-      description: `Best Class ${classNum} science project ideas with materials list and steps. Safe, fun projects for school exhibitions and homework.`,
+      title: `Class ${classNum} School & Science Projects | Ideas, Materials & Steps`,
+      description: `Best Class ${classNum} school and science project ideas with materials list and steps. Safe, fun projects for school exhibitions and homework.`,
       keywords: [
+        `class ${classNum} school projects`,
         `class ${classNum} science projects`,
+        `school project ideas class ${classNum}`,
         `science project ideas class ${classNum}`,
         `class ${classNum} science exhibition`,
-        `easy science projects class ${classNum}`,
+        `easy school projects class ${classNum}`,
       ],
-      h1: `Class ${classNum} Science Project Ideas`,
-      intro: `Looking for a Class ${classNum} science project? Get creative, safe project ideas with materials you can find at home or school. Use our AI to generate custom project ideas for any topic.`,
+      h1: `Class ${classNum} School Project Ideas`,
+      intro: `Looking for a Class ${classNum} school or science project? Get creative, safe project ideas with materials you can find at home or school. Use our School Projects AI to generate custom ideas for any topic.`,
       sections: [
         {
-          heading: "What Makes a Good Science Project",
+          heading: "What Makes a Good School Project",
           content:
             "Choose a clear question, use simple materials, demonstrate a scientific concept, and explain what you learned. Judges love projects where students understand the science behind the experiment.",
         },
@@ -281,7 +283,7 @@ function scienceProjectPages(): SeoPage[] {
       ],
       faqs: [
         {
-          question: `What are easy science projects for Class ${classNum}?`,
+          question: `What are easy school projects for Class ${classNum}?`,
           answer: getScienceProjectIdeas(classNum).split("\n")[0].replace(/^-\s*/, ""),
         },
         {

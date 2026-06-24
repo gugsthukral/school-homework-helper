@@ -9,3 +9,4 @@ Software: Next.js, Vercel, Supabase, OpenAI
 
 /* THANKS */
 Built for CBSE students Class 1–12
+AI Tools: Ask Anything, Homework Solver, Essay Generator, Calculator, Math Solver, Quiz Generator, School Projects, Grammar Checker

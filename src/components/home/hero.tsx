@@ -25,7 +25,7 @@ export function Hero() {
             </h1>
 
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-sky-200/70 lg:mx-0">
-              Step-by-step homework help, essays, math solutions, quizzes, and more —
+              Eight AI tools for homework, essays, maths, quizzes, school projects, and more —
               built for students from Class 1 to Class 12. Learn smarter, not harder.
             </p>
 
@@ -84,7 +84,7 @@ export function Hero() {
             </div>
 
             <div className="absolute -bottom-6 -left-6 glass-card rounded-2xl px-5 py-3 shadow-xl">
-              <p className="text-2xl font-bold text-orange-400">6</p>
+              <p className="text-2xl font-bold text-orange-400">8</p>
               <p className="text-xs text-sky-300/70">AI Tools Ready</p>
             </div>
             <div className="absolute -right-4 -top-4 glass-card rounded-2xl px-5 py-3 shadow-xl">

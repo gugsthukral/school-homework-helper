@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog-posts";
 import { getChapterFocusRegistry } from "@/lib/chapter-focus";
 import { chapterRegistry } from "@/lib/chapters";
+import { aiTools } from "@/lib/data";
 import { keyTopicsRegistry } from "@/lib/key-topics";
 import { seoPages } from "@/lib/seo-pages";
 
@@ -17,14 +18,7 @@ const staticRoutes = [
   "/cookies",
   "/classes",
   "/subjects",
-  "/tools/homework-solver",
-  "/tools/essay-generator",
-  "/tools/math-solver",
-  "/tools/quiz-generator",
-  "/tools/grammar-checker",
-  "/tools/science-projects",
-  "/tools/calculator",
-  "/tools/ask-anything",
+  ...aiTools.map((tool) => tool.href),
   ...Array.from({ length: 12 }, (_, i) => `/classes/class-${i + 1}`),
   ...["mathematics", "science", "english", "hindi", "punjabi", "sst", "evs", "accountancy", "business-studies", "economics"].map(
     (s) => `/subjects/${s}`
