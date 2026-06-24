@@ -4,8 +4,10 @@ import {
   Calculator,
   FlaskConical,
   HelpCircle,
+  MessageCircleQuestion,
   PenLine,
   SpellCheck,
+  SquareFunction,
   ArrowUpRight,
   type LucideIcon,
 } from "lucide-react";
@@ -18,6 +20,8 @@ const iconMap: Record<string, LucideIcon> = {
   HelpCircle,
   SpellCheck,
   FlaskConical,
+  SquareFunction,
+  MessageCircleQuestion,
 };
 
 export function ToolsSection() {
@@ -30,7 +34,7 @@ export function ToolsSection() {
             AI Tools
           </span>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-            Six Powerful Tools, One Platform
+            Eight Powerful Tools, One Platform
           </h2>
           <p className="mt-4 text-sky-200/70">
             Everything you need for homework, exams, and learning — powered by AI and

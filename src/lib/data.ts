@@ -55,6 +55,22 @@ export const aiTools = [
     color: "from-orange-500/20 to-orange-500/5",
     accent: "text-orange-400",
   },
+  {
+    name: "Calculator",
+    description: "Calculate expressions, percentages, and units with step-by-step help.",
+    icon: "SquareFunction",
+    href: "/tools/calculator",
+    color: "from-sky-400/20 to-orange-500/5",
+    accent: "text-sky-300",
+  },
+  {
+    name: "Ask Anything",
+    description: "Ask any school question and get a clear AI tutor answer.",
+    icon: "MessageCircleQuestion",
+    href: "/tools/ask-anything",
+    color: "from-orange-500/20 to-sky-400/5",
+    accent: "text-orange-400",
+  },
 ];
 
 export const classes = Array.from({ length: 12 }, (_, i) => ({
@@ -76,7 +92,7 @@ export const steps = [
   {
     step: "01",
     title: "Choose Your Tool",
-    description: "Pick from 6 AI tools — homework solver, essays, math, quizzes, and more.",
+    description: "Pick from 8 AI tools — homework solver, calculator, ask anything, and more.",
   },
   {
     step: "02",
@@ -113,7 +129,7 @@ export const audiences = [
 
 export const stats = [
   { value: "12", label: "Classes Covered", href: "/classes" },
-  { value: "6", label: "AI Tools", href: "/#tools" },
+  { value: "8", label: "AI Tools", href: "/#tools" },
   { value: "6+", label: "Subjects", href: "/subjects" },
   { value: "Free", label: "To Get Started", href: "/tools/homework-solver" },
 ];

@@ -10,6 +10,8 @@ const footerLinks = {
     { label: "Quiz Generator", href: "/tools/quiz-generator" },
     { label: "Grammar Checker", href: "/tools/grammar-checker" },
     { label: "Science Projects", href: "/tools/science-projects" },
+    { label: "Calculator", href: "/tools/calculator" },
+    { label: "Ask Anything", href: "/tools/ask-anything" },
   ],
   resources: [
     { label: "All Classes", href: "/classes" },

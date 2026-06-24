@@ -18,3 +18,10 @@ export const mathTypes = [
 export const wordCountOptions = [100, 150, 200, 250, 300, 400, 500];
 
 export const quizCountOptions = [5, 10, 15, 20];
+
+export const calculatorTypes = [
+  { value: "basic", label: "Basic Arithmetic" },
+  { value: "percentage", label: "Percentage & Ratio" },
+  { value: "scientific", label: "Scientific" },
+  { value: "unit", label: "Unit Conversion" },
+];

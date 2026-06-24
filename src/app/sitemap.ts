@@ -23,6 +23,8 @@ const staticRoutes = [
   "/tools/quiz-generator",
   "/tools/grammar-checker",
   "/tools/science-projects",
+  "/tools/calculator",
+  "/tools/ask-anything",
   ...Array.from({ length: 12 }, (_, i) => `/classes/class-${i + 1}`),
   ...["mathematics", "science", "english", "hindi", "punjabi", "sst", "evs", "accountancy", "business-studies", "economics"].map(
     (s) => `/subjects/${s}`

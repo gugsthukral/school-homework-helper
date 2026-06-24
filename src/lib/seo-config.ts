@@ -3,7 +3,7 @@ export const SITE_NAME = "School Homework Helper";
 export const SITE_TAGLINE = "AI Education for Classes 1–12";
 
 export const DEFAULT_DESCRIPTION =
-  "Free AI-powered homework help, essay generator, math solver, grammar checker, quizzes, and NCERT study resources for CBSE students from Class 1 to Class 12.";
+  "Free AI-powered homework help, calculator, ask anything tutor, essay generator, math solver, grammar checker, quizzes, and NCERT study resources for CBSE students from Class 1 to Class 12.";
 
 export const DEFAULT_KEYWORDS = [
   "school homework helper",
@@ -20,6 +20,8 @@ export const DEFAULT_KEYWORDS = [
   "board exam preparation",
   "online study help",
   "free homework help",
+  "AI calculator",
+  "ask anything AI tutor",
 ];
 
 export const TOOL_SEO = {
@@ -101,6 +103,32 @@ export const TOOL_SEO = {
       "DIY science experiments",
     ],
     path: "/tools/science-projects",
+  },
+  calculator: {
+    title: "AI Calculator",
+    description:
+      "Calculate arithmetic, percentages, scientific expressions, and unit conversions with clear step-by-step explanations for school students.",
+    keywords: [
+      "online calculator",
+      "percentage calculator",
+      "scientific calculator",
+      "unit converter",
+      "school maths calculator",
+    ],
+    path: "/tools/calculator",
+  },
+  "ask-anything": {
+    title: "Ask Anything — AI Tutor",
+    description:
+      "Ask any school question across subjects and get clear, class-appropriate answers from an AI tutor for CBSE Classes 1–12.",
+    keywords: [
+      "ask anything AI",
+      "homework questions",
+      "AI tutor",
+      "study help",
+      "CBSE doubt solver",
+    ],
+    path: "/tools/ask-anything",
   },
 } as const;
 

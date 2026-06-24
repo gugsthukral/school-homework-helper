@@ -198,3 +198,54 @@ Rules:
 
 export const SCIENCE_PROJECTS_SYSTEM = buildScienceProjectsSystemPrompt(6);
 
+export function buildCalculatorPrompt(grade: number, expression: string, calcType: string) {
+  return `You are a smart school calculator assistant for a Class ${grade} student.
+
+Calculation type: ${calcType}
+
+Expression or problem:
+${expression}
+
+Rules:
+- Compute the correct numerical answer (show the exact result)
+- Show step-by-step working in simple language appropriate for Class ${grade}
+- For percentages, ratios, and unit conversions, explain each step clearly
+- Use markdown with **Final Answer** highlighted at the end
+- If the input is invalid, explain what to fix and give an example`;
+}
+
+export function buildAskAnythingPrompt(grade: number, question: string, subject?: string) {
+  const subjectLine = subject ? `\nSubject context: ${subject}` : "";
+
+  return `You are a friendly, knowledgeable tutor for Indian CBSE students.
+Answer this question for a Class ${grade} student.${subjectLine}
+
+Question:
+${question}
+
+Rules:
+- Give a clear, accurate answer using simple language appropriate for Class ${grade}
+- Use short paragraphs and bullet points where helpful
+- If the question is about homework or exams, include 1-2 study tips
+- Use markdown formatting
+- If the question is unclear, answer the most likely intent and note any assumptions`;
+}
+
+export function buildAskAnythingVisionPrompt(grade: number, question: string, subject?: string) {
+  const subjectLine = subject ? `\nSubject context: ${subject}` : "";
+  const questionLine = question.trim()
+    ? `\nThe student also wrote:\n${question}\n`
+    : "";
+
+  return `The student uploaded image(s) with a school-related question for a Class ${grade} student.${subjectLine}${questionLine}
+
+Your task:
+1. Read and understand the attached image(s)
+2. Answer the question clearly for a Class ${grade} student
+
+Rules:
+- You MUST use the attached image(s). Never say you cannot read images.
+- Use simple language and markdown formatting
+- Include step-by-step help when solving problems`;
+}
+
