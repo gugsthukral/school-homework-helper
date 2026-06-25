@@ -38,10 +38,10 @@ export function Hero() {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
-                href="#classes"
+                href="/tools/ask-anything"
                 className="inline-flex w-full items-center justify-center rounded-full border border-sky-400/30 bg-sky-400/5 px-8 py-3.5 text-base font-semibold text-sky-200 transition-all hover:border-sky-400/50 hover:bg-sky-400/10 sm:w-auto"
               >
-                Browse by Class
+                Ask Anything
               </Link>
             </div>
 
