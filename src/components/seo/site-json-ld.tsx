@@ -2,6 +2,7 @@ import { getSiteUrl } from "@/lib/seo-metadata";
 import { SITE_NAME } from "@/lib/seo-config";
 import { aiTools } from "@/lib/data";
 import { REGIONAL_LANGUAGES_TAGLINE } from "@/lib/indian-languages";
+import { socialLinks } from "@/lib/site-config";
 
 export function SiteJsonLd() {
   const baseUrl = getSiteUrl();
@@ -14,11 +15,7 @@ export function SiteJsonLd() {
     logo: `${baseUrl}/logo.png`,
     description:
       `Eight AI tools for homework help, essays, maths, quizzes, school projects, grammar, calculator, and ask-anything tutoring — for CBSE Classes 1–12. ${REGIONAL_LANGUAGES_TAGLINE}.`,
-    sameAs: [
-      "https://www.facebook.com/",
-      "https://x.com/",
-      "https://www.linkedin.com/",
-    ],
+    sameAs: socialLinks.map((link) => link.href),
   };
 
   const websiteSchema = {

@@ -1,20 +1,25 @@
 export const socialLinks = [
   {
+    label: "Instagram",
+    href: "https://www.instagram.com/schoolhomeworkhelper/",
+    icon: "instagram" as const,
+  },
+  {
     label: "Facebook",
-    href: "https://www.facebook.com/",
+    href: "https://www.facebook.com/profile.php?id=61591263363969",
     icon: "facebook" as const,
   },
   {
     label: "X",
-    href: "https://x.com/",
+    href: "https://x.com/aischoolhub",
     icon: "x" as const,
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/",
+    href: "https://www.linkedin.com/in/school-homework-helper-undefined-b73542419/",
     icon: "linkedin" as const,
   },
-];
+] as const;
 
 export const TOPBAR_HEIGHT = 60;
 
