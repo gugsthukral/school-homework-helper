@@ -64,26 +64,24 @@ export default async function SubjectDetailPage({ params, searchParams }: Props)
       backLabel="All Subjects"
     >
       {selectedClass && (
-        <div className="mb-8 rounded-2xl border border-sky-400/20 bg-sky-400/5 px-5 py-3 text-sm text-sky-200">
-          Viewing resources for <strong className="text-white">Class {selectedClass}</strong>{" "}
+        <div className="mb-8 rounded-2xl border border-slate-200 bg-sky-400/5 px-5 py-3 text-sm text-slate-700">
+          Viewing resources for <strong className="text-slate-900">Class {selectedClass}</strong>{" "}
           — <Link href={`/classes/class-${selectedClass}`} className="text-orange-400 hover:underline">view all Class {selectedClass} subjects</Link>
         </div>
       )}
 
       <div className="mb-10 flex items-center gap-4">
-        <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-400/20 to-orange-500/10 ring-1 ring-sky-400/20">
-          <SubjectIcon icon={subject.icon} className="h-8 w-8 text-sky-400" />
-        </span>
+        <SubjectIcon icon={subject.icon} size={56} />
       </div>
 
       <section className="mb-12">
-        <h2 className="mb-4 text-xl font-semibold text-white">Topics Covered</h2>
+        <h2 className="mb-4 text-xl font-semibold text-slate-900">Topics Covered</h2>
         <TopicPills topics={subject.topics} />
       </section>
 
       <section className="mb-12">
-        <h2 className="mb-2 text-xl font-semibold text-white">Browse by Class</h2>
-        <p className="mb-6 text-sm text-sky-200/60">
+        <h2 className="mb-2 text-xl font-semibold text-slate-900">Browse by Class</h2>
+        <p className="mb-6 text-sm text-slate-500">
           Select your class for {subject.name}-specific homework help.
         </p>
         <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12">
@@ -94,7 +92,7 @@ export default async function SubjectDetailPage({ params, searchParams }: Props)
               className={`flex h-12 items-center justify-center rounded-xl border text-sm font-medium transition-all hover:-translate-y-0.5 ${
                 selectedClass === cls.number
                   ? "border-orange-400/50 bg-orange-500/10 text-orange-400"
-                  : "border-sky-400/15 text-sky-300/70 hover:border-sky-400/40 hover:text-white"
+                  : "border-slate-200 text-slate-500 hover:border-sky-400/40 hover:text-slate-900"
               }`}
             >
               {cls.number}
@@ -105,10 +103,10 @@ export default async function SubjectDetailPage({ params, searchParams }: Props)
 
       {classChapters.length > 0 && selectedClass && (
         <section className="mb-12">
-          <h2 className="mb-2 text-xl font-semibold text-white">
+          <h2 className="mb-2 text-xl font-semibold text-slate-900">
             Class {selectedClass} {subject.name} Chapters
           </h2>
-          <p className="mb-6 text-sm text-sky-200/60">
+          <p className="mb-6 text-sm text-slate-500">
             Open any chapter for notes, study tips, and homework help.
           </p>
           <ChapterLinkList
@@ -120,8 +118,8 @@ export default async function SubjectDetailPage({ params, searchParams }: Props)
       )}
 
       <section>
-        <h2 className="mb-2 text-xl font-semibold text-white">AI Tools for {subject.name}</h2>
-        <p className="mb-6 text-sm text-sky-200/60">
+        <h2 className="mb-2 text-xl font-semibold text-slate-900">AI Tools for {subject.name}</h2>
+        <p className="mb-6 text-sm text-slate-500">
           Use these tools to get instant help with {subject.name} homework.
         </p>
         <ToolCardGrid tools={tools} />

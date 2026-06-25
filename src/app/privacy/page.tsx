@@ -18,7 +18,7 @@ export default function PrivacyPolicyPage() {
       backHref="/"
     >
       <article className="glass-card w-full max-w-[1280px] rounded-2xl p-6 sm:p-8">
-        <p className="text-sm text-sky-300/50">Last updated: {LAST_UPDATED}</p>
+        <p className="text-sm text-slate-400">Last updated: {LAST_UPDATED}</p>
 
         <LegalSection title="1. Introduction">
           <p>
@@ -37,25 +37,25 @@ export default function PrivacyPolicyPage() {
           <p>We may collect the following types of information:</p>
           <ul className="list-disc space-y-2 pl-5">
             <li>
-              <strong className="text-sky-100">Account information:</strong> If you sign in with
+              <strong className="text-slate-800">Account information:</strong> If you sign in with
               Google, we receive your name, email address, profile picture, and a unique user ID from
               our authentication provider.
             </li>
             <li>
-              <strong className="text-sky-100">AI tool inputs and outputs:</strong> When you use our
+              <strong className="text-slate-800">AI tool inputs and outputs:</strong> When you use our
               AI tools (such as the homework solver, essay generator, or math solver), we process the
               text, questions, or prompts you submit, along with the AI-generated responses.
             </li>
             <li>
-              <strong className="text-sky-100">Usage data:</strong> We track how many free AI tries
+              <strong className="text-slate-800">Usage data:</strong> We track how many free AI tries
               guest users have used via a cookie, and we may log which tools are used and when.
             </li>
             <li>
-              <strong className="text-sky-100">Contact information:</strong> If you contact us, we
+              <strong className="text-slate-800">Contact information:</strong> If you contact us, we
               receive the name, email, subject, and message you provide.
             </li>
             <li>
-              <strong className="text-sky-100">Technical data:</strong> Like most websites, our
+              <strong className="text-slate-800">Technical data:</strong> Like most websites, our
               hosting and analytics providers may automatically collect information such as your IP
               address, browser type, device type, and pages visited.
             </li>
@@ -90,15 +90,15 @@ export default function PrivacyPolicyPage() {
           <p>We use cookies and similar technologies for essential site functionality, including:</p>
           <ul className="list-disc space-y-2 pl-5">
             <li>
-              <strong className="text-sky-100">Guest usage cookie:</strong> Tracks how many free AI
+              <strong className="text-slate-800">Guest usage cookie:</strong> Tracks how many free AI
               tool uses remain before sign-in is required.
             </li>
             <li>
-              <strong className="text-sky-100">Authentication cookies:</strong> Keep you signed in
+              <strong className="text-slate-800">Authentication cookies:</strong> Keep you signed in
               when you use Google sign-in.
             </li>
             <li>
-              <strong className="text-sky-100">Advertising cookies:</strong> If ads are enabled, our
+              <strong className="text-slate-800">Advertising cookies:</strong> If ads are enabled, our
               advertising partners (such as Google AdSense) may use cookies to serve and measure ads.
             </li>
           </ul>
@@ -116,14 +116,14 @@ export default function PrivacyPolicyPage() {
           <p>We rely on trusted third-party services to operate our platform, including:</p>
           <ul className="list-disc space-y-2 pl-5">
             <li>
-              <strong className="text-sky-100">Supabase</strong> — authentication and database hosting
+              <strong className="text-slate-800">Supabase</strong> — authentication and database hosting
             </li>
             <li>
-              <strong className="text-sky-100">Google</strong> — sign-in (OAuth) and optional
+              <strong className="text-slate-800">Google</strong> — sign-in (OAuth) and optional
               advertising
             </li>
             <li>
-              <strong className="text-sky-100">OpenAI</strong> — AI text generation for our tools
+              <strong className="text-slate-800">OpenAI</strong> — AI text generation for our tools
             </li>
           </ul>
           <p>

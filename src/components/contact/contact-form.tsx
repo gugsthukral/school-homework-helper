@@ -20,8 +20,8 @@ export function ContactForm() {
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
           <Send className="h-7 w-7 text-green-400" />
         </div>
-        <h3 className="mt-4 text-xl font-semibold text-white">Message Sent!</h3>
-        <p className="mt-2 text-sm text-sky-200/60">
+        <h3 className="mt-4 text-xl font-semibold text-slate-900">Message Sent!</h3>
+        <p className="mt-2 text-sm text-slate-500">
           Thank you for reaching out. We&apos;ll get back to you soon.
         </p>
         <button

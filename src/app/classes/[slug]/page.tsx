@@ -81,8 +81,8 @@ export default async function ClassDetailPage({ params }: Props) {
       <SyllabusSection classSlug={slug} classNumber={cls.number} subjects={syllabus} />
 
       <section className="mb-12">
-        <h2 className="mb-2 text-xl font-semibold text-white">Subjects for {cls.label}</h2>
-        <p className="mb-6 text-sm text-sky-200/60">
+        <h2 className="mb-2 text-xl font-semibold text-slate-900">Subjects for {cls.label}</h2>
+        <p className="mb-6 text-sm text-slate-500">
           Browse chapter-wise syllabus for session {ACADEMIC_SESSION}.
         </p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -90,10 +90,10 @@ export default async function ClassDetailPage({ params }: Props) {
             <Link
               key={subject.slug}
               href={`/classes/${slug}/${subject.slug}`}
-              className="glass-card rounded-xl px-5 py-4 transition-all hover:-translate-y-0.5 hover:border-sky-400/30"
+              className="glass-card rounded-xl px-5 py-4 transition-all hover:-translate-y-0.5 hover:shadow-md"
             >
-              <h3 className="font-medium text-white">{subject.name}</h3>
-              <p className="mt-1 text-xs text-sky-300/50">
+              <h3 className="font-medium text-slate-900">{subject.name}</h3>
+              <p className="mt-1 text-xs text-slate-400">
                 {subject.chapterCount} chapters · {ACADEMIC_SESSION}
               </p>
             </Link>
@@ -102,8 +102,8 @@ export default async function ClassDetailPage({ params }: Props) {
       </section>
 
       <section>
-        <h2 className="mb-2 text-xl font-semibold text-white">Recommended AI Tools</h2>
-        <p className="mb-6 text-sm text-sky-200/60">
+        <h2 className="mb-2 text-xl font-semibold text-slate-900">Recommended AI Tools</h2>
+        <p className="mb-6 text-sm text-slate-500">
           Tools picked for Class {cls.number} students.
         </p>
         <ToolCardGrid tools={tools} />
@@ -111,16 +111,16 @@ export default async function ClassDetailPage({ params }: Props) {
 
       {classSeoPages.length > 0 && (
         <section className="mt-12">
-          <h2 className="mb-6 text-xl font-semibold text-white">Study Guides &amp; Homework Help</h2>
+          <h2 className="mb-6 text-xl font-semibold text-slate-900">Study Guides &amp; Homework Help</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {classSeoPages.map((seo) => (
               <Link
                 key={seo.slug}
                 href={`/${seo.slug}`}
-                className="glass-card rounded-xl px-5 py-4 transition-all hover:-translate-y-0.5 hover:border-sky-400/30"
+                className="glass-card rounded-xl px-5 py-4 transition-all hover:-translate-y-0.5 hover:shadow-md"
               >
-                <h3 className="text-sm font-medium text-white">{seo.h1}</h3>
-                <p className="mt-1 line-clamp-2 text-xs text-sky-300/50">{seo.description}</p>
+                <h3 className="text-sm font-medium text-slate-900">{seo.h1}</h3>
+                <p className="mt-1 line-clamp-2 text-xs text-slate-400">{seo.description}</p>
               </Link>
             ))}
           </div>
@@ -135,7 +135,7 @@ export default async function ClassDetailPage({ params }: Props) {
             <Link
               key={c.slug}
               href={`/classes/${c.slug}`}
-              className="rounded-full border border-sky-400/20 px-4 py-1.5 text-sm text-sky-300/70 transition-colors hover:border-orange-400/40 hover:text-orange-400"
+              className="rounded-full border border-slate-200 px-4 py-1.5 text-sm text-slate-500 transition-colors hover:border-orange-300 hover:text-orange-400"
             >
               {c.label}
             </Link>

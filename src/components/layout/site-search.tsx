@@ -109,7 +109,7 @@ export function SiteSearch({ variant = "desktop", onNavigate }: SiteSearchProps)
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-sky-200/90 hover:bg-sky-400/10 hover:text-white"
+        className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-orange-500"
       >
         <Search className="h-4 w-4" />
         Search site...
@@ -123,7 +123,7 @@ export function SiteSearch({ variant = "desktop", onNavigate }: SiteSearchProps)
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-sky-400/20 text-sky-200/80 transition-colors hover:border-orange-400/40 hover:text-orange-400"
+          className="site-search-trigger flex h-9 w-9 items-center justify-center rounded-lg border transition-colors hover:border-orange-300 hover:text-orange-400"
           aria-label="Search site"
           title="Search (Ctrl+K)"
         >
@@ -132,13 +132,13 @@ export function SiteSearch({ variant = "desktop", onNavigate }: SiteSearchProps)
       )}
 
       {open && (
-        <div className="fixed inset-0 z-[100] flex items-start justify-center bg-navy-950/70 px-3 pt-[10.5rem] backdrop-blur-sm sm:px-4 sm:pt-[11.75rem] md:pt-[12.5rem]">
+        <div className="fixed inset-0 z-[100] flex items-start justify-center bg-slate-900/40 px-3 pt-[10.5rem] backdrop-blur-sm sm:px-4 sm:pt-[11.75rem] md:pt-[12.5rem]">
           <div
             ref={panelRef}
-            className="w-full max-w-xl overflow-hidden rounded-2xl border border-sky-400/20 bg-navy-900 shadow-2xl shadow-black/40"
+            className="site-search-panel w-full max-w-xl overflow-hidden rounded-2xl border shadow-2xl"
           >
-            <div className="flex items-center gap-3 border-b border-sky-400/10 px-4 py-3">
-              <Search className="h-5 w-5 shrink-0 text-sky-400" />
+            <div className="flex items-center gap-3 border-b border-slate-200 px-4 py-3">
+              <Search className="h-5 w-5 shrink-0 text-sky-500" />
               <input
                 ref={inputRef}
                 type="search"
@@ -146,13 +146,13 @@ export function SiteSearch({ variant = "desktop", onNavigate }: SiteSearchProps)
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleInputKeyDown}
                 placeholder="Search classes, subjects, chapters, blog, tools..."
-                className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-sky-300/40"
+                className="site-search-input flex-1 bg-transparent text-sm outline-none"
                 aria-label="Search"
               />
               <button
                 type="button"
                 onClick={close}
-                className="rounded-lg p-1.5 text-sky-300/60 hover:bg-sky-400/10 hover:text-white"
+                className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-800"
                 aria-label="Close search"
               >
                 <X className="h-4 w-4" />
@@ -161,11 +161,11 @@ export function SiteSearch({ variant = "desktop", onNavigate }: SiteSearchProps)
 
             <div className="max-h-[min(60vh,420px)] overflow-y-auto p-2">
               {query.trim().length < 2 ? (
-                <p className="px-3 py-6 text-center text-sm text-sky-300/50">
+                <p className="px-3 py-6 text-center text-sm text-slate-400">
                   Type at least 2 characters to search. Try &quot;class 10 maths&quot;, &quot;essay&quot;, or a chapter name.
                 </p>
               ) : results.length === 0 ? (
-                <p className="px-3 py-6 text-center text-sm text-sky-300/50">
+                <p className="px-3 py-6 text-center text-sm text-slate-400">
                   No results for &quot;{query}&quot;. Try a different keyword.
                 </p>
               ) : (
@@ -180,21 +180,21 @@ export function SiteSearch({ variant = "desktop", onNavigate }: SiteSearchProps)
                           className={cn(
                             "flex w-full items-start gap-3 rounded-xl px-3 py-2.5 text-left transition-colors",
                             index === activeIndex
-                              ? "bg-orange-500/15 text-white"
-                              : "text-sky-100/90 hover:bg-sky-400/10"
+                              ? "bg-orange-50 text-orange-900"
+                              : "text-slate-700 hover:bg-slate-50"
                           )}
                         >
-                          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-400/10">
-                            <Icon className="h-4 w-4 text-sky-400" />
+                          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-50">
+                            <Icon className="h-4 w-4 text-sky-500" />
                           </span>
                           <span className="min-w-0 flex-1">
                             <span className="flex items-center gap-2">
                               <span className="truncate text-sm font-medium">{result.title}</span>
-                              <span className="shrink-0 rounded-full bg-sky-400/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-sky-300/70">
+                              <span className="shrink-0 rounded-full bg-sky-50 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-slate-500">
                                 {searchTypeLabels[result.type]}
                               </span>
                             </span>
-                            <span className="mt-0.5 line-clamp-1 text-xs text-sky-300/50">
+                            <span className="mt-0.5 line-clamp-1 text-xs text-slate-400">
                               {result.description}
                             </span>
                           </span>
@@ -206,7 +206,7 @@ export function SiteSearch({ variant = "desktop", onNavigate }: SiteSearchProps)
               )}
             </div>
 
-            <div className="border-t border-sky-400/10 px-4 py-2 text-[11px] text-sky-300/40">
+            <div className="border-t border-slate-200 px-4 py-2 text-[11px] text-slate-400">
               <span className="hidden sm:inline">↑↓ navigate · Enter open · Esc close · </span>
               Ctrl+K to open
             </div>

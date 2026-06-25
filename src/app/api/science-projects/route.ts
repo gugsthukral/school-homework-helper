@@ -11,7 +11,7 @@ import {
 
 const schema = z.object({
   grade: z.number().int().min(1).max(12),
-  interest: z.string().max(200).optional(),
+  interest: z.string().trim().min(2, "Please enter an area of interest.").max(200),
 });
 
 export const POST = createAIToolRoute({
@@ -19,7 +19,8 @@ export const POST = createAIToolRoute({
   schema,
   buildSystemPrompt: ({ grade }) => buildScienceProjectsSystemPrompt(grade),
   buildPrompt: ({ grade, interest }) => buildScienceProjectsPrompt(grade, interest),
-  maxTokens: 3500,
+  maxTokens: 4500,
+  jsonObject: true,
   transformResponse: async (raw, { grade, interest }) => {
     const projects = await processScienceProjectsResponse(raw, grade, interest);
     return {

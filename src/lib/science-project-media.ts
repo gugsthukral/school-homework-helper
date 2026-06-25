@@ -4,6 +4,7 @@ import type {
   ScienceProjectStepMedia,
   ScienceProjectVideo,
 } from "@/lib/science-projects-types";
+import { searchExternalTutorialVideos } from "@/lib/project-video-search";
 
 type MediaBundle = {
   tags: string[];
@@ -38,6 +39,42 @@ const MEDIA_LIBRARY: MediaBundle[] = [
       {
         url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Baking_soda.jpg/640px-Baking_soda.jpg",
         alt: "Baking soda materials",
+      },
+    ],
+  },
+  {
+    tags: [
+      "conductor",
+      "insulator",
+      "conductors",
+      "insulators",
+      "electric circuit",
+      "simple circuit",
+      "conductivity",
+      "led circuit",
+    ],
+    videos: [
+      {
+        defaultTitle: "Conductors and Insulators for Kids",
+        platform: "youtube",
+        watchUrl: "https://www.youtube.com/watch?v=5nYHkXyMSSY",
+        thumbnailUrl: YT_THUMB("5nYHkXyMSSY"),
+      },
+      {
+        defaultTitle: "Simple Circuit with Switch and LED",
+        platform: "youtube",
+        watchUrl: "https://www.youtube.com/watch?v=HcI8k2vO9xk",
+        thumbnailUrl: YT_THUMB("HcI8k2vO9xk"),
+      },
+    ],
+    images: [
+      {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/LEDs.jpg/640px-LEDs.jpg",
+        alt: "LED bulb in a simple circuit",
+      },
+      {
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Circuit_diagram_%E2%80%93_pictorial_and_schematic.png/640px-Circuit_diagram_%E2%80%93_pictorial_and_schematic.png",
+        alt: "Simple electric circuit diagram",
       },
     ],
   },
@@ -504,6 +541,14 @@ function normalizeWatchUrl(
     return url.includes("vimeo.com") ? url : null;
   }
 
+  if (platform === "facebook") {
+    return /facebook\.com|fb\.watch/i.test(url) ? url : null;
+  }
+
+  if (platform === "instagram") {
+    return /instagram\.com\/(reel|p|tv)\//i.test(url) ? url : null;
+  }
+
   const id = extractYoutubeId(url);
   if (!id) return null;
 
@@ -533,8 +578,9 @@ const IRRELEVANT_VIDEO_KEYWORDS = [
 const TOPIC_CONFLICTS: [string[], string[]][] = [
   [["volcano", "eruption", "lava"], ["plant", "seed", "germination", "growing", "garden", "sprout"]],
   [["magnet", "magnetic", "compass"], ["plant", "seed", "volcano", "water filter", "crystal"]],
-  [["led", "rgb", "circuit", "arduino"], ["plant", "volcano", "magnet", "seed"]],
-  [["butterfly", "insect", "monarch"], ["magnet", "volcano", "led", "density"]],
+  [["led", "rgb", "circuit", "arduino", "conductor", "insulator", "electric", "battery", "bulb"], ["plant", "volcano", "magnet", "seed", "butterfly", "insect", "monarch", "water filter", "filtration"]],
+  [["butterfly", "insect", "monarch", "life cycle"], ["magnet", "volcano", "led", "density", "circuit", "conductor", "battery"]],
+  [["water filter", "filtration", "purification"], ["conductor", "insulator", "circuit", "magnet", "volcano", "butterfly", "insect"]],
 ];
 
 const MATERIAL_ONLY_TAGS = new Set([
@@ -588,20 +634,54 @@ const STOP_WORDS = new Set([
   "works",
   "show",
   "shows",
+  "learning",
+  "difference",
+  "between",
+  "through",
+  "observation",
+  "various",
+  "create",
+  "student",
+  "school",
+  "tutorial",
+  "space",
+  "watch",
+  "guide",
+  "activity",
+  "ideas",
+  "idea",
 ]);
 
-function projectFocusText(project: ScienceProject): string {
-  return `${project.title} ${project.learningOutcome}`.toLowerCase();
+function projectMatchText(project: ScienceProject, interest?: string): string {
+  return [
+    project.title,
+    interest ?? "",
+    ...project.materials,
+    ...project.steps.map((step) => `${step.title} ${step.description}`),
+  ]
+    .join(" ")
+    .toLowerCase();
 }
 
-function extractFocusKeywords(project: ScienceProject): string[] {
-  const text = projectFocusText(project);
-
+function extractMatchKeywords(text: string): string[] {
   const words = text
     .split(/[^a-z0-9]+/)
     .filter((word) => word.length > 3 && !STOP_WORDS.has(word));
 
   return [...new Set(words)];
+}
+
+function countKeywordHits(sourceText: string, videoTitle: string): number {
+  const keywords = extractMatchKeywords(sourceText);
+  const videoLower = videoTitle.toLowerCase();
+
+  return keywords.filter(
+    (keyword) =>
+      videoLower.includes(keyword) ||
+      videoLower
+        .split(/[^a-z0-9]+/)
+        .some((word) => word.length > 3 && (word.includes(keyword) || keyword.includes(word)))
+  ).length;
 }
 
 function hasTopicConflict(projectFocus: string, videoTitle: string): boolean {
@@ -620,76 +700,63 @@ function hasTopicConflict(projectFocus: string, videoTitle: string): boolean {
   return false;
 }
 
-function extractProjectKeywords(project: ScienceProject): string[] {
-  const text = `${project.title} ${project.learningOutcome} ${project.materials.join(" ")} ${project.steps.map((s) => `${s.title} ${s.description}`).join(" ")}`.toLowerCase();
-
-  const words = text
-    .split(/[^a-z0-9]+/)
-    .filter((word) => word.length > 3 && !STOP_WORDS.has(word));
-
-  return [...new Set(words)];
-}
-
 function isVideoRelevantToProject(
   project: ScienceProject,
   videoTitle: string,
-  bundleTags: string[]
+  bundleTags: string[],
+  interest?: string
 ): boolean {
   const videoLower = videoTitle.toLowerCase();
-  const projectFocus = projectFocusText(project);
+  const matchText = projectMatchText(project, interest);
 
   if (IRRELEVANT_VIDEO_KEYWORDS.some((keyword) => videoLower.includes(keyword))) {
     return false;
   }
 
-  if (hasTopicConflict(projectFocus, videoLower)) {
+  if (hasTopicConflict(matchText, videoLower)) {
     return false;
   }
 
-  const bundleTagInVideo = bundleTags.some((tag) => tagMatchesText(videoLower, tag));
-  const bundleTagInFocus = bundleTags.some((tag) => tagMatchesText(projectFocus, tag));
+  const titleKeywords = extractMatchKeywords(project.title);
+  const titleHit = titleKeywords.some((keyword) => videoLower.includes(keyword));
 
-  if (bundleTagInVideo && bundleTagInFocus) {
+  const matchHits = countKeywordHits(matchText, videoTitle);
+
+  if (titleHit && matchHits >= 1) {
     return true;
   }
 
-  const focusKeywords = extractFocusKeywords(project);
-  const focusHits = focusKeywords.filter(
-    (keyword) =>
-      videoLower.includes(keyword) ||
-      videoLower
-        .split(/[^a-z0-9]+/)
-        .some((word) => word.length > 3 && (word.includes(keyword) || keyword.includes(word)))
-  );
-
-  const tagHits = bundleTags.filter((tag) => {
-    if (tag.includes(" ")) {
-      return videoLower.includes(tag) && projectFocus.includes(tag.split(" ")[0]);
-    }
-    return videoLower.includes(tag) && tag.length > 4 && projectFocus.includes(tag);
-  });
-
-  if (focusHits.length >= 1 || tagHits.length >= 1) {
+  if (matchHits >= 2) {
     return true;
   }
 
-  const projectKeywords = extractProjectKeywords(project);
-  const keywordHits = projectKeywords.filter(
-    (keyword) =>
-      focusKeywords.includes(keyword) &&
-      (videoLower.includes(keyword) ||
-        videoLower
-          .split(/[^a-z0-9]+/)
-          .some((word) => word.length > 3 && (word.includes(keyword) || keyword.includes(word))))
+  const phraseTagHit = bundleTags.some(
+    (tag) =>
+      tag.includes(" ") &&
+      tagMatchesText(videoLower, tag) &&
+      tagMatchesText(matchText, tag)
   );
 
-  return keywordHits.length >= 2;
+  if (phraseTagHit) {
+    return true;
+  }
+
+  const strongTagHits = bundleTags.filter(
+    (tag) =>
+      !tag.includes(" ") &&
+      tag.length > 4 &&
+      tagMatchesText(videoLower, tag) &&
+      tagMatchesText(matchText, tag)
+  );
+
+  return strongTagHits.length >= 2;
 }
 
 async function verifyVideoForProject(
   video: ScienceProjectVideo,
   project: ScienceProject,
-  bundleTags: string[]
+  bundleTags: string[],
+  interest?: string
 ): Promise<ScienceProjectVideo | null> {
   const normalizedUrl = normalizeWatchUrl(video.platform, video.watchUrl);
   if (!normalizedUrl) return null;
@@ -705,7 +772,11 @@ async function verifyVideoForProject(
   const oembedUrl =
     video.platform === "vimeo"
       ? `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(oembedTargetUrl)}`
-      : `https://www.youtube.com/oembed?url=${encodeURIComponent(oembedTargetUrl)}&format=json`;
+      : video.platform === "facebook"
+        ? `https://www.facebook.com/plugins/video/oembed.json/?url=${encodeURIComponent(oembedTargetUrl)}`
+        : video.platform === "instagram"
+          ? `https://api.instagram.com/oembed?url=${encodeURIComponent(oembedTargetUrl)}`
+          : `https://www.youtube.com/oembed?url=${encodeURIComponent(oembedTargetUrl)}&format=json`;
 
   try {
     const controller = new AbortController();
@@ -718,10 +789,10 @@ async function verifyVideoForProject(
 
     if (!response.ok) return null;
 
-    const data = (await response.json()) as { title?: string };
-    const oembedTitle = data.title?.trim() ?? "";
+    const data = (await response.json()) as { title?: string; thumbnail_url?: string };
+    const oembedTitle = data.title?.trim() ?? video.title?.trim() ?? "";
 
-    if (!oembedTitle || !isVideoRelevantToProject(project, oembedTitle, bundleTags)) {
+    if (!oembedTitle || !isVideoRelevantToProject(project, oembedTitle, bundleTags, interest)) {
       return null;
     }
 
@@ -732,11 +803,12 @@ async function verifyVideoForProject(
       platform: video.platform,
       watchUrl: normalizedUrl,
       thumbnailUrl:
-        video.platform === "vimeo"
+        data.thumbnail_url ??
+        (video.platform === "vimeo"
           ? video.thumbnailUrl
           : id
             ? YT_THUMB(id)
-            : video.thumbnailUrl,
+            : video.thumbnailUrl),
     };
   } catch {
     return null;
@@ -747,22 +819,69 @@ async function verifyVideosForProject(
   project: ScienceProject,
   videos: ScienceProjectVideo[],
   bundleTags: string[],
-  usedVideoUrls: Set<string>
+  usedVideoUrls: Set<string>,
+  interest?: string,
+  maxVideos = 3
 ): Promise<ScienceProjectVideo[]> {
-  const candidates = videos.filter((video) => {
-    const url = normalizeWatchUrl(video.platform, video.watchUrl);
-    return url && !usedVideoUrls.has(url);
-  });
+  const verified: ScienceProjectVideo[] = [];
 
-  for (const video of candidates) {
-    const verified = await verifyVideoForProject(video, project, bundleTags);
-    if (verified) {
-      usedVideoUrls.add(verified.watchUrl);
-      return [verified];
+  for (const video of videos) {
+    if (verified.length >= maxVideos) break;
+
+    const normalizedUrl = normalizeWatchUrl(video.platform, video.watchUrl);
+    if (!normalizedUrl || usedVideoUrls.has(normalizedUrl)) continue;
+
+    const result = await verifyVideoForProject(video, project, bundleTags, interest);
+    if (!result) continue;
+
+    usedVideoUrls.add(result.watchUrl);
+    verified.push(result);
+  }
+
+  return verified;
+}
+
+function collectLibraryVideoCandidates(
+  project: ScienceProject,
+  interest?: string
+): { video: ScienceProjectVideo; tags: string[]; score: number }[] {
+  const focusText = projectMatchText(project, interest).toLowerCase();
+  const candidates: { video: ScienceProjectVideo; tags: string[]; score: number }[] = [];
+
+  for (const bundle of MEDIA_LIBRARY) {
+    const score = scoreBundle(focusText, bundle.tags);
+
+    for (const video of bundle.videos) {
+      const normalizedUrl = normalizeWatchUrl(video.platform, video.watchUrl);
+      if (!normalizedUrl) continue;
+
+      const candidateVideo: ScienceProjectVideo = {
+        title: video.defaultTitle,
+        platform: video.platform,
+        watchUrl: normalizedUrl,
+        thumbnailUrl:
+          video.platform === "vimeo"
+            ? video.thumbnailUrl
+            : extractYoutubeId(normalizedUrl)
+              ? YT_THUMB(extractYoutubeId(normalizedUrl)!)
+              : video.thumbnailUrl,
+      };
+
+      if (!isVideoRelevantToProject(project, candidateVideo.title, bundle.tags, interest)) {
+        continue;
+      }
+
+      candidates.push({
+        video: candidateVideo,
+        tags: bundle.tags,
+        score,
+      });
     }
   }
 
-  return [];
+  return candidates
+    .filter((candidate) => candidate.score >= 2)
+    .sort((a, b) => b.score - a.score);
 }
 
 async function isImageAvailable(url: string): Promise<boolean> {
@@ -839,7 +958,7 @@ function rankBundles(
   usedIndices: Set<number>,
   interest?: string
 ): BundleMatch[] {
-  const focusText = `${projectFocusText(project)} ${interest ?? ""}`.toLowerCase();
+  const focusText = projectMatchText(project, interest).toLowerCase();
   const detailText = [
     ...project.materials,
     ...project.steps.map((step) => `${step.title} ${step.description}`),
@@ -857,8 +976,8 @@ function rankBundles(
     .filter(
       (item) =>
         !usedIndices.has(item.index) &&
-        item.focusScore >= 2 &&
-        item.totalScore >= 4
+        item.focusScore >= 1 &&
+        item.totalScore >= 2
     )
     .sort((a, b) => b.focusScore - a.focusScore || b.totalScore - a.totalScore);
 }
@@ -888,56 +1007,58 @@ export async function enrichScienceProject(
   project: ScienceProject,
   usedIndices: Set<number>,
   usedVideoUrls: Set<string>,
+  grade: number,
   interest?: string
 ): Promise<EnrichedScienceProject> {
+  const libraryCandidates = collectLibraryVideoCandidates(project, interest);
+  const externalCandidates = (
+    await searchExternalTutorialVideos(project, grade, interest, 6)
+  ).filter((video) => isVideoRelevantToProject(project, video.title, [], interest));
+
+  const bundleTags =
+    libraryCandidates.find((candidate) => candidate.score >= 2)?.tags ?? [];
+
+  const seenUrls = new Set<string>();
+  const videoCandidates: ScienceProjectVideo[] = [];
+
+  for (const candidate of [...libraryCandidates.map((item) => item.video), ...externalCandidates]) {
+    const url = normalizeWatchUrl(candidate.platform, candidate.watchUrl);
+    if (!url || seenUrls.has(url)) continue;
+    seenUrls.add(url);
+    videoCandidates.push({ ...candidate, watchUrl: url });
+  }
+
+  const videos = await verifyVideosForProject(
+    project,
+    videoCandidates,
+    bundleTags,
+    usedVideoUrls,
+    interest,
+    3
+  );
+
   const rankedBundles = rankBundles(project, usedIndices, interest);
 
   for (const match of rankedBundles) {
-    const candidateVideos: ScienceProjectVideo[] = match.bundle.videos
-      .map((video) => {
-        const normalizedUrl = normalizeWatchUrl(video.platform, video.watchUrl);
-        if (!normalizedUrl) return null;
-
-        const id = extractYoutubeId(normalizedUrl);
-        const thumbnailUrl =
-          video.platform === "vimeo"
-            ? video.thumbnailUrl
-            : id
-              ? YT_THUMB(id)
-              : video.thumbnailUrl;
-
-        return {
-          title: video.defaultTitle,
-          platform: video.platform,
-          watchUrl: normalizedUrl,
-          thumbnailUrl,
-        };
-      })
-      .filter((video): video is ScienceProjectVideo => video !== null);
-
     const candidateStepImages = buildStepImages(project, match.bundle.images);
+    const stepImages = await filterAvailableStepImages(candidateStepImages);
 
-    const [videos, stepImages] = await Promise.all([
-      verifyVideosForProject(project, candidateVideos, match.bundle.tags, usedVideoUrls),
-      filterAvailableStepImages(candidateStepImages),
-    ]);
-
-    if (videos.length === 0) continue;
-
-    usedIndices.add(match.index);
-    return {
-      ...project,
-      videos,
-      stepImages,
-    };
+    if (videos.length > 0 || stepImages.length > 0) {
+      usedIndices.add(match.index);
+      return {
+        ...project,
+        videos,
+        stepImages,
+      };
+    }
   }
 
-  return { ...project, videos: [], stepImages: [] };
+  return { ...project, videos, stepImages: [] };
 }
 
 export async function enrichScienceProjects(
   projects: ScienceProject[],
-  _grade: number,
+  grade: number,
   interest?: string
 ): Promise<EnrichedScienceProject[]> {
   const usedIndices = new Set<number>();
@@ -946,7 +1067,7 @@ export async function enrichScienceProjects(
 
   for (const project of projects) {
     enriched.push(
-      await enrichScienceProject(project, usedIndices, usedVideoUrls, interest)
+      await enrichScienceProject(project, usedIndices, usedVideoUrls, grade, interest)
     );
   }
 
@@ -1000,74 +1121,63 @@ function isTooSimilarToAny(project: ScienceProject, selected: ScienceProject[]):
   });
 }
 
-function pickDistinctProject(
-  candidates: ScienceProject[],
-  selected: ScienceProject[]
-): ScienceProject | undefined {
-  return (
-    candidates.find((project) => !selected.includes(project) && !isTooSimilarToAny(project, selected)) ??
-    candidates.find((project) => !selected.includes(project))
-  );
+function dedupeProjectsByTitle(projects: ScienceProject[]): ScienceProject[] {
+  const seen = new Set<string>();
+  const unique: ScienceProject[] = [];
+
+  for (const project of projects) {
+    const key = project.title.toLowerCase().trim();
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    unique.push(project);
+  }
+
+  return unique;
 }
 
+function assignDifficultySlots(projects: ScienceProject[]): ScienceProject[] {
+  return projects.map((project) => ({
+    ...project,
+    difficulty: "Easy" as const,
+  }));
+}
+
+const TARGET_PROJECT_COUNT = 2;
+
 export function normalizeProjectsForClass(projects: ScienceProject[]): ScienceProject[] {
-  const easy = projects.filter((project) => project.difficulty === "Easy");
-  const medium = projects.filter((project) => project.difficulty === "Medium");
-  const hard = projects.filter((project) => project.difficulty === "Hard");
+  const unique = dedupeProjectsByTitle(projects);
+
+  if (unique.length <= TARGET_PROJECT_COUNT) {
+    return assignDifficultySlots(unique);
+  }
 
   const selected: ScienceProject[] = [];
 
-  for (const project of easy) {
-    if (selected.filter((item) => item.difficulty === "Easy").length >= 2) break;
-    if (isTooSimilarToAny(project, selected)) continue;
+  const canSkipSimilar = (candidate: ScienceProject) => {
+    const remaining = unique.filter((project) => !selected.includes(project)).length;
+    const needed = TARGET_PROJECT_COUNT - selected.length;
+    return remaining > needed && isTooSimilarToAny(candidate, selected);
+  };
+
+  for (const project of unique) {
+    if (selected.length >= TARGET_PROJECT_COUNT) break;
+    if (canSkipSimilar(project)) continue;
     selected.push(project);
   }
 
-  while (selected.filter((item) => item.difficulty === "Easy").length < 2) {
-    const next = pickDistinctProject(easy, selected);
-    if (!next) break;
-    selected.push(next);
+  for (const project of unique) {
+    if (selected.length >= TARGET_PROJECT_COUNT) break;
+    if (!selected.includes(project)) selected.push(project);
   }
 
-  const mediumPick = pickDistinctProject(medium, selected);
-  if (mediumPick) selected.push(mediumPick);
-
-  const hardPick = pickDistinctProject(hard, selected);
-  if (hardPick) selected.push(hardPick);
-
-  if (selected.length < 4) {
-    for (const project of projects) {
-      if (selected.includes(project) || isTooSimilarToAny(project, selected)) continue;
-      selected.push(project);
-      if (selected.length >= 4) break;
-    }
-  }
-
-  if (selected.length < 4) {
-    for (const project of projects) {
-      if (selected.includes(project)) continue;
-      selected.push(project);
-      if (selected.length >= 4) break;
-    }
-  }
-
-  const finalProjects = selected.slice(0, 4);
-
-  if (finalProjects.length >= 1) finalProjects[0] = { ...finalProjects[0], difficulty: "Easy" };
-  if (finalProjects.length >= 2) finalProjects[1] = { ...finalProjects[1], difficulty: "Easy" };
-  if (finalProjects.length >= 3) finalProjects[2] = { ...finalProjects[2], difficulty: "Medium" };
-  if (finalProjects.length >= 4) finalProjects[3] = { ...finalProjects[3], difficulty: "Hard" };
-
-  return finalProjects;
+  return assignDifficultySlots(selected.slice(0, TARGET_PROJECT_COUNT));
 }
 
 function normalizeScienceProject(
   project: ScienceProject,
   index: number
 ): ScienceProject {
-  const difficulty = String(project.difficulty ?? "Easy");
-  const normalizedDifficulty: ScienceProject["difficulty"] =
-    difficulty === "Medium" || difficulty === "Hard" ? difficulty : "Easy";
+  const normalizedDifficulty: ScienceProject["difficulty"] = "Easy";
 
   return {
     title: project.title?.trim() || `Project ${index + 1}`,
@@ -1106,7 +1216,7 @@ export async function processScienceProjectsResponse(
       const enriched = await Promise.race([
         enrichScienceProjects(parsed, grade, interest),
         new Promise<EnrichedScienceProject[]>((resolve) => {
-          setTimeout(() => resolve(toEnrichedWithoutMedia(parsed)), 20000);
+          setTimeout(() => resolve(toEnrichedWithoutMedia(parsed)), 30000);
         }),
       ]);
       return enriched;

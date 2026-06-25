@@ -1,50 +1,54 @@
-import { GraduationCap, Heart, Users, type LucideIcon } from "lucide-react";
-import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
+import { ColorfulFeatureIcon } from "@/components/shared/colorful-icons";
+import { SiteContainer } from "@/components/shared/site-container";
 import { audiences } from "@/lib/data";
+import { REGIONAL_LANGUAGES_LIST } from "@/lib/indian-languages";
 
-const iconMap: Record<string, LucideIcon> = {
-  GraduationCap,
-  Heart,
-  Users,
-};
+const featureIconMap = {
+  GraduationCap: "GraduationCap",
+  Heart: "Heart",
+  Users: "Users",
+  Languages: "Languages",
+} as const;
+
+const audienceCards = [
+  ...audiences,
+  {
+    title: "Easy Language",
+    description: `Type, speak, listen, and get AI explanations in ${REGIONAL_LANGUAGES_LIST}.`,
+    icon: "Languages",
+  },
+] as const;
+
+const cardClassName =
+  "home-pastel-orange rounded-2xl border p-6 transition-all hover:-translate-y-0.5 hover:shadow-md";
 
 export function AudiencesSection() {
   return (
-    <section className="relative py-20 sm:py-28">
-      <div className="section-glow pointer-events-none absolute inset-0" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-semibold uppercase tracking-widest text-orange-400">
+    <section className="w-full py-16 sm:py-20">
+      <SiteContainer>
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="text-sm font-semibold uppercase tracking-widest text-orange-500">
             For Everyone
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="home-section-title mt-3 text-3xl font-bold sm:text-4xl">
             Built for the Whole School Community
           </h2>
-          <RegionalLanguagesBadge className="mt-6" centered />
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {audiences.map((audience) => {
-            const Icon = iconMap[audience.icon] ?? GraduationCap;
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {audienceCards.map((audience) => {
+            const iconKey =
+              featureIconMap[audience.icon as keyof typeof featureIconMap] ?? "GraduationCap";
             return (
-              <div
-                key={audience.title}
-                className="glass-card group rounded-2xl p-8 transition-all hover:-translate-y-1 hover:border-orange-400/20"
-              >
-                <span
-                  className={`inline-flex h-14 w-14 items-center justify-center rounded-xl ${audience.accent}`}
-                >
-                  <Icon className="h-7 w-7" />
-                </span>
-                <h3 className="mt-5 text-xl font-semibold text-white">{audience.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-sky-200/60">
-                  {audience.description}
-                </p>
+              <div key={audience.title} className={cardClassName}>
+                <ColorfulFeatureIcon icon={iconKey} size={44} />
+                <h3 className="mt-4 text-lg font-semibold text-slate-800">{audience.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{audience.description}</p>
               </div>
             );
           })}
         </div>
-      </div>
+      </SiteContainer>
     </section>
   );
 }

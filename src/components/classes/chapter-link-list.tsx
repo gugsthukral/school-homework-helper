@@ -28,7 +28,7 @@ export function ChapterLinkList({
           <li key={`${chapter.chapterSlug}-${chapter.chapterNumber}`}>
             <Link
               href={getChapterPath(chapter)}
-              className="flex items-start gap-2 rounded-lg px-2 py-1.5 text-sm text-sky-200/70 transition-colors hover:bg-sky-400/5 hover:text-orange-400"
+              className="flex items-start gap-2 rounded-lg px-2 py-1.5 text-sm text-slate-600 transition-colors hover:bg-sky-400/5 hover:text-orange-400"
             >
               <span className="mt-0.5 shrink-0 text-xs font-medium text-orange-400/80">
                 {chapter.chapterNumber}.
@@ -47,16 +47,16 @@ export function ChapterLinkList({
         <Link
           key={`${chapter.chapterSlug}-${chapter.chapterNumber}`}
           href={getChapterPath(chapter)}
-          className="group glass-card flex items-center gap-4 rounded-xl px-5 py-4 transition-all hover:-translate-y-0.5 hover:border-sky-400/30"
+          className="group glass-card flex items-center gap-4 rounded-xl px-5 py-4 transition-all hover:-translate-y-0.5 hover:shadow-md"
         >
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-sky-400/10 text-sm font-bold text-sky-400">
             {chapter.chapterNumber}
           </span>
           <div className="min-w-0 flex-1">
-            <h2 className="font-medium text-white transition-colors group-hover:text-sky-300">
+            <h2 className="font-medium text-slate-900 transition-colors group-hover:text-sky-300">
               {chapter.chapterTitle}
             </h2>
-            <p className="mt-0.5 text-xs text-sky-300/50">
+            <p className="mt-0.5 text-xs text-slate-400">
               Chapter {chapter.chapterNumber} · Class {classNumber} {subjectName}
             </p>
           </div>

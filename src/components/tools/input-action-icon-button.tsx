@@ -30,11 +30,9 @@ export function InputActionIconButton({
       aria-label={label}
       title={label}
       className={cn(
-        "flex items-center justify-center rounded-md border transition-colors",
+        "theme-input-action-btn flex items-center justify-center rounded-md border transition-colors",
         size === "sm" ? "h-7 w-7" : "h-9 w-9 rounded-lg",
-        active
-          ? "border-orange-400/50 bg-orange-500/20 text-orange-300"
-          : "border-sky-400/20 bg-sky-400/5 text-sky-200 hover:border-sky-400/40 hover:bg-sky-400/10 hover:text-white",
+        active && "theme-input-action-btn-active",
         disabled && "cursor-not-allowed opacity-50",
         className
       )}

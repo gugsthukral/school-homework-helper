@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { HelpCircle } from "lucide-react";
 import { ToolLayout } from "@/components/tools/tool-layout";
 import { QuizGeneratorForm } from "@/components/tools/quiz-generator-form";
 import { TOOL_SEO } from "@/lib/seo-config";
@@ -12,7 +11,7 @@ export default function QuizGeneratorPage() {
     <ToolLayout
       title="Quiz Generator"
       description="Create multiple-choice quizzes by subject or topic, with answers and explanations."
-      icon={<HelpCircle className="h-7 w-7 text-orange-400" />}
+      iconKey="HelpCircle"
     >
       <QuizGeneratorForm />
     </ToolLayout>

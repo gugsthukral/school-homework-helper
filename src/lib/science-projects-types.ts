@@ -14,7 +14,7 @@ export type ScienceProject = {
 
 export type ScienceProjectVideo = {
   title: string;
-  platform: "youtube" | "vimeo" | "youtube-shorts";
+  platform: "youtube" | "vimeo" | "youtube-shorts" | "facebook" | "instagram";
   watchUrl: string;
   thumbnailUrl: string;
 };

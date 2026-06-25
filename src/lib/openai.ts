@@ -19,7 +19,8 @@ export function getOpenAIClient() {
 export async function generateAIResponse(
   systemPrompt: string,
   userPrompt: string,
-  maxTokens = 1500
+  maxTokens = 1500,
+  options?: { jsonObject?: boolean }
 ) {
   const client = getOpenAIClient();
 
@@ -35,6 +36,7 @@ export async function generateAIResponse(
     ],
     temperature: 0.7,
     max_tokens: maxTokens,
+    ...(options?.jsonObject ? { response_format: { type: "json_object" as const } } : {}),
   });
 
   const content = completion.choices[0]?.message?.content;

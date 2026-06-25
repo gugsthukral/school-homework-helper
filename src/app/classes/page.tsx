@@ -32,12 +32,12 @@ export default function ClassesPage() {
           <Link
             key={cls.slug}
             href={`/classes/${cls.slug}`}
-            className="group relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-2xl border border-sky-400/15 bg-navy-900/50 transition-all hover:-translate-y-1 hover:border-orange-400/40 hover:bg-navy-800/60 hover:shadow-lg hover:shadow-orange-500/10"
+            className="group relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all hover:-translate-y-1 hover:border-orange-300 hover:bg-slate-100 hover:shadow-lg hover:shadow-orange-500/10"
           >
-            <span className="text-3xl font-bold text-white transition-colors group-hover:text-orange-400">
+            <span className="text-3xl font-bold text-slate-900 transition-colors group-hover:text-orange-400">
               {cls.number}
             </span>
-            <span className="mt-1 text-xs font-medium text-sky-300/50">Class</span>
+            <span className="mt-1 text-xs font-medium text-slate-400">Class</span>
             <div className="absolute inset-x-0 bottom-0 h-1 scale-x-0 bg-gradient-to-r from-sky-400 to-orange-400 transition-transform group-hover:scale-x-100" />
           </Link>
         ))}
@@ -48,10 +48,10 @@ export default function ClassesPage() {
           <Link
             key={cls.slug}
             href={`/classes/${cls.slug}`}
-            className="glass-card rounded-2xl p-6 transition-all hover:-translate-y-0.5 hover:border-sky-400/30"
+            className="glass-card rounded-2xl p-6 transition-all hover:-translate-y-0.5 hover:shadow-md"
           >
-            <h2 className="text-lg font-semibold text-white">{cls.label}</h2>
-            <p className="mt-2 text-sm text-sky-200/60 line-clamp-2">{cls.description}</p>
+            <h2 className="text-lg font-semibold text-slate-900">{cls.label}</h2>
+            <p className="mt-2 text-sm text-slate-500 line-clamp-2">{cls.description}</p>
             <span className="mt-4 inline-block text-sm font-medium text-orange-400">
               View resources →
             </span>

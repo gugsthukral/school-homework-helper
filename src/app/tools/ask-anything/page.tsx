@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { MessageCircleQuestion } from "lucide-react";
 import { ToolLayout } from "@/components/tools/tool-layout";
 import { AskAnythingForm } from "@/components/tools/ask-anything-form";
 import { TOOL_SEO } from "@/lib/seo-config";
@@ -12,7 +11,7 @@ export default function AskAnythingPage() {
     <ToolLayout
       title="Ask Anything"
       description="Ask any school question and get a clear answer from your AI tutor. Type or use voice input."
-      icon={<MessageCircleQuestion className="h-7 w-7 text-orange-400" />}
+      iconKey="MessageCircleQuestion"
     >
       <AskAnythingForm />
     </ToolLayout>

@@ -125,9 +125,13 @@ git push -u origin main
 | Type | Host | Value | TTL |
 |------|------|-------|-----|
 | A | `@` | `76.76.21.21` | 14400 |
-| CNAME | `www` | `cname.vercel-dns.com` | 14400 |
+| CNAME | `www` | `f84052e74f8e3260.vercel-dns-017.com` | 14400 |
 
-5. **Remove** conflicting A/CNAME records for `@` or `www` pointing elsewhere.
+**Important:** Copy the exact `www` CNAME from **Vercel → Project → Settings → Domains** (it is unique per project). If Vercel shows a different value later, use that one.
+
+5. **Remove** conflicting records:
+   - Delete any **A** record for `@` pointing to Bluehost (e.g. `162.214.80.103`) — this causes **403 Forbidden** on `schoolhomeworkhelper.com`.
+   - Delete old `www` CNAME values like `cname.vercel-dns.com` if they differ from Vercel’s current recommendation.
 6. Save changes.
 
 ### Step 5: Wait for DNS & SSL

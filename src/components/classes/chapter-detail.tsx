@@ -26,8 +26,8 @@ export function ChapterDetail({ chapter, content }: ChapterDetailProps) {
       backHref={getSubjectPath(chapter.classSlug, chapter.subjectSlug)}
       backLabel={`Class ${chapter.classNumber} ${chapter.subjectName}`}
     >
-      <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-sky-300/50">
-        <span className="rounded-full border border-sky-400/20 px-3 py-1">
+      <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-slate-400">
+        <span className="rounded-full border border-slate-200 px-3 py-1">
           Chapter {chapter.chapterNumber}
         </span>
         <span className="rounded-full border border-orange-500/20 bg-orange-500/5 px-3 py-1 text-orange-300/80">
@@ -47,9 +47,9 @@ export function ChapterDetail({ chapter, content }: ChapterDetailProps) {
         <section className="glass-card rounded-2xl p-6 sm:p-8">
           <div className="mb-4 flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-sky-400" />
-            <h2 className="text-lg font-semibold text-white">Chapter Overview</h2>
+            <h2 className="text-lg font-semibold text-slate-900">Chapter Overview</h2>
           </div>
-          <p className="text-sm leading-relaxed text-sky-200/70 sm:text-base">
+          <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
             {content.overview}
           </p>
         </section>
@@ -57,14 +57,14 @@ export function ChapterDetail({ chapter, content }: ChapterDetailProps) {
         <section className="glass-card rounded-2xl p-6 sm:p-8">
           <div className="mb-4 flex items-center gap-2">
             <Target className="h-5 w-5 text-orange-400" />
-            <h2 className="text-lg font-semibold text-white">Key Topics</h2>
+            <h2 className="text-lg font-semibold text-slate-900">Key Topics</h2>
           </div>
           <ul className="grid gap-2 sm:grid-cols-2">
             {content.keyTopics.map((topic) => (
               <li key={topic.slug}>
                 <Link
                   href={getChapterFocusPath(chapter, topic.slug)}
-                  className="flex items-start gap-2 text-sm text-sky-200/70 transition-colors hover:text-orange-300"
+                  className="flex items-start gap-2 text-sm text-slate-600 transition-colors hover:text-orange-300"
                 >
                   <span className="text-orange-400">→</span>
                   {topic.title}
@@ -75,10 +75,10 @@ export function ChapterDetail({ chapter, content }: ChapterDetailProps) {
         </section>
 
         <section className="glass-card rounded-2xl p-6 sm:p-8">
-          <h2 className="mb-4 text-lg font-semibold text-white">Learning Objectives</h2>
+          <h2 className="mb-4 text-lg font-semibold text-slate-900">Learning Objectives</h2>
           <ol className="space-y-2">
             {content.learningObjectives.map((obj, i) => (
-              <li key={obj} className="flex gap-3 text-sm text-sky-200/70">
+              <li key={obj} className="flex gap-3 text-sm text-slate-600">
                 <span className="font-medium text-sky-400">{i + 1}.</span>
                 {obj}
               </li>
@@ -89,11 +89,11 @@ export function ChapterDetail({ chapter, content }: ChapterDetailProps) {
         <section className="glass-card rounded-2xl p-6 sm:p-8">
           <div className="mb-4 flex items-center gap-2">
             <Lightbulb className="h-5 w-5 text-sky-400" />
-            <h2 className="text-lg font-semibold text-white">Study Tips</h2>
+            <h2 className="text-lg font-semibold text-slate-900">Study Tips</h2>
           </div>
           <ul className="space-y-2">
             {content.studyTips.map((tip) => (
-              <li key={tip} className="text-sm text-sky-200/70">
+              <li key={tip} className="text-sm text-slate-600">
                 • {tip}
               </li>
             ))}
@@ -108,11 +108,11 @@ export function ChapterDetail({ chapter, content }: ChapterDetailProps) {
         )}
       </div>
 
-      <nav className="mt-10 flex flex-col gap-3 border-t border-sky-400/10 pt-8 sm:flex-row sm:justify-between">
+      <nav className="mt-10 flex flex-col gap-3 border-t border-slate-200 pt-8 sm:flex-row sm:justify-between">
         {prev ? (
           <Link
             href={getChapterPath(prev)}
-            className="glass-card flex items-center gap-2 rounded-xl px-4 py-3 text-sm text-sky-200/70 transition-colors hover:text-orange-400"
+            className="glass-card flex items-center gap-2 rounded-xl px-4 py-3 text-sm text-slate-600 transition-colors hover:text-orange-400"
           >
             <ArrowLeft className="h-4 w-4 shrink-0" />
             <span>
@@ -126,7 +126,7 @@ export function ChapterDetail({ chapter, content }: ChapterDetailProps) {
         {next && (
           <Link
             href={getChapterPath(next)}
-            className="glass-card flex items-center justify-end gap-2 rounded-xl px-4 py-3 text-right text-sm text-sky-200/70 transition-colors hover:text-orange-400 sm:ml-auto"
+            className="glass-card flex items-center justify-end gap-2 rounded-xl px-4 py-3 text-right text-sm text-slate-600 transition-colors hover:text-orange-400 sm:ml-auto"
           >
             <span>
               <span className="block text-xs text-sky-400/50">Next</span>

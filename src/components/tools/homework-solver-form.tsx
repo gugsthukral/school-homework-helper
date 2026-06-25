@@ -74,7 +74,7 @@ export function HomeworkSolverForm() {
             onError: setUploadError,
           }}
           hint={
-            <p className="mt-1.5 text-xs text-sky-300/40">{question.length}/2000 characters</p>
+            <p className="mt-1.5 text-xs text-slate-400">{question.length}/2000 characters</p>
           }
         />
 

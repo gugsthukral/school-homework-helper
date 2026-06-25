@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { PenLine } from "lucide-react";
 import { ToolLayout } from "@/components/tools/tool-layout";
 import { EssayGeneratorForm } from "@/components/tools/essay-generator-form";
 import { TOOL_SEO } from "@/lib/seo-config";
@@ -12,7 +11,7 @@ export default function EssayGeneratorPage() {
     <ToolLayout
       title="Essay Generator"
       description="Write essays on any topic with the right word count and language for your class level."
-      icon={<PenLine className="h-7 w-7 text-orange-400" />}
+      iconKey="PenLine"
     >
       <EssayGeneratorForm />
     </ToolLayout>

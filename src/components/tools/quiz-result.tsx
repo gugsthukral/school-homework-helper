@@ -52,10 +52,10 @@ export function QuizResult({
   return (
     <GlowCard active={glowActive}>
       <div className="glass-card animate-fade-up overflow-hidden rounded-2xl">
-      <div className="border-b border-sky-400/10 bg-sky-400/5">
+      <div className="border-b border-slate-200 bg-sky-400/5">
         <div className="flex items-center gap-3 px-4 pt-4 sm:px-6">
           <Icon className="h-5 w-5 shrink-0 text-sky-400" />
-          <h2 className="font-semibold text-white">{title}</h2>
+          <h2 className="font-semibold text-slate-900">{title}</h2>
         </div>
         <div className="px-4 pb-4 pt-3 sm:px-6">
           <ResultExportActions
@@ -76,13 +76,13 @@ export function QuizResult({
             return (
               <article
                 key={question.number}
-                className="rounded-xl border border-sky-400/15 bg-navy-950/40 p-4 sm:p-5"
+                className="rounded-xl border border-slate-200 bg-navy-950/40 p-4 sm:p-5"
               >
-                <h3 className="text-base font-semibold text-white sm:text-lg">
+                <h3 className="text-base font-semibold text-slate-900 sm:text-lg">
                   Question {question.number}
                 </h3>
                 {question.question && (
-                  <p className="mt-2 text-sm leading-relaxed text-sky-100/90 sm:text-base">
+                  <p className="mt-2 text-sm leading-relaxed text-slate-700 sm:text-base">
                     {question.question}
                   </p>
                 )}
@@ -99,10 +99,10 @@ export function QuizResult({
                         <li
                           key={option.letter}
                           className={cn(
-                            "rounded-lg border px-3 py-2 text-sm text-sky-100/90",
+                            "rounded-lg border px-3 py-2 text-sm text-slate-700",
                             isCorrect
                               ? "border-green-400/40 bg-green-500/10 text-green-100"
-                              : "border-sky-400/10 bg-sky-400/5"
+                              : "border-slate-200 bg-sky-400/5"
                           )}
                         >
                           <span className="font-semibold text-sky-300">{option.letter})</span>{" "}
@@ -152,9 +152,9 @@ export function QuizResult({
         </div>
       ) : (
         <div
-          className="prose-response space-y-1 px-4 py-5 text-sm leading-relaxed text-sky-100/90 sm:px-6 sm:text-base"
+          className="prose-response space-y-1 px-4 py-5 text-sm leading-relaxed text-slate-700 sm:px-6 sm:text-base"
           dangerouslySetInnerHTML={{
-            __html: `<p class='mb-2 text-sky-100/90'>${formatResponse(response)}</p>`,
+            __html: `<p class='mb-2 text-slate-700'>${formatResponse(response)}</p>`,
           }}
         />
       )}

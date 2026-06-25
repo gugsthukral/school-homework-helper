@@ -32,7 +32,7 @@ export function CalculatorForm() {
     <div className="space-y-6">
       <form onSubmit={handleSubmit} className="glass-card space-y-5 rounded-2xl p-6 sm:p-8">
         <div>
-          <p className="mb-3 text-sm font-medium text-sky-200">Calculator Type</p>
+          <p className="mb-3 text-sm font-medium text-slate-700">Calculator Type</p>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {calculatorTypes.map((type) => {
               const selected = calcType === type.value;
@@ -53,12 +53,12 @@ export function CalculatorForm() {
                     <span
                       className={cn(
                         "block text-sm font-semibold",
-                        selected ? "text-sky-200" : "text-sky-100/90"
+                        selected ? "text-orange-600" : "text-slate-700"
                       )}
                     >
                       {type.label}
                     </span>
-                    <span className="mt-1 block text-xs leading-snug text-sky-300/55">
+                    <span className="mt-1 block text-xs leading-snug text-slate-500">
                       {type.description}
                     </span>
                   </GlowButtonShell>
@@ -77,7 +77,7 @@ export function CalculatorForm() {
           required
           disabled={loading}
           onVoiceTranscript={(text) => setExpression((prev) => appendVoiceText(prev, text))}
-          hint={<p className="mt-2 text-xs text-sky-300/50">{activeType.description}</p>}
+          hint={<p className="mt-2 text-xs text-slate-400">{activeType.description}</p>}
         />
 
         <AIToolStatus

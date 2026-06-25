@@ -36,7 +36,7 @@ export function GoogleSignInButton({ label = "Continue with Google" }: { label?:
         type="button"
         onClick={handleSignIn}
         disabled={loading}
-        className="flex w-full items-center justify-center gap-3 rounded-xl border border-sky-400/20 bg-white px-6 py-3.5 text-base font-semibold text-gray-800 shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl disabled:opacity-60"
+        className="flex w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-base font-semibold text-gray-800 shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl disabled:opacity-60"
       >
         {loading ? (
           <Loader2 className="h-5 w-5 animate-spin text-gray-600" />

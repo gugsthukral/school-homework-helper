@@ -31,7 +31,7 @@ export function GlowButtonShell({
       )}
       <span
         className={cn(
-          "relative inline-flex w-full items-center justify-center rounded-xl bg-button-bg text-white outline outline-1 outline-[#fff2f21f]",
+          "theme-glow-button relative inline-flex w-full items-center justify-center rounded-xl border shadow-sm",
           disabled && "opacity-60",
           contentClassName
         )}

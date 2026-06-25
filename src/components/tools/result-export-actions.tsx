@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Download, Loader2, Printer, Volume2 } from "lucide-react";
-import { GlowActionButton } from "@/components/motion-primitives/glow-action-button";
 import { downloadTextFile, printResult } from "@/lib/export-result";
 import { useTextToSpeech } from "@/hooks/use-text-to-speech";
 import { SpeechProgressVisualizer } from "@/components/tools/speech-progress-visualizer";
@@ -19,6 +18,9 @@ type ResultExportActionsProps = {
   showShare?: boolean;
   className?: string;
 };
+
+const actionButtonClass =
+  "inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium transition-all hover:shadow-sm disabled:cursor-not-allowed disabled:opacity-50";
 
 export function ResultExportActions({
   content,
@@ -71,27 +73,47 @@ export function ResultExportActions({
       {showExport && (
         <>
           <div className="flex flex-wrap items-center gap-2">
-            <GlowActionButton
+            <button
+              type="button"
               onClick={handleListen}
               disabled={!content.trim()}
               aria-pressed={audioBusy}
-              contentClassName={audioBusy ? "text-orange-100" : undefined}
+              className={cn(
+                actionButtonClass,
+                audioBusy
+                  ? "border-orange-300 bg-orange-50 text-orange-700 hover:bg-orange-100"
+                  : "border-slate-200 bg-white text-slate-700 hover:border-orange-300 hover:text-orange-600"
+              )}
             >
               {loading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <Loader2 className="h-4 w-4 animate-spin text-orange-500" />
               ) : (
                 <Volume2 className="h-4 w-4" />
               )}
-              {loading ? "Preparing..." : audioBusy ? "Playing..." : "Listen Audio"}
-            </GlowActionButton>
-            <GlowActionButton onClick={handlePrint}>
+              {loading ? "Preparing..." : speaking ? "Playing..." : "Listen Audio"}
+            </button>
+            <button
+              type="button"
+              onClick={handlePrint}
+              className={cn(
+                actionButtonClass,
+                "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+              )}
+            >
               <Printer className="h-4 w-4" />
               Print
-            </GlowActionButton>
-            <GlowActionButton onClick={handleDownload}>
+            </button>
+            <button
+              type="button"
+              onClick={handleDownload}
+              className={cn(
+                actionButtonClass,
+                "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+              )}
+            >
               <Download className="h-4 w-4" />
               Download
-            </GlowActionButton>
+            </button>
           </div>
 
           <SpeechProgressVisualizer
@@ -104,13 +126,13 @@ export function ResultExportActions({
             onStop={stop}
           />
 
-          {error && <p className="text-xs text-red-300">{error}</p>}
-          {printError && <p className="text-xs text-red-400">{printError}</p>}
+          {error && <p className="text-xs text-red-600">{error}</p>}
+          {printError && <p className="text-xs text-red-600">{printError}</p>}
         </>
       )}
 
       {showShare && (
-        <div className="border-t border-sky-400/10 pt-3">
+        <div className="border-t border-slate-200 pt-3">
           <ResultShareIcons
             content={content}
             title={title}

@@ -35,7 +35,7 @@ export function AuthNav() {
   }
 
   if (loading) {
-    return <div className="hidden h-9 w-24 animate-pulse rounded-full bg-sky-400/10 md:block" />;
+    return <div className="hidden h-9 w-24 animate-pulse rounded-full bg-slate-200 md:block" />;
   }
 
   if (user) {
@@ -62,12 +62,12 @@ export function AuthNav() {
               <User className="h-4 w-4 text-sky-400" />
             </span>
           )}
-          <span className="max-w-[120px] truncate text-sm text-sky-200">{name}</span>
+          <span className="max-w-[120px] truncate text-sm text-slate-700">{name}</span>
         </div>
         <button
           type="button"
           onClick={handleSignOut}
-          className="flex items-center gap-1.5 rounded-full border border-sky-400/20 px-3 py-1.5 text-sm text-sky-300 transition-colors hover:border-orange-400/40 hover:text-orange-400"
+          className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-sm text-slate-600 transition-colors hover:border-orange-300 hover:text-orange-500"
         >
           <LogOut className="h-3.5 w-3.5" />
           Sign Out
@@ -80,7 +80,7 @@ export function AuthNav() {
     <div className="hidden items-center gap-3 md:flex">
       <Link
         href="/signin"
-        className="rounded-full px-4 py-2 text-sm font-medium text-sky-200 transition-colors hover:text-white"
+        className="rounded-full px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:text-slate-900"
       >
         Sign In
       </Link>
@@ -122,7 +122,7 @@ export function AuthNavMobile({ onClose }: { onClose: () => void }) {
       <button
         type="button"
         onClick={handleSignOut}
-        className="mt-2 rounded-full border border-sky-400/30 px-5 py-2.5 text-center text-sm font-medium text-sky-200"
+        className="mt-2 rounded-full border border-sky-400/30 px-5 py-2.5 text-center text-sm font-medium text-slate-700"
       >
         Sign Out
       </button>

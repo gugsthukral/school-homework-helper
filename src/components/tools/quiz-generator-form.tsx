@@ -80,7 +80,7 @@ export function QuizGeneratorForm() {
           id="topic"
           label={
             <>
-              Quiz Topic <span className="text-sky-300/40">(optional)</span>
+              Quiz Topic <span className="text-slate-400">(optional)</span>
             </>
           }
           value={topic}
@@ -89,7 +89,7 @@ export function QuizGeneratorForm() {
           disabled={loading}
           onVoiceTranscript={(text) => setTopic((prev) => appendVoiceText(prev, text))}
           hint={
-            <p className="mt-1.5 text-xs text-sky-300/40">
+            <p className="mt-1.5 text-xs text-slate-400">
               Pick a subject only for a syllabus-wide quiz, or add a topic to focus the questions.
             </p>
           }

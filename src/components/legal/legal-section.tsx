@@ -6,8 +6,8 @@ type LegalSectionProps = {
 export function LegalSection({ title, children }: LegalSectionProps) {
   return (
     <section className="mt-10 first:mt-0">
-      <h2 className="text-xl font-semibold text-white">{title}</h2>
-      <div className="mt-4 space-y-4 text-sm leading-relaxed text-sky-200/70">{children}</div>
+      <h2 className="page-title text-xl font-semibold">{title}</h2>
+      <div className="page-description mt-4 space-y-4 text-sm leading-relaxed">{children}</div>
     </section>
   );
 }

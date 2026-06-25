@@ -159,7 +159,7 @@ export function AttachmentUpload({
         documents={documents}
         onDocumentsChange={onDocumentsChange}
       />
-      {processing && <p className="text-xs text-sky-300/60">Processing upload...</p>}
+      {processing && <p className="text-xs text-slate-500">Processing upload...</p>}
       {error && <p className="text-xs text-red-300">{error}</p>}
     </div>
   );
@@ -182,25 +182,25 @@ export function AttachmentPreviews({
   if (images.length === 0 && documents.length === 0) return null;
 
   return (
-    <div className="space-y-3 rounded-xl border border-sky-400/15 bg-navy-950/40 p-3">
+    <div className="space-y-3 rounded-xl border border-slate-200 bg-navy-950/40 p-3">
       {images.length > 0 && (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {images.map((img) => (
             <div
               key={img.id}
-              className="group relative overflow-hidden rounded-lg border border-sky-400/20"
+              className="group relative overflow-hidden rounded-lg border border-slate-200"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={img.previewUrl} alt={img.name} className="h-24 w-full object-cover" />
               <button
                 type="button"
                 onClick={() => removeImage(img.id)}
-                className="absolute right-1 top-1 rounded-full bg-navy-950/80 p-1 text-sky-200 hover:text-white"
+                className="absolute right-1 top-1 rounded-full bg-navy-950/80 p-1 text-slate-700 hover:text-slate-900"
                 aria-label={`Remove ${img.name}`}
               >
                 <X className="h-3.5 w-3.5" />
               </button>
-              <p className="truncate px-2 py-1 text-[10px] text-sky-300/60">{img.name}</p>
+              <p className="truncate px-2 py-1 text-[10px] text-slate-500">{img.name}</p>
             </div>
           ))}
         </div>
@@ -209,19 +209,19 @@ export function AttachmentPreviews({
       {documents.map((doc) => (
         <div
           key={doc.name}
-          className="flex items-start justify-between gap-3 rounded-lg border border-sky-400/15 px-3 py-2"
+          className="flex items-start justify-between gap-3 rounded-lg border border-slate-200 px-3 py-2"
         >
           <div className="min-w-0">
-            <p className="flex items-center gap-1.5 text-sm font-medium text-sky-200">
+            <p className="flex items-center gap-1.5 text-sm font-medium text-slate-700">
               <FileText className="h-3.5 w-3.5 shrink-0 text-orange-400" />
               {doc.name}
             </p>
-            <p className="mt-1 line-clamp-2 text-xs text-sky-300/50">{doc.text}</p>
+            <p className="mt-1 line-clamp-2 text-xs text-slate-400">{doc.text}</p>
           </div>
           <button
             type="button"
             onClick={() => removeDocument(doc.name)}
-            className="shrink-0 rounded-full p-1 text-sky-300/60 hover:text-white"
+            className="shrink-0 rounded-full p-1 text-slate-500 hover:text-slate-900"
             aria-label={`Remove ${doc.name}`}
           >
             <X className="h-4 w-4" />

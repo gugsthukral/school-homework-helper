@@ -1,8 +1,7 @@
 export const inputClassName =
-  "w-full rounded-xl border border-sky-400/20 bg-navy-950/60 px-4 py-3 text-white outline-none transition-colors focus:border-sky-400/50 focus:ring-2 focus:ring-sky-400/20";
+  "theme-input w-full rounded-xl border px-4 py-3 outline-none transition-colors focus:border-sky-400/50 focus:ring-2 focus:ring-sky-400/20";
 
-export const labelClassName = "mb-2 block text-sm font-medium text-sky-200";
-
+export const labelClassName = "theme-label mb-2 block text-sm font-medium";
 export const gradeOptions = Array.from({ length: 12 }, (_, i) => ({
   value: i + 1,
   label: `Class ${i + 1}`,

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { SpellCheck } from "lucide-react";
 import { ToolLayout } from "@/components/tools/tool-layout";
 import { GrammarCheckerForm } from "@/components/tools/grammar-checker-form";
 import { TOOL_SEO } from "@/lib/seo-config";
@@ -12,7 +11,7 @@ export default function GrammarCheckerPage() {
     <ToolLayout
       title="Grammar Checker"
       description="Fix grammar mistakes, get corrections, and learn from clear explanations."
-      icon={<SpellCheck className="h-7 w-7 text-sky-400" />}
+      iconKey="SpellCheck"
     >
       <GrammarCheckerForm />
     </ToolLayout>

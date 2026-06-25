@@ -6,12 +6,14 @@ import Image from "next/image";
 import { LogOut, User } from "lucide-react";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
+import { cn } from "@/lib/utils";
 
 type TopBarAuthProps = {
   compact?: boolean;
+  variant?: "light" | "dark";
 };
 
-export function TopBarAuth({ compact = false }: TopBarAuthProps) {
+export function TopBarAuth({ compact = false, variant = "light" }: TopBarAuthProps) {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [ready, setReady] = useState(false);
 
@@ -39,11 +41,18 @@ export function TopBarAuth({ compact = false }: TopBarAuthProps) {
     window.location.href = "/";
   }
 
+  const isDark = variant === "dark";
+  const linkClass = isDark
+    ? "text-sky-300 transition-colors hover:text-orange-400"
+    : "text-slate-600 transition-colors hover:text-orange-500";
+  const nameClass = isDark ? "text-sky-200" : "text-slate-600";
+  const skeletonClass = isDark ? "bg-navy-800" : "bg-slate-200";
+
   if (!ready) {
     return (
       <div className="flex h-8 items-center gap-2 sm:gap-3" aria-hidden>
-        <span className="h-4 w-14 rounded bg-sky-400/10" />
-        <span className="h-4 w-16 rounded bg-sky-400/10" />
+        <span className={cn("h-4 w-14 rounded", skeletonClass)} />
+        <span className={cn("h-4 w-16 rounded", skeletonClass)} />
       </div>
     );
   }
@@ -72,7 +81,7 @@ export function TopBarAuth({ compact = false }: TopBarAuthProps) {
             </span>
           )}
           {!compact && (
-            <span className="hidden max-w-[100px] truncate text-xs text-sky-200 sm:inline sm:max-w-[120px] sm:text-sm">
+            <span className={cn("hidden max-w-[100px] truncate text-xs sm:inline sm:max-w-[120px] sm:text-sm", nameClass)}>
               {name}
             </span>
           )}
@@ -80,7 +89,7 @@ export function TopBarAuth({ compact = false }: TopBarAuthProps) {
         <button
           type="button"
           onClick={handleSignOut}
-          className="flex items-center gap-1 text-xs font-medium text-sky-300 transition-colors hover:text-orange-400 sm:text-sm"
+          className={cn("flex items-center gap-1 text-xs font-medium sm:text-sm", linkClass)}
         >
           <LogOut className="h-3.5 w-3.5" />
           <span className="hidden sm:inline">Sign Out</span>
@@ -91,10 +100,7 @@ export function TopBarAuth({ compact = false }: TopBarAuthProps) {
 
   return (
     <div className="flex items-center gap-2 sm:gap-4">
-      <Link
-        href="/signin"
-        className="text-xs font-medium text-sky-200 transition-colors hover:text-white sm:text-sm"
-      >
+      <Link href="/signin" className={cn("text-xs font-medium sm:text-sm", linkClass)}>
         Sign In
       </Link>
       <Link

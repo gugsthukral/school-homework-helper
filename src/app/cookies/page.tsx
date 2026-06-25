@@ -59,7 +59,7 @@ export default function CookiePolicyPage() {
       backHref="/"
     >
       <article className="glass-card w-full max-w-[1280px] rounded-2xl p-6 sm:p-8">
-        <p className="text-sm text-sky-300/50">Last updated: {LAST_UPDATED}</p>
+        <p className="text-sm text-slate-400">Last updated: {LAST_UPDATED}</p>
 
         <LegalSection title="1. What Are Cookies?">
           <p>
@@ -76,16 +76,16 @@ export default function CookiePolicyPage() {
             AdSense.
           </p>
           <p>
-            <strong className="text-sky-100">Visitors in India and other regions:</strong> a cookie
+            <strong className="text-slate-800">Visitors in India and other regions:</strong> a cookie
             banner appears at the bottom of the screen. You can{" "}
-            <strong className="text-sky-100">Accept</strong> all cookies or{" "}
-            <strong className="text-sky-100">Reject</strong> non-essential cookies.
+            <strong className="text-slate-800">Accept</strong> all cookies or{" "}
+            <strong className="text-slate-800">Reject</strong> non-essential cookies.
           </p>
           <p>
-            <strong className="text-sky-100">Visitors in the EEA, UK, and Switzerland:</strong>{" "}
+            <strong className="text-slate-800">Visitors in the EEA, UK, and Switzerland:</strong>{" "}
             Google&apos;s certified consent message (Privacy &amp; messaging, IAB TCF v2) handles ad
             and cookie choices. Our site banner is hidden in those regions to avoid duplicate
-            prompts. Use <strong className="text-sky-100">Privacy &amp; cookie settings</strong> in
+            prompts. Use <strong className="text-slate-800">Privacy &amp; cookie settings</strong> in
             the footer or below to change your Google ad choices.
           </p>
           <CookiePreferenceActions className="pt-2" />
@@ -95,7 +95,7 @@ export default function CookiePolicyPage() {
           <div className="overflow-x-auto">
             <table className="w-full min-w-[640px] border-collapse text-left text-sm">
               <thead>
-                <tr className="border-b border-sky-400/20 text-sky-200">
+                <tr className="border-b border-slate-200 text-slate-700">
                   <th className="py-3 pr-4 font-semibold">Cookie / technology</th>
                   <th className="py-3 pr-4 font-semibold">Purpose</th>
                   <th className="py-3 pr-4 font-semibold">Type</th>
@@ -104,9 +104,9 @@ export default function CookiePolicyPage() {
               </thead>
               <tbody>
                 {cookieTable.map((row) => (
-                  <tr key={row.name} className="border-b border-sky-400/10 align-top">
-                    <td className="py-3 pr-4 font-medium text-white">{row.name}</td>
-                    <td className="py-3 pr-4 text-sky-200/70">{row.purpose}</td>
+                  <tr key={row.name} className="border-b border-slate-200 align-top">
+                    <td className="py-3 pr-4 font-medium text-slate-900">{row.name}</td>
+                    <td className="py-3 pr-4 text-slate-600">{row.purpose}</td>
                     <td className="py-3 pr-4">
                       <span
                         className={
@@ -118,7 +118,7 @@ export default function CookiePolicyPage() {
                         {row.type}
                       </span>
                     </td>
-                    <td className="py-3 text-sky-200/70">{row.duration}</td>
+                    <td className="py-3 text-slate-600">{row.duration}</td>
                   </tr>
                 ))}
               </tbody>
@@ -129,12 +129,12 @@ export default function CookiePolicyPage() {
         <LegalSection title="4. Essential vs Optional Cookies">
           <ul className="list-disc space-y-2 pl-5">
             <li>
-              <strong className="text-sky-100">Essential cookies</strong> are required for the site
+              <strong className="text-slate-800">Essential cookies</strong> are required for the site
               to function. They include consent storage, guest usage tracking, and authentication.
               These still apply if you reject optional cookies.
             </li>
             <li>
-              <strong className="text-sky-100">Optional cookies</strong> are used for advertising.
+              <strong className="text-slate-800">Optional cookies</strong> are used for advertising.
               They load only after you accept in our banner (outside the EEA/UK/CH) or consent in
               Google&apos;s message (inside the EEA/UK/CH). We use Google Consent Mode v2 so ad tags
               respect your choice.

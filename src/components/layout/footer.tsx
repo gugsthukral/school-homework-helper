@@ -1,7 +1,9 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
-import { GooglePrivacyFooterLink } from "@/components/cookie-consent/google-privacy-footer-link";
 import { SiteLogo } from "@/components/layout/site-logo";
+import { GooglePrivacyFooterLink } from "@/components/cookie-consent/google-privacy-footer-link";
+import { SiteContainer } from "@/components/shared/site-container";
 import { REGIONAL_LANGUAGES_TAGLINE } from "@/lib/indian-languages";
 
 const footerLinks = {
@@ -24,77 +26,73 @@ const footerLinks = {
   ],
 };
 
+function FooterColumnHeading({ children }: { children: ReactNode }) {
+  return (
+    <h4 className="theme-footer-heading text-xs font-bold uppercase tracking-wider">{children}</h4>
+  );
+}
+
+function FooterLinkList({ links }: { links: { label: string; href: string }[] }) {
+  return (
+    <ul className="mt-4 space-y-2.5">
+      {links.map((link) => (
+        <li key={link.href}>
+          <Link
+            href={link.href}
+            className="theme-footer-link text-sm transition-colors hover:text-orange-500"
+          >
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function Footer() {
   return (
-    <footer className="border-t border-sky-400/10 bg-navy-950">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-          <div className="lg:col-span-1">
+    <footer className="theme-footer w-full border-t">
+      <SiteContainer className="py-10 sm:py-12">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-block transition-opacity hover:opacity-90">
-              <SiteLogo />
+              <SiteLogo variant="footer" />
             </Link>
-            <p className="mt-4 text-sm leading-relaxed text-sky-200/50">
+            <p className="theme-footer-body mt-4 text-sm leading-relaxed">
               AI-powered education platform for students from Class 1 to Class 12.
               Homework help, essays, math, quizzes, and more. {REGIONAL_LANGUAGES_TAGLINE}.
             </p>
-            <div className="mt-5 space-y-2">
-              <p className="flex items-center gap-2 text-sm text-sky-300/50">
-                <Mail className="h-4 w-4 text-sky-400" />
+            <div className="mt-4 space-y-2">
+              <p className="theme-footer-body flex items-center gap-2 text-sm">
+                <Mail className="h-4 w-4 shrink-0 text-orange-500" />
                 hello@schoolhomeworkhelper.com
               </p>
-              <p className="flex items-center gap-2 text-sm text-sky-300/50">
-                <MapPin className="h-4 w-4 text-sky-400" />
+              <p className="theme-footer-body flex items-center gap-2 text-sm">
+                <MapPin className="h-4 w-4 shrink-0 text-orange-500" />
                 India
               </p>
             </div>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white">
-              AI Tools
-            </h4>
-            <ul className="mt-4 space-y-2.5">
-              {footerLinks.tools.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-sky-200/50 transition-colors hover:text-orange-400"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <FooterColumnHeading>AI Tools</FooterColumnHeading>
+            <FooterLinkList links={footerLinks.tools} />
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white">
-              Resources
-            </h4>
-            <ul className="mt-4 space-y-2.5">
-              {footerLinks.resources.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-sky-200/50 transition-colors hover:text-orange-400"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <FooterColumnHeading>Resources</FooterColumnHeading>
+            <FooterLinkList links={footerLinks.resources} />
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white">
-              Classes
-            </h4>
+            <FooterColumnHeading>Classes</FooterColumnHeading>
             <div className="mt-4 grid grid-cols-4 gap-2">
               {Array.from({ length: 12 }, (_, i) => (
                 <Link
                   key={i + 1}
                   href={`/classes/class-${i + 1}`}
-                  className="flex h-9 items-center justify-center rounded-lg border border-sky-400/10 text-xs font-medium text-sky-300/60 transition-colors hover:border-orange-400/30 hover:text-orange-400"
+                  className="theme-class-chip flex h-9 items-center justify-center rounded-lg border text-sm font-semibold transition-colors hover:border-orange-300 hover:bg-orange-50 hover:text-orange-600"
+                  aria-label={`Class ${i + 1}`}
                 >
                   {i + 1}
                 </Link>
@@ -103,24 +101,24 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-sky-400/10 pt-8 sm:flex-row">
-          <p className="text-sm text-sky-300/40">
+        <div className="theme-footer-divider mt-10 flex flex-col items-center justify-between gap-4 border-t pt-6 sm:flex-row">
+          <p className="theme-footer-muted text-sm">
             &copy; {new Date().getFullYear()} School Homework Helper. All rights reserved.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-            <Link href="/privacy" className="text-sm text-sky-300/40 hover:text-sky-300">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+            <Link href="/privacy" className="theme-footer-muted text-sm transition-colors hover:text-orange-500">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-sm text-sky-300/40 hover:text-sky-300">
+            <Link href="/terms" className="theme-footer-muted text-sm transition-colors hover:text-orange-500">
               Terms of Service
             </Link>
-            <Link href="/cookies" className="text-sm text-sky-300/40 hover:text-sky-300">
+            <Link href="/cookies" className="theme-footer-muted text-sm transition-colors hover:text-orange-500">
               Cookie Policy
             </Link>
             <GooglePrivacyFooterLink />
           </div>
         </div>
-      </div>
+      </SiteContainer>
     </footer>
   );
 }

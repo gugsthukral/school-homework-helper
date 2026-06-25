@@ -57,10 +57,10 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
 
         {chapters.length > 0 && (
           <section className="mb-12">
-            <h2 className="mb-2 text-xl font-semibold text-white">
+            <h2 className="mb-2 text-xl font-semibold text-slate-900">
               Class {page.classNumber} {subjectName} Chapters
             </h2>
-            <p className="mb-6 text-sm text-sky-200/60">
+            <p className="mb-6 text-sm text-slate-500">
               Browse chapter-wise study material and homework help.
             </p>
             <ChapterLinkList
@@ -74,8 +74,8 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
         <div className="space-y-8">
           {page.sections.map((section) => (
             <section key={section.heading} className="glass-card rounded-2xl p-6 sm:p-8">
-              <h2 className="text-xl font-semibold text-white">{section.heading}</h2>
-              <div className="mt-4 whitespace-pre-line text-sm leading-relaxed text-sky-200/70 sm:text-base">
+              <h2 className="text-xl font-semibold text-slate-900">{section.heading}</h2>
+              <div className="mt-4 whitespace-pre-line text-sm leading-relaxed text-slate-600 sm:text-base">
                 {section.content}
               </div>
             </section>
@@ -83,25 +83,25 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
         </div>
 
         <section className="mt-12">
-          <h2 className="mb-6 text-xl font-semibold text-white">Recommended AI Tools</h2>
+          <h2 className="mb-6 text-xl font-semibold text-slate-900">Recommended AI Tools</h2>
           <ToolCardGrid tools={recommendedTools} />
         </section>
 
         <section className="mt-12">
-          <h2 className="mb-6 text-xl font-semibold text-white">Frequently Asked Questions</h2>
+          <h2 className="mb-6 text-xl font-semibold text-slate-900">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {page.faqs.map((faq) => (
               <details
                 key={faq.question}
                 className="group glass-card rounded-xl p-5 open:border-sky-400/30"
               >
-                <summary className="cursor-pointer list-none font-medium text-white marker:content-none">
+                <summary className="cursor-pointer list-none font-medium text-slate-900 marker:content-none">
                   <span className="flex items-center justify-between gap-4">
                     {faq.question}
                     <span className="text-sky-400 transition-transform group-open:rotate-45">+</span>
                   </span>
                 </summary>
-                <p className="mt-3 text-sm leading-relaxed text-sky-200/60">{faq.answer}</p>
+                <p className="mt-3 text-sm leading-relaxed text-slate-500">{faq.answer}</p>
               </details>
             ))}
           </div>
@@ -110,7 +110,7 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
         <section className="mt-12 flex flex-wrap gap-3">
           <Link
             href={`/classes/class-${page.classNumber}`}
-            className="inline-flex items-center gap-2 rounded-full border border-sky-400/20 px-4 py-2 text-sm text-sky-300/70 transition-colors hover:border-orange-400/40 hover:text-orange-400"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-500 transition-colors hover:border-orange-300 hover:text-orange-400"
           >
             <GraduationCap className="h-4 w-4" />
             Class {page.classNumber} Hub
@@ -118,7 +118,7 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
           {page.subject && (
             <Link
               href={`/subjects/${getSubjectDbSlug(page.subject)}?class=${page.classNumber}`}
-              className="inline-flex items-center gap-2 rounded-full border border-sky-400/20 px-4 py-2 text-sm text-sky-300/70 transition-colors hover:border-orange-400/40 hover:text-orange-400"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-500 transition-colors hover:border-orange-300 hover:text-orange-400"
             >
               <BookOpen className="h-4 w-4" />
               Subject Resources
@@ -128,16 +128,16 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
 
         {related.length > 0 && (
           <section className="mt-12">
-            <h2 className="mb-6 text-xl font-semibold text-white">Related Pages</h2>
+            <h2 className="mb-6 text-xl font-semibold text-slate-900">Related Pages</h2>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((rel) => (
                 <Link
                   key={rel.slug}
                   href={`/${rel.slug}`}
-                  className="glass-card rounded-xl px-5 py-4 transition-all hover:-translate-y-0.5 hover:border-sky-400/30"
+                  className="glass-card rounded-xl px-5 py-4 transition-all hover:-translate-y-0.5 hover:shadow-md"
                 >
-                  <h3 className="text-sm font-medium text-white">{rel.h1}</h3>
-                  <p className="mt-1 line-clamp-2 text-xs text-sky-300/50">{rel.description}</p>
+                  <h3 className="text-sm font-medium text-slate-900">{rel.h1}</h3>
+                  <p className="mt-1 line-clamp-2 text-xs text-slate-400">{rel.description}</p>
                 </Link>
               ))}
             </div>

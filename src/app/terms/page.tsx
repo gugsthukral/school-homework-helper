@@ -18,7 +18,7 @@ export default function TermsOfServicePage() {
       backHref="/"
     >
       <article className="glass-card w-full max-w-[1280px] rounded-2xl p-6 sm:p-8">
-        <p className="text-sm text-sky-300/50">Last updated: {LAST_UPDATED}</p>
+        <p className="text-sm text-slate-400">Last updated: {LAST_UPDATED}</p>
 
         <LegalSection title="1. Acceptance of Terms">
           <p>

@@ -9,21 +9,30 @@ import { SiteSearch } from "@/components/layout/site-search";
 import { TopBarAuth } from "@/components/layout/top-bar-auth";
 import { useTopBarScroll } from "@/components/layout/use-topbar-scroll";
 import { navLinks } from "@/lib/data";
+import { SiteContainer } from "@/components/shared/site-container";
 import { TOPBAR_HEIGHT } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
+type NavbarProps = {
+  variant?: "dark" | "light";
+};
+
+export function Navbar({ variant = "dark" }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const { hidden: topBarHidden } = useTopBarScroll();
+  const isLight = variant === "light";
 
   return (
     <header
       className={cn(
-        "fixed inset-x-0 z-50 border-b border-sky-400/10 bg-navy-950 transition-[top] duration-300 ease-in-out"
+        "fixed inset-x-0 z-50 transition-[top,background-color,box-shadow] duration-300 ease-in-out",
+        isLight
+          ? "border-b border-slate-200/80 bg-white/95 shadow-sm shadow-slate-200/50 backdrop-blur-md"
+          : "border-b border-[#101a2d] bg-[#050a14]/95 backdrop-blur-md"
       )}
       style={{ top: topBarHidden ? 0 : TOPBAR_HEIGHT }}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 sm:px-6 sm:py-3 lg:px-8">
+      <SiteContainer as="nav" className="flex items-center justify-between gap-3 py-2 sm:py-3">
         <Link
           href="/"
           className="group flex shrink-0 items-center transition-opacity hover:opacity-90"
@@ -31,9 +40,9 @@ export function Navbar() {
           <SiteLogo priority variant="header" />
         </Link>
 
-        <div className="hidden flex-1 items-center justify-end gap-5 md:flex">
+        <div className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (
-            <NavLink key={link.href} href={link.href} label={link.label} />
+            <NavLink key={link.href} href={link.href} label={link.label} variant={variant} />
           ))}
           <SiteSearch />
         </div>
@@ -42,7 +51,7 @@ export function Navbar() {
           <SiteSearch />
           <button
             type="button"
-            className="rounded-lg p-2 text-sky-200"
+            className={cn("rounded-lg p-2", isLight ? "text-navy-900" : "text-sky-300")}
             onClick={() => setOpen((value) => !value)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
@@ -50,11 +59,12 @@ export function Navbar() {
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
-      </nav>
+      </SiteContainer>
 
       <div
         className={cn(
-          "border-t border-sky-400/10 bg-navy-900 md:hidden",
+          "border-t md:hidden",
+          isLight ? "border-slate-200 bg-white" : "border-[#101a2d] bg-[#050a14]",
           open ? "block" : "hidden"
         )}
       >
@@ -64,12 +74,16 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               label={link.label}
+              variant={variant}
               onNavigate={() => setOpen(false)}
-              className="rounded-lg px-3 py-2.5 hover:bg-sky-400/10 hover:text-white"
+              className={cn(
+                "rounded-lg px-3 py-2.5",
+                isLight ? "hover:bg-slate-50 hover:text-orange-500" : "hover:bg-sky-400/10 hover:text-white"
+              )}
             />
           ))}
-          <div className="mt-3 border-t border-sky-400/10 pt-3 md:hidden">
-            <TopBarAuth compact />
+          <div className={cn("mt-3 border-t pt-3", isLight ? "border-slate-200" : "border-[#1e293b]")}>
+            <TopBarAuth compact variant={isLight ? "light" : "dark"} />
           </div>
         </div>
       </div>

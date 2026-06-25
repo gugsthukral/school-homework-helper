@@ -29,7 +29,7 @@ export function KeyTopicDetail({ topic }: KeyTopicDetailProps) {
       backLabel={`Class ${topic.classNumber} Hub`}
     >
       <div className="mb-6 flex flex-wrap gap-2">
-        <span className="rounded-full border border-sky-400/20 px-3 py-1 text-xs text-sky-300">
+        <span className="rounded-full border border-slate-200 px-3 py-1 text-xs text-sky-300">
           {topic.subjectName}
         </span>
         <span className="rounded-full border border-orange-500/20 bg-orange-500/5 px-3 py-1 text-xs text-orange-300">
@@ -47,17 +47,17 @@ export function KeyTopicDetail({ topic }: KeyTopicDetailProps) {
         </Link>
         <Link
           href={tool.href}
-          className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 px-6 py-2.5 text-sm font-medium text-sky-200 transition-colors hover:border-orange-400/50 hover:text-orange-400"
+          className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 px-6 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:border-orange-400/50 hover:text-orange-400"
         >
           Open {tool.label}
         </Link>
       </div>
 
       <section className="glass-card mb-6 rounded-2xl p-6 sm:p-8">
-        <h2 className="mb-4 text-lg font-semibold text-white">What You&apos;ll Learn</h2>
+        <h2 className="mb-4 text-lg font-semibold text-slate-900">What You&apos;ll Learn</h2>
         <ul className="grid gap-2 sm:grid-cols-2">
           {topic.highlights.map((item) => (
-            <li key={item} className="flex items-start gap-2 text-sm text-sky-200/70">
+            <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
               <span className="text-orange-400">→</span>
               {item}
             </li>
@@ -67,17 +67,17 @@ export function KeyTopicDetail({ topic }: KeyTopicDetailProps) {
 
       <Link
         href={`/classes/${topic.classSlug}/${topic.subjectSlug}`}
-        className="group glass-card flex items-center justify-between rounded-2xl p-6 transition-all hover:border-sky-400/30"
+        className="group glass-card flex items-center justify-between rounded-2xl p-6 transition-all hover:shadow-md"
       >
         <div className="flex items-center gap-4">
           <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-400/10">
             <BookOpen className="h-6 w-6 text-sky-400" />
           </span>
           <div>
-            <h2 className="font-semibold text-white">
+            <h2 className="font-semibold text-slate-900">
               Class {topic.classNumber} {topic.subjectName}
             </h2>
-            <p className="mt-1 text-sm text-sky-300/50">
+            <p className="mt-1 text-sm text-slate-400">
               View all chapters for session {ACADEMIC_SESSION}
             </p>
           </div>
@@ -87,16 +87,16 @@ export function KeyTopicDetail({ topic }: KeyTopicDetailProps) {
 
       {otherTopics.length > 0 && (
         <section className="mt-10">
-          <h2 className="mb-4 text-lg font-semibold text-white">Other Key Topics</h2>
+          <h2 className="mb-4 text-lg font-semibold text-slate-900">Other Key Topics</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {otherTopics.map((t) => (
               <Link
                 key={t.slug}
                 href={`/classes/${t.classSlug}/topics/${t.slug}`}
-                className="glass-card rounded-xl px-4 py-3 transition-all hover:border-sky-400/30"
+                className="glass-card rounded-xl px-4 py-3 transition-all hover:shadow-md"
               >
                 <span className="text-xs text-orange-400">{t.subjectName}</span>
-                <h3 className="mt-1 text-sm font-medium text-white">{t.title}</h3>
+                <h3 className="mt-1 text-sm font-medium text-slate-900">{t.title}</h3>
               </Link>
             ))}
           </div>

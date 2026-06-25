@@ -23,12 +23,18 @@ export const socialLinks = [
 
 export const TOPBAR_HEIGHT = 60;
 
+export { CANONICAL_SITE_ORIGIN, getSiteUrl } from "@/lib/site-url";
+
 /** Navbar row height (logo + vertical padding). Sync with SiteLogo header variant. */
 export const NAVBAR_HEIGHT = {
   base: 88, // 140px logo + py-2
   sm: 106, // 160px logo + py-3
   md: 116, // 180px logo + py-3
 } as const;
+
+/** Full-width content shell with responsive side padding (mockup layout). */
+export const SITE_CONTAINER_CLASS =
+  "mx-auto w-full max-w-[1680px] px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16";
 
 /** Space below fixed header (top bar + navbar) so content is not covered */
 export const SITE_HEADER_OFFSET_CLASS =

@@ -41,34 +41,36 @@ export function AIResponseCard({
   return (
     <GlowCard active={glowActive}>
       <div className="glass-card animate-fade-up overflow-hidden rounded-2xl">
-      <div className="border-b border-sky-400/10 bg-sky-400/5">
-        <div className="flex items-center gap-3 px-4 pt-4 sm:px-6">
-          <Icon className="h-5 w-5 shrink-0 text-sky-400" />
-          <h2 className="font-semibold text-white">{title}</h2>
+        <div className="border-b border-slate-100 bg-white px-4 py-4 sm:px-6 sm:py-5">
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-50 to-orange-50 ring-1 ring-slate-100">
+              <Icon className="h-5 w-5 text-orange-500" />
+            </span>
+            <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
+          </div>
+          <div className="mt-4">
+            <ResultExportActions
+              content={response}
+              fileName={resolvedFileName}
+              title={title}
+              subtitle={exportSubtitle}
+              sharePath={sharePath}
+            />
+          </div>
         </div>
-        <div className="px-4 pb-4 pt-3 sm:px-6">
-          <ResultExportActions
-            content={response}
-            fileName={resolvedFileName}
-            title={title}
-            subtitle={exportSubtitle}
-            sharePath={sharePath}
-          />
-        </div>
-      </div>
-      <div
-        className="prose-response space-y-1 px-4 py-5 text-sm leading-relaxed text-sky-100/90 sm:px-6 sm:text-base"
-        dangerouslySetInnerHTML={{
-          __html: `<p class='mb-2 text-sky-100/90'>${formatResponse(response)}</p>`,
-        }}
-      />
+        <div
+          className="prose-response border-t border-slate-100 bg-slate-50/50 px-4 py-5 text-sm leading-relaxed text-slate-700 sm:px-6 sm:text-base"
+          dangerouslySetInnerHTML={{
+            __html: `<p class='mb-2 text-slate-700'>${formatResponse(response)}</p>`,
+          }}
+        />
       </div>
     </GlowCard>
   );
 }
 
 const loadingShimmerClassName =
-  "text-base font-medium [--base-color:#7dd3fc] [--base-gradient-color:#ffffff] dark:[--base-color:#7dd3fc] dark:[--base-gradient-color:#ffffff]";
+  "text-base font-medium [--base-color:#f97316] [--base-gradient-color:#0a1628]";
 
 export function AIToolLoadingCard({ message }: { message: string }) {
   return (
@@ -85,14 +87,14 @@ export function AIToolLoadingCard({ message }: { message: string }) {
 export function AIEmptyState({ message }: { message: string }) {
   return (
     <div className="glass-card rounded-2xl p-6 text-center">
-      <p className="text-sm text-sky-300/50">{message}</p>
+      <p className="text-sm text-slate-400">{message}</p>
     </div>
   );
 }
 
 export function AIErrorBanner({ message }: { message: string }) {
   return (
-    <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+    <div className="theme-error-banner rounded-xl border px-4 py-3 text-sm">
       {message}
     </div>
   );
@@ -117,30 +119,30 @@ export function AIToolStatus({
         !signInRequired &&
         guestUsesRemaining != null &&
         guestUsesRemaining > 0 && (
-        <div className="relative overflow-hidden rounded-xl border border-sky-400/20 bg-navy-900/60 px-4 py-3">
+        <div className="theme-guest-banner relative w-full max-w-[50%] overflow-hidden rounded-xl border px-4 py-3">
           <BorderTrail
             lengthRatio={0.5}
             thickness={3}
             transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
             className="bg-gradient-to-r from-orange-500 via-orange-300 to-orange-400"
           />
-          <p className="relative z-10 text-sm text-sky-200/80">
+          <p className="theme-guest-banner-text relative z-10 text-sm">
             {guestUsesRemaining} of {GUEST_USAGE_LIMIT} free tries remaining without sign-in.
           </p>
         </div>
       )}
 
       {signInRequired && (
-        <div className="rounded-xl border border-orange-500/40 bg-orange-500/10 px-4 py-4 text-sm text-orange-100">
-          <p className="font-medium text-orange-200">
+        <div className="theme-signin-banner w-full max-w-[50%] rounded-xl border px-4 py-4 text-sm">
+          <p className="theme-signin-banner-title font-medium">
             You&apos;ve used your {GUEST_USAGE_LIMIT} free tries.
           </p>
-          <p className="mt-1 text-orange-100/90">
+          <p className="theme-signin-banner-text mt-1">
             Sign in with Google to keep using all AI tools for free.
           </p>
           <Link href="/signin" className="mt-3 inline-flex transition-transform hover:scale-[1.02]">
             <GlowButtonShell>
-              <span className="inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold text-white">
+              <span className="inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold">
                 <LogIn className="h-4 w-4" />
                 Sign In to Continue
               </span>

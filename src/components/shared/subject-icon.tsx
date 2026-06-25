@@ -1,44 +1,11 @@
-import { BriefcaseBusiness, Landmark, Monitor, Sigma, TestTube2, TrendingUp, type LucideIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-const lucideIconMap: Record<string, LucideIcon> = {
-  Sigma,
-  TestTube: TestTube2,
-  BriefcaseBusiness,
-  TrendingUp,
-  Landmark,
-  Monitor,
-};
-
-const letterIconMap: Record<string, string> = {
-  Abc: "abc",
-  Hindi: "अ",
-  Punjabi: "ੳ",
-};
+import { ColorfulSubjectIcon } from "@/components/shared/colorful-icons";
 
 type SubjectIconProps = {
   icon: string;
   className?: string;
+  size?: number;
 };
 
-export function SubjectIcon({ icon, className }: SubjectIconProps) {
-  const letter = letterIconMap[icon];
-  if (letter) {
-    return (
-      <span
-        className={cn(
-          "font-semibold leading-none tracking-tight",
-          icon === "Abc" && "text-base lowercase",
-          (icon === "Hindi" || icon === "Punjabi") && "text-xl",
-          className
-        )}
-        aria-hidden
-      >
-        {letter}
-      </span>
-    );
-  }
-
-  const LucideIcon = lucideIconMap[icon] ?? Sigma;
-  return <LucideIcon className={className} aria-hidden />;
+export function SubjectIcon({ icon, className, size = 48 }: SubjectIconProps) {
+  return <ColorfulSubjectIcon icon={icon} className={className} size={size} />;
 }

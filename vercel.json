@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "schoolhomeworkhelper.com" }],
+      "destination": "https://www.schoolhomeworkhelper.com/:path*",
+      "permanent": true
+    }
+  ]
+}

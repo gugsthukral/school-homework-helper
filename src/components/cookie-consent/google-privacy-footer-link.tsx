@@ -11,7 +11,7 @@ export function GooglePrivacyFooterLink() {
     <button
       type="button"
       onClick={openGooglePrivacySettings}
-      className="text-sm text-sky-300/40 hover:text-sky-300"
+      className="theme-footer-muted text-sm transition-colors hover:text-orange-500"
     >
       Privacy &amp; cookie settings
     </button>

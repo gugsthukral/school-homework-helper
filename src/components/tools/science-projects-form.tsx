@@ -37,7 +37,8 @@ export function ScienceProjectsForm() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    submit({ grade, interest: interest.trim() || undefined });
+    if (interest.trim().length < 2) return;
+    submit({ grade, interest: interest.trim() });
   }
 
   return (
@@ -47,10 +48,11 @@ export function ScienceProjectsForm() {
 
         <AIToolInputField
           id="interest"
-          label="Area of Interest (optional)"
+          label="Area of Interest"
           value={interest}
           onChange={setInterest}
           placeholder="e.g. plants, electricity, space, chemistry"
+          required
           disabled={loading}
           onVoiceTranscript={(text) => setInterest((prev) => appendVoiceText(prev, text))}
         />
@@ -64,7 +66,7 @@ export function ScienceProjectsForm() {
 
         <SubmitButton
           loading={loading}
-          disabled={signInRequired}
+          disabled={signInRequired || interest.trim().length < 2}
           label="Get Project Ideas"
           loadingLabel="Finding ideas..."
         />
@@ -84,7 +86,7 @@ export function ScienceProjectsForm() {
         response?.trim().startsWith("{") ? (
           <AIErrorBanner message="We received project data but couldn't display it. Please try again." />
         ) : (
-          <AIEmptyState message="Select your class to get 4 science project ideas (2 easy, 1 medium, 1 hard) you can do at home or school." />
+          <AIEmptyState message="Select your class and enter an area of interest to get 2 easy project ideas matched to your topic." />
         )
       )}
     </div>

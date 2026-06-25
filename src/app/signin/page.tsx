@@ -20,8 +20,8 @@ export default async function SignInPage({ searchParams }: Props) {
           <Link href="/" className="inline-block transition-opacity hover:opacity-90">
             <SiteLogo className="mx-auto object-center md:object-left" />
           </Link>
-          <h1 className="mt-6 text-2xl font-bold text-white">Welcome Back</h1>
-          <p className="mt-2 text-sm text-sky-200/60">
+          <h1 className="page-title mt-6 text-2xl font-bold">Welcome Back</h1>
+          <p className="mt-2 text-sm text-slate-500">
             Sign in or create an account with Google to save your progress.
           </p>
         </div>
@@ -35,12 +35,12 @@ export default async function SignInPage({ searchParams }: Props) {
 
           <GoogleSignInButton label="Sign in with Google" />
 
-          <p className="mt-6 text-center text-xs text-sky-300/40">
+          <p className="mt-6 text-center text-xs text-slate-400">
             We only support Google sign-in. By continuing, you agree to our Terms of Service.
           </p>
         </div>
 
-        <p className="mt-6 text-center text-sm text-sky-300/50">
+        <p className="mt-6 text-center text-sm text-slate-400">
           <Link href="/" className="text-orange-400 hover:underline">
             Continue without signing in
           </Link>

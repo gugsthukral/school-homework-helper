@@ -25,10 +25,10 @@ export function StreamsSection({ classSlug, classNumber }: StreamsSectionProps) 
       <div className="mb-6 flex items-start gap-3">
         <GraduationCap className="mt-1 h-5 w-5 shrink-0 text-orange-400" />
         <div>
-          <h2 className="text-xl font-semibold text-white">
+          <h2 className="text-xl font-semibold text-slate-900">
             Choose Your Stream — Session {ACADEMIC_SESSION}
           </h2>
-          <p className="mt-1 text-sm text-sky-200/60">
+          <p className="mt-1 text-sm text-slate-500">
             CBSE senior secondary streams: Non-Medical (PCM), Medical (PCB), Commerce, and Arts.
             Select your stream to browse subject-wise chapters.
           </p>
@@ -39,11 +39,11 @@ export function StreamsSection({ classSlug, classNumber }: StreamsSectionProps) 
         {streams.map((stream) => (
           <div
             key={stream.id}
-            className={`glass-card overflow-hidden rounded-2xl border bg-gradient-to-br ${streamColors[stream.id] ?? "border-sky-400/20"}`}
+            className={`glass-card overflow-hidden rounded-2xl border bg-gradient-to-br ${streamColors[stream.id] ?? "border-slate-200"}`}
           >
-            <div className="border-b border-sky-400/10 px-5 py-4">
-              <h3 className="font-semibold text-white">{stream.label}</h3>
-              <p className="mt-1 text-xs text-sky-200/60">{stream.description}</p>
+            <div className="border-b border-slate-200 px-5 py-4">
+              <h3 className="font-semibold text-slate-900">{stream.label}</h3>
+              <p className="mt-1 text-xs text-slate-500">{stream.description}</p>
             </div>
             <ul className="divide-y divide-sky-400/10">
               {stream.subjects.map((subjectName) => {
@@ -55,7 +55,7 @@ export function StreamsSection({ classSlug, classNumber }: StreamsSectionProps) 
                       href={getSubjectPath(classSlug, subjectSlug)}
                       className="group flex items-center justify-between px-5 py-3 text-sm transition-colors hover:bg-sky-400/5"
                     >
-                      <span className="text-sky-200/80 group-hover:text-white">
+                      <span className="text-slate-600 group-hover:text-slate-900">
                         {subjectName}
                       </span>
                       <ChevronRight className="h-4 w-4 text-sky-400/30 group-hover:text-orange-400" />

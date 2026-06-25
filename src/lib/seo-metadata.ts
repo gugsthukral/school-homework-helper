@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { DEFAULT_KEYWORDS, SITE_NAME } from "@/lib/seo-config";
+import { getSiteUrl } from "@/lib/site-url";
 
-export function getSiteUrl() {
-  return process.env.NEXT_PUBLIC_SITE_URL ?? "https://schoolhomeworkhelper.com";
-}
-
+export { getSiteUrl };
 const OG_IMAGE_PATH = "/logo.png";
 
 type BuildPageMetadataOptions = {
@@ -62,8 +60,8 @@ export function buildPageMetadata({
       images: [
         {
           url: imageUrl,
-          width: 196,
-          height: 100,
+          width: 180,
+          height: 92,
           alt: SITE_NAME,
         },
       ],
@@ -108,8 +106,8 @@ export function buildRootMetadata(): Metadata {
       images: [
         {
           url: imageUrl,
-          width: 196,
-          height: 100,
+          width: 180,
+          height: 92,
           alt: SITE_NAME,
         },
       ],
@@ -134,9 +132,9 @@ export function buildRootMetadata(): Metadata {
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
-        { url: "/favicon.png", type: "image/png", sizes: "16x16" },
+        { url: "/favicon.png", type: "image/png", sizes: "14x16" },
       ],
-      apple: "/logo.png",
+      apple: "/favicon.png",
     },
     verification: {
       google: "vtaBwWyRbATOVYiugu6crxh5OUjB2-GI05Dge3tB45k",

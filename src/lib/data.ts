@@ -92,16 +92,19 @@ export const subjects = [
 export const steps = [
   {
     step: "01",
+    icon: "ChooseTool" as const,
     title: "Choose Your Tool",
     description: "Pick from 8 AI tools — Ask Anything, Homework Solver, Essay Generator, Calculator, and more.",
   },
   {
     step: "02",
+    icon: "EnterQuestion" as const,
     title: "Enter Your Question",
     description: "Type your question, topic, or paste homework — in English, Hindi, Tamil, Bengali, and other regional languages. Select your class level.",
   },
   {
     step: "03",
+    icon: "GetExplanation" as const,
     title: "Get AI Explanation",
     description: "Receive clear, step-by-step answers in the same language you asked — written for your class level.",
   },

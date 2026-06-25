@@ -9,9 +9,10 @@ type NavLinkProps = {
   label: string;
   className?: string;
   onNavigate?: () => void;
+  variant?: "dark" | "light";
 };
 
-export function NavLink({ href, label, className, onNavigate }: NavLinkProps) {
+export function NavLink({ href, label, className, onNavigate, variant = "light" }: NavLinkProps) {
   const pathname = usePathname();
   const isHashLink = href.startsWith("/#");
   const hashId = isHashLink ? href.slice(2) : null;
@@ -41,7 +42,13 @@ export function NavLink({ href, label, className, onNavigate }: NavLinkProps) {
       scroll={!isHashLink || pathname !== "/"}
       className={cn(
         "text-sm font-medium transition-colors hover:text-orange-400",
-        isActive ? "text-orange-400" : "text-sky-200/80",
+        variant === "light"
+          ? isActive
+            ? "text-orange-500"
+            : "text-navy-900"
+          : isActive
+            ? "text-orange-400"
+            : "text-sky-300",
         className
       )}
     >

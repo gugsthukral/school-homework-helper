@@ -52,7 +52,7 @@ export function SubjectChaptersPage({
       backLabel={`Class ${classNumber} Hub`}
     >
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <p className="text-sm text-sky-200/60">
+        <p className="text-sm text-slate-500">
           {chapters.length} chapters · NCERT aligned · Session {ACADEMIC_SESSION}
         </p>
         <Link
@@ -71,16 +71,16 @@ export function SubjectChaptersPage({
 
       {otherSubjects.length > 0 && (
         <div className="mt-10">
-          <h2 className="mb-4 text-lg font-semibold text-white">Other Subjects</h2>
+          <h2 className="mb-4 text-lg font-semibold text-slate-900">Other Subjects</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {otherSubjects.map((s) => (
               <Link
                 key={s.slug}
                 href={getSubjectPath(classSlug, s.slug)}
-                className="glass-card flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:border-sky-400/30"
+                className="glass-card flex items-center gap-3 rounded-xl px-4 py-3 transition-all hover:shadow-md"
               >
                 <BookOpen className="h-4 w-4 text-sky-400" />
-                <span className="text-sm text-sky-200/70">
+                <span className="text-sm text-slate-600">
                   Class {classNumber} {s.name}
                   <span className="ml-1 text-sky-400/40">({s.chapterCount} ch.)</span>
                 </span>

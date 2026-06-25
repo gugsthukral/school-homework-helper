@@ -6,8 +6,9 @@ import { aiTools } from "@/lib/data";
 import { keyTopicsRegistry } from "@/lib/key-topics";
 import { seoPages } from "@/lib/seo-pages";
 import { subjectList } from "@/lib/subject-content";
+import { getSiteUrl } from "@/lib/site-url";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://schoolhomeworkhelper.com";
+const baseUrl = getSiteUrl();
 
 const staticRoutes = [
   "",

@@ -1,3 +1,5 @@
+import { getSiteUrl } from "@/lib/site-url";
+
 export function markdownToPlainText(text: string): string {
   return text
     .replace(/\*\*(.*?)\*\*/g, "$1")
@@ -12,7 +14,7 @@ export function getSiteOrigin(): string {
     return window.location.origin;
   }
 
-  return process.env.NEXT_PUBLIC_SITE_URL ?? "https://schoolhomeworkhelper.com";
+  return getSiteUrl();
 }
 
 export function buildSharePageUrl(sharePath: string): string {

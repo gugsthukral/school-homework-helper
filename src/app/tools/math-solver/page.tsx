@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Calculator } from "lucide-react";
 import { ToolLayout } from "@/components/tools/tool-layout";
 import { MathSolverForm } from "@/components/tools/math-solver-form";
 import { TOOL_SEO } from "@/lib/seo-config";
@@ -12,7 +11,7 @@ export default function MathSolverPage() {
     <ToolLayout
       title="Math Solver"
       description="Get step-by-step solutions for arithmetic, algebra, geometry, and word problems."
-      icon={<Calculator className="h-7 w-7 text-sky-300" />}
+      iconKey="Calculator"
     >
       <MathSolverForm />
     </ToolLayout>

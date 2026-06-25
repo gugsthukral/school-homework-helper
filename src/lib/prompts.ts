@@ -154,10 +154,11 @@ function getScienceProjectsGradeGuidance(grade: number): string {
 }
 
 export function buildScienceProjectsSystemPrompt(grade: number) {
-  return `You are a CBSE science teacher creating project ideas ONLY for Class ${grade} students.
+  return `You are a CBSE science teacher creating easy school project ideas ONLY for Class ${grade} students.
 
 Critical rules:
 - Every response must be tailored specifically to Class ${grade} — not generic ideas that could fit any class.
+- When the student gives an area of interest, BOTH project ideas must clearly match that interest — use their exact topic words in titles and steps where natural.
 - Class 6 ideas must be simpler than Class 12 ideas. Never reuse the same project titles or concepts across different class levels.
 - Return only valid JSON — no markdown fences, no commentary outside the JSON object.
 - Write all student-facing text (titles, materials, steps, learningOutcome) in the same language the student used in their interest or request when provided; otherwise use simple English.`;
@@ -165,15 +166,21 @@ Critical rules:
 
 export function buildScienceProjectsPrompt(grade: number, interest?: string) {
   const gradeGuidance = getScienceProjectsGradeGuidance(grade);
-  const interestLine = interest
-    ? `\nStudent interest or preferred area: ${interest}. If an interest is given, spread the 4 projects across different subtopics within that area — do NOT repeat the same subtopic four times.`
-    : "";
+  const interestBlock = interest
+    ? `Student's area of interest: "${interest}"
 
-  return `Suggest exactly 4 science project ideas for a Class ${grade} Indian CBSE student.
+Interest rules (mandatory):
+- BOTH projects must be directly about "${interest}" — not generic science projects.
+- Use materials and steps a Class ${grade} student can actually do for "${interest}".
+- The two ideas must be different approaches or subtopics within "${interest}" (do not repeat the same experiment twice).`
+    : `No specific interest was given. Suggest two different easy science topics that are popular and appropriate for Class ${grade} (e.g. plants, magnets, water, light — pick topics suited to this class level).`;
+
+  return `Suggest exactly 2 easy science project ideas for a Class ${grade} Indian CBSE student.
 
 Class-level guidance:
 ${gradeGuidance}
-${interestLine}
+
+${interestBlock}
 
 Return ONLY valid JSON (no markdown fences, no extra text) in this shape:
 {
@@ -195,15 +202,14 @@ Return ONLY valid JSON (no markdown fences, no extra text) in this shape:
 }
 
 Rules:
-- Exactly 4 projects total: 2 with difficulty "Easy", 1 "Medium", and 1 "Hard"
-- difficulty must be exactly "Easy", "Medium", or "Hard"
-- Each project needs 4–6 detailed steps with stepNumber 1, 2, 3...
+- Exactly 2 projects total — both must have difficulty "Easy" only
+- difficulty must be exactly "Easy" for every project
+- Each project needs 4–6 clear steps with stepNumber 1, 2, 3...
 - materials: 3–8 simple, affordable household or school items appropriate for Class ${grade}
 - Projects must be safe and doable at home or school with adult supervision where needed
-- All 4 projects MUST cover completely different science topics (e.g. plants, magnets, water, light). Do NOT suggest four variations of the same theme (e.g. four LED or four electricity projects)
-- Each project title must be unique and specific to Class ${grade}
-- The Hard project must be noticeably more challenging than the Easy projects for Class ${grade}
-- Steps should be specific enough to follow with photos/diagrams
+- The two projects must be clearly different from each other
+- Titles must be specific to Class ${grade}${interest ? ` and to "${interest}"` : ""}
+- Steps should be practical enough for a student to follow and present as a school project
 ${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 

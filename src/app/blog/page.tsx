@@ -21,18 +21,18 @@ export default function BlogPage() {
           <Link
             key={article.slug}
             href={`/blog/${article.slug}`}
-            className="group glass-card flex flex-col overflow-hidden rounded-2xl transition-all hover:-translate-y-1 hover:border-sky-400/30"
+            className="group glass-card flex flex-col overflow-hidden rounded-2xl transition-all hover:-translate-y-1 hover:shadow-md"
           >
-            <div className="flex h-36 items-center justify-center bg-gradient-to-br from-navy-800 to-navy-900">
-              <BookOpen className="h-12 w-12 text-sky-400/30 transition-colors group-hover:text-orange-400/40" />
+            <div className="theme-blog-card-media flex h-36 items-center justify-center">
+              <BookOpen className="theme-blog-card-icon h-12 w-12 transition-colors group-hover:text-orange-400" />
             </div>
             <div className="flex flex-1 flex-col p-5">
               <span className="text-xs font-medium text-orange-400">{article.category}</span>
-              <h2 className="mt-2 font-semibold text-white transition-colors group-hover:text-sky-300">
+              <h2 className="mt-2 font-semibold text-slate-900 transition-colors group-hover:text-sky-300">
                 {article.title}
               </h2>
-              <p className="mt-2 flex-1 text-sm text-sky-200/60">{article.excerpt}</p>
-              <div className="mt-4 flex items-center gap-1 text-xs text-sky-300/40">
+              <p className="mt-2 flex-1 text-sm text-slate-500">{article.excerpt}</p>
+              <div className="mt-4 flex items-center gap-1 text-xs text-slate-400">
                 <Clock className="h-3 w-3" />
                 {article.readTime}
               </div>

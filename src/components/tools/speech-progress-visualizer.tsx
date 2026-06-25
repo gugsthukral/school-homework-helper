@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { VolumeX } from "lucide-react";
-import { GlowActionButton } from "@/components/motion-primitives/glow-action-button";
+import { Square } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type SpeechProgressVisualizerProps = {
@@ -16,14 +15,21 @@ type SpeechProgressVisualizerProps = {
   className?: string;
 };
 
-const BAR_COUNT = 28;
+const BAR_COUNT = 48;
+
+const SKELETON_ROWS = [
+  ["w-full", "w-[92%]", "w-[78%]", "w-[95%]", "w-[88%]"],
+  ["w-[85%]", "w-full", "w-[70%]", "w-[90%]", "w-[82%]"],
+  ["w-[75%]", "w-[88%]", "w-full", "w-[68%]", "w-[94%]"],
+  ["w-[90%]", "w-[72%]", "w-[86%]", "w-full", "w-[80%]"],
+];
 
 function useSimulatedBars(active: boolean, loading?: boolean) {
-  const [heights, setHeights] = useState<number[]>(() => Array(BAR_COUNT).fill(24));
+  const [heights, setHeights] = useState<number[]>(() => Array(BAR_COUNT).fill(20));
 
   useEffect(() => {
     if (!active && !loading) {
-      setHeights(Array(BAR_COUNT).fill(14));
+      setHeights(Array(BAR_COUNT).fill(12));
       return;
     }
 
@@ -34,9 +40,9 @@ function useSimulatedBars(active: boolean, loading?: boolean) {
           const dist = Math.abs(index - center) / center;
           const envelope = 1 - dist * 0.35;
           const wave = Math.sin(Date.now() / 140 + index * 0.45) * 0.5 + 0.5;
-          const jitter = Math.random() * (loading ? 10 : 28);
-          const base = loading ? 16 : 22;
-          return (base + wave * (loading ? 18 : 40) + jitter) * envelope;
+          const jitter = Math.random() * (loading ? 8 : 20);
+          const base = loading ? 10 : 14;
+          return (base + wave * (loading ? 14 : 28) + jitter) * envelope;
         })
       );
     }, loading ? 110 : 75);
@@ -48,7 +54,7 @@ function useSimulatedBars(active: boolean, loading?: boolean) {
 }
 
 function useLiveAudioBars(audioElement: HTMLAudioElement | null | undefined, active: boolean) {
-  const [heights, setHeights] = useState<number[]>(() => Array(BAR_COUNT).fill(16));
+  const [heights, setHeights] = useState<number[]>(() => Array(BAR_COUNT).fill(12));
   const contextRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
@@ -87,7 +93,7 @@ function useLiveAudioBars(audioElement: HTMLAudioElement | null | undefined, act
             const envelope = 1 - dist * 0.3;
             const sampleIndex = Math.floor((index / BAR_COUNT) * data.length);
             const value = data[sampleIndex] ?? 0;
-            return (12 + (value / 255) * 68) * envelope;
+            return (8 + (value / 255) * 52) * envelope;
           });
 
           setHeights(next);
@@ -145,14 +151,14 @@ export function SpeechProgressVisualizer({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-xl border border-sky-400/25 bg-gradient-to-br from-navy-950/90 via-navy-900/80 to-navy-950/90 shadow-inner shadow-sky-400/5",
+        "overflow-hidden rounded-2xl border border-slate-200 bg-sky-50/80 shadow-sm",
         className
       )}
       role="status"
       aria-live="polite"
       aria-label={`${statusLabel}, ${progressPercent}% complete`}
     >
-      <div className="flex items-center justify-between gap-3 border-b border-sky-400/10 px-3 py-2 sm:px-4">
+      <div className="flex items-center justify-between gap-3 border-b border-slate-200/80 bg-white px-4 py-2.5">
         <div className="flex min-w-0 items-center gap-2">
           <span
             className={cn(
@@ -160,48 +166,58 @@ export function SpeechProgressVisualizer({
               loading ? "animate-pulse bg-sky-400" : "animate-pulse bg-orange-400"
             )}
           />
-          <span className="truncate text-xs font-medium text-sky-100">{statusLabel}</span>
+          <span className="truncate text-xs font-medium text-slate-600">{statusLabel}</span>
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          <span className="text-xs font-semibold tabular-nums text-orange-300">
+          <span className="text-xs font-semibold tabular-nums text-orange-500">
             {loading ? "..." : `${progressPercent}%`}
           </span>
           {onStop && (
-            <GlowActionButton
+            <button
+              type="button"
               onClick={onStop}
-              contentClassName="gap-1 px-2 py-1 text-[11px] text-orange-100"
               aria-label="Stop audio"
+              className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 transition-colors hover:border-orange-200 hover:text-orange-600"
             >
-              <VolumeX className="h-3 w-3" />
+              <Square className="h-3 w-3 fill-red-500 text-red-500" />
               Stop
-            </GlowActionButton>
+            </button>
           )}
         </div>
       </div>
 
-      <div className="px-3 py-3 sm:px-4">
-        <div className="flex h-12 items-end justify-between gap-[2px] sm:h-14 sm:gap-[3px]">
-          {heights.map((height, index) => (
-            <span
-              key={index}
-              className={cn(
-                "min-w-0 flex-1 rounded-full transition-[height] duration-75",
-                loading
-                  ? "bg-sky-400/30"
-                  : "bg-gradient-to-t from-orange-500/80 via-orange-400/50 to-sky-400/90"
-              )}
-              style={{ height: `${Math.min(100, Math.max(14, height))}%` }}
-            />
-          ))}
-        </div>
+      <div className="bg-white px-4 py-4">
+        {loading ? (
+          <div className="flex flex-col gap-2" aria-hidden>
+            {SKELETON_ROWS.map((row, rowIndex) => (
+              <div key={rowIndex} className="flex items-center gap-1.5">
+                {row.map((widthClass, pillIndex) => (
+                  <div
+                    key={pillIndex}
+                    className={cn("h-1.5 animate-pulse rounded-full bg-sky-300", widthClass)}
+                    style={{ animationDelay: `${(rowIndex * 5 + pillIndex) * 80}ms` }}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex h-10 items-end justify-center gap-[3px] sm:h-11">
+            {heights.map((height, index) => (
+              <span
+                key={index}
+                className="w-[3px] shrink-0 rounded-sm bg-orange-400 transition-[height] duration-75"
+                style={{ height: `${Math.min(100, Math.max(18, height))}%` }}
+              />
+            ))}
+          </div>
+        )}
 
-        <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-navy-950/80 ring-1 ring-sky-400/10">
+        <div className="mt-3 h-1 overflow-hidden rounded-full bg-slate-200">
           <div
             className={cn(
               "h-full rounded-full transition-[width] duration-300",
-              loading
-                ? "w-2/5 animate-pulse bg-sky-400/50"
-                : "bg-gradient-to-r from-sky-400 via-sky-300 to-orange-400"
+              loading ? "w-2/5 animate-pulse bg-sky-400" : "bg-orange-400"
             )}
             style={loading ? undefined : { width: `${Math.max(progressPercent, 3)}%` }}
           />

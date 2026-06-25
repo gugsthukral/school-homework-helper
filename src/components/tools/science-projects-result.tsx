@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ExternalLink, FlaskConical, ListOrdered, Play, Youtube } from "lucide-react";
+import { ExternalLink, FlaskConical, ListOrdered, Play, Video } from "lucide-react";
 import { GlowCard } from "@/components/motion-primitives/glow-card";
 import type {
   EnrichedScienceProject,
@@ -35,7 +35,10 @@ function formatProjectShareContent(project: EnrichedScienceProject): string {
   ];
 
   if (project.videos.length > 0) {
-    lines.push("", `Tutorial video: ${project.videos[0].title}`);
+    lines.push("", "Tutorial videos:");
+    project.videos.forEach((video) => {
+      lines.push(`- ${video.title}: ${video.watchUrl}`);
+    });
   }
 
   return lines.join("\n");
@@ -52,13 +55,17 @@ function formatAllProjectsContent(projects: EnrichedScienceProject[], markdown: 
 function platformLabel(platform: ScienceProjectVideo["platform"]) {
   if (platform === "youtube-shorts") return "YouTube Shorts";
   if (platform === "vimeo") return "Vimeo";
+  if (platform === "facebook") return "Facebook";
+  if (platform === "instagram") return "Instagram";
   return "YouTube";
 }
 
 function platformBadgeClass(platform: ScienceProjectVideo["platform"]) {
-  if (platform === "youtube-shorts") return "bg-red-500/20 text-red-300";
-  if (platform === "vimeo") return "bg-sky-500/20 text-sky-300";
-  return "bg-red-600/20 text-red-200";
+  if (platform === "youtube-shorts") return "bg-red-500 text-white";
+  if (platform === "vimeo") return "bg-sky-600 text-white";
+  if (platform === "facebook") return "bg-blue-600 text-white";
+  if (platform === "instagram") return "bg-gradient-to-r from-purple-600 to-pink-500 text-white";
+  return "bg-red-600 text-white";
 }
 
 function TutorialVideosSection({ videos }: { videos: ScienceProjectVideo[] }) {
@@ -70,8 +77,8 @@ function TutorialVideosSection({ videos }: { videos: ScienceProjectVideo[] }) {
 
   return (
     <section>
-      <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-sky-300">
-        <Youtube className="h-4 w-4 text-red-400" />
+      <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-slate-600">
+        <Video className="h-4 w-4 text-orange-500" />
         Tutorial Videos
       </h4>
       <div
@@ -111,13 +118,13 @@ function VideoCardWithFallback({
       href={video.watchUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative overflow-hidden rounded-xl border border-sky-400/15 bg-navy-900/50 transition-all hover:border-orange-400/40 hover:shadow-lg hover:shadow-orange-500/10"
+      className="group relative overflow-hidden rounded-xl border border-slate-200 bg-white transition-all hover:border-orange-300 hover:shadow-lg hover:shadow-orange-500/10"
     >
-      <div className="relative aspect-video overflow-hidden bg-navy-950">
+      <div className="relative aspect-video overflow-hidden bg-slate-100">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={video.thumbnailUrl}
-          alt=""
+          alt={video.title}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
           onError={() => {
@@ -125,9 +132,9 @@ function VideoCardWithFallback({
             onUnavailable();
           }}
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition-colors group-hover:bg-black/40">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-red-600/90 text-white shadow-lg">
-            <Play className="h-5 w-5 fill-white pl-0.5" />
+        <div className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/35">
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white/95 text-slate-900 shadow-lg">
+            <Play className="h-5 w-5 fill-slate-900 pl-0.5" />
           </span>
         </div>
         <span
@@ -137,7 +144,7 @@ function VideoCardWithFallback({
         </span>
       </div>
       <div className="flex items-start justify-between gap-2 p-3">
-        <p className="line-clamp-2 text-xs font-medium text-sky-100/90 group-hover:text-white">
+        <p className="line-clamp-2 text-xs font-medium text-slate-700 group-hover:text-slate-900">
           {video.title}
         </p>
         <ExternalLink className="h-3.5 w-3.5 shrink-0 text-sky-400/50 group-hover:text-orange-400" />
@@ -153,7 +160,7 @@ function StepImage({ image }: { image: ScienceProjectStepMedia }) {
   if (failed) return null;
 
   return (
-    <div className="mt-4 overflow-hidden rounded-lg border border-sky-400/10 bg-navy-950/60">
+    <div className="mt-4 overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
       {!loaded && (
         <div className="flex h-40 items-center justify-center bg-sky-400/5">
           <div className="h-8 w-8 animate-pulse rounded-full bg-sky-400/20" />
@@ -181,7 +188,7 @@ function StepGuideSection({
 }) {
   return (
     <section>
-      <h4 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-sky-300">
+      <h4 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-sky-700">
         <ListOrdered className="h-4 w-4 text-orange-400" />
         Step-by-Step Guide
       </h4>
@@ -203,9 +210,9 @@ function StepGuideSection({
               </div>
 
               <div className={`min-w-0 flex-1 ${isLast ? "pb-0" : "pb-6"}`}>
-                <div className="rounded-xl border border-sky-400/10 bg-navy-950/40 p-4 sm:p-5">
-                  <h5 className="text-base font-semibold text-white">{step.title}</h5>
-                  <p className="mt-2 text-sm leading-relaxed text-sky-200/75">
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
+                  <h5 className="text-base font-semibold text-slate-900">{step.title}</h5>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-700/75">
                     {step.description}
                   </p>
                   {stepImage && <StepImage image={stepImage} />}
@@ -231,12 +238,12 @@ export function ScienceProjectsResult({ projects, markdown, grade }: ScienceProj
   return (
     <GlowCard active={glowActive}>
     <div className="space-y-8">
-      <div className="glass-card overflow-hidden rounded-2xl border-b border-sky-400/10 bg-sky-400/5">
+      <div className="glass-card overflow-hidden rounded-2xl border-b border-slate-200 bg-sky-400/5">
         <div className="flex items-center gap-3 px-4 pt-4 sm:px-6">
           <FlaskConical className="h-5 w-5 text-sky-400" />
           <div>
-            <h2 className="font-semibold text-white">School Project Ideas</h2>
-            <p className="text-xs text-sky-300/50">
+            <h2 className="font-semibold text-slate-900">School Project Ideas</h2>
+            <p className="text-xs text-slate-400">
               Class {grade} · {projects.length} project{projects.length !== 1 ? "s" : ""}
             </p>
           </div>
@@ -257,22 +264,22 @@ export function ScienceProjectsResult({ projects, markdown, grade }: ScienceProj
           key={`${project.title}-${index}`}
           className="glass-card animate-fade-up overflow-hidden rounded-2xl"
         >
-          <div className="border-b border-sky-400/10 bg-gradient-to-r from-sky-400/5 to-transparent px-4 py-5 sm:px-6">
+          <div className="border-b border-slate-200 bg-gradient-to-r from-sky-400/5 to-transparent px-4 py-5 sm:px-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div className="min-w-0 flex-1">
-                <span className="inline-flex items-center rounded-full bg-orange-500/15 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-orange-300">
+                <span className="inline-flex items-center rounded-full bg-orange-100 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-orange-800 ring-1 ring-orange-200">
                   Project {index + 1}
                 </span>
-                <h3 className="mt-2 text-xl font-bold text-white sm:text-2xl">{project.title}</h3>
+                <h3 className="mt-2 text-xl font-bold text-slate-900 sm:text-2xl">{project.title}</h3>
               </div>
               <div className="flex shrink-0 flex-row flex-wrap items-center gap-3 sm:flex-col sm:items-end">
                 <span
                   className={`rounded-full px-3 py-1 text-xs font-semibold ${
                     project.difficulty === "Easy"
-                      ? "bg-green-500/15 text-green-300 ring-1 ring-green-500/20"
+                      ? "bg-green-100 text-green-800 ring-1 ring-green-200"
                       : project.difficulty === "Medium"
-                        ? "bg-orange-500/15 text-orange-300 ring-1 ring-orange-500/20"
-                        : "bg-red-500/15 text-red-300 ring-1 ring-red-500/20"
+                        ? "bg-orange-100 text-orange-800 ring-1 ring-orange-200"
+                        : "bg-red-100 text-red-800 ring-1 ring-red-200"
                   }`}
                 >
                   {project.difficulty}
@@ -285,22 +292,22 @@ export function ScienceProjectsResult({ projects, markdown, grade }: ScienceProj
                 />
               </div>
             </div>
-            <p className="mt-4 rounded-lg border border-sky-400/10 bg-navy-950/30 px-4 py-3 text-sm leading-relaxed text-sky-200/75">
-              <span className="font-medium text-sky-300">What you&apos;ll learn: </span>
+            <p className="mt-4 rounded-lg border border-slate-200 bg-sky-50 px-4 py-3 text-sm leading-relaxed text-slate-700">
+              <span className="font-medium text-sky-700">What you&apos;ll learn: </span>
               {project.learningOutcome}
             </p>
           </div>
 
           <div className="space-y-8 px-4 py-6 sm:px-6">
             <section>
-              <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-sky-300">
+              <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-600">
                 Materials Needed
               </h4>
               <ul className="flex flex-wrap gap-2">
                 {project.materials.map((item) => (
                   <li
                     key={item}
-                    className="rounded-lg border border-sky-400/15 bg-sky-400/5 px-3 py-1.5 text-xs font-medium text-sky-100/90"
+                    className="rounded-lg border border-slate-200 bg-sky-50 px-3 py-1.5 text-xs font-medium text-slate-700"
                   >
                     {item}
                   </li>
@@ -312,7 +319,7 @@ export function ScienceProjectsResult({ projects, markdown, grade }: ScienceProj
 
             <StepGuideSection steps={project.steps} stepImages={project.stepImages} />
 
-            <div className="border-t border-sky-400/10 pt-6">
+            <div className="border-t border-slate-200 pt-6">
               <ResultExportActions
                 content={formatProjectShareContent(project)}
                 fileName={`${slugifyFileName(project.title)}-class-${grade}`}

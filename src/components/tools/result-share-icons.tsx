@@ -117,7 +117,7 @@ export function ResultShareIcons({
       )}
     >
       {showLabel && (
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-sky-300/45">
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
           Share result
         </span>
       )}
@@ -178,7 +178,7 @@ export function ResultShareIcons({
           </button>
         )}
       </div>
-      {feedback && <p className="text-[11px] text-sky-300/70">{feedback}</p>}
+      {feedback && <p className="text-[11px] text-slate-500">{feedback}</p>}
     </div>
   );
 }

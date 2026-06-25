@@ -49,7 +49,7 @@ export function AdUnit({
         Advertisement
       </span>
       <div
-        className="w-full overflow-hidden rounded-xl border border-sky-400/10 bg-navy-950/30"
+        className="w-full overflow-hidden rounded-xl border border-slate-200 bg-navy-950/30"
         style={{ minHeight }}
       >
         <ins

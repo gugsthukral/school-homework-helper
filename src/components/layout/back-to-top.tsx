@@ -40,7 +40,7 @@ export function BackToTop() {
         "fixed bottom-24 right-4 z-40 flex h-11 w-11 items-center justify-center rounded-full",
         "bg-gradient-to-br from-orange-500 to-orange-400 text-white shadow-lg shadow-orange-500/30",
         "transition-all duration-300 hover:scale-110 hover:shadow-orange-500/50",
-        "focus:outline-none focus:ring-2 focus:ring-orange-400/50 focus:ring-offset-2 focus:ring-offset-navy-950",
+        "focus:outline-none focus:ring-2 focus:ring-orange-400/50 focus:ring-offset-2 focus:ring-offset-[#f7f9fc]",
         "sm:bottom-8 sm:right-6",
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       )}

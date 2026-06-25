@@ -13,7 +13,7 @@ type SubmitButtonProps = {
 };
 
 const shimmerClassName =
-  "text-sm font-semibold sm:text-base [--base-color:#7dd3fc] [--base-gradient-color:#ffffff] dark:[--base-color:#7dd3fc] dark:[--base-gradient-color:#ffffff]";
+  "text-sm font-semibold sm:text-base [--base-color:#f97316] [--base-gradient-color:#0a1628]";
 
 export function SubmitButton({ loading, disabled, label, loadingLabel }: SubmitButtonProps) {
   const isDisabled = loading || disabled;
@@ -28,14 +28,14 @@ export function SubmitButton({ loading, disabled, label, loadingLabel }: SubmitB
       )}
     >
       <GlowButtonShell disabled={isDisabled} className="w-full sm:w-auto">
-        <span className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 text-base font-semibold text-white">
+        <span className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 text-base font-semibold text-slate-800">
           {loading ? (
             <TextShimmer as="span" className={shimmerClassName} duration={1.5}>
               {loadingLabel}
             </TextShimmer>
           ) : (
             <span className="inline-flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-sky-300" />
+              <Sparkles className="h-5 w-5 text-orange-500" />
               {label}
             </span>
           )}

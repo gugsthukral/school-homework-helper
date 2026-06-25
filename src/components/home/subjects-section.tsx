@@ -2,41 +2,36 @@ import Link from "next/link";
 import { subjects } from "@/lib/data";
 import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
 import { SubjectIcon } from "@/components/shared/subject-icon";
+import { SiteContainer } from "@/components/shared/site-container";
 
 export function SubjectsSection() {
   return (
-    <section id="subjects" className="relative py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-navy-800/30 to-transparent" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="subjects" className="relative w-full py-16 sm:py-20">
+      <SiteContainer>
         <div className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-semibold uppercase tracking-widest text-orange-400">
+          <span className="text-sm font-semibold uppercase tracking-widest text-orange-500">
             Subjects
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="home-section-title mt-3 text-3xl font-bold sm:text-4xl">
             All Major Subjects Covered
           </h2>
-          <p className="mt-4 text-sky-200/70">
+          <p className="home-section-subtitle mt-4">
             Mathematics, Science, English, Hindi, Punjabi, Computer, and Social Studies — all in one place.
           </p>
-          <RegionalLanguagesBadge className="mt-6" centered />
+          <RegionalLanguagesBadge className="mt-6" centered variant="light" />
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {subjects.map((subject) => (
             <Link
               key={subject.name}
               href={subject.href}
-              className={`group flex items-center gap-4 rounded-2xl border bg-navy-900/40 p-5 transition-all hover:-translate-y-0.5 hover:bg-navy-800/50 hover:shadow-lg ${subject.color}`}
+              className="home-card group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-0.5 hover:shadow-lg"
             >
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400/20 to-orange-500/10">
-                <SubjectIcon
-                  icon={subject.icon}
-                  className="h-7 w-7 text-sky-400 transition-colors group-hover:text-orange-400"
-                />
-              </span>
+              <SubjectIcon icon={subject.icon} size={52} />
               <div>
-                <h3 className="text-lg font-semibold text-white">{subject.name}</h3>
-                <p className="text-sm text-sky-300/50">Homework help &amp; resources</p>
+                <h3 className="text-lg font-semibold text-slate-800">{subject.name}</h3>
+                <p className="text-sm text-slate-500">Homework help &amp; resources</p>
               </div>
             </Link>
           ))}
@@ -45,12 +40,12 @@ export function SubjectsSection() {
         <div className="mt-10 flex justify-center">
           <Link
             href="/subjects"
-            className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 px-6 py-2.5 text-sm font-medium text-sky-300 transition-colors hover:border-orange-400/50 hover:text-orange-400"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:border-orange-300 hover:text-orange-500"
           >
             View More
           </Link>
         </div>
-      </div>
+      </SiteContainer>
     </section>
   );
 }

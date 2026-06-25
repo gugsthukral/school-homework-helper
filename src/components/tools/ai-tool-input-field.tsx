@@ -32,10 +32,10 @@ type AIToolInputFieldProps = {
 };
 
 const fieldShellClassName =
-  "relative overflow-hidden rounded-xl border border-sky-400/20 bg-navy-950/60 transition-colors focus-within:border-sky-400/50 focus-within:ring-2 focus-within:ring-sky-400/20";
+  "theme-field-shell relative overflow-hidden rounded-xl border transition-colors focus-within:border-sky-400/50 focus-within:ring-2 focus-within:ring-sky-400/20";
 
 const inputInnerClassName =
-  "w-full min-w-0 border-0 bg-transparent px-4 py-3 text-white outline-none placeholder:text-sky-300/35";
+  "theme-input-inner w-full min-w-0 border-0 bg-transparent px-4 py-3 outline-none";
 
 export function AIToolInputField({
   id,
@@ -110,7 +110,7 @@ export function AIToolInputField({
         )}
 
         {showActions && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-end bg-gradient-to-t from-navy-950/90 via-navy-950/50 to-transparent px-2 pb-1.5 pt-4 sm:px-2.5 sm:pb-2">
+          <div className="theme-input-actions-bar pointer-events-none absolute inset-x-0 bottom-0 flex justify-end px-2 pb-1.5 pt-4 sm:px-2.5 sm:pb-2">
             <div className="pointer-events-auto flex items-center gap-1">
               {showVoice && (
                 <InputActionIconButton
@@ -140,11 +140,11 @@ export function AIToolInputField({
       </div>
 
       {voice.voiceError && showVoice && (
-        <p className="mt-1.5 text-xs text-red-300">{voice.voiceError}</p>
+        <p className="theme-error-text mt-1.5 text-xs">{voice.voiceError}</p>
       )}
 
       {attachments?.error && (
-        <p className="mt-1.5 text-xs text-red-300">{attachments.error}</p>
+        <p className="theme-error-text mt-1.5 text-xs">{attachments.error}</p>
       )}
 
       {hint}
