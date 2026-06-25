@@ -5,7 +5,7 @@ import { MessageCircleQuestion } from "lucide-react";
 import { useAITool } from "@/hooks/use-ai-tool";
 import { SubmitButton } from "@/components/tools/submit-button";
 import { AIToolInputField } from "@/components/tools/ai-tool-input-field";
-import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
+import { AIResponseCard, AIEmptyState, AIToolLoadingCard, AIToolStatus } from "@/components/tools/ai-response";
 import {
   buildDocumentContext,
   type DocumentExtract,
@@ -70,6 +70,8 @@ export function AskAnythingForm() {
           loadingLabel="Thinking..."
         />
       </form>
+
+      {loading && <AIToolLoadingCard message="Thinking..." />}
 
       {response && (
         <AIResponseCard

@@ -1,6 +1,13 @@
+"use client";
+
 import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { LogIn } from "lucide-react";
+import { GlowButtonShell } from "@/components/motion-primitives/glow-button-shell";
+import { BorderTrail } from "@/components/motion-primitives/border-trail";
+import { GlowCard } from "@/components/motion-primitives/glow-card";
+import { TextShimmer } from "@/components/motion-primitives/text-shimmer";
 import { formatResponse } from "@/lib/format-response";
 import { GUEST_USAGE_LIMIT } from "@/lib/guest-usage-limit";
 import { ResultExportActions } from "@/components/tools/result-export-actions";
@@ -23,9 +30,17 @@ export function AIResponseCard({
   sharePath,
 }: AIResponseCardProps) {
   const resolvedFileName = exportFileName ?? "ai-result";
+  const [glowActive, setGlowActive] = useState(true);
+
+  useEffect(() => {
+    setGlowActive(true);
+    const timer = window.setTimeout(() => setGlowActive(false), 3500);
+    return () => window.clearTimeout(timer);
+  }, [response]);
 
   return (
-    <div className="glass-card animate-fade-up overflow-hidden rounded-2xl">
+    <GlowCard active={glowActive}>
+      <div className="glass-card animate-fade-up overflow-hidden rounded-2xl">
       <div className="border-b border-sky-400/10 bg-sky-400/5">
         <div className="flex items-center gap-3 px-4 pt-4 sm:px-6">
           <Icon className="h-5 w-5 shrink-0 text-sky-400" />
@@ -47,7 +62,23 @@ export function AIResponseCard({
           __html: `<p class='mb-2 text-sky-100/90'>${formatResponse(response)}</p>`,
         }}
       />
-    </div>
+      </div>
+    </GlowCard>
+  );
+}
+
+const loadingShimmerClassName =
+  "text-base font-medium [--base-color:#7dd3fc] [--base-gradient-color:#ffffff] dark:[--base-color:#7dd3fc] dark:[--base-gradient-color:#ffffff]";
+
+export function AIToolLoadingCard({ message }: { message: string }) {
+  return (
+    <GlowCard active>
+      <div className="glass-card px-6 py-12 text-center sm:px-8">
+        <TextShimmer as="p" className={loadingShimmerClassName} duration={1.5}>
+          {message}
+        </TextShimmer>
+      </div>
+    </GlowCard>
   );
 }
 
@@ -86,9 +117,17 @@ export function AIToolStatus({
         !signInRequired &&
         guestUsesRemaining != null &&
         guestUsesRemaining > 0 && (
-        <p className="rounded-xl border border-sky-400/20 bg-sky-400/5 px-4 py-3 text-sm text-sky-200/80">
-          {guestUsesRemaining} of {GUEST_USAGE_LIMIT} free tries remaining without sign-in.
-        </p>
+        <div className="relative overflow-hidden rounded-xl border border-sky-400/20 bg-navy-900/60 px-4 py-3">
+          <BorderTrail
+            lengthRatio={0.5}
+            thickness={3}
+            transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
+            className="bg-gradient-to-r from-orange-500 via-orange-300 to-orange-400"
+          />
+          <p className="relative z-10 text-sm text-sky-200/80">
+            {guestUsesRemaining} of {GUEST_USAGE_LIMIT} free tries remaining without sign-in.
+          </p>
+        </div>
       )}
 
       {signInRequired && (
@@ -99,12 +138,13 @@ export function AIToolStatus({
           <p className="mt-1 text-orange-100/90">
             Sign in with Google to keep using all AI tools for free.
           </p>
-          <Link
-            href="/signin"
-            className="mt-3 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-400 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-orange-500/25 transition-all hover:scale-105"
-          >
-            <LogIn className="h-4 w-4" />
-            Sign In to Continue
+          <Link href="/signin" className="mt-3 inline-flex transition-transform hover:scale-[1.02]">
+            <GlowButtonShell>
+              <span className="inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold text-white">
+                <LogIn className="h-4 w-4" />
+                Sign In to Continue
+              </span>
+            </GlowButtonShell>
           </Link>
         </div>
       )}

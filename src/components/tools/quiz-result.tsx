@@ -1,8 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Eye, EyeOff } from "lucide-react";
+import { GlowActionButton } from "@/components/motion-primitives/glow-action-button";
+import { GlowCard } from "@/components/motion-primitives/glow-card";
 import { formatResponse } from "@/lib/format-response";
 import { parseQuizResponse } from "@/lib/parse-quiz-response";
 import { ResultExportActions } from "@/components/tools/result-export-actions";
@@ -39,9 +41,17 @@ export function QuizResult({
   }
 
   const resolvedFileName = exportFileName ?? "ai-result";
+  const [glowActive, setGlowActive] = useState(true);
+
+  useEffect(() => {
+    setGlowActive(true);
+    const timer = window.setTimeout(() => setGlowActive(false), 3500);
+    return () => window.clearTimeout(timer);
+  }, [response]);
 
   return (
-    <div className="glass-card animate-fade-up overflow-hidden rounded-2xl">
+    <GlowCard active={glowActive}>
+      <div className="glass-card animate-fade-up overflow-hidden rounded-2xl">
       <div className="border-b border-sky-400/10 bg-sky-400/5">
         <div className="flex items-center gap-3 px-4 pt-4 sm:px-6">
           <Icon className="h-5 w-5 shrink-0 text-sky-400" />
@@ -104,10 +114,9 @@ export function QuizResult({
                 )}
 
                 <div className="mt-4">
-                  <button
-                    type="button"
+                  <GlowActionButton
                     onClick={() => toggleReveal(question.number)}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-sky-400/25 bg-navy-950/60 px-3 py-1.5 text-xs font-medium text-sky-200 transition-colors hover:border-sky-400/45 hover:bg-sky-400/10 hover:text-white sm:text-sm"
+                    contentClassName="gap-1.5 px-3 py-1.5 text-xs sm:text-sm"
                   >
                     {isRevealed ? (
                       <>
@@ -120,7 +129,7 @@ export function QuizResult({
                         Reveal Answer
                       </>
                     )}
-                  </button>
+                  </GlowActionButton>
                 </div>
 
                 {isRevealed && (question.answerLetter || question.explanation) && (
@@ -149,6 +158,7 @@ export function QuizResult({
           }}
         />
       )}
-    </div>
+      </div>
+    </GlowCard>
   );
 }

@@ -6,7 +6,7 @@ import { parseProjectsForDisplay } from "@/lib/science-project-media";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubmitButton } from "@/components/tools/submit-button";
 import { AIToolInputField } from "@/components/tools/ai-tool-input-field";
-import { AIEmptyState, AIErrorBanner, AIToolStatus } from "@/components/tools/ai-response";
+import { AIEmptyState, AIErrorBanner, AIToolLoadingCard, AIToolStatus } from "@/components/tools/ai-response";
 import { ScienceProjectsResult } from "@/components/tools/science-projects-result";
 import { appendVoiceText } from "@/lib/voice-text";
 
@@ -69,6 +69,8 @@ export function ScienceProjectsForm() {
           loadingLabel="Finding ideas..."
         />
       </form>
+
+      {loading && <AIToolLoadingCard message="Finding ideas..." />}
 
       {displayProjects && displayProjects.length > 0 && !loading && (
         <ScienceProjectsResult

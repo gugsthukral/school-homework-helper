@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { GlowButtonShell } from "@/components/motion-primitives/glow-button-shell";
 import { cn } from "@/lib/utils";
 
 type TryNowButtonProps = {
@@ -8,14 +11,10 @@ type TryNowButtonProps = {
 
 export function TryNowButton({ href, className }: TryNowButtonProps) {
   return (
-    <Link
-      href={href}
-      className={cn(
-        "inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-orange-500 to-orange-400 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-500/20 transition-all hover:scale-[1.02] hover:shadow-orange-500/35",
-        className
-      )}
-    >
-      Try now
+    <Link href={href} className={cn("inline-flex w-full transition-transform hover:scale-[1.02]", className)}>
+      <GlowButtonShell className="w-full">
+        <span className="px-4 py-2.5 text-sm font-semibold text-white">Try now</span>
+      </GlowButtonShell>
     </Link>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ExternalLink, FlaskConical, ListOrdered, Play, Youtube } from "lucide-react";
+import { GlowCard } from "@/components/motion-primitives/glow-card";
 import type {
   EnrichedScienceProject,
   ScienceProjectStep,
@@ -219,7 +220,16 @@ function StepGuideSection({
 }
 
 export function ScienceProjectsResult({ projects, markdown, grade }: ScienceProjectsResultProps) {
+  const [glowActive, setGlowActive] = useState(true);
+
+  useEffect(() => {
+    setGlowActive(true);
+    const timer = window.setTimeout(() => setGlowActive(false), 3500);
+    return () => window.clearTimeout(timer);
+  }, [projects]);
+
   return (
+    <GlowCard active={glowActive}>
     <div className="space-y-8">
       <div className="glass-card overflow-hidden rounded-2xl border-b border-sky-400/10 bg-sky-400/5">
         <div className="flex items-center gap-3 px-4 pt-4 sm:px-6">
@@ -315,5 +325,6 @@ export function ScienceProjectsResult({ projects, markdown, grade }: ScienceProj
         </article>
       ))}
     </div>
+    </GlowCard>
   );
 }

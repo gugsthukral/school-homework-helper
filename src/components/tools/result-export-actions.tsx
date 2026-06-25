@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Download, Loader2, Printer, Volume2 } from "lucide-react";
+import { GlowActionButton } from "@/components/motion-primitives/glow-action-button";
 import { downloadTextFile, printResult } from "@/lib/export-result";
 import { useTextToSpeech } from "@/hooks/use-text-to-speech";
 import { SpeechProgressVisualizer } from "@/components/tools/speech-progress-visualizer";
@@ -18,9 +19,6 @@ type ResultExportActionsProps = {
   showShare?: boolean;
   className?: string;
 };
-
-const toolbarButtonClassName =
-  "inline-flex items-center justify-center gap-1.5 rounded-lg border border-sky-400/20 bg-navy-950/50 px-3 py-2 text-xs font-medium text-sky-200 transition-colors hover:border-sky-400/40 hover:bg-sky-400/10 hover:text-white sm:text-sm";
 
 export function ResultExportActions({
   content,
@@ -73,16 +71,11 @@ export function ResultExportActions({
       {showExport && (
         <>
           <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
+            <GlowActionButton
               onClick={handleListen}
               disabled={!content.trim()}
               aria-pressed={audioBusy}
-              className={cn(
-                toolbarButtonClassName,
-                audioBusy && "border-orange-400/40 bg-orange-500/15 text-orange-100",
-                !content.trim() && "cursor-not-allowed opacity-50"
-              )}
+              contentClassName={audioBusy ? "text-orange-100" : undefined}
             >
               {loading ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -90,15 +83,15 @@ export function ResultExportActions({
                 <Volume2 className="h-4 w-4" />
               )}
               {loading ? "Preparing..." : audioBusy ? "Playing..." : "Listen Audio"}
-            </button>
-            <button type="button" onClick={handlePrint} className={toolbarButtonClassName}>
+            </GlowActionButton>
+            <GlowActionButton onClick={handlePrint}>
               <Printer className="h-4 w-4" />
               Print
-            </button>
-            <button type="button" onClick={handleDownload} className={toolbarButtonClassName}>
+            </GlowActionButton>
+            <GlowActionButton onClick={handleDownload}>
               <Download className="h-4 w-4" />
               Download
-            </button>
+            </GlowActionButton>
           </div>
 
           <SpeechProgressVisualizer

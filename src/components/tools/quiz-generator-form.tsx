@@ -7,7 +7,7 @@ import { GradeSelect } from "@/components/tools/grade-select";
 import { SubjectSelect } from "@/components/tools/subject-select";
 import { SubmitButton } from "@/components/tools/submit-button";
 import { AIToolInputField } from "@/components/tools/ai-tool-input-field";
-import { AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
+import { AIEmptyState, AIToolLoadingCard, AIToolStatus } from "@/components/tools/ai-response";
 import { QuizResult } from "@/components/tools/quiz-result";
 import { slugifyFileName } from "@/lib/export-result";
 import { getSubjectNamesForClass } from "@/lib/syllabus-2026-27";
@@ -109,6 +109,8 @@ export function QuizGeneratorForm() {
           loadingLabel="Creating quiz..."
         />
       </form>
+
+      {loading && <AIToolLoadingCard message="Creating quiz..." />}
 
       {response && (
         <QuizResult

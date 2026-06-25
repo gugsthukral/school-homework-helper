@@ -6,7 +6,7 @@ import { useAITool } from "@/hooks/use-ai-tool";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubmitButton } from "@/components/tools/submit-button";
 import { AIToolInputField } from "@/components/tools/ai-tool-input-field";
-import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
+import { AIResponseCard, AIEmptyState, AIToolLoadingCard, AIToolStatus } from "@/components/tools/ai-response";
 import { inputClassName, labelClassName, wordCountOptions } from "@/lib/tool-form-config";
 import { slugifyFileName } from "@/lib/export-result";
 import { appendVoiceText } from "@/lib/voice-text";
@@ -72,6 +72,8 @@ export function EssayGeneratorForm() {
           loadingLabel="Writing..."
         />
       </form>
+
+      {loading && <AIToolLoadingCard message="Writing..." />}
 
       {response && (
         <AIResponseCard

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { VolumeX } from "lucide-react";
+import { GlowActionButton } from "@/components/motion-primitives/glow-action-button";
 import { cn } from "@/lib/utils";
 
 type SpeechProgressVisualizerProps = {
@@ -166,15 +167,14 @@ export function SpeechProgressVisualizer({
             {loading ? "..." : `${progressPercent}%`}
           </span>
           {onStop && (
-            <button
-              type="button"
+            <GlowActionButton
               onClick={onStop}
-              className="inline-flex items-center gap-1 rounded-md border border-orange-400/30 bg-orange-500/10 px-2 py-1 text-[11px] font-medium text-orange-200 transition-colors hover:bg-orange-500/20"
+              contentClassName="gap-1 px-2 py-1 text-[11px] text-orange-100"
               aria-label="Stop audio"
             >
               <VolumeX className="h-3 w-3" />
               Stop
-            </button>
+            </GlowActionButton>
           )}
         </div>
       </div>

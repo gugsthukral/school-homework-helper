@@ -1,4 +1,8 @@
-import { Loader2, Sparkles } from "lucide-react";
+"use client";
+
+import { Sparkles } from "lucide-react";
+import { GlowButtonShell } from "@/components/motion-primitives/glow-button-shell";
+import { TextShimmer } from "@/components/motion-primitives/text-shimmer";
 import { cn } from "@/lib/utils";
 
 type SubmitButtonProps = {
@@ -8,29 +12,35 @@ type SubmitButtonProps = {
   loadingLabel: string;
 };
 
+const shimmerClassName =
+  "text-sm font-semibold sm:text-base [--base-color:#7dd3fc] [--base-gradient-color:#ffffff] dark:[--base-color:#7dd3fc] dark:[--base-gradient-color:#ffffff]";
+
 export function SubmitButton({ loading, disabled, label, loadingLabel }: SubmitButtonProps) {
+  const isDisabled = loading || disabled;
+
   return (
     <button
       type="submit"
-      disabled={loading || disabled}
+      disabled={isDisabled}
       className={cn(
-        "flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-400 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-orange-500/25 transition-all sm:w-auto",
-        loading || disabled
-          ? "cursor-not-allowed opacity-60"
-          : "hover:scale-[1.02] hover:shadow-orange-500/40"
+        "w-full sm:w-auto",
+        isDisabled ? "cursor-not-allowed" : "transition-transform hover:scale-[1.02]"
       )}
     >
-      {loading ? (
-        <>
-          <Loader2 className="h-5 w-5 animate-spin" />
-          {loadingLabel}
-        </>
-      ) : (
-        <>
-          <Sparkles className="h-5 w-5" />
-          {label}
-        </>
-      )}
+      <GlowButtonShell disabled={isDisabled} className="w-full sm:w-auto">
+        <span className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 text-base font-semibold text-white">
+          {loading ? (
+            <TextShimmer as="span" className={shimmerClassName} duration={1.5}>
+              {loadingLabel}
+            </TextShimmer>
+          ) : (
+            <span className="inline-flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-sky-300" />
+              {label}
+            </span>
+          )}
+        </span>
+      </GlowButtonShell>
     </button>
   );
 }

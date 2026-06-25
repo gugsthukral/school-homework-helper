@@ -6,7 +6,7 @@ import { useAITool } from "@/hooks/use-ai-tool";
 import { GradeSelect } from "@/components/tools/grade-select";
 import { SubmitButton } from "@/components/tools/submit-button";
 import { AIToolInputField } from "@/components/tools/ai-tool-input-field";
-import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
+import { AIResponseCard, AIEmptyState, AIToolLoadingCard, AIToolStatus } from "@/components/tools/ai-response";
 import {
   buildDocumentContext,
   type DocumentExtract,
@@ -97,6 +97,8 @@ export function MathSolverForm() {
           loadingLabel="Solving..."
         />
       </form>
+
+      {loading && <AIToolLoadingCard message="Solving..." />}
 
       {response && (
         <AIResponseCard

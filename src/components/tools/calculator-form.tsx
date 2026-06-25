@@ -2,16 +2,18 @@
 
 import { useState } from "react";
 import { SquareFunction } from "lucide-react";
+import { GlowButtonShell } from "@/components/motion-primitives/glow-button-shell";
 import { useAITool } from "@/hooks/use-ai-tool";
 import { SubmitButton } from "@/components/tools/submit-button";
 import { AIToolInputField } from "@/components/tools/ai-tool-input-field";
-import { AIResponseCard, AIEmptyState, AIToolStatus } from "@/components/tools/ai-response";
+import { AIResponseCard, AIEmptyState, AIToolLoadingCard, AIToolStatus } from "@/components/tools/ai-response";
 import {
   calculatorTypes,
   type CalculatorType,
 } from "@/lib/tool-form-config";
 import { slugifyFileName } from "@/lib/export-result";
 import { appendVoiceText } from "@/lib/voice-text";
+import { cn } from "@/lib/utils";
 
 export function CalculatorForm() {
   const [expression, setExpression] = useState("");
@@ -39,24 +41,27 @@ export function CalculatorForm() {
                   key={type.value}
                   type="button"
                   onClick={() => setCalcType(type.value)}
-                  className={[
-                    "rounded-xl border px-3 py-3 text-left transition-colors",
-                    selected
-                      ? "border-sky-400/50 bg-sky-400/10 ring-2 ring-sky-400/20"
-                      : "border-sky-400/15 bg-navy-950/40 hover:border-sky-400/30 hover:bg-sky-400/5",
-                  ].join(" ")}
+                  className="w-full transition-transform hover:scale-[1.01]"
                 >
-                  <span
-                    className={[
-                      "block text-sm font-semibold",
-                      selected ? "text-sky-200" : "text-sky-100/90",
-                    ].join(" ")}
+                  <GlowButtonShell
+                    className="w-full"
+                    contentClassName={cn(
+                      "w-full flex-col items-start gap-0 px-3 py-3 text-left",
+                      selected && "ring-2 ring-sky-400/30"
+                    )}
                   >
-                    {type.label}
-                  </span>
-                  <span className="mt-1 block text-xs leading-snug text-sky-300/55">
-                    {type.description}
-                  </span>
+                    <span
+                      className={cn(
+                        "block text-sm font-semibold",
+                        selected ? "text-sky-200" : "text-sky-100/90"
+                      )}
+                    >
+                      {type.label}
+                    </span>
+                    <span className="mt-1 block text-xs leading-snug text-sky-300/55">
+                      {type.description}
+                    </span>
+                  </GlowButtonShell>
                 </button>
               );
             })}
@@ -89,6 +94,8 @@ export function CalculatorForm() {
           loadingLabel="Calculating..."
         />
       </form>
+
+      {loading && <AIToolLoadingCard message="Calculating..." />}
 
       {response && (
         <AIResponseCard
