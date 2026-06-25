@@ -7,8 +7,11 @@ export type QuizQuestion = {
 };
 
 const QUESTION_HEADER = /^##\s*Question\s*(\d+)/im;
-const ANSWER_LINE = /(?:\*\*Answer:\*\*|Answer:)\s*([A-D])(?:\s*[—\-–:]\s*(.*))?/i;
-const OPTION_LINE = /^([A-D])\)\s*(.+)$/gm;
+const OPTION_LINE = /^([A-D])\)\s*(.+)$/i;
+const ANSWER_LINE =
+  /^(?:\*\*)?Answer:(?:\*\*)?\s*([A-D])\)?(?:\s*[^—\-–\n]*)?\s*(?:[—\-–:]\s*(.*))?$/i;
+const HORIZONTAL_RULE = /^-{3,}\s*$/;
+const ANSWER_ARTIFACT = /^\*+\s*\)\s*[^—\-–]*(?:[—\-–]\s*.*)?$/;
 
 export function parseQuizResponse(text: string): QuizQuestion[] {
   const sections = text
@@ -27,26 +30,46 @@ function parseQuestionSection(section: string, index: number): QuizQuestion {
   const numberMatch = section.match(QUESTION_HEADER);
   const number = numberMatch ? Number(numberMatch[1]) : index + 1;
 
-  let body = section.replace(QUESTION_HEADER, "").trim();
-  const answerMatch = body.match(ANSWER_LINE);
+  const body = section.replace(QUESTION_HEADER, "").trim();
+  const lines = body.split(/\n/);
 
   let answerLetter = "";
   let explanation = "";
-  if (answerMatch) {
-    answerLetter = answerMatch[1].toUpperCase();
-    explanation = (answerMatch[2] ?? "").trim().replace(/\s+/g, " ");
-    body = body.replace(answerMatch[0], "").trim();
-  }
-
+  const questionLines: string[] = [];
   const options: { letter: string; text: string }[] = [];
-  for (const match of body.matchAll(OPTION_LINE)) {
-    options.push({ letter: match[1], text: match[2].trim() });
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || HORIZONTAL_RULE.test(trimmed)) continue;
+
+    const answerMatch = trimmed.match(ANSWER_LINE);
+    if (answerMatch) {
+      answerLetter = answerMatch[1].toUpperCase();
+      explanation = (answerMatch[2] ?? "").trim().replace(/\s+/g, " ");
+      continue;
+    }
+
+    const optionMatch = trimmed.match(OPTION_LINE);
+    if (optionMatch) {
+      options.push({ letter: optionMatch[1].toUpperCase(), text: optionMatch[2].trim() });
+      continue;
+    }
+
+    if (ANSWER_ARTIFACT.test(trimmed)) continue;
+
+    questionLines.push(trimmed);
   }
 
-  const question = body
-    .replace(OPTION_LINE, "")
-    .trim()
-    .replace(/\n+/g, " ");
+  const question = cleanQuestionText(questionLines.join(" "));
 
   return { number, question, options, answerLetter, explanation };
+}
+
+function cleanQuestionText(text: string): string {
+  return text
+    .replace(/\s*[\*"]+\s*\)\s*(?:[A-D]\s*)?(?:\d+\s*)?[—\-–]\s*.*$/i, "")
+    .replace(/^(?:\*\*)?Answer:(?:\*\*)?\s*.*$/i, "")
+    .replace(/\s*[-*]{2,}\s*$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 }

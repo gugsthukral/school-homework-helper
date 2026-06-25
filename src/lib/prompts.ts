@@ -85,9 +85,10 @@ B) [option]
 C) [option]
 D) [option]
 
-**Answer:** [correct letter] — [brief explanation]
+**Answer:** [correct letter only, e.g. B] — [brief explanation]
 
 Rules:
+- Put the answer on its own line after the options — use only the letter (A, B, C, or D), never repeat the option text (wrong: "B) 34", correct: "B")
 - Questions should match Class ${grade} difficulty
 - Cover different aspects of ${subject ? `${subject} and ` : ""}the chosen focus
 - Make distractors realistic but clearly wrong
