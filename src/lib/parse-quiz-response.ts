@@ -21,7 +21,8 @@ export function parseQuizResponse(text: string): QuizQuestion[] {
 
   const questions = sections
     .map((section, index) => parseQuestionSection(section, index))
-    .filter((question) => question.question || question.options.length > 0);
+    .filter((question) => question.question || question.options.length > 0)
+    .map(reconcileAnswerLetter);
 
   return questions;
 }
@@ -72,4 +73,67 @@ function cleanQuestionText(text: string): string {
     .replace(/\s*[-*]{2,}\s*$/g, "")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function stripLatex(text: string): string {
+  return text
+    .replace(/\\\(|\\\)|\\\[|\\\]/g, " ")
+    .replace(/\\[a-zA-Z]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeAnswerValue(text: string): string {
+  return stripLatex(text).replace(/[.,;:]+$/, "").trim().toLowerCase();
+}
+
+function extractConclusionValues(explanation: string): string[] {
+  const plain = stripLatex(explanation);
+  const values: string[] = [];
+
+  const henceMatch = plain.match(
+    /\b(?:hence|therefore|thus|so)\s*,?\s*(?:(?:the\s+)?(?:answer|number|value|result)\s+is\s+)?(?:[a-z]\s*=\s*)?([^\s,.;+=]+)/i
+  );
+  if (henceMatch?.[1]) values.push(henceMatch[1]);
+
+  const answerIsMatch = plain.match(
+    /\b(?:the\s+)?(?:answer|number|value|result)\s+is\s+([^\s,.;+=]+)/i
+  );
+  if (answerIsMatch?.[1]) values.push(answerIsMatch[1]);
+
+  const varAssignments = [...plain.matchAll(/\b[a-z]\s*=\s*([^\s,.;+=]+)/gi)];
+  if (varAssignments.length > 0) {
+    values.push(varAssignments[varAssignments.length - 1][1]);
+  }
+
+  return values;
+}
+
+function findOptionByValue(
+  options: QuizQuestion["options"],
+  value: string
+): QuizQuestion["options"][number] | undefined {
+  const normalized = normalizeAnswerValue(value);
+  if (!normalized) return undefined;
+
+  return options.find((option) => normalizeAnswerValue(option.text) === normalized);
+}
+
+/** Fix AI mistakes where the declared letter disagrees with the explanation conclusion. */
+function reconcileAnswerLetter(question: QuizQuestion): QuizQuestion {
+  const { options, answerLetter, explanation } = question;
+  if (!explanation || options.length === 0) return question;
+
+  for (const value of extractConclusionValues(explanation)) {
+    const matchingOption = findOptionByValue(options, value);
+    if (!matchingOption) continue;
+
+    if (matchingOption.letter !== answerLetter) {
+      return { ...question, answerLetter: matchingOption.letter };
+    }
+
+    return question;
+  }
+
+  return question;
 }

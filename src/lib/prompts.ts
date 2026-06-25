@@ -89,6 +89,7 @@ D) [option]
 
 Rules:
 - Put the answer on its own line after the options — use only the letter (A, B, C, or D), never repeat the option text (wrong: "B) 34", correct: "B")
+- The answer letter MUST match the final conclusion in your explanation (double-check your math before responding)
 - Questions should match Class ${grade} difficulty
 - Cover different aspects of ${subject ? `${subject} and ` : ""}the chosen focus
 - Make distractors realistic but clearly wrong
