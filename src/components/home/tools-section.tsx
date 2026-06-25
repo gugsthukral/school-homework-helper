@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   BookOpen,
   Calculator,
@@ -8,10 +7,10 @@ import {
   PenLine,
   SpellCheck,
   SquareFunction,
-  ArrowUpRight,
   type LucideIcon,
 } from "lucide-react";
 import { aiTools } from "@/lib/data";
+import { TryNowButton } from "@/components/shared/try-now-button";
 
 const iconMap: Record<string, LucideIcon> = {
   BookOpen,
@@ -46,30 +45,26 @@ export function ToolsSection() {
           {aiTools.map((tool) => {
             const Icon = iconMap[tool.icon] ?? BookOpen;
             return (
-              <Link
+              <div
                 key={tool.name}
-                href={tool.href}
-                className="group glass-card relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-sky-400/30 hover:shadow-xl hover:shadow-sky-400/10"
+                className="group glass-card relative flex h-full flex-col overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-sky-400/30 hover:shadow-xl hover:shadow-sky-400/10"
               >
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${tool.color} opacity-0 transition-opacity group-hover:opacity-100`}
                 />
-                <div className="relative">
-                  <div className="mb-4 flex items-start justify-between">
+                <div className="relative flex flex-1 flex-col">
+                  <div className="mb-4">
                     <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy-950/60 ring-1 ring-sky-400/20">
                       <Icon className={`h-6 w-6 ${tool.accent}`} />
                     </span>
-                    <ArrowUpRight className="h-5 w-5 text-sky-400/40 transition-all group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                   <h3 className="text-lg font-semibold text-white">{tool.name}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-sky-200/60">
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-sky-200/60">
                     {tool.description}
                   </p>
-                  <span className="mt-4 inline-flex items-center text-sm font-medium text-orange-400 opacity-0 transition-opacity group-hover:opacity-100">
-                    Try now →
-                  </span>
+                  <TryNowButton href={tool.href} className="relative mt-4" />
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>
