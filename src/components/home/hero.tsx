@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, Star } from "lucide-react";
+import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
 import { stats } from "@/lib/data";
 import { SITE_HEADER_OFFSET_CLASS } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
@@ -28,6 +29,8 @@ export function Hero() {
               Eight AI tools for homework, essays, maths, quizzes, school projects, and more —
               built for students from Class 1 to Class 12. Learn smarter, not harder.
             </p>
+
+            <RegionalLanguagesBadge className="mt-5" showDetail centered />
 
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row lg:justify-start">
               <Link

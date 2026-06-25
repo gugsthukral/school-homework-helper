@@ -111,6 +111,16 @@ export const subjectList: SubjectInfo[] = [
     color: "border-orange-500/30 hover:border-orange-500/60",
     recommendedTools: ["Homework Solver", "Quiz Generator", "Essay Generator"],
   },
+  {
+    slug: "computer",
+    name: "Computer",
+    icon: "Monitor",
+    description:
+      "Computer basics, MS Office, programming, and cyber safety for Classes 1–10 — CBSE session 2026-27.",
+    topics: ["MS Office", "HTML & CSS", "Python", "Internet & Email", "Cyber Safety", "Networking"],
+    color: "border-sky-400/30 hover:border-orange-500/60",
+    recommendedTools: ["Homework Solver", "Quiz Generator", "Ask Anything"],
+  },
 ];
 
 export function getSubjectBySlug(slug: string) {

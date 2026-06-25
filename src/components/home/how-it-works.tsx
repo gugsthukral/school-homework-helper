@@ -1,4 +1,5 @@
 import { steps } from "@/lib/data";
+import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
 
 export function HowItWorks() {
   return (
@@ -14,6 +15,7 @@ export function HowItWorks() {
           <p className="mt-4 text-sky-200/70">
             No complicated setup. Just pick a tool, ask your question, and learn.
           </p>
+          <RegionalLanguagesBadge className="mt-6" centered />
         </div>
 
         <div className="relative mt-14 grid gap-8 md:grid-cols-3">

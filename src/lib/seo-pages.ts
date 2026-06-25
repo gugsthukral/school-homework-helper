@@ -11,7 +11,8 @@ export type SeoSubjectSlug =
   | "english"
   | "hindi"
   | "punjabi"
-  | "sst";
+  | "sst"
+  | "computer";
 
 export type SeoPage = {
   slug: string;
@@ -69,15 +70,31 @@ const subjectMeta: Record<
     toolHref: "/tools/quiz-generator",
     toolLabel: "Quiz Generator",
   },
+  computer: {
+    name: "Computer",
+    dbSlug: "computer",
+    toolHref: "/tools/ask-anything",
+    toolLabel: "Ask Anything",
+  },
 };
 
-const subjects: SeoSubjectSlug[] = ["maths", "science", "english", "hindi", "punjabi", "sst"];
+const subjects: SeoSubjectSlug[] = [
+  "maths",
+  "science",
+  "english",
+  "hindi",
+  "punjabi",
+  "sst",
+  "computer",
+];
 
 function homeworkHelpPages(): SeoPage[] {
   const pages: SeoPage[] = [];
 
   for (let classNum = 1; classNum <= 12; classNum++) {
     for (const subject of subjects) {
+      if (subject === "computer" && classNum > 10) continue;
+
       const meta = subjectMeta[subject];
       const slug = `class-${classNum}-${subject}-homework-help`;
 
@@ -324,7 +341,7 @@ function boardExamPages(): SeoPage[] {
         {
           heading: "Subject-Wise Strategy",
           content:
-            "Mathematics: solve daily problems. Science: understand concepts + diagrams. English: practice essays and grammar. SST: make notes and timelines. Hindi: revise grammar rules.",
+            "Mathematics: solve daily problems. Science: understand concepts + diagrams. English: practice essays and grammar. Computer: revise MS Office, HTML, and Python basics. SST: make notes and timelines. Hindi: revise grammar rules.",
         },
         {
           heading: "Use AI for Exam Prep",

@@ -1,6 +1,7 @@
 import { blogPosts } from "@/lib/blog-posts";
 import { chapterRegistry, getChapterPath } from "@/lib/chapters";
 import { aiTools, classes, navLinks, subjects } from "@/lib/data";
+import { REGIONAL_LANGUAGES_TAGLINE } from "@/lib/indian-languages";
 
 export type SearchResultType = "blog" | "tool" | "class" | "subject" | "chapter" | "page";
 
@@ -16,16 +17,16 @@ const staticPages: SearchResult[] = [
   {
     type: "page",
     title: "Home",
-    description: "AI homework help for Classes 1–12",
+    description: `AI homework help for Classes 1–12. ${REGIONAL_LANGUAGES_TAGLINE}.`,
     href: "/",
-    keywords: "home homepage school homework helper ai",
+    keywords: "home homepage school homework helper ai hindi tamil bengali regional languages",
   },
   {
     type: "page",
     title: "About",
-    description: "About School Homework Helper",
+    description: `About School Homework Helper — ${REGIONAL_LANGUAGES_TAGLINE}.`,
     href: "/about",
-    keywords: "about us team mission",
+    keywords: "about us team mission regional languages India multilingual",
   },
   {
     type: "page",
@@ -51,9 +52,9 @@ const staticPages: SearchResult[] = [
   {
     type: "page",
     title: "All Subjects",
-    description: "Mathematics, Science, English, Hindi, and more",
+    description: "Mathematics, Science, English, Hindi, Punjabi, Computer, and more — CBSE subject guides",
     href: "/subjects",
-    keywords: "subjects maths science english hindi punjabi sst",
+    keywords: "subjects maths science english hindi punjabi sst computer",
   },
   {
     type: "page",

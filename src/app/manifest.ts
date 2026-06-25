@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_NAME } from "@/lib/seo-config";
+import { REGIONAL_LANGUAGES_TAGLINE } from "@/lib/indian-languages";
 import { getSiteUrl } from "@/lib/seo-metadata";
 
 export default function manifest(): MetadataRoute.Manifest {
@@ -9,7 +10,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: SITE_NAME,
     short_name: "Homework Helper",
     description:
-      "Eight AI tools for homework help, calculator, ask anything, school projects, and CBSE study resources for Classes 1–12.",
+      `Eight AI tools for homework help, calculator, ask anything, school projects, Computer subject guides, and CBSE study resources for Classes 1–12. ${REGIONAL_LANGUAGES_TAGLINE}.`,
     start_url: "/",
     display: "standalone",
     background_color: "#06101f",

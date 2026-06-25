@@ -33,6 +33,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `CBSE ${subject.name.toLowerCase()}`,
       "class 1 to 12",
       `${subject.name} study guide`,
+      "2026-27 syllabus",
+      ...(slug === "computer"
+        ? ["computer class 10", "ICT syllabus CBSE", "MS Office homework", "Python class 9"]
+        : []),
     ],
     path: `/subjects/${slug}`,
   });

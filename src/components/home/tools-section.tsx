@@ -10,6 +10,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { aiTools } from "@/lib/data";
+import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
 import { TryNowButton } from "@/components/shared/try-now-button";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -39,6 +40,7 @@ export function ToolsSection() {
             Everything you need for homework, exams, and learning — powered by AI and
             tailored to your class level.
           </p>
+          <RegionalLanguagesBadge className="mt-6" centered />
         </div>
 
         <div className="mt-14 grid grid-cols-2 gap-5 md:grid-cols-4">

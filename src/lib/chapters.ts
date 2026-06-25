@@ -44,6 +44,7 @@ const SUBJECT_SLUGS: Record<string, string> = {
   Physics: "physics",
   Chemistry: "chemistry",
   Biology: "biology",
+  Computer: "computer",
 };
 
 const SUBJECT_TOOLS: Record<string, { href: string; label: string }> = {
@@ -56,6 +57,7 @@ const SUBJECT_TOOLS: Record<string, { href: string; label: string }> = {
   physics: { href: "/tools/math-solver", label: "Math Solver" },
   chemistry: { href: "/tools/homework-solver", label: "Homework Solver" },
   biology: { href: "/tools/science-projects", label: "School Projects" },
+  computer: { href: "/tools/ask-anything", label: "Ask Anything" },
 };
 
 export function getSubjectSlug(subjectName: string): string {

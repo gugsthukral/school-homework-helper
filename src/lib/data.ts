@@ -9,7 +9,7 @@ export const navLinks = [
 export const aiTools = [
   {
     name: "Ask Anything",
-    description: "Ask any school question and get a clear AI tutor answer.",
+    description: "Ask any school question and get a clear AI tutor answer — in English or any major Indian regional language.",
     icon: "MessageCircleQuestion",
     href: "/tools/ask-anything",
     color: "from-orange-500/20 to-sky-400/5",
@@ -17,7 +17,7 @@ export const aiTools = [
   },
   {
     name: "Homework Solver",
-    description: "Get step-by-step explanations for any homework question.",
+    description: "Get step-by-step explanations for any homework question, in your language.",
     icon: "BookOpen",
     href: "/tools/homework-solver",
     color: "from-sky-400/20 to-sky-400/5",
@@ -86,6 +86,7 @@ export const subjects = [
   { name: "Hindi", icon: "Hindi", href: "/subjects/hindi", color: "border-orange-500/30 hover:border-orange-500/60" },
   { name: "Punjabi", icon: "Punjabi", href: "/subjects/punjabi", color: "border-sky-400/30 hover:border-sky-400/60" },
   { name: "SST", icon: "Landmark", href: "/subjects/sst", color: "border-orange-500/30 hover:border-orange-500/60" },
+  { name: "Computer", icon: "Monitor", href: "/subjects/computer", color: "border-sky-400/30 hover:border-orange-500/60" },
 ];
 
 export const steps = [
@@ -97,25 +98,25 @@ export const steps = [
   {
     step: "02",
     title: "Enter Your Question",
-    description: "Type your question, topic, or paste your homework. Select your class level.",
+    description: "Type your question, topic, or paste homework — in English, Hindi, Tamil, Bengali, and other regional languages. Select your class level.",
   },
   {
     step: "03",
     title: "Get AI Explanation",
-    description: "Receive clear, step-by-step answers written for your class level.",
+    description: "Receive clear, step-by-step answers in the same language you asked — written for your class level.",
   },
 ];
 
 export const audiences = [
   {
     title: "Students",
-    description: "Homework help, exam prep, essays, and quizzes for Classes 1–12.",
+    description: "Homework help, exam prep, essays, and quizzes for Classes 1–12 — in your regional language.",
     icon: "GraduationCap",
     accent: "bg-sky-400/10 text-sky-400",
   },
   {
     title: "Parents",
-    description: "Support your child's learning with easy-to-understand explanations.",
+    description: "Support your child's learning with easy-to-understand explanations in regional languages.",
     icon: "Heart",
     accent: "bg-orange-500/10 text-orange-400",
   },
@@ -130,6 +131,6 @@ export const audiences = [
 export const stats = [
   { value: "12", label: "Classes Covered", href: "/classes" },
   { value: "8", label: "AI Tools", href: "/#tools" },
-  { value: "6+", label: "Subjects", href: "/subjects" },
+  { value: "7+", label: "Subjects", href: "/subjects" },
   { value: "Free", label: "To Get Started", href: "/tools/homework-solver" },
 ];

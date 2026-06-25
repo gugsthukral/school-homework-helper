@@ -27,6 +27,7 @@ function toolForSubject(subject: string): { href: string; label: string } {
     Accountancy: { href: "/tools/homework-solver", label: "Homework Solver" },
     "Business Studies": { href: "/tools/homework-solver", label: "Homework Solver" },
     Economics: { href: "/tools/homework-solver", label: "Homework Solver" },
+    Computer: { href: "/tools/ask-anything", label: "Ask Anything" },
   };
   return map[subject] ?? { href: "/tools/homework-solver", label: "Homework Solver" };
 }
@@ -109,6 +110,7 @@ function getSubjectFocusAreas(subjectName: string, classNumber: number, chapters
     Accountancy: `Practise journal entries, ledger posting, and financial statements. ${first || "Double-entry system"} must be crystal clear.`,
     "Business Studies": `Understand concepts with real business examples. Case-study based answers score well in ${first || "management and marketing"} topics.`,
     Economics: `Graphs, definitions, and numerical problems on statistics and micro/macro concepts. Revise ${first || "data presentation and national income"}.`,
+    Computer: `Practise MS Office tools, keyboard shortcuts, and coding logic. Revise ${first || "computer fundamentals, internet safety, and programming basics"} with hands-on lab practice.`,
   };
   return maps[subjectName] ?? `Revise all ${chapters.length} chapters systematically, starting with ${first || "the NCERT textbook"}.`;
 }
@@ -129,6 +131,9 @@ function getExamQuestionTypes(subjectName: string, classNumber: number): string 
   if (subjectName === "Social Science" || subjectName === "Social Studies") {
     return "• Map-based questions\n• Timeline and chronology\n• Short definitions and key terms\n• Source-based questions\n• Long answers (5 marks) with points";
   }
+  if (subjectName === "Computer") {
+    return "• MCQs on hardware, software, and internet\n• Practical/lab-based tasks (MS Office, HTML, Python)\n• Short answer definitions (2–3 marks)\n• Output-based questions (write code or steps)\n• Cyber safety and ethics questions";
+  }
   return "• MCQs\n• Short answer questions (2–3 marks)\n• Long descriptive answers (5 marks)\n• Application-based problems\n• Case-study questions (Class 11–12)";
 }
 
@@ -140,6 +145,7 @@ function getCommonMistakes(subjectName: string): string {
     Hindi: "• वर्तनी की गलतियाँ\n• समय की अशुद्धि (काल)\n• अपठित गद्यांश में अनुचित उत्तर\n• शब्द सीमा से अधिक लेखन",
     Punjabi: "• ਸ਼ਬਦ-ਜੋੜ ਦੀਆਂ ਗਲਤੀਆਂ\n• ਕਾਲ ਦੀਆਂ ਅਸ਼ੁੱਧੀਆਂ\n• ਅਨਪਠਿਤ ਗਦ ਵਿੱਚ ਗਲਤ ਉੱਤਰ\n• ਸ਼ਬਦ ਸੀਮਾ ਤੋਂ ਵੱਧ ਲਿਖਣਾ",
     "Social Science": "• Confusing dates and events\n• Incomplete map labelling\n• Writing paragraphs without points\n• Ignoring key terms from NCERT",
+    Computer: "• Not practising on computer/lab regularly\n• Memorising steps without understanding logic\n• Ignoring output formatting in MS Office\n• Syntax errors in HTML/Python without testing code\n• Skipping cyber safety and ethics topics",
   };
   return maps[subjectName] ?? "• Leaving questions unanswered\n• Not revising before tests\n• Rote learning without understanding\n• Ignoring NCERT textbook exercises\n• Studying only one day before exams";
 }
@@ -296,6 +302,13 @@ export function buildGeneratedBlogPosts(): BlogPost[] {
       if (syllabus.some((s) => s.name === subject)) {
         posts.push(buildSubjectGuidePost(classNumber, subject, index++));
       }
+    }
+  }
+
+  for (let classNumber = 1; classNumber <= 10; classNumber++) {
+    const syllabus = getSyllabusForClass(classNumber);
+    if (syllabus.some((s) => s.name === "Computer")) {
+      posts.push(buildSubjectGuidePost(classNumber, "Computer", index++));
     }
   }
 

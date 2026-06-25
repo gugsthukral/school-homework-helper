@@ -24,6 +24,7 @@ const tools: Record<string, { href: string; label: string }> = {
   physics: { href: "/tools/math-solver", label: "Math Solver" },
   chemistry: { href: "/tools/homework-solver", label: "Homework Solver" },
   biology: { href: "/tools/science-projects", label: "School Projects" },
+  computer: { href: "/tools/ask-anything", label: "Ask Anything" },
 };
 
 export function SubjectChaptersPage({

@@ -43,6 +43,7 @@ const SUBJECT_EXTRAS: Record<string, string[]> = {
   EVS: ["Observation and activities", "Environment connections"],
   "Social Science": ["Timeline and map work", "Key terms and events"],
   "Social Studies": ["Map skills", "Civics and history facts"],
+  Computer: ["Practical lab tasks", "Programming and logic practice"],
 };
 
 export function getChapterFocusTopics(

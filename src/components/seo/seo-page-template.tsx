@@ -27,6 +27,7 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
     hindi: "Hindi",
     punjabi: "Punjabi",
     sst: "Social Studies",
+    computer: "Computer",
   };
   const subjectName = page.subject ? subjectNames[page.subject] : "";
   const chapters =

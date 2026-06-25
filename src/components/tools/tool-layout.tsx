@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { AdBanner } from "@/components/ads/ad-banner";
 import { Footer } from "@/components/layout/footer";
+import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
 import { SITE_HEADER_OFFSET_CLASS } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +34,7 @@ export function ToolLayout({ title, description, icon, children }: ToolLayoutPro
             <div className="min-w-0">
               <h1 className="text-3xl font-bold text-white sm:text-4xl">{title}</h1>
               <p className="mt-2 text-sky-200/70">{description}</p>
+              <RegionalLanguagesBadge className="mt-4" />
             </div>
           </div>
 

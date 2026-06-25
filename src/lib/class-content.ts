@@ -68,6 +68,7 @@ export const subjectSlugMap: Record<string, string> = {
   Hindi: "hindi",
   Punjabi: "punjabi",
   SST: "sst",
+  Computer: "computer",
 };
 
 export function getSubjectsForClass() {

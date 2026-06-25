@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageLayout } from "@/components/layout/page-layout";
 import { classList } from "@/lib/class-content";
+import { REGIONAL_LANGUAGES_SEO_PHRASE } from "@/lib/indian-languages";
 import { ACADEMIC_SESSION } from "@/lib/syllabus-2026-27";
 import { buildPageMetadata } from "@/lib/seo-metadata";
 
 export const metadata: Metadata = buildPageMetadata({
   title: `All Classes — Syllabus ${ACADEMIC_SESSION}`,
-  description: `Homework help and CBSE ${ACADEMIC_SESSION} syllabus for Class 1 to Class 12. Chapter-wise notes, key topics, and AI study tools.`,
+  description: `Homework help and CBSE ${ACADEMIC_SESSION} syllabus for Class 1 to Class 12. Chapter-wise notes, key topics, and AI study tools. ${REGIONAL_LANGUAGES_SEO_PHRASE}`,
   keywords: [
     "class 1 to 12 syllabus",
     `CBSE ${ACADEMIC_SESSION}`,
@@ -23,6 +24,7 @@ export default function ClassesPage() {
       badge="Classes"
       title="Homework Help for Every Class"
       description={`CBSE syllabus ${ACADEMIC_SESSION} for Class 1–12. Pick your class and start learning with AI-powered tools.`}
+      showRegionalLanguages
       backHref="/"
     >
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">

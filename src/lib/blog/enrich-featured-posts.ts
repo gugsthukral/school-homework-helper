@@ -63,7 +63,7 @@ export function enrichFeaturedPost(post: BlogPost): BlogPost {
       {
         heading: "Subject Order That Works",
         content:
-          "1. Hardest subject first (Maths/Science for most students)\n2. Language subjects (English/Hindi)\n3. Social Science / EVS\n4. Quick revision of what you learned today\n\nNever leave maths for last when you are tired.",
+          "1. Hardest subject first (Maths/Science for most students)\n2. Language subjects (English/Hindi)\n3. Computer / ICT practice\n4. Social Science / EVS\n5. Quick revision of what you learned today\n\nNever leave maths for last when you are tired.",
       },
       {
         heading: "Free Tools on This Website",

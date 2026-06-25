@@ -19,6 +19,7 @@ export const SUBJECT_TOOLS: Record<string, { href: string; label: string }> = {
   geography: { href: "/tools/quiz-generator", label: "Quiz Generator" },
   psychology: { href: "/tools/homework-solver", label: "Homework Solver" },
   sociology: { href: "/tools/essay-generator", label: "Essay Generator" },
+  computer: { href: "/tools/ask-anything", label: "Ask Anything" },
 };
 
 export function getToolForSubjectSlug(subjectSlug: string) {

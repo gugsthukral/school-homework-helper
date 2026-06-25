@@ -1,9 +1,14 @@
+import {
+  REGIONAL_LANGUAGES_SEO_PHRASE,
+  REGIONAL_LANGUAGES_TAGLINE,
+} from "@/lib/indian-languages";
+
 export const SITE_NAME = "School Homework Helper";
 
 export const SITE_TAGLINE = "AI Education for Classes 1–12";
 
 export const DEFAULT_DESCRIPTION =
-  "Free AI homework help with 8 tools — Ask Anything, Homework Solver, Essay Generator, Calculator, Math Solver, Quiz Generator, School Projects, and Grammar Checker — plus NCERT study resources for CBSE Classes 1–12.";
+  `Free AI homework help with 8 tools — Ask Anything, Homework Solver, Essay Generator, Calculator, Math Solver, Quiz Generator, School Projects, and Grammar Checker — plus NCERT study resources and Computer subject guides for CBSE Classes 1–12. ${REGIONAL_LANGUAGES_TAGLINE}.`;
 
 export const DEFAULT_KEYWORDS = [
   "school homework helper",
@@ -24,13 +29,24 @@ export const DEFAULT_KEYWORDS = [
   "board exam preparation",
   "online study help",
   "free homework help",
+  "computer homework help",
+  "CBSE computer syllabus",
+  "computer class 10",
+  "ICT study help",
+  "MS Office homework",
+  "Python class 9 10",
+  "regional languages India",
+  "Hindi homework help",
+  "Tamil homework help",
+  "Bengali homework help",
+  "multilingual AI tutor",
 ] as const;
 
 export const TOOL_SEO = {
   "ask-anything": {
     title: "Ask Anything — AI Tutor",
     description:
-      "Ask any school question across subjects and get clear answers from an AI tutor. Type or use voice input — for CBSE Classes 1–12.",
+      `Ask any school question across subjects and get clear answers from an AI tutor. Type or use voice input — for CBSE Classes 1–12. ${REGIONAL_LANGUAGES_TAGLINE}.`,
     keywords: [
       "ask anything AI",
       "homework questions",
@@ -38,19 +54,24 @@ export const TOOL_SEO = {
       "study help",
       "CBSE doubt solver",
       "voice homework help",
+      "computer homework questions",
+      "ICT doubts",
+      "regional language homework help",
+      "Hindi Tamil Bengali tutor",
     ],
     path: "/tools/ask-anything",
   },
   "homework-solver": {
     title: "AI Homework Solver",
     description:
-      "Get step-by-step homework explanations for any question. AI-powered help for Maths, Science, English, and more — Classes 1 to 12.",
+      "Get step-by-step homework explanations for any question. AI-powered help for Maths, Science, English, Computer, and more — Classes 1 to 12.",
     keywords: [
       "homework solver",
       "AI homework help",
       "step by step solutions",
       "CBSE homework answers",
       "class 1-12 homework help",
+      "computer homework help",
     ],
     path: "/tools/homework-solver",
   },
@@ -97,13 +118,14 @@ export const TOOL_SEO = {
   "quiz-generator": {
     title: "AI Quiz Generator",
     description:
-      "Create MCQ quizzes from any topic or chapter. Practice tests for Maths, Science, English, and SST — Classes 1–12.",
+      "Create MCQ quizzes from any topic or chapter. Practice tests for Maths, Science, English, Computer, and SST — Classes 1–12.",
     keywords: [
       "quiz generator",
       "MCQ generator",
       "practice quiz maker",
       "online test generator",
       "CBSE quiz",
+      "computer quiz class 10",
     ],
     path: "/tools/quiz-generator",
   },
@@ -146,12 +168,13 @@ export const PAGE_SEO = {
   about: {
     title: "About Us",
     description:
-      "Learn about School Homework Helper — eight AI tools and CBSE study resources helping students, parents, and teachers from Class 1 to Class 12 across India.",
+      `Learn about School Homework Helper — eight AI tools and CBSE study resources helping students, parents, and teachers from Class 1 to Class 12 across India. ${REGIONAL_LANGUAGES_TAGLINE}.`,
     keywords: [
       "about school homework helper",
       "AI education platform",
       "CBSE homework help",
       "online learning India",
+      "regional languages India",
     ],
     path: "/about",
   },
@@ -171,26 +194,30 @@ export const PAGE_SEO = {
   classes: {
     title: "All Classes — CBSE Syllabus & Homework Help",
     description:
-      "Homework help and CBSE syllabus for Class 1 to Class 12. Chapter-wise notes, key topics, and AI tools for every grade.",
+      `Homework help and CBSE syllabus for Class 1 to Class 12. Chapter-wise notes for Maths, Science, English, Computer, and more — plus AI tools for every grade. ${REGIONAL_LANGUAGES_SEO_PHRASE}`,
     keywords: [
       "class 1 to 12 syllabus",
       "CBSE homework help",
       "class wise study material",
       "NCERT chapters",
+      "computer syllabus class 1 to 10",
     ],
     path: "/classes",
   },
   subjects: {
-    title: "All Subjects — Maths, Science, English & More",
+    title: "All Subjects — Maths, Science, English, Computer & More",
     description:
-      "Homework help for Mathematics, Science, English, Hindi, Punjabi, SST, EVS, Accountancy, Business Studies, and Economics — Classes 1–12.",
+      `Homework help for Mathematics, Science, English, Hindi, Punjabi, Computer, SST, EVS, Accountancy, Business Studies, and Economics — CBSE session 2026-27, Classes 1–12. ${REGIONAL_LANGUAGES_SEO_PHRASE}`,
     keywords: [
       "maths homework help",
       "science homework help",
       "english homework help",
+      "computer homework help",
       "hindi homework",
       "social studies help",
       "CBSE subjects",
+      "computer class 10",
+      "ICT syllabus CBSE",
     ],
     path: "/subjects",
   },

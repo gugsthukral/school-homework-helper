@@ -36,7 +36,8 @@ export default function AboutPage() {
     <PageLayout
       badge="About Us"
       title="Helping Every Student Learn Smarter"
-      description="School Homework Helper is an AI-powered education platform designed for Indian students from Class 1 to Class 12."
+      description="School Homework Helper is an AI-powered education platform for Indian students from Class 1 to Class 12."
+      showRegionalLanguages
       backHref="/"
     >
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -49,7 +50,7 @@ export default function AboutPage() {
           </p>
           <p className="leading-relaxed text-sky-200/70">
             From Class 1 counting to Class 12 board exam prep, our platform grows with students
-            across Mathematics, Science, English, Hindi, Punjabi, and Social Studies.
+            across Mathematics, Science, English, Hindi, Punjabi, Computer, and Social Studies.
           </p>
 
           <div className="grid grid-cols-2 gap-4 pt-4">

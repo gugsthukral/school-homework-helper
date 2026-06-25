@@ -1,4 +1,5 @@
 import { GraduationCap, Heart, Users, type LucideIcon } from "lucide-react";
+import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
 import { audiences } from "@/lib/data";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -19,6 +20,7 @@ export function AudiencesSection() {
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
             Built for the Whole School Community
           </h2>
+          <RegionalLanguagesBadge className="mt-6" centered />
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">

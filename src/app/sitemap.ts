@@ -5,6 +5,7 @@ import { chapterRegistry } from "@/lib/chapters";
 import { aiTools } from "@/lib/data";
 import { keyTopicsRegistry } from "@/lib/key-topics";
 import { seoPages } from "@/lib/seo-pages";
+import { subjectList } from "@/lib/subject-content";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://schoolhomeworkhelper.com";
 
@@ -20,9 +21,7 @@ const staticRoutes = [
   "/subjects",
   ...aiTools.map((tool) => tool.href),
   ...Array.from({ length: 12 }, (_, i) => `/classes/class-${i + 1}`),
-  ...["mathematics", "science", "english", "hindi", "punjabi", "sst", "evs", "accountancy", "business-studies", "economics"].map(
-    (s) => `/subjects/${s}`
-  ),
+  ...subjectList.map((s) => `/subjects/${s.slug}`),
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

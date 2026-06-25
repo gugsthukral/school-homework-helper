@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
 import { GooglePrivacyFooterLink } from "@/components/cookie-consent/google-privacy-footer-link";
 import { SiteLogo } from "@/components/layout/site-logo";
+import { REGIONAL_LANGUAGES_TAGLINE } from "@/lib/indian-languages";
 
 const footerLinks = {
   tools: [
@@ -34,7 +35,7 @@ export function Footer() {
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-sky-200/50">
               AI-powered education platform for students from Class 1 to Class 12.
-              Homework help, essays, math, quizzes, and more.
+              Homework help, essays, math, quizzes, and more. {REGIONAL_LANGUAGES_TAGLINE}.
             </p>
             <div className="mt-5 space-y-2">
               <p className="flex items-center gap-2 text-sm text-sky-300/50">

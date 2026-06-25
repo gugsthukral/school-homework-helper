@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
 
 export function CtaSection() {
   return (
@@ -21,6 +22,7 @@ export function CtaSection() {
               Join thousands of students using School Homework Helper to learn faster,
               understand better, and score higher.
             </p>
+            <RegionalLanguagesBadge className="mt-6" showDetail centered />
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 href="#tools"

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { subjects } from "@/lib/data";
+import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
 import { SubjectIcon } from "@/components/shared/subject-icon";
 
 export function SubjectsSection() {
@@ -15,8 +16,9 @@ export function SubjectsSection() {
             All Major Subjects Covered
           </h2>
           <p className="mt-4 text-sky-200/70">
-            Mathematics, Science, English, Hindi, Punjabi, and Social Studies — all in one place.
+            Mathematics, Science, English, Hindi, Punjabi, Computer, and Social Studies — all in one place.
           </p>
+          <RegionalLanguagesBadge className="mt-6" centered />
         </div>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

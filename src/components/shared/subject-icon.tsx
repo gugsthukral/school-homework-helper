@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, Landmark, Sigma, TestTube2, TrendingUp, type LucideIcon } from "lucide-react";
+import { BriefcaseBusiness, Landmark, Monitor, Sigma, TestTube2, TrendingUp, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const lucideIconMap: Record<string, LucideIcon> = {
@@ -7,6 +7,7 @@ const lucideIconMap: Record<string, LucideIcon> = {
   BriefcaseBusiness,
   TrendingUp,
   Landmark,
+  Monitor,
 };
 
 const letterIconMap: Record<string, string> = {

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { AdBanner } from "@/components/ads/ad-banner";
 import { Footer } from "@/components/layout/footer";
+import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
 import { SITE_HEADER_OFFSET_CLASS } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -11,6 +12,7 @@ type PageLayoutProps = {
   badge?: string;
   title: string;
   description: string;
+  showRegionalLanguages?: boolean;
   children: React.ReactNode;
 };
 
@@ -20,6 +22,7 @@ export function PageLayout({
   badge,
   title,
   description,
+  showRegionalLanguages = false,
   children,
 }: PageLayoutProps) {
   return (
@@ -43,6 +46,7 @@ export function PageLayout({
             )}
             <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">{title}</h1>
             <p className="mt-4 text-lg text-sky-200/70">{description}</p>
+            {showRegionalLanguages && <RegionalLanguagesBadge className="mt-5" showDetail />}
           </div>
 
           <AdBanner placement="horizontal" className="mb-8" />

@@ -38,6 +38,30 @@ export const INDIAN_SPEECH_LANGS: SpeechLang[] = [
   "od-IN",
 ];
 
+/** Marketing copy — keep in sync with INDIAN_SPEECH_LANGS / script detection. */
+export const REGIONAL_LANGUAGES_TAGLINE = "Covered all regional languages of India";
+
+export const REGIONAL_LANGUAGE_NAMES = [
+  "English",
+  "Hindi",
+  "Bengali",
+  "Tamil",
+  "Telugu",
+  "Kannada",
+  "Malayalam",
+  "Marathi",
+  "Gujarati",
+  "Punjabi",
+  "Odia",
+] as const;
+
+export const REGIONAL_LANGUAGES_LIST = REGIONAL_LANGUAGE_NAMES.join(", ");
+
+export const REGIONAL_LANGUAGES_DETAIL = `${REGIONAL_LANGUAGES_TAGLINE}. Type, speak, listen, and get AI explanations in ${REGIONAL_LANGUAGES_LIST}.`;
+
+export const REGIONAL_LANGUAGES_SEO_PHRASE =
+  "All major regional languages of India supported for voice input, Listen Audio, and AI replies.";
+
 const SCRIPT_TO_LANG: Record<Exclude<IndianScript, "latin" | "devanagari">, SpeechLang> = {
   bengali: "bn-IN",
   gurmukhi: "pa-IN",

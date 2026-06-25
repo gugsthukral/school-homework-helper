@@ -13,7 +13,8 @@ export default function SubjectsPage() {
     <PageLayout
       badge="Subjects"
       title="All Subjects Covered"
-      description="Mathematics, Science, English, Hindi, Punjabi, and Social Studies — AI-powered help for every subject."
+      description={PAGE_SEO.subjects.description}
+      showRegionalLanguages
       backHref="/"
     >
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
