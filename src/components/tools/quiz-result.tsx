@@ -76,7 +76,7 @@ export function QuizResult({
             return (
               <article
                 key={question.number}
-                className="rounded-xl border border-slate-200 bg-navy-950/40 p-4 sm:p-5"
+                className="theme-quiz-card rounded-xl border p-4 sm:p-5"
               >
                 <h3 className="text-base font-semibold text-slate-900 sm:text-lg">
                   Question {question.number}
@@ -99,13 +99,13 @@ export function QuizResult({
                         <li
                           key={option.letter}
                           className={cn(
-                            "rounded-lg border px-3 py-2 text-sm text-slate-700",
-                            isCorrect
-                              ? "border-green-400/40 bg-green-500/10 text-green-100"
-                              : "border-slate-200 bg-sky-400/5"
+                            "rounded-lg border px-3 py-2 text-sm",
+                            isCorrect ? "theme-quiz-option-correct" : "theme-quiz-option"
                           )}
                         >
-                          <span className="font-semibold text-sky-300">{option.letter})</span>{" "}
+                          <span className="theme-quiz-option-letter font-semibold">
+                            {option.letter})
+                          </span>{" "}
                           {option.text}
                         </li>
                       );
@@ -133,9 +133,9 @@ export function QuizResult({
                 </div>
 
                 {isRevealed && (question.answerLetter || question.explanation) && (
-                  <div className="mt-3 rounded-lg border border-orange-400/25 bg-orange-500/10 px-3 py-2.5 text-sm text-orange-100/95">
+                  <div className="theme-quiz-answer-box mt-3 rounded-lg border px-3 py-2.5 text-sm">
                     {question.answerLetter && (
-                      <p className="font-semibold text-orange-200">
+                      <p className="theme-quiz-answer-title font-semibold">
                         Correct answer: {question.answerLetter}
                       </p>
                     )}

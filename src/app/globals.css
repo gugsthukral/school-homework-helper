@@ -191,6 +191,18 @@ html:not([data-theme]) {
   --theme-error-bg: #fef2f2;
   --theme-error-border: #fecaca;
   --theme-error-text: #b91c1c;
+  --theme-quiz-card-bg: #f8fafc;
+  --theme-quiz-option-bg: #f0f9ff;
+  --theme-quiz-option-text: #334155;
+  --theme-quiz-option-letter: #2563eb;
+  --theme-quiz-correct-bg: #ecfdf5;
+  --theme-quiz-correct-border: #6ee7b7;
+  --theme-quiz-correct-text: #065f46;
+  --theme-quiz-correct-letter: #047857;
+  --theme-quiz-answer-bg: #fff7ed;
+  --theme-quiz-answer-border: #fed7aa;
+  --theme-quiz-answer-title: #9a3412;
+  --theme-quiz-answer-text: #7c2d12;
 }
 
 html[data-theme="dark"] {
@@ -236,6 +248,18 @@ html[data-theme="dark"] {
   --theme-error-bg: rgba(239, 68, 68, 0.1);
   --theme-error-border: rgba(239, 68, 68, 0.35);
   --theme-error-text: #fca5a5;
+  --theme-quiz-card-bg: rgba(5, 10, 20, 0.4);
+  --theme-quiz-option-bg: rgba(74, 158, 255, 0.05);
+  --theme-quiz-option-text: #cbd5e1;
+  --theme-quiz-option-letter: #7ab8ff;
+  --theme-quiz-correct-bg: rgba(34, 197, 94, 0.12);
+  --theme-quiz-correct-border: rgba(74, 222, 128, 0.4);
+  --theme-quiz-correct-text: #bbf7d0;
+  --theme-quiz-correct-letter: #86efac;
+  --theme-quiz-answer-bg: rgba(249, 115, 22, 0.1);
+  --theme-quiz-answer-border: rgba(249, 115, 22, 0.28);
+  --theme-quiz-answer-title: #fdba74;
+  --theme-quiz-answer-text: #fed7aa;
 }
 
 /* Shared UI tokens (homepage + all pages) */
@@ -392,6 +416,41 @@ html[data-theme="dark"] {
 
 .theme-error-text {
   color: var(--theme-error-text);
+}
+
+.theme-quiz-card {
+  border-color: var(--theme-border);
+  background-color: var(--theme-quiz-card-bg);
+}
+
+.theme-quiz-option {
+  border-color: var(--theme-border);
+  background-color: var(--theme-quiz-option-bg);
+  color: var(--theme-quiz-option-text);
+}
+
+.theme-quiz-option-letter {
+  color: var(--theme-quiz-option-letter);
+}
+
+.theme-quiz-option-correct {
+  border-color: var(--theme-quiz-correct-border);
+  background-color: var(--theme-quiz-correct-bg);
+  color: var(--theme-quiz-correct-text);
+}
+
+.theme-quiz-option-correct .theme-quiz-option-letter {
+  color: var(--theme-quiz-correct-letter);
+}
+
+.theme-quiz-answer-box {
+  border-color: var(--theme-quiz-answer-border);
+  background-color: var(--theme-quiz-answer-bg);
+  color: var(--theme-quiz-answer-text);
+}
+
+.theme-quiz-answer-title {
+  color: var(--theme-quiz-answer-title);
 }
 
 .theme-blog-card-media {
