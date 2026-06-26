@@ -94,6 +94,7 @@ Rules:
 - Cover different aspects of ${subject ? `${subject} and ` : ""}the chosen focus
 - Make distractors realistic but clearly wrong
 - Use easy language
+- Use plain text for math (e.g. "7 × 8" or "2 + 5") — never use LaTeX, backslashes, \\( \\), or commands like \\times
 ${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 

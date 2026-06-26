@@ -61,9 +61,18 @@ function parseQuestionSection(section: string, index: number): QuizQuestion {
     questionLines.push(trimmed);
   }
 
-  const question = cleanQuestionText(questionLines.join(" "));
+  const question = simplifyQuizText(cleanQuestionText(questionLines.join(" ")));
 
-  return { number, question, options, answerLetter, explanation };
+  return {
+    number,
+    question,
+    options: options.map((option) => ({
+      ...option,
+      text: simplifyQuizText(option.text),
+    })),
+    answerLetter,
+    explanation: simplifyQuizText(explanation),
+  };
 }
 
 function cleanQuestionText(text: string): string {
@@ -76,10 +85,43 @@ function cleanQuestionText(text: string): string {
 }
 
 function stripLatex(text: string): string {
-  return text
-    .replace(/\\\(|\\\)|\\\[|\\\]/g, " ")
+  return simplifyQuizText(text);
+}
+
+const LATEX_SYMBOLS: Record<string, string> = {
+  times: "×",
+  div: "÷",
+  pm: "±",
+  cdot: "·",
+  leq: "≤",
+  geq: "≥",
+  neq: "≠",
+  approx: "≈",
+  pi: "π",
+  infinity: "∞",
+  percent: "%",
+};
+
+/** Convert LaTeX-style math in quiz text to plain readable text. */
+export function simplifyQuizText(text: string): string {
+  if (!text) return "";
+
+  let result = text
+    .replace(/\\\(|\\\)|\\\[|\\\]/g, "")
+    .replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, "$1/$2")
+    .replace(/\\sqrt\{([^}]+)\}/g, "√$1")
+    .replace(/\^2\b/g, "²")
+    .replace(/\^3\b/g, "³");
+
+  for (const [command, symbol] of Object.entries(LATEX_SYMBOLS)) {
+    result = result.replace(new RegExp(`\\\\${command}\\b`, "g"), symbol);
+  }
+
+  return result
     .replace(/\\[a-zA-Z]+/g, " ")
+    .replace(/\\/g, "")
     .replace(/\s+/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
     .trim();
 }
 
