@@ -53,6 +53,8 @@ export function EssayGeneratorForm() {
           value={topic}
           onChange={setTopic}
           placeholder="e.g. The Importance of Trees"
+          multiline
+          rows={5}
           required
           disabled={loading}
           onVoiceTranscript={(text) => setTopic((prev) => appendVoiceText(prev, text))}

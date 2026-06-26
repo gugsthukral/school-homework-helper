@@ -54,6 +54,8 @@ export function AIToolInputField({
   const voice = useVoiceInput();
   const showActions = Boolean(onVoiceTranscript || attachments);
   const showVoice = Boolean(onVoiceTranscript && voice.supported);
+  const useTextarea = multiline || showActions;
+  const textareaRows = multiline ? rows : 3;
   const inputPadding = showActions ? (showVoice && voice.listening ? "pb-[4.25rem] pr-3" : "pb-10 pr-3") : "";
 
   function handleVoiceToggle() {
@@ -79,13 +81,13 @@ export function AIToolInputField({
           voice.listening && "border-orange-400/40 ring-2 ring-orange-400/20"
         )}
       >
-        {multiline ? (
+        {useTextarea ? (
           <textarea
             id={id}
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
-            rows={rows}
+            rows={textareaRows}
             required={required}
             disabled={disabled}
             className={cn(inputInnerClassName, "resize-none", inputPadding)}
@@ -110,7 +112,7 @@ export function AIToolInputField({
         )}
 
         {showActions && (
-          <div className="theme-input-actions-bar pointer-events-none absolute inset-x-0 bottom-0 flex justify-end px-2 pb-1.5 pt-4 sm:px-2.5 sm:pb-2">
+          <div className="theme-input-actions-bar pointer-events-none absolute inset-x-0 bottom-0 flex justify-end px-2 pb-1.5 sm:px-2.5 sm:pb-2">
             <div className="pointer-events-auto flex items-center gap-1">
               {showVoice && (
                 <InputActionIconButton

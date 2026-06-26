@@ -161,6 +161,7 @@ html:not([data-theme]) {
   --theme-prose: #334155;
   --theme-input-bg: #ffffff;
   --theme-field-bg: #f8fafc;
+  --theme-input-placeholder: #94a3b8;
   --theme-accent: #f97316;
   --theme-sky: #4a9eff;
   --theme-card-shadow: 0 4px 24px rgba(10, 22, 40, 0.06);
@@ -216,6 +217,7 @@ html[data-theme="dark"] {
   --theme-prose: #94a3b8;
   --theme-input-bg: #08111e;
   --theme-field-bg: #08111e;
+  --theme-input-placeholder: #8a99b1;
   --theme-accent: #f97316;
   --theme-sky: #4a9eff;
   --theme-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
@@ -339,7 +341,8 @@ html[data-theme="dark"] {
 
 .theme-input::placeholder,
 .theme-input-inner::placeholder {
-  color: var(--theme-text-faint);
+  color: var(--theme-input-placeholder);
+  opacity: 1;
 }
 
 .theme-input-inner {
