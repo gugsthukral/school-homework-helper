@@ -87,26 +87,47 @@ function normalizeAnswerValue(text: string): string {
   return stripLatex(text).replace(/[.,;:]+$/, "").trim().toLowerCase();
 }
 
+function extractFinalEqualityResult(plain: string): string | undefined {
+  const matches = [...plain.matchAll(/=\s*([^=\n]+?)(?=\s*(?:\.|,|;|$))/g)];
+  if (matches.length === 0) return undefined;
+
+  for (let i = matches.length - 1; i >= 0; i--) {
+    const candidate = matches[i][1].trim().replace(/[.,;:]+$/, "");
+    if (!candidate) continue;
+
+    const compact = candidate.replace(/\s/g, "");
+    if (/^\d+\([^)]+\)$/.test(compact)) continue;
+    if (/^[a-z]+\([^)]+\)$/i.test(compact)) continue;
+
+    return candidate;
+  }
+
+  return undefined;
+}
+
 function extractConclusionValues(explanation: string): string[] {
   const plain = stripLatex(explanation);
   const values: string[] = [];
 
+  const finalResult = extractFinalEqualityResult(plain);
+  if (finalResult) values.push(finalResult);
+
   const henceMatch = plain.match(
-    /\b(?:hence|therefore|thus|so)\s*,?\s*(?:(?:the\s+)?(?:answer|number|value|result)\s+is\s+)?(?:[a-z]\s*=\s*)?([^\s,.;+=]+)/i
+    /\b(?:hence|therefore|thus|so)\s*,?\s*(?:(?:the\s+)?(?:answer|number|value|result)\s+is\s+)?(?:[a-z]\s*=\s*)?([^\s,.;+=]+(?:\s*[^\s,.;+=]+)?)/i
   );
-  if (henceMatch?.[1]) values.push(henceMatch[1]);
+  if (henceMatch?.[1]) values.push(henceMatch[1].trim());
 
   const answerIsMatch = plain.match(
-    /\b(?:the\s+)?(?:answer|number|value|result)\s+is\s+([^\s,.;+=]+)/i
+    /\b(?:the\s+)?(?:answer|number|value|result)\s+is\s+([^\s,.;+=]+(?:\s*[^\s,.;+=]+)?)/i
   );
-  if (answerIsMatch?.[1]) values.push(answerIsMatch[1]);
+  if (answerIsMatch?.[1]) values.push(answerIsMatch[1].trim());
 
   const varAssignments = [...plain.matchAll(/\b[a-z]\s*=\s*([^\s,.;+=]+)/gi)];
   if (varAssignments.length > 0) {
     values.push(varAssignments[varAssignments.length - 1][1]);
   }
 
-  return values;
+  return [...new Set(values.filter(Boolean))];
 }
 
 function findOptionByValue(
@@ -116,7 +137,26 @@ function findOptionByValue(
   const normalized = normalizeAnswerValue(value);
   if (!normalized) return undefined;
 
-  return options.find((option) => normalizeAnswerValue(option.text) === normalized);
+  const exact = options.find((option) => normalizeAnswerValue(option.text) === normalized);
+  if (exact) return exact;
+
+  const numberMatch = normalized.match(/^([\d.]+)(?:\s*(.+))?$/);
+  if (!numberMatch) {
+    return options.find((option) => {
+      const opt = normalizeAnswerValue(option.text);
+      return opt.includes(normalized) || normalized.includes(opt);
+    });
+  }
+
+  const [, num, unit] = numberMatch;
+
+  return options.find((option) => {
+    const opt = normalizeAnswerValue(option.text);
+    const optNumber = opt.match(/^([\d.]+)(?:\s*(.+))?$/);
+    if (!optNumber || optNumber[1] !== num) return false;
+    if (!unit) return true;
+    return !optNumber[2] || optNumber[2] === unit || opt.includes(unit);
+  });
 }
 
 /** Fix AI mistakes where the declared letter disagrees with the explanation conclusion. */
@@ -133,6 +173,18 @@ function reconcileAnswerLetter(question: QuizQuestion): QuizQuestion {
     }
 
     return question;
+  }
+
+  const plain = stripLatex(explanation).toLowerCase();
+  const byText = [...options]
+    .sort((a, b) => normalizeAnswerValue(b.text).length - normalizeAnswerValue(a.text).length)
+    .find((option) => {
+      const text = normalizeAnswerValue(option.text);
+      return text.length > 0 && plain.includes(text);
+    });
+
+  if (byText && byText.letter !== answerLetter) {
+    return { ...question, answerLetter: byText.letter };
   }
 
   return question;
