@@ -20,7 +20,7 @@ export async function synthesizeWithSarvam(text: string, lang: SpeechLang): Prom
       speaker: sarvamSpeakerForLang(lang),
       output_audio_codec: "mp3",
       speech_sample_rate: "24000",
-      pace: lang === "pa-IN" ? 0.92 : lang === "ml-IN" || lang === "ta-IN" ? 0.95 : 1,
+      pace: lang === "ml-IN" || lang === "ta-IN" ? 0.95 : 1,
       temperature: lang === "pa-IN" ? 0.4 : 0.55,
     }),
   });
