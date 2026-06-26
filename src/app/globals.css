@@ -179,8 +179,6 @@ html:not([data-theme]) {
   --theme-icon-ring: #f1f5f9;
   --theme-class-chip-bg: #f8fafc;
   --theme-class-chip-text: #334155;
-  --theme-input-actions-fade-from: #f1f5f9;
-  --theme-input-actions-fade-mid: rgb(248 250 252 / 0.92);
   --theme-guest-banner-bg: #fff7ed;
   --theme-guest-banner-border: #fed7aa;
   --theme-guest-banner-text: #475569;
@@ -236,8 +234,6 @@ html[data-theme="dark"] {
   --theme-icon-ring: #1e293b;
   --theme-class-chip-bg: #050a14;
   --theme-class-chip-text: #5c93e1;
-  --theme-input-actions-fade-from: #08111e;
-  --theme-input-actions-fade-mid: rgb(8 17 30 / 0.92);
   --theme-guest-banner-bg: rgba(249, 115, 22, 0.08);
   --theme-guest-banner-border: rgba(249, 115, 22, 0.28);
   --theme-guest-banner-text: #94a3b8;
@@ -360,12 +356,7 @@ html[data-theme="dark"] {
 }
 
 .theme-input-actions-bar {
-  background: linear-gradient(
-    to top,
-    var(--theme-input-actions-fade-from) 0%,
-    var(--theme-input-actions-fade-mid) 45%,
-    transparent 100%
-  );
+  background-color: var(--theme-field-bg);
 }
 
 .theme-input-action-btn {
