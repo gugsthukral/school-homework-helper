@@ -25,7 +25,7 @@ type CreateAIToolRouteOptions<T extends z.ZodType> = {
   systemPrompt?: string;
   buildSystemPrompt?: (data: z.infer<T>) => string;
   visionSystemPrompt?: string;
-  maxTokens?: number;
+  maxTokens?: number | ((data: z.infer<T>) => number);
   jsonObject?: boolean;
   transformResponse?: (
     response: string,
@@ -71,11 +71,13 @@ export function createAIToolRoute<T extends z.ZodType>({
 
       const prompt = buildPrompt(parsed.data);
       const resolvedSystemPrompt = buildSystemPrompt?.(parsed.data) ?? systemPrompt;
+      const resolvedMaxTokens =
+        typeof maxTokens === "function" ? maxTokens(parsed.data) : maxTokens;
       const images = getImages?.(parsed.data)?.filter(Boolean);
       const hasImages = Boolean(images && images.length > 0);
       const response = hasImages
         ? await generateAIResponseWithVision(visionSystemPrompt, prompt, images!)
-        : await generateAIResponse(resolvedSystemPrompt, prompt, maxTokens, {
+        : await generateAIResponse(resolvedSystemPrompt, prompt, resolvedMaxTokens, {
             jsonObject,
           });
 

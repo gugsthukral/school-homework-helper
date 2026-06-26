@@ -119,6 +119,7 @@ export function QuizGeneratorForm() {
           icon={HelpCircle}
           exportFileName={`${slugifyFileName(quizLabel)}-class-${grade}-quiz`}
           exportSubtitle={exportSubtitle}
+          expectedCount={count}
         />
       )}
       {!response && !loading && (

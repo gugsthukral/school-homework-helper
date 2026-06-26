@@ -90,11 +90,12 @@ D) [option]
 Rules:
 - Put the answer on its own line after the options — use only the letter (A, B, C, or D), never repeat the option text (wrong: "B) 34", correct: "B")
 - The answer letter MUST match the final conclusion in your explanation (double-check your math before responding)
+- Keep each explanation to ONE short sentence (max 20 words) — you must output all ${count} complete questions
 - Questions should match Class ${grade} difficulty
 - Cover different aspects of ${subject ? `${subject} and ` : ""}the chosen focus
 - Make distractors realistic but clearly wrong
 - Use easy language
-- Use plain text for math (e.g. "7 × 8" or "2 + 5") — never use LaTeX, backslashes, \\( \\), or commands like \\times
+- Use plain text for math (e.g. "7 × 8", "√25", or "2 + 5") — never use LaTeX, backslashes, \\( \\), $...$, or commands like \\times
 ${RESPOND_IN_USER_LANGUAGE_RULE}`;
 }
 

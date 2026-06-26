@@ -6,7 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { GlowActionButton } from "@/components/motion-primitives/glow-action-button";
 import { GlowCard } from "@/components/motion-primitives/glow-card";
 import { formatResponse } from "@/lib/format-response";
-import { parseQuizResponse } from "@/lib/parse-quiz-response";
+import { isQuizIncomplete, parseQuizResponse } from "@/lib/parse-quiz-response";
 import { ResultExportActions } from "@/components/tools/result-export-actions";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +17,7 @@ type QuizResultProps = {
   exportFileName?: string;
   exportSubtitle?: string;
   sharePath?: string;
+  expectedCount?: number;
 };
 
 export function QuizResult({
@@ -26,9 +27,11 @@ export function QuizResult({
   exportFileName,
   exportSubtitle,
   sharePath,
+  expectedCount,
 }: QuizResultProps) {
   const questions = useMemo(() => parseQuizResponse(response), [response]);
   const parsed = questions.length > 0;
+  const incomplete = parsed && isQuizIncomplete(questions, expectedCount);
   const [revealed, setRevealed] = useState<Set<number>>(() => new Set());
 
   function toggleReveal(questionNumber: number) {
@@ -51,7 +54,7 @@ export function QuizResult({
 
   return (
     <GlowCard active={glowActive}>
-      <div className="glass-card animate-fade-up overflow-hidden rounded-2xl">
+      <div className="glass-card animate-fade-up rounded-2xl">
       <div className="border-b border-slate-200 bg-sky-400/5">
         <div className="flex items-center gap-3 px-4 pt-4 sm:px-6">
           <Icon className="h-5 w-5 shrink-0 text-sky-400" />
@@ -70,6 +73,13 @@ export function QuizResult({
 
       {parsed ? (
         <div className="space-y-4 px-4 py-5 sm:space-y-5 sm:px-6 sm:py-6">
+          {incomplete && (
+            <p className="theme-error-banner rounded-lg border px-3 py-2.5 text-sm">
+              This quiz looks incomplete ({questions.length}
+              {expectedCount ? ` of ${expectedCount}` : ""} questions shown). Please generate
+              again — try fewer questions if the problem continues.
+            </p>
+          )}
           {questions.map((question) => {
             const isRevealed = revealed.has(question.number);
 

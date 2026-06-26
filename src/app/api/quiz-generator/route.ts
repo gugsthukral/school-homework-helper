@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { createAIToolRoute } from "@/lib/create-ai-route";
 import { buildQuizGeneratorPrompt } from "@/lib/prompts";
+import { getQuizMaxTokens } from "@/lib/quiz-tokens";
 
 const schema = z
   .object({
@@ -18,4 +19,5 @@ export const POST = createAIToolRoute({
   schema,
   buildPrompt: ({ topic, grade, count, subject }) =>
     buildQuizGeneratorPrompt(grade, count, { topic: topic.trim(), subject }),
+  maxTokens: ({ grade, count }) => getQuizMaxTokens(count, grade),
 });

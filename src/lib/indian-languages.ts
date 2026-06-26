@@ -83,7 +83,7 @@ const DEFAULT_SARVAM_SPEAKERS: Record<SpeechLang, string> = {
   "ml-IN": "mohan",
   "mr-IN": "shubh",
   "gu-IN": "priya",
-  "pa-IN": "suhani",
+  "pa-IN": "ritu",
   "od-IN": "prasant",
 };
 
@@ -229,6 +229,11 @@ export function pickVoiceForLang(
 
   const prefix = lang.split("-")[0].toLowerCase();
   const matches = voices.filter((voice) => voice.lang.toLowerCase().startsWith(prefix));
+
+  if (lang === "pa-IN") {
+    const ritu = matches.find((voice) => /ritu/i.test(voice.name));
+    if (ritu) return ritu;
+  }
 
   if (matches.length > 0) {
     return (

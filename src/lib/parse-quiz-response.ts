@@ -27,6 +27,20 @@ export function parseQuizResponse(text: string): QuizQuestion[] {
   return questions;
 }
 
+export function isQuizIncomplete(
+  questions: QuizQuestion[],
+  expectedCount?: number
+): boolean {
+  if (expectedCount !== undefined && questions.length < expectedCount) {
+    return true;
+  }
+
+  const last = questions[questions.length - 1];
+  if (!last) return false;
+
+  return last.options.length < 4 || !last.answerLetter;
+}
+
 function parseQuestionSection(section: string, index: number): QuizQuestion {
   const numberMatch = section.match(QUESTION_HEADER);
   const number = numberMatch ? Number(numberMatch[1]) : index + 1;
@@ -79,6 +93,7 @@ function cleanQuestionText(text: string): string {
   return text
     .replace(/\s*[\*"]+\s*\)\s*(?:[A-D]\s*)?(?:\d+\s*)?[—\-–]\s*.*$/i, "")
     .replace(/^(?:\*\*)?Answer:(?:\*\*)?\s*.*$/i, "")
+    .replace(/([?.!])\s+([A-D])\s*$/i, "$1")
     .replace(/\s*[-*]{2,}\s*$/g, "")
     .replace(/\s+/g, " ")
     .trim();
@@ -107,6 +122,7 @@ export function simplifyQuizText(text: string): string {
   if (!text) return "";
 
   let result = text
+    .replace(/\$([^$]+)\$/g, "$1")
     .replace(/\\\(|\\\)|\\\[|\\\]/g, "")
     .replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, "$1/$2")
     .replace(/\\sqrt\{([^}]+)\}/g, "√$1")
