@@ -14,7 +14,7 @@ export const mathTypes = [
   { value: "word-problem", label: "Word Problem" },
 ];
 
-export const wordCountOptions = [100, 150, 200, 250, 300, 400, 500];
+export const wordCountOptions = [100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000];
 
 export const quizCountOptions = [5, 10, 15, 20];
 
