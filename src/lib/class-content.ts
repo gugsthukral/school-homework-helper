@@ -19,7 +19,7 @@ const classFocus: Record<number, { focus: string[]; examNote?: string }> = {
   6: { focus: ["Creative writing", "Algebra basics", "Light & electricity", "Ancient civilizations"] },
   7: { focus: ["Comprehension", "Linear equations", "Acids & bases", "Medieval India"] },
   8: { focus: ["Formal essays", "Geometry proofs", "Force & pressure", "Modern history"] },
-  9: { focus: ["Literature analysis", "Polynomials", "Atoms & molecules", "Democracy & economics"] },
+  9: { focus: ["Algebra & geometry foundations", "Exploration science (Cell to Sound)", "New Social Science themes", "Board exam readiness"], examNote: "CBSE 2026-27 syllabus — updated Maths, Science (Exploration), and Social Science textbooks" },
   10: { focus: ["Board exam writing", "Trigonometry", "Chemical reactions", "Board exam prep"], examNote: "CBSE 2026-27 board exam year — focus on NCERT syllabus and sample papers" },
   11: { focus: ["Advanced writing", "Calculus intro", "Physics fundamentals", "Stream selection prep"], examNote: "Choose your stream — Non-Medical (PCM), Medical (PCB), Commerce, or Arts — and follow the CBSE 2026-27 syllabus" },
   12: { focus: ["Competitive writing", "Advanced maths", "Board + entrance prep", "Career guidance"], examNote: "CBSE 2026-27 final board exams — PCM, PCB, Commerce, or Arts stream revision plan" },
