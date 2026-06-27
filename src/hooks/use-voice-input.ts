@@ -18,7 +18,7 @@ function getVoiceErrorMessage(code: string): string | null {
     case "audio-capture":
       return "Microphone is busy. Close other apps using the mic and try again.";
     case "no-speech":
-      return "No speech detected. Tap the mic and speak again.";
+      return null;
     case "network":
       return "Voice input needs internet. Check your connection and try again.";
     default:
@@ -46,6 +46,8 @@ function releaseRecognition(recognition: SpeechRecognition | null) {
 export function useVoiceInput() {
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const userStoppedRef = useRef(false);
+  const onTranscriptRef = useRef<((text: string) => void) | null>(null);
+  const contextTextRef = useRef("");
   const [listening, setListening] = useState(false);
   const [supported, setSupported] = useState(false);
   const [voiceError, setVoiceError] = useState("");
@@ -53,10 +55,89 @@ export function useVoiceInput() {
   useEffect(() => {
     setSupported(Boolean(getSpeechRecognition()));
     return () => {
+      userStoppedRef.current = true;
       releaseRecognition(recognitionRef.current);
       recognitionRef.current = null;
     };
   }, []);
+
+  const attachRecognitionHandlers = useCallback((recognition: SpeechRecognition) => {
+    recognition.onstart = () => {
+      setVoiceError("");
+      setListening(true);
+    };
+
+    recognition.onend = () => {
+      if (userStoppedRef.current) {
+        setListening(false);
+        recognitionRef.current = null;
+        return;
+      }
+
+      window.setTimeout(() => {
+        if (userStoppedRef.current || recognitionRef.current !== recognition) {
+          return;
+        }
+
+        try {
+          recognition.start();
+        } catch {
+          setListening(false);
+          recognitionRef.current = null;
+          setVoiceError("Voice input paused. Tap the mic to continue.");
+        }
+      }, 100);
+    };
+
+    recognition.onerror = (event) => {
+      if (userStoppedRef.current) return;
+      if (event.error === "aborted" || event.error === "no-speech") return;
+
+      userStoppedRef.current = true;
+      setListening(false);
+      recognitionRef.current = null;
+
+      const message = getVoiceErrorMessage(event.error);
+      if (message) setVoiceError(message);
+    };
+
+    recognition.onresult = (event) => {
+      const onTranscript = onTranscriptRef.current;
+      if (!onTranscript) return;
+
+      let text = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const result = event.results[i];
+        if (result.isFinal) {
+          text += result[0]?.transcript ?? "";
+        }
+      }
+
+      const trimmed = text.trim();
+      if (trimmed) onTranscript(trimmed);
+    };
+  }, []);
+
+  const startRecognitionSession = useCallback(() => {
+    const SpeechRecognitionCtor = getSpeechRecognition();
+    if (!SpeechRecognitionCtor) return false;
+
+    const recognition = new SpeechRecognitionCtor();
+    recognition.lang = detectRecognitionLang(contextTextRef.current);
+    recognition.interimResults = false;
+    recognition.continuous = true;
+
+    attachRecognitionHandlers(recognition);
+    recognitionRef.current = recognition;
+
+    try {
+      recognition.start();
+      return true;
+    } catch {
+      recognitionRef.current = null;
+      return false;
+    }
+  }, [attachRecognitionHandlers]);
 
   const startListening = useCallback(
     (onTranscript: (text: string) => void, contextText = "") => {
@@ -69,51 +150,20 @@ export function useVoiceInput() {
       releaseRecognition(recognitionRef.current);
       recognitionRef.current = null;
       userStoppedRef.current = false;
+      onTranscriptRef.current = onTranscript;
+      contextTextRef.current = contextText;
 
-      const recognition = new SpeechRecognitionCtor();
-      recognition.lang = detectRecognitionLang(contextText);
-      recognition.interimResults = false;
-      recognition.continuous = false;
-
-      recognition.onstart = () => {
-        setVoiceError("");
-        setListening(true);
-      };
-
-      recognition.onend = () => {
+      if (!startRecognitionSession()) {
         setListening(false);
-        recognitionRef.current = null;
-      };
-
-      recognition.onerror = (event) => {
-        setListening(false);
-        recognitionRef.current = null;
-        if (userStoppedRef.current) return;
-
-        const message = getVoiceErrorMessage(event.error);
-        if (message) setVoiceError(message);
-      };
-
-      recognition.onresult = (event) => {
-        const transcript = event.results[0]?.[0]?.transcript?.trim();
-        if (transcript) onTranscript(transcript);
-      };
-
-      recognitionRef.current = recognition;
-
-      try {
-        recognition.start();
-      } catch {
-        setListening(false);
-        recognitionRef.current = null;
         setVoiceError("Could not start voice input. Tap the mic again.");
       }
     },
-    []
+    [startRecognitionSession]
   );
 
   const stopListening = useCallback(() => {
     userStoppedRef.current = true;
+    onTranscriptRef.current = null;
     const recognition = recognitionRef.current;
     if (recognition) {
       try {
