@@ -38,4 +38,4 @@ export const SITE_CONTAINER_CLASS =
 
 /** Space below fixed header (top bar + navbar) so content is not covered */
 export const SITE_HEADER_OFFSET_CLASS =
-  "pt-[10.5rem] sm:pt-[11.75rem] md:pt-[12.5rem]";
+  "pt-[148px] sm:pt-[166px] md:pt-[176px]";
