@@ -76,6 +76,410 @@ body {
   animation: fade-up 0.7s ease-out both;
 }
 
+/* FIFA 2026 — footballs bounce inside hero banner from both sides, then exit */
+.fifa-football-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fifa-football {
+  position: absolute;
+  opacity: 0;
+  will-change: left, top, transform, opacity;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes fifa-football-path-1 {
+  0% {
+    left: 105%;
+    top: 8%;
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  5% {
+    left: 92%;
+    top: 10%;
+    opacity: 1;
+    transform: rotate(120deg);
+  }
+  14% {
+    left: 84%;
+    top: 76%;
+    transform: rotate(320deg);
+  }
+  22% {
+    left: 76%;
+    top: 28%;
+    transform: rotate(520deg);
+  }
+  30% {
+    left: 68%;
+    top: 80%;
+    transform: rotate(720deg);
+  }
+  38% {
+    left: 58%;
+    top: 34%;
+    transform: rotate(920deg);
+  }
+  46% {
+    left: 48%;
+    top: 78%;
+    transform: rotate(1120deg);
+  }
+  54% {
+    left: 38%;
+    top: 40%;
+    transform: rotate(1320deg);
+  }
+  62% {
+    left: 28%;
+    top: 76%;
+    transform: rotate(1520deg);
+  }
+  70% {
+    left: 18%;
+    top: 44%;
+    transform: rotate(1720deg);
+    opacity: 1;
+  }
+  80% {
+    left: 6%;
+    top: 72%;
+    transform: rotate(1920deg);
+  }
+  90% {
+    left: -6%;
+    top: 58%;
+    transform: rotate(2120deg);
+  }
+  100% {
+    left: -16%;
+    top: 82%;
+    opacity: 0;
+    transform: rotate(2320deg);
+  }
+}
+
+@keyframes fifa-football-path-2 {
+  0% {
+    left: -10%;
+    top: 22%;
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  6% {
+    left: 4%;
+    top: 24%;
+    opacity: 1;
+    transform: rotate(-100deg);
+  }
+  16% {
+    left: 12%;
+    top: 82%;
+    transform: rotate(-280deg);
+  }
+  24% {
+    left: 20%;
+    top: 36%;
+    transform: rotate(-460deg);
+  }
+  32% {
+    left: 30%;
+    top: 84%;
+    transform: rotate(-640deg);
+  }
+  40% {
+    left: 40%;
+    top: 42%;
+    transform: rotate(-820deg);
+  }
+  48% {
+    left: 50%;
+    top: 82%;
+    transform: rotate(-1000deg);
+  }
+  56% {
+    left: 60%;
+    top: 46%;
+    transform: rotate(-1180deg);
+  }
+  64% {
+    left: 70%;
+    top: 80%;
+    transform: rotate(-1360deg);
+  }
+  72% {
+    left: 82%;
+    top: 50%;
+    transform: rotate(-1540deg);
+    opacity: 1;
+  }
+  82% {
+    left: 94%;
+    top: 78%;
+    transform: rotate(-1720deg);
+  }
+  92% {
+    left: 106%;
+    top: 66%;
+    transform: rotate(-1900deg);
+  }
+  100% {
+    left: 116%;
+    top: 88%;
+    opacity: 0;
+    transform: rotate(-2080deg);
+  }
+}
+
+@keyframes fifa-football-path-3 {
+  0% {
+    left: 106%;
+    top: 4%;
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  5% {
+    left: 96%;
+    top: 6%;
+    opacity: 1;
+    transform: rotate(140deg);
+  }
+  13% {
+    left: 88%;
+    top: 70%;
+    transform: rotate(340deg);
+  }
+  21% {
+    left: 80%;
+    top: 24%;
+    transform: rotate(540deg);
+  }
+  29% {
+    left: 70%;
+    top: 74%;
+    transform: rotate(740deg);
+  }
+  37% {
+    left: 60%;
+    top: 30%;
+    transform: rotate(940deg);
+  }
+  45% {
+    left: 50%;
+    top: 72%;
+    transform: rotate(1140deg);
+  }
+  53% {
+    left: 40%;
+    top: 32%;
+    transform: rotate(1340deg);
+  }
+  61% {
+    left: 30%;
+    top: 70%;
+    transform: rotate(1540deg);
+  }
+  69% {
+    left: 20%;
+    top: 38%;
+    transform: rotate(1740deg);
+    opacity: 1;
+  }
+  78% {
+    left: 8%;
+    top: 68%;
+    transform: rotate(1940deg);
+  }
+  88% {
+    left: -4%;
+    top: 52%;
+    transform: rotate(2140deg);
+  }
+  100% {
+    left: -14%;
+    top: 76%;
+    opacity: 0;
+    transform: rotate(2340deg);
+  }
+}
+
+@keyframes fifa-football-path-4 {
+  0% {
+    left: -14%;
+    top: 32%;
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  6% {
+    left: 0%;
+    top: 34%;
+    opacity: 0.95;
+    transform: rotate(-110deg);
+  }
+  15% {
+    left: 8%;
+    top: 86%;
+    transform: rotate(-300deg);
+  }
+  23% {
+    left: 16%;
+    top: 40%;
+    transform: rotate(-490deg);
+  }
+  31% {
+    left: 26%;
+    top: 86%;
+    transform: rotate(-680deg);
+  }
+  39% {
+    left: 36%;
+    top: 44%;
+    transform: rotate(-870deg);
+  }
+  47% {
+    left: 46%;
+    top: 84%;
+    transform: rotate(-1060deg);
+  }
+  55% {
+    left: 56%;
+    top: 48%;
+    transform: rotate(-1250deg);
+  }
+  63% {
+    left: 66%;
+    top: 82%;
+    transform: rotate(-1440deg);
+  }
+  71% {
+    left: 76%;
+    top: 52%;
+    transform: rotate(-1630deg);
+    opacity: 0.95;
+  }
+  80% {
+    left: 88%;
+    top: 80%;
+    transform: rotate(-1820deg);
+  }
+  90% {
+    left: 100%;
+    top: 70%;
+    transform: rotate(-2010deg);
+  }
+  100% {
+    left: 110%;
+    top: 92%;
+    opacity: 0;
+    transform: rotate(-2200deg);
+  }
+}
+
+@keyframes fifa-football-path-5 {
+  0% {
+    left: -8%;
+    top: 16%;
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  5% {
+    left: 10%;
+    top: 18%;
+    opacity: 1;
+    transform: rotate(-130deg);
+  }
+  14% {
+    left: 18%;
+    top: 78%;
+    transform: rotate(-330deg);
+  }
+  22% {
+    left: 26%;
+    top: 30%;
+    transform: rotate(-530deg);
+  }
+  30% {
+    left: 36%;
+    top: 82%;
+    transform: rotate(-730deg);
+  }
+  38% {
+    left: 46%;
+    top: 36%;
+    transform: rotate(-930deg);
+  }
+  46% {
+    left: 56%;
+    top: 80%;
+    transform: rotate(-1130deg);
+  }
+  54% {
+    left: 66%;
+    top: 42%;
+    transform: rotate(-1330deg);
+  }
+  62% {
+    left: 76%;
+    top: 78%;
+    transform: rotate(-1530deg);
+  }
+  70% {
+    left: 86%;
+    top: 46%;
+    transform: rotate(-1730deg);
+    opacity: 1;
+  }
+  80% {
+    left: 96%;
+    top: 74%;
+    transform: rotate(-1930deg);
+  }
+  90% {
+    left: 108%;
+    top: 62%;
+    transform: rotate(-2130deg);
+  }
+  100% {
+    left: 118%;
+    top: 86%;
+    opacity: 0;
+    transform: rotate(-2330deg);
+  }
+}
+
+.fifa-football-path-1 {
+  animation-name: fifa-football-path-1;
+}
+
+.fifa-football-path-2 {
+  animation-name: fifa-football-path-2;
+}
+
+.fifa-football-path-3 {
+  animation-name: fifa-football-path-3;
+}
+
+.fifa-football-path-4 {
+  animation-name: fifa-football-path-4;
+}
+
+.fifa-football-path-5 {
+  animation-name: fifa-football-path-5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fifa-football-layer {
+    display: none;
+  }
+}
+
 .gradient-text {
   background: linear-gradient(135deg, var(--color-sky-300), var(--color-sky-400), var(--color-orange-400));
   -webkit-background-clip: text;

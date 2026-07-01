@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FifaFootballAnimation } from "@/components/seasonal/fifa-football-animation";
 import { SITE_HEADER_OFFSET_CLASS } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +23,7 @@ export function Hero() {
       )}
     >
       <div className="hero-banner relative aspect-[1920/600] w-full">
+        <FifaFootballAnimation />
         <Image
           src={HERO_BANNER.light.src}
           alt={HERO_BANNER.light.alt}
