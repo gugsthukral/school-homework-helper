@@ -19,6 +19,7 @@ import { AudiencesSection } from "@/components/home/audiences-section";
 import { BlogPreview } from "@/components/home/blog-preview";
 
 import { CtaSection } from "@/components/home/cta-section";
+import { FifaFootballAnimation } from "@/components/seasonal/fifa-football-animation";
 import { SiteContainer } from "@/components/shared/site-container";
 
 import { PAGE_SEO } from "@/lib/seo-config";
@@ -50,6 +51,10 @@ export default function HomePage() {
   return (
 
     <div className="home-ui">
+
+      <div className="lg:hidden">
+        <FifaFootballAnimation mode="screen" />
+      </div>
 
       <main>
 

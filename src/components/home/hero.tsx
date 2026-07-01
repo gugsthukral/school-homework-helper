@@ -23,7 +23,9 @@ export function Hero() {
       )}
     >
       <div className="hero-banner relative aspect-[1920/600] w-full">
-        <FifaFootballAnimation />
+        <div className="pointer-events-none absolute inset-0 z-10 hidden overflow-hidden lg:block">
+          <FifaFootballAnimation mode="hero" />
+        </div>
         <Image
           src={HERO_BANNER.light.src}
           alt={HERO_BANNER.light.alt}

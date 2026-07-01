@@ -5,15 +5,19 @@ import { useEffect, useState } from "react";
 import { FootballIcon } from "@/components/seasonal/football-icon";
 import { FIFA_2026_ANIMATION_ENABLED } from "@/lib/seasonal-config";
 
+type FifaFootballAnimationProps = {
+  mode: "screen" | "hero";
+};
+
 const FOOTBALLS = [
-  { pathClass: "fifa-football-path-1", duration: 16, delay: 0, size: 50 },
-  { pathClass: "fifa-football-path-2", duration: 18, delay: 1.2, size: 48 },
-  { pathClass: "fifa-football-path-3", duration: 15, delay: 2.4, size: 46 },
-  { pathClass: "fifa-football-path-4", duration: 19, delay: 0.6, size: 50 },
-  { pathClass: "fifa-football-path-5", duration: 17, delay: 3, size: 44 },
+  { pathClass: "fifa-football-path-1" },
+  { pathClass: "fifa-football-path-2" },
+  { pathClass: "fifa-football-path-3" },
+  { pathClass: "fifa-football-path-4" },
+  { pathClass: "fifa-football-path-5" },
 ] as const;
 
-export function FifaFootballAnimation() {
+export function FifaFootballAnimation({ mode }: FifaFootballAnimationProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -28,17 +32,16 @@ export function FifaFootballAnimation() {
   if (!visible) return null;
 
   return (
-    <div className="fifa-football-layer" aria-hidden="true">
+    <div
+      className={`fifa-football-layer fifa-football-layer--${mode}`}
+      aria-hidden="true"
+    >
       {FOOTBALLS.map((ball) => (
         <div
           key={ball.pathClass}
           className={`fifa-football ${ball.pathClass}`}
-          style={{
-            animationDuration: `${ball.duration}s`,
-            animationDelay: `${ball.delay}s`,
-          }}
         >
-          <FootballIcon size={ball.size} />
+          <FootballIcon />
         </div>
       ))}
     </div>
