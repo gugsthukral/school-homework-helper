@@ -91,6 +91,27 @@ html[data-theme="dark"] .hero-glow {
   background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(74, 158, 255, 0.08), transparent 70%);
 }
 
+.hero-banner-image-light {
+  display: block;
+}
+
+.hero-banner-image-dark {
+  display: none;
+}
+
+html[data-theme="dark"] .hero-banner-image-light {
+  display: none;
+}
+
+html[data-theme="dark"] .hero-banner-image-dark {
+  display: block;
+}
+
+.hero-banner-image {
+  width: 100%;
+  height: 100%;
+}
+
 .section-glow {
   background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(249, 115, 22, 0.06), transparent 70%);
 }
