@@ -12,6 +12,7 @@ export default function CalculatorPage() {
       title="AI Calculator"
       description="Calculate expressions, percentages, scientific values, and unit conversions with step-by-step explanations."
       iconKey="SquareFunction"
+      learnMoreKey="calculator"
     >
       <CalculatorForm />
     </ToolLayout>

@@ -12,6 +12,7 @@ export default function EssayGeneratorPage() {
       title="Essay Generator"
       description="Write essays on any topic with the right word count and language for your class level."
       iconKey="PenLine"
+      learnMoreKey="essay-generator"
     >
       <EssayGeneratorForm />
     </ToolLayout>

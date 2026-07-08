@@ -12,6 +12,7 @@ export default function QuizGeneratorPage() {
       title="Quiz Generator"
       description="Create multiple-choice quizzes by subject or topic, with answers and explanations."
       iconKey="HelpCircle"
+      learnMoreKey="quiz-generator"
     >
       <QuizGeneratorForm />
     </ToolLayout>

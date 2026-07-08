@@ -12,6 +12,7 @@ export default function AskAnythingPage() {
       title="Ask Anything"
       description="Ask any school question and get a clear answer from your AI tutor. Type or use voice input."
       iconKey="MessageCircleQuestion"
+      learnMoreKey="ask-anything"
     >
       <AskAnythingForm />
     </ToolLayout>

@@ -12,6 +12,7 @@ export default function GrammarCheckerPage() {
       title="Grammar Checker"
       description="Fix grammar mistakes, get corrections, and learn from clear explanations."
       iconKey="SpellCheck"
+      learnMoreKey="grammar-checker"
     >
       <GrammarCheckerForm />
     </ToolLayout>

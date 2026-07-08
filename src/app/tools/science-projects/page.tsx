@@ -12,6 +12,7 @@ export default function ScienceProjectsPage() {
       title="School Projects"
       description="Discover fun, safe school project ideas tailored to your class level."
       iconKey="FlaskConical"
+      learnMoreKey="science-projects"
     >
       <ScienceProjectsForm />
     </ToolLayout>

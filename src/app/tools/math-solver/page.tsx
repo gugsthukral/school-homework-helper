@@ -12,6 +12,7 @@ export default function MathSolverPage() {
       title="Math Solver"
       description="Get step-by-step solutions for arithmetic, algebra, geometry, and word problems."
       iconKey="Calculator"
+      learnMoreKey="math-solver"
     >
       <MathSolverForm />
     </ToolLayout>

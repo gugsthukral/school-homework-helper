@@ -5,17 +5,22 @@ import { Footer } from "@/components/layout/footer";
 import { ColorfulToolIcon } from "@/components/shared/colorful-icons";
 import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
 import { SiteContainer } from "@/components/shared/site-container";
+import { ToolLearnMore } from "@/components/tools/tool-learn-more";
 import { SITE_HEADER_OFFSET_CLASS } from "@/lib/site-config";
+import { getToolLearnMoreContent, type ToolLearnMoreKey } from "@/lib/tool-learn-more";
 import { cn } from "@/lib/utils";
 
 type ToolLayoutProps = {
   title: string;
   description: string;
   iconKey: string;
+  learnMoreKey?: ToolLearnMoreKey;
   children: React.ReactNode;
 };
 
-export function ToolLayout({ title, description, iconKey, children }: ToolLayoutProps) {
+export function ToolLayout({ title, description, iconKey, learnMoreKey, children }: ToolLayoutProps) {
+  const learnMore = learnMoreKey ? getToolLearnMoreContent(learnMoreKey) : null;
+
   return (
     <>
       <main className={cn("min-h-screen w-full pb-20 sm:pb-16", SITE_HEADER_OFFSET_CLASS)}>
@@ -38,9 +43,11 @@ export function ToolLayout({ title, description, iconKey, children }: ToolLayout
             </div>
           </div>
 
-          <AdBanner placement="horizontal" className="mb-6" />
-
           {children}
+
+          {learnMore ? <ToolLearnMore content={learnMore} className="mt-10" /> : null}
+
+          <AdBanner placement="horizontal" className="mt-10" />
 
           <AdBanner placement="inArticle" className="mt-8" />
         </SiteContainer>

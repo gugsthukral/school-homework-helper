@@ -12,6 +12,7 @@ export default function HomeworkSolverPage() {
       title="Homework Solver"
       description="Enter any homework question and get a clear, step-by-step explanation tailored to your class level."
       iconKey="BookOpen"
+      learnMoreKey="homework-solver"
     >
       <HomeworkSolverForm />
     </ToolLayout>
