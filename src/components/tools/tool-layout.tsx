@@ -4,6 +4,8 @@ import { AdBanner } from "@/components/ads/ad-banner";
 import { Footer } from "@/components/layout/footer";
 import { ColorfulToolIcon } from "@/components/shared/colorful-icons";
 import { RegionalLanguagesBadge } from "@/components/shared/regional-languages-badge";
+import { ToolAppJsonLd } from "@/components/seo/tool-app-json-ld";
+import { ToolFaqJsonLd } from "@/components/seo/tool-faq-json-ld";
 import { SiteContainer } from "@/components/shared/site-container";
 import { ToolLearnMore } from "@/components/tools/tool-learn-more";
 import { SITE_HEADER_OFFSET_CLASS } from "@/lib/site-config";
@@ -15,10 +17,11 @@ type ToolLayoutProps = {
   description: string;
   iconKey: string;
   learnMoreKey?: ToolLearnMoreKey;
+  path?: string;
   children: React.ReactNode;
 };
 
-export function ToolLayout({ title, description, iconKey, learnMoreKey, children }: ToolLayoutProps) {
+export function ToolLayout({ title, description, iconKey, learnMoreKey, path, children }: ToolLayoutProps) {
   const learnMore = learnMoreKey ? getToolLearnMoreContent(learnMoreKey) : null;
 
   return (
@@ -26,6 +29,10 @@ export function ToolLayout({ title, description, iconKey, learnMoreKey, children
       <main className={cn("min-h-screen w-full pb-20 sm:pb-16", SITE_HEADER_OFFSET_CLASS)}>
         <div className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-96" />
         <SiteContainer className="relative">
+          {learnMore && path ? (
+            <ToolAppJsonLd tool={{ name: title, description, path }} content={learnMore} />
+          ) : null}
+          {learnMore ? <ToolFaqJsonLd content={learnMore} /> : null}
           <Link
             href="/#tools"
             className="page-link mb-8 inline-flex items-center gap-2 text-sm transition-colors hover:text-orange-500"

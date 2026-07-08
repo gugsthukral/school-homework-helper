@@ -13,6 +13,7 @@ export default function ScienceProjectsPage() {
       description="Discover fun, safe school project ideas tailored to your class level."
       iconKey="FlaskConical"
       learnMoreKey="science-projects"
+      path={TOOL_SEO["science-projects"].path}
     >
       <ScienceProjectsForm />
     </ToolLayout>

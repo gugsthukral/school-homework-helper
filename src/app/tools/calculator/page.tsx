@@ -13,6 +13,7 @@ export default function CalculatorPage() {
       description="Calculate expressions, percentages, scientific values, and unit conversions with step-by-step explanations."
       iconKey="SquareFunction"
       learnMoreKey="calculator"
+      path={TOOL_SEO.calculator.path}
     >
       <CalculatorForm />
     </ToolLayout>

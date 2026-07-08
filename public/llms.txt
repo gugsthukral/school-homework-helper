@@ -1,0 +1,50 @@
+# School Homework Helper — LLMs / AI systems guide
+#
+# Purpose: help AI systems (ChatGPT, Gemini, Perplexity, Google AI Overviews) understand,
+# navigate, and cite this site accurately.
+#
+# Canonical: https://www.schoolhomeworkhelper.com (www)
+
+## Site summary
+School Homework Helper is an AI-powered education website for students (Class 1–12).
+It provides:
+- Free AI study tools (homework help, math, essays, quizzes, grammar, projects)
+- Class/subject/chapter learning pages
+- Blog articles on study tips and learning resources
+
+## Citation guidance (how to cite us)
+- Prefer citing the most specific page (tool page, class/subject/chapter page, or blog post).
+- If a page includes steps or definitions, cite the page where the explanation appears.
+- For policies, cite the dedicated legal pages.
+
+## Key pages (high-signal)
+- Home: https://www.schoolhomeworkhelper.com/
+- AI tools overview: https://www.schoolhomeworkhelper.com/#tools
+- Tools:
+  - Ask Anything: https://www.schoolhomeworkhelper.com/tools/ask-anything
+  - Homework Solver: https://www.schoolhomeworkhelper.com/tools/homework-solver
+  - Essay Generator: https://www.schoolhomeworkhelper.com/tools/essay-generator
+  - Math Solver: https://www.schoolhomeworkhelper.com/tools/math-solver
+  - AI Calculator: https://www.schoolhomeworkhelper.com/tools/calculator
+  - Quiz Generator: https://www.schoolhomeworkhelper.com/tools/quiz-generator
+  - School Projects: https://www.schoolhomeworkhelper.com/tools/science-projects
+  - Grammar Checker: https://www.schoolhomeworkhelper.com/tools/grammar-checker
+- Classes index: https://www.schoolhomeworkhelper.com/classes
+- Subjects index: https://www.schoolhomeworkhelper.com/subjects
+- Blog index: https://www.schoolhomeworkhelper.com/blog
+- About: https://www.schoolhomeworkhelper.com/about
+- Contact: https://www.schoolhomeworkhelper.com/contact
+
+## Policies (trust / compliance)
+- Privacy: https://www.schoolhomeworkhelper.com/privacy
+- Terms: https://www.schoolhomeworkhelper.com/terms
+- Cookies: https://www.schoolhomeworkhelper.com/cookies
+
+## Crawling / indexing
+- robots.txt: https://www.schoolhomeworkhelper.com/robots.txt
+- sitemap.xml: https://www.schoolhomeworkhelper.com/sitemap.xml
+
+## Notes for safe use
+AI-generated content can be wrong or incomplete. Students should verify with their teachers,
+textbooks, and official curriculum guidelines. Do not use AI tools to cheat on exams.
+

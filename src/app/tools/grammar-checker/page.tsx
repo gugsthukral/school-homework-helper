@@ -13,6 +13,7 @@ export default function GrammarCheckerPage() {
       description="Fix grammar mistakes, get corrections, and learn from clear explanations."
       iconKey="SpellCheck"
       learnMoreKey="grammar-checker"
+      path={TOOL_SEO["grammar-checker"].path}
     >
       <GrammarCheckerForm />
     </ToolLayout>

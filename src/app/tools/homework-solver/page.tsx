@@ -13,6 +13,7 @@ export default function HomeworkSolverPage() {
       description="Enter any homework question and get a clear, step-by-step explanation tailored to your class level."
       iconKey="BookOpen"
       learnMoreKey="homework-solver"
+      path={TOOL_SEO["homework-solver"].path}
     >
       <HomeworkSolverForm />
     </ToolLayout>

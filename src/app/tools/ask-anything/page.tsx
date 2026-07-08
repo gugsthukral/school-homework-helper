@@ -13,6 +13,7 @@ export default function AskAnythingPage() {
       description="Ask any school question and get a clear answer from your AI tutor. Type or use voice input."
       iconKey="MessageCircleQuestion"
       learnMoreKey="ask-anything"
+      path={TOOL_SEO["ask-anything"].path}
     >
       <AskAnythingForm />
     </ToolLayout>

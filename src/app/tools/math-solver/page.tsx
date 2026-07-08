@@ -13,6 +13,7 @@ export default function MathSolverPage() {
       description="Get step-by-step solutions for arithmetic, algebra, geometry, and word problems."
       iconKey="Calculator"
       learnMoreKey="math-solver"
+      path={TOOL_SEO["math-solver"].path}
     >
       <MathSolverForm />
     </ToolLayout>

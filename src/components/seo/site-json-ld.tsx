@@ -13,9 +13,23 @@ export function SiteJsonLd() {
     name: SITE_NAME,
     url: baseUrl,
     logo: `${baseUrl}/logo.png`,
+    email: "hello@schoolhomeworkhelper.com",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "IN",
+    },
     description:
       `Eight AI tools for homework help, essays, maths, quizzes, school projects, grammar, calculator, and ask-anything tutoring — for CBSE Classes 1–12. ${REGIONAL_LANGUAGES_TAGLINE}.`,
     sameAs: socialLinks.map((link) => link.href),
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: "hello@schoolhomeworkhelper.com",
+        url: `${baseUrl}/contact`,
+        availableLanguage: ["en", "hi"],
+      },
+    ],
   };
 
   const websiteSchema = {
@@ -30,6 +44,7 @@ export function SiteJsonLd() {
       name: SITE_NAME,
       logo: `${baseUrl}/logo.png`,
     },
+    inLanguage: ["en-IN", "hi-IN"],
     potentialAction: {
       "@type": "SearchAction",
       target: {
