@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 
 import { Footer } from "@/components/layout/footer";
 import { AdBanner } from "@/components/ads/ad-banner";
@@ -11,17 +10,10 @@ import { HowItWorks } from "@/components/home/how-it-works";
 import { AudiencesSection } from "@/components/home/audiences-section";
 import { BlogPreview } from "@/components/home/blog-preview";
 import { CtaSection } from "@/components/home/cta-section";
+import { FifaFootballLazy } from "@/components/seasonal/fifa-football-lazy";
 import { SiteContainer } from "@/components/shared/site-container";
 import { PAGE_SEO } from "@/lib/seo-config";
 import { buildPageMetadata } from "@/lib/seo-metadata";
-
-const FifaFootballAnimation = dynamic(
-  () =>
-    import("@/components/seasonal/fifa-football-animation").then(
-      (mod) => mod.FifaFootballAnimation
-    ),
-  { ssr: false }
-);
 
 const homeSeo = PAGE_SEO.home;
 
@@ -36,7 +28,7 @@ export default function HomePage() {
   return (
     <div className="home-ui">
       <div className="lg:hidden">
-        <FifaFootballAnimation mode="screen" />
+        <FifaFootballLazy mode="screen" />
       </div>
 
       <main>

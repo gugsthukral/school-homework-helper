@@ -1,15 +1,7 @@
-import dynamic from "next/dynamic";
 import { HeroBannerImage } from "@/components/home/hero-banner-image";
+import { FifaFootballLazy } from "@/components/seasonal/fifa-football-lazy";
 import { SITE_HEADER_OFFSET_CLASS } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
-
-const FifaFootballAnimation = dynamic(
-  () =>
-    import("@/components/seasonal/fifa-football-animation").then(
-      (mod) => mod.FifaFootballAnimation
-    ),
-  { ssr: false }
-);
 
 const HERO_BANNER = {
   light: {
@@ -46,7 +38,7 @@ export function Hero() {
       >
         <div className="hero-banner relative aspect-[1920/600] w-full bg-[var(--theme-bg)]">
           <div className="pointer-events-none absolute inset-0 z-10 hidden overflow-hidden lg:block">
-            <FifaFootballAnimation mode="hero" />
+            <FifaFootballLazy mode="hero" />
           </div>
           <HeroBannerImage
             src={HERO_BANNER.light.src}
