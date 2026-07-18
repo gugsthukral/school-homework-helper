@@ -23,8 +23,9 @@ export default function ClassesPage() {
     <PageLayout
       badge="Classes"
       title="Homework Help for Every Class"
-      description={`CBSE syllabus ${ACADEMIC_SESSION} for Class 1–12. Pick your class and start learning with AI-powered tools.`}
+      description={`Class 1–12 resource directories and AI study tools for academic session ${ACADEMIC_SESSION}. Verify syllabus details with your school or education board.`}
       showRegionalLanguages
+      showAds={false}
       backHref="/"
     >
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">

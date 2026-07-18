@@ -5,14 +5,16 @@ import { formatResponse } from "@/lib/format-response";
 import { Footer } from "@/components/layout/footer";
 import { SiteContainer } from "@/components/shared/site-container";
 import { SITE_HEADER_OFFSET_CLASS } from "@/lib/site-config";
+import { REVIEW_STATUS_LABELS } from "@/lib/editorial";
 import { cn } from "@/lib/utils";
 import type { BlogPost } from "@/lib/blog-posts";
-import { blogPosts } from "@/lib/blog-posts";
+import { curatedBlogPosts, isApprovedBlogPost } from "@/lib/blog-posts";
 
 type BlogArticleProps = { post: BlogPost };
 
 export function BlogArticle({ post }: BlogArticleProps) {
-  const related = blogPosts
+  const showAds = isApprovedBlogPost(post.slug);
+  const related = curatedBlogPosts
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 3);
   const fallbackRelated =
@@ -20,7 +22,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
       ? related
       : [
           ...related,
-          ...blogPosts
+          ...curatedBlogPosts
             .filter((p) => p.slug !== post.slug && !related.includes(p))
             .slice(0, 3 - related.length),
         ];
@@ -58,14 +60,19 @@ export function BlogArticle({ post }: BlogArticleProps) {
               </span>
               <span>{post.readTime}</span>
             </div>
+            {post.reviewStatus ? (
+              <p className="page-description mt-3 text-xs">
+                Status: {REVIEW_STATUS_LABELS[post.reviewStatus]}
+              </p>
+            ) : null}
           </header>
 
-          <AdBanner placement="horizontal" />
+          {showAds ? <AdBanner placement="horizontal" /> : null}
 
           <div className="space-y-8">
             {post.sections.map((section, i) => (
               <section key={i}>
-                {i === 1 && <AdBanner placement="inArticle" className="mb-8" />}
+                {showAds && i === 1 ? <AdBanner placement="inArticle" className="mb-8" /> : null}
                 <div className="glass-card rounded-2xl p-6 sm:p-8">
                 {section.heading && (
                   <h2 className="page-title mb-4 text-xl font-semibold">{section.heading}</h2>
@@ -80,6 +87,26 @@ export function BlogArticle({ post }: BlogArticleProps) {
               </section>
             ))}
           </div>
+
+          {post.sources && post.sources.length > 0 ? (
+            <section className="glass-card mt-8 rounded-2xl p-6">
+              <h2 className="page-title text-lg font-semibold">Sources</h2>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
+                {post.sources.map((source) => (
+                  <li key={source.url}>
+                    <a
+                      href={source.url}
+                      className="page-link hover:text-orange-500"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {source.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
 
           {fallbackRelated.length > 0 && (
             <section className="mt-12">

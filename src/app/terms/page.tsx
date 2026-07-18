@@ -15,6 +15,7 @@ export default function TermsOfServicePage() {
       badge="Legal"
       title="Terms of Service"
       description="Please read these terms carefully before using School Homework Helper."
+      showAds={false}
       backHref="/"
     >
       <article className="glass-card w-full max-w-[1280px] rounded-2xl p-6 sm:p-8">

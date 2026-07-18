@@ -7,7 +7,7 @@ import { SITE_CONTAINER_CLASS } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 export function CookieConsentBanner() {
-  const { bannerOpen, acceptCookies } = useCookieConsent();
+  const { bannerOpen, acceptCookies, rejectCookies } = useCookieConsent();
 
   if (!bannerOpen) return null;
 
@@ -26,9 +26,9 @@ export function CookieConsentBanner() {
       >
         <button
           type="button"
-          onClick={acceptCookies}
+          onClick={rejectCookies}
           className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
-          aria-label="Accept cookies and close"
+          aria-label="Reject optional cookies and close"
         >
           <X className="h-4 w-4" />
         </button>
@@ -52,7 +52,14 @@ export function CookieConsentBanner() {
           </div>
         </div>
 
-        <div className="flex shrink-0 sm:items-center">
+        <div className="flex shrink-0 flex-col gap-2 sm:flex-row sm:items-center">
+          <button
+            type="button"
+            onClick={rejectCookies}
+            className="inline-flex w-full items-center justify-center rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-orange-300 hover:text-orange-500 sm:w-auto"
+          >
+            Reject optional
+          </button>
           <button
             type="button"
             onClick={acceptCookies}

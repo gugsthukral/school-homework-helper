@@ -23,6 +23,7 @@ export function ChapterDetail({ chapter, content }: ChapterDetailProps) {
       badge={`Class ${chapter.classNumber} · ${chapter.subjectName}`}
       title={chapter.chapterTitle}
       description={content.overview}
+      showAds={false}
       backHref={getSubjectPath(chapter.classSlug, chapter.subjectSlug)}
       backLabel={`Class ${chapter.classNumber} ${chapter.subjectName}`}
     >

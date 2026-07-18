@@ -62,6 +62,7 @@ export default async function ClassDetailPage({ params }: Props) {
       badge={cls.label}
       title={cls.title}
       description={cls.description}
+      showAds={false}
       backHref="/classes"
       backLabel="All Classes"
     >

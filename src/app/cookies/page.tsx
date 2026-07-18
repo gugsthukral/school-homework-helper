@@ -8,7 +8,7 @@ import { buildPageMetadata } from "@/lib/seo-metadata";
 
 export const metadata: Metadata = buildPageMetadata(PAGE_SEO.cookies);
 
-const LAST_UPDATED = "June 24, 2026";
+const LAST_UPDATED = "July 19, 2026";
 
 const cookieTable = [
   {
@@ -56,6 +56,7 @@ export default function CookiePolicyPage() {
       badge="Legal"
       title="Cookie Policy"
       description="This page explains what cookies we use, why we use them, and how you can control your preferences."
+      showAds={false}
       backHref="/"
     >
       <article className="glass-card w-full max-w-[1280px] rounded-2xl p-6 sm:p-8">
@@ -134,10 +135,11 @@ export default function CookiePolicyPage() {
               These still apply if you reject optional cookies.
             </li>
             <li>
-              <strong className="text-slate-800">Optional cookies</strong> are used for advertising.
-              They load only after you accept in our banner (outside the EEA/UK/CH) or consent in
-              Google&apos;s message (inside the EEA/UK/CH). We use Google Consent Mode v2 so ad tags
-              respect your choice.
+              <strong className="text-slate-800">Optional storage and advertising</strong> are
+              enabled only after you accept in our banner (outside the EEA/UK/CH) or consent in
+              Google&apos;s message (inside the EEA/UK/CH). Google tag and consent-management
+              scripts may load before a choice in consent-denied mode so they can record and
+              respect that choice; ad units do not render until marketing consent is available.
             </li>
           </ul>
         </LegalSection>

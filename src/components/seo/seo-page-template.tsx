@@ -42,6 +42,7 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
         badge={`Class ${page.classNumber}`}
         title={page.h1}
         description={page.intro}
+        showAds={false}
         backHref={`/classes/class-${page.classNumber}`}
         backLabel={`Class ${page.classNumber} Resources`}
       >

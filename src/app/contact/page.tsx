@@ -13,6 +13,7 @@ export default function ContactPage() {
       badge="Contact"
       title="Get in Touch"
       description="Have a question, suggestion, or feedback? We'd love to hear from you."
+      showAds={false}
       backHref="/"
     >
       <div className="grid gap-10 lg:grid-cols-5">

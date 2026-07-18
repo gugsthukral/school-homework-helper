@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { ChapterDetail } from "@/components/classes/chapter-detail";
 import {
   buildChapterContent,
-  chapterRegistry,
   getChapter,
 } from "@/lib/chapters";
 import { ACADEMIC_SESSION } from "@/lib/syllabus-2026-27";
@@ -13,14 +12,6 @@ type Props = {
   params: Promise<{ slug: string; subject: string; chapter: string }>;
 };
 
-export async function generateStaticParams() {
-  return chapterRegistry.map((c) => ({
-    slug: c.classSlug,
-    subject: c.subjectSlug,
-    chapter: c.chapterSlug,
-  }));
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, subject, chapter } = await params;
   const entry = getChapter(slug, subject, chapter);
@@ -28,14 +19,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return buildPageMetadata({
     title: `Class ${entry.classNumber} ${entry.subjectName}: ${entry.chapterTitle} (${ACADEMIC_SESSION})`,
-    description: `Study Class ${entry.classNumber} ${entry.subjectName} Chapter ${entry.chapterNumber} — ${entry.chapterTitle}. CBSE NCERT syllabus ${ACADEMIC_SESSION} with notes, tips, and AI homework help.`,
+    description: `Directory and general study guidance for Class ${entry.classNumber} ${entry.subjectName} Chapter ${entry.chapterNumber} — ${entry.chapterTitle}, session ${ACADEMIC_SESSION}.`,
     keywords: [
       `class ${entry.classNumber} ${entry.chapterTitle}`,
       `${entry.subjectName} chapter ${entry.chapterNumber}`,
       `class ${entry.classNumber} ${entry.subjectName} ${ACADEMIC_SESSION}`,
-      "NCERT chapter notes",
+      "chapter study guidance",
     ],
     path: `/classes/${slug}/${subject}/${chapter}`,
+    noIndex: true,
   });
 }
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { PageLayout } from "@/components/layout/page-layout";
 import { LegalSection } from "@/components/legal/legal-section";
+import { editorialIdentity } from "@/lib/editorial";
 import { buildPageMetadata } from "@/lib/seo-metadata";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -13,7 +14,7 @@ export const metadata: Metadata = buildPageMetadata({
   keywords: ["editorial policy", "content quality", "AI transparency", "education website policy"],
 });
 
-const LAST_UPDATED = "July 8, 2026";
+const LAST_UPDATED = "July 19, 2026";
 
 export default function EditorialPolicyPage() {
   return (
@@ -21,6 +22,7 @@ export default function EditorialPolicyPage() {
       badge="Trust"
       title="Editorial Policy"
       description="Our commitment to clear, accurate, and student-first educational content."
+      showAds={false}
       backHref="/"
     >
       <article className="glass-card w-full max-w-[1280px] rounded-2xl p-6 sm:p-8">
@@ -53,37 +55,74 @@ export default function EditorialPolicyPage() {
 
         <LegalSection title="3. AI transparency and limitations">
           <p>
-            AI-generated content may be incomplete or incorrect. Students should verify important
-            answers with textbooks, teachers, and official curriculum guidance. We encourage users
-            to request step-by-step reasoning and to write final work in their own words.
+            Our interactive tools generate answers with artificial intelligence. Some static
+            resources may also be drafted or structured with AI assistance. AI output can be
+            incomplete, outdated, or incorrect, so students should verify important answers with
+            their prescribed textbook, teacher, and official curriculum guidance.
+          </p>
+          <p>
+            A page is not described as reviewed merely because it was generated successfully.
+            Unreviewed and template-based pages are excluded from search indexing while they await
+            substantive editorial work.
           </p>
         </LegalSection>
 
-        <LegalSection title="4. Quality standards">
-          <p>We aim to keep content:</p>
+        <LegalSection title="4. Review statuses">
           <ul className="list-disc space-y-2 pl-5">
-            <li>Clear and age-appropriate for the requested class level</li>
-            <li>Structured (headings, steps, examples, and summaries)</li>
-            <li>Safe and responsible for students</li>
-            <li>Up to date where curriculum changes apply</li>
+            <li><strong className="text-slate-800">Draft:</strong> not approved for search indexing or advertising.</li>
+            <li><strong className="text-slate-800">Editorial review pending:</strong> selected for improvement, but not represented as expert-reviewed.</li>
+            <li><strong className="text-slate-800">Reviewed for publication:</strong> checked for scope, clarity, internal consistency, source support, and accurate claims.</li>
           </ul>
         </LegalSection>
 
-        <LegalSection title="5. Corrections and updates">
+        <LegalSection title="5. Review process and source hierarchy">
+          <p>Before material is approved for publication, the review process should:</p>
+          <ul className="list-disc space-y-2 pl-5">
+            <li>Confirm that the title and description match what the page actually provides</li>
+            <li>Check worked steps, counts, formulas, dates, and internal consistency</li>
+            <li>Use age-appropriate language and include safety cautions where relevant</li>
+            <li>Distinguish general study guidance from official curriculum requirements</li>
+            <li>Record genuine publication and update dates rather than generated dates</li>
+          </ul>
+          <p>
+            Sources are prioritized in this order: official education-board or government
+            publications, prescribed textbooks and school notices, established educational
+            references, and clearly labelled general guidance. Where no source is listed, readers
+            should not assume that a page has been verified against the latest board syllabus.
+          </p>
+        </LegalSection>
+
+        <LegalSection title="6. Editorial responsibility">
+          <p>
+            The publisher is {editorialIdentity.publisher}.
+            {editorialIdentity.ownerName
+              ? ` Editorial responsibility is held by ${editorialIdentity.ownerName}${editorialIdentity.ownerCredentials ? ` (${editorialIdentity.ownerCredentials})` : ""}.`
+              : " A named editor profile will be published only after the owner supplies accurate public details; we do not invent credentials."}
+          </p>
+        </LegalSection>
+
+        <LegalSection title="7. Corrections and updates">
           <p>
             If you find an error, please report it via our{" "}
             <Link href="/contact" className="text-orange-400 hover:underline">
               contact page
             </Link>
-            . We review reports and update content when needed. Significant policy updates will be
-            reflected in the “Last updated” date above.
+            . Reports are assessed against the source hierarchy above. When a material correction
+            is made, the page&apos;s genuine update date should be changed. Significant policy
+            updates are reflected in the “Last updated” date above.
           </p>
         </LegalSection>
 
-        <LegalSection title="6. Advertising and independence">
+        <LegalSection title="8. Advertising and independence">
           <p>
             Ads (if enabled) help support the website. Advertising partners do not influence our
             educational content or the guidance we provide to students.
+          </p>
+          <p>
+            Because the service is intended for a broad school audience that can include children,
+            the site owner must review age handling, consent, and child-directed advertising
+            requirements before enabling or changing advertising. This editorial policy is not a
+            substitute for legal or platform-policy advice.
           </p>
         </LegalSection>
       </article>

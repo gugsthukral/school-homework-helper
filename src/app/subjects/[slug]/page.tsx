@@ -60,6 +60,7 @@ export default async function SubjectDetailPage({ params, searchParams }: Props)
       badge="Subject"
       title={`${subject.name} Homework Help`}
       description={subject.description}
+      showAds={false}
       backHref="/subjects"
       backLabel="All Subjects"
     >

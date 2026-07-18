@@ -22,6 +22,7 @@ const footerLinks = {
     { label: "All Subjects", href: "/subjects" },
     { label: "Blog", href: "/blog" },
     { label: "About Us", href: "/about" },
+    { label: "Editorial Policy", href: "/editorial-policy" },
     { label: "Contact", href: "/contact" },
   ],
 };
@@ -114,6 +115,9 @@ export function Footer() {
             </Link>
             <Link href="/cookies" className="theme-footer-muted text-sm transition-colors hover:text-orange-500">
               Cookie Policy
+            </Link>
+            <Link href="/editorial-policy" className="theme-footer-muted text-sm transition-colors hover:text-orange-500">
+              Editorial Policy
             </Link>
             <GooglePrivacyFooterLink />
           </div>

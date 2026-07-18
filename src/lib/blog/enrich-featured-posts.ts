@@ -7,7 +7,7 @@ export function enrichFeaturedPost(post: BlogPost): BlogPost {
       {
         heading: "Daily Practice Plan",
         content:
-          "• **Monday:** Numbers & place value (Q 1–20)\n• **Tuesday:** Fractions & decimals (Q 21–50)\n• **Wednesday:** Geometry (Q 51–75)\n• **Thursday:** Word problems (Q 76–100)\n• **Friday:** Mixed revision quiz\n• **Weekend:** Retry questions you got wrong",
+          "• **Monday:** Numbers and place value\n• **Tuesday:** Fractions and decimals\n• **Wednesday:** Geometry and measurement\n• **Thursday:** Word problems\n• **Friday:** Mixed revision quiz\n• **Weekend:** Retry questions you got wrong",
       },
       {
         heading: "Common Class 5 Maths Mistakes",
@@ -15,9 +15,9 @@ export function enrichFeaturedPost(post: BlogPost): BlogPost {
           "• Forgetting to convert units (cm to m)\n• Adding fractions without common denominators\n• Confusing perimeter with area\n• Rounding errors in decimals\n• Misreading 'total' vs 'remaining' in word problems",
       },
       {
-        heading: "NCERT Chapters to Revise",
+        heading: "Textbook Topics to Revise",
         content:
-          "These question patterns align with Class 5 NCERT Maths chapters: Parts and Wholes, Tenths and Hundredths, Area and its Boundary, Ways to Multiply and Divide, and Smart Charts. Revise the related chapter before practising each section.",
+          "Before practising, revise the matching sections in your prescribed Class 5 mathematics textbook: place value, fractions, decimals, perimeter, area, multiplication, division, and data handling. Chapter names vary by board and textbook edition.",
       },
     ],
     "best-science-projects-class-8": [

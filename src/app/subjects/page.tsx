@@ -15,6 +15,7 @@ export default function SubjectsPage() {
       title="All Subjects Covered"
       description={PAGE_SEO.subjects.description}
       showRegionalLanguages
+      showAds={false}
       backHref="/"
     >
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

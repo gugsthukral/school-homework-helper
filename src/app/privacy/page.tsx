@@ -7,7 +7,7 @@ import { buildPageMetadata } from "@/lib/seo-metadata";
 
 export const metadata: Metadata = buildPageMetadata(PAGE_SEO.privacy);
 
-const LAST_UPDATED = "June 20, 2026";
+const LAST_UPDATED = "July 19, 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -15,6 +15,7 @@ export default function PrivacyPolicyPage() {
       badge="Legal"
       title="Privacy Policy"
       description="We respect your privacy. This policy explains what information we collect and how we use it."
+      showAds={false}
       backHref="/"
     >
       <article className="glass-card w-full max-w-[1280px] rounded-2xl p-6 sm:p-8">
@@ -119,8 +120,8 @@ export default function PrivacyPolicyPage() {
               <strong className="text-slate-800">Supabase</strong> — authentication and database hosting
             </li>
             <li>
-              <strong className="text-slate-800">Google</strong> — sign-in (OAuth) and optional
-              advertising
+              <strong className="text-slate-800">Google</strong> — sign-in (OAuth), optional
+              analytics, consent management, and advertising
             </li>
             <li>
               <strong className="text-slate-800">OpenAI</strong> — AI text generation for our tools

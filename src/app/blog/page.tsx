@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BookOpen, Clock } from "lucide-react";
 import { PageLayout } from "@/components/layout/page-layout";
-import { blogPosts } from "@/lib/blog-posts";
+import { curatedBlogPosts } from "@/lib/blog-posts";
 import { PAGE_SEO } from "@/lib/seo-config";
 import { buildPageMetadata } from "@/lib/seo-metadata";
 
@@ -14,10 +14,11 @@ export default function BlogPage() {
       badge="Blog"
       title="Study Tips & Learning Resources"
       description="Articles to help students learn better, prepare for exams, and master every subject."
+      showAds={false}
       backHref="/"
     >
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {blogPosts.map((article) => (
+        {curatedBlogPosts.map((article) => (
           <Link
             key={article.slug}
             href={`/blog/${article.slug}`}

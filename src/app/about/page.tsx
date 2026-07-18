@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, Sparkles, Target, Users, Zap } from "lucide-react";import { PageLayout } from "@/components/layout/page-layout";
+import { Heart, Sparkles, Target, Users, Zap } from "lucide-react";
+import { PageLayout } from "@/components/layout/page-layout";
 import { aiTools, stats } from "@/lib/data";
+import { editorialIdentity } from "@/lib/editorial";
 import { PAGE_SEO } from "@/lib/seo-config";
 import { buildPageMetadata } from "@/lib/seo-metadata";
 
@@ -38,6 +40,7 @@ export default function AboutPage() {
       title="Helping Every Student Learn Smarter"
       description="School Homework Helper is an AI-powered education platform for Indian students from Class 1 to Class 12."
       showRegionalLanguages
+      showAds={false}
       backHref="/"
     >
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -96,6 +99,42 @@ export default function AboutPage() {
               <p className="mt-2 text-sm leading-relaxed text-slate-500">{item.description}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="mt-16">
+        <h2 className="mb-2 text-2xl font-bold text-slate-900">Publisher & Editorial Responsibility</h2>
+        <div className="glass-card rounded-2xl p-6">
+          <p className="leading-relaxed text-slate-600">
+            School Homework Helper is responsible for this website, its educational resources, and
+            its AI tool guidance. AI-assisted material is not treated as a substitute for a
+            prescribed textbook, teacher, or official curriculum notice.
+          </p>
+          {editorialIdentity.ownerName ? (
+            <p className="mt-4 text-sm text-slate-600">
+              <strong className="text-slate-900">Owner and editor:</strong>{" "}
+              {editorialIdentity.ownerName}
+              {editorialIdentity.ownerCredentials
+                ? ` — ${editorialIdentity.ownerCredentials}`
+                : ""}
+            </p>
+          ) : null}
+          <p className="mt-4 text-sm text-slate-600">
+            Editorial questions and correction requests:{" "}
+            <a
+              href={`mailto:${editorialIdentity.contactEmail}`}
+              className="font-medium text-orange-400 hover:underline"
+            >
+              {editorialIdentity.contactEmail}
+            </a>
+          </p>
+          <p className="mt-3 text-sm text-slate-500">
+            See our{" "}
+            <Link href="/editorial-policy" className="font-medium text-orange-400 hover:underline">
+              Editorial Policy
+            </Link>{" "}
+            for review statuses, sources, corrections, and AI disclosure.
+          </p>
         </div>
       </section>
 

@@ -17,7 +17,7 @@ export function BlogJsonLd({ post }: BlogJsonLdProps) {
     description: post.excerpt,
     url,
     datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
+    dateModified: post.updatedAt ?? post.publishedAt,
     author: {
       "@type": "Organization",
       name: SITE_NAME,
@@ -37,6 +37,12 @@ export function BlogJsonLd({ post }: BlogJsonLdProps) {
     },
     articleSection: post.category,
     keywords: [post.category, post.title, "CBSE", "homework help", "study tips"].join(", "),
+    ...(post.reviewer
+      ? { reviewedBy: { "@type": "Person", name: post.reviewer } }
+      : {}),
+    ...(post.sources && post.sources.length > 0
+      ? { citation: post.sources.map((source) => source.url) }
+      : {}),
   };
 
   const breadcrumbSchema = {

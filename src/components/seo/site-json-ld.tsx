@@ -45,14 +45,6 @@ export function SiteJsonLd() {
       logo: `${baseUrl}/logo.png`,
     },
     inLanguage: ["en-IN", "hi-IN"],
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${baseUrl}/?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 
   const toolsListSchema = {

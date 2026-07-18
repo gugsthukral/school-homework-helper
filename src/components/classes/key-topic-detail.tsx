@@ -25,6 +25,7 @@ export function KeyTopicDetail({ topic }: KeyTopicDetailProps) {
       badge={`Class ${topic.classNumber} · ${topic.subjectName}`}
       title={topic.title}
       description={topic.description}
+      showAds={false}
       backHref={`/classes/${topic.classSlug}`}
       backLabel={`Class ${topic.classNumber} Hub`}
     >

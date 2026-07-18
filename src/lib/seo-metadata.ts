@@ -48,7 +48,7 @@ export function buildPageMetadata({
       canonical: url,
     },
     robots: noIndex
-      ? { index: false, follow: false }
+      ? { index: false, follow: true }
       : { index: true, follow: true },
     openGraph: {
       title: absoluteTitle ? title : `${title} | ${SITE_NAME}`,

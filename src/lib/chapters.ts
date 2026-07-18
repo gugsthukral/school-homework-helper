@@ -173,7 +173,7 @@ export function buildChapterContent(entry: ChapterEntry): ChapterContent {
   const isBoardClass = entry.classNumber >= 10;
 
   return {
-    overview: `Welcome to Class ${entry.classNumber} ${entry.subjectName}, Chapter ${entry.chapterNumber}: "${entry.chapterTitle}". This page covers the complete CBSE (NCERT) syllabus for academic session ${ACADEMIC_SESSION}. Use it for homework help, revision, and exam preparation.`,
+    overview: `This directory page lists general study guidance and links for Class ${entry.classNumber} ${entry.subjectName}, Chapter ${entry.chapterNumber}: "${entry.chapterTitle}" for academic session ${ACADEMIC_SESSION}. Verify chapter requirements with your school and prescribed textbook.`,
     keyTopics: getChapterFocusTopics(
       entry.subjectName,
       entry.chapterTitle,

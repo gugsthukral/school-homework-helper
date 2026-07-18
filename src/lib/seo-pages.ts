@@ -104,7 +104,7 @@ function homeworkHelpPages(): SeoPage[] {
         classNumber: classNum,
         subject,
         title: `Class ${classNum} ${meta.name} Homework Help | Free AI Assistant`,
-        description: `Get free Class ${classNum} ${meta.name} homework help with step-by-step AI explanations. Practice questions, solved examples, and study tips for Class ${classNum} students.`,
+        description: `Get Class ${classNum} ${meta.name} homework support with AI explanations, study guidance, and links to relevant tools.`,
         keywords: [
           `class ${classNum} ${meta.name.toLowerCase()} homework`,
           `class ${classNum} ${subject} questions`,
@@ -160,7 +160,7 @@ function essayTopicPages(): SeoPage[] {
       type: "essay-topics" as const,
       classNumber: classNum,
       subject: "english" as const,
-      title: `Class ${classNum} English Essay Topics | 50+ Ideas & AI Writer`,
+      title: `Class ${classNum} English Essay Topics | 5 Ideas & AI Writer`,
       description: `Best Class ${classNum} English essay topics with writing tips. Generate full essays instantly with our AI Essay Generator for Class ${classNum} students.`,
       keywords: [
         `class ${classNum} english essay topics`,
@@ -215,8 +215,8 @@ function mathWordProblemPages(): SeoPage[] {
       type: "math-word-problems" as const,
       classNumber: classNum,
       subject: "maths" as const,
-      title: `Class ${classNum} Math Word Problems | Solved Examples & AI Help`,
-      description: `Practice Class ${classNum} math word problems with step-by-step solutions. Free AI Math Solver for arithmetic, algebra, and geometry word problems.`,
+      title: `Class ${classNum} Math Word Problems | Practice & AI Help`,
+      description: `Practice two Class ${classNum} math word problems and use the AI Math Solver to request a step-by-step explanation.`,
       keywords: [
         `class ${classNum} math word problems`,
         `word problems class ${classNum}`,
@@ -224,7 +224,7 @@ function mathWordProblemPages(): SeoPage[] {
         `math problem solver class ${classNum}`,
       ],
       h1: `Class ${classNum} Math Word Problems`,
-      intro: `Word problems are one of the toughest parts of Class ${classNum} Mathematics. Learn how to break them down, see solved examples, and use our AI Math Solver for any word problem.`,
+      intro: `Word problems can be challenging in Class ${classNum} Mathematics. Learn a general method, try two practice problems, and use our AI Math Solver when you need an explanation.`,
       sections: [
         {
           heading: "How to Solve Word Problems",
@@ -324,7 +324,7 @@ function boardExamPages(): SeoPage[] {
       type: "board-exam-preparation" as const,
       classNumber: classNum,
       title: `Class ${classNum} Board Exam Preparation | Study Plan & AI Tools`,
-      description: `Complete Class ${classNum} board exam preparation guide. Study plan, subject-wise tips, practice questions, and free AI homework help.`,
+      description: `A general Class ${classNum} exam preparation checklist with study planning tips and links to AI learning tools.`,
       keywords: [
         `class ${classNum} board exam preparation`,
         `class ${classNum} board exam study plan`,
@@ -416,7 +416,7 @@ function getScienceProjectIdeas(classNum: number): string {
 
 function getBoardExamPlan(classNum: number): string {
   const months = classNum >= 10 ? 6 : 4;
-  return `6 months out: Complete syllabus once. ${months - 2} months out: First revision + notes. 2 months out: Solve sample papers daily. 1 month out: Focus on weak topics. Final week: Light revision + rest.`;
+  return `${months} months out: Review the syllabus and make a realistic timetable. ${months - 2} months out: Begin revision and update your notes. 2 months out: Practise sample questions regularly. 1 month out: Focus on weak topics. Final week: Light revision and adequate rest.`;
 }
 
 export const seoPages: SeoPage[] = [

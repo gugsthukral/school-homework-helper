@@ -1,4 +1,4 @@
-import { blogPosts } from "@/lib/blog-posts";
+import { approvedBlogPosts } from "@/lib/blog-posts";
 import { getSiteUrl } from "@/lib/site-url";
 
 function escapeXml(value: string) {
@@ -14,7 +14,7 @@ export function GET() {
   const baseUrl = getSiteUrl();
   const now = new Date().toUTCString();
 
-  const items = blogPosts
+  const items = approvedBlogPosts
     .slice(0, 50)
     .map((post) => {
       const url = `${baseUrl}/blog/${post.slug}`;

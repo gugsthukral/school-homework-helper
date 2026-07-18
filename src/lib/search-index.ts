@@ -1,5 +1,4 @@
-import { blogPosts } from "@/lib/blog-posts";
-import { chapterRegistry, getChapterPath } from "@/lib/chapters";
+import { curatedBlogPosts } from "@/lib/blog-posts";
 import { aiTools, classes, navLinks, subjects } from "@/lib/data";
 import { REGIONAL_LANGUAGES_TAGLINE } from "@/lib/indian-languages";
 
@@ -37,6 +36,13 @@ const staticPages: SearchResult[] = [
   },
   {
     type: "page",
+    title: "Editorial Policy",
+    description: "How educational and AI-assisted content is reviewed, sourced, and corrected",
+    href: "/editorial-policy",
+    keywords: "editorial policy review sources corrections ai transparency",
+  },
+  {
+    type: "page",
     title: "Sign In",
     description: "Sign in to your account",
     href: "/signin",
@@ -66,7 +72,7 @@ const staticPages: SearchResult[] = [
 ];
 
 function buildSearchIndex(): SearchResult[] {
-  const blogResults: SearchResult[] = blogPosts.map((post) => ({
+  const blogResults: SearchResult[] = curatedBlogPosts.map((post) => ({
     type: "blog",
     title: post.title,
     description: post.excerpt,
@@ -98,14 +104,6 @@ function buildSearchIndex(): SearchResult[] {
     keywords: `${s.name} subject study notes`,
   }));
 
-  const chapterResults: SearchResult[] = chapterRegistry.map((chapter) => ({
-    type: "chapter",
-    title: `Class ${chapter.classNumber} ${chapter.subjectName}: ${chapter.chapterTitle}`,
-    description: `Chapter ${chapter.chapterNumber} — ${chapter.chapterTitle}`,
-    href: getChapterPath(chapter),
-    keywords: `class ${chapter.classNumber} ${chapter.subjectName} ${chapter.chapterTitle} chapter ${chapter.chapterNumber} ${chapter.subjectSlug}`,
-  }));
-
   const navResults: SearchResult[] = navLinks.map((link) => ({
     type: "page",
     title: link.label,
@@ -121,7 +119,6 @@ function buildSearchIndex(): SearchResult[] {
     ...classResults,
     ...subjectResults,
     ...blogResults,
-    ...chapterResults,
   ];
 }
 

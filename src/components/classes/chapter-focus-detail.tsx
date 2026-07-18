@@ -25,6 +25,7 @@ export function ChapterFocusDetail({ chapter, focus }: ChapterFocusDetailProps) 
       badge={`Class ${chapter.classNumber} · ${chapter.subjectName}`}
       title={focus.title}
       description={content.intro}
+      showAds={false}
       backHref={getChapterPath(chapter)}
       backLabel={`Chapter ${chapter.chapterNumber}: ${chapter.chapterTitle}`}
     >

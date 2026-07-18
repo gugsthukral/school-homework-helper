@@ -4,18 +4,10 @@ import { KeyTopicDetail } from "@/components/classes/key-topic-detail";
 import { getClassBySlug } from "@/lib/class-content";
 import {
   getKeyTopic,
-  keyTopicsRegistry,
 } from "@/lib/key-topics";
 import { buildPageMetadata } from "@/lib/seo-metadata";
 
 type Props = { params: Promise<{ slug: string; topic: string }> };
-
-export async function generateStaticParams() {
-  return keyTopicsRegistry.map((t) => ({
-    slug: t.classSlug,
-    topic: t.slug,
-  }));
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, topic } = await params;
@@ -32,6 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "CBSE study topics",
     ],
     path: `/classes/${slug}/topics/${topic}`,
+    noIndex: true,
   });
 }
 

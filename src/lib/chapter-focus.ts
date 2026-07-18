@@ -59,17 +59,17 @@ export function getChapterFocusTopics(
     },
     {
       slug: "ncert-chapter-notes",
-      title: `NCERT Class ${classNumber} ${subjectName} — Chapter notes`,
+      title: `Class ${classNumber} ${subjectName} textbook study checklist`,
       category: "ncert-notes",
     },
     {
       slug: "definitions-and-formulas",
-      title: "Important definitions and formulas",
+      title: "How to build a definitions and formulas sheet",
       category: "definitions",
     },
     {
       slug: "solved-examples",
-      title: "Solved examples and practice questions",
+      title: "How to practise textbook examples",
       category: "solved-examples",
     },
   ];
@@ -97,8 +97,8 @@ export function buildChapterFocusContent(
   const { chapterTitle, subjectName, classNumber, chapterNumber } = entry;
 
   const sharedHighlights = [
-    `Aligned with CBSE NCERT Class ${classNumber} syllabus`,
-    `Session ${ACADEMIC_SESSION} study material`,
+    `General Class ${classNumber} study guidance`,
+    `Check requirements for session ${ACADEMIC_SESSION} with your school`,
     `Chapter ${chapterNumber}: ${chapterTitle}`,
   ];
 
@@ -131,7 +131,7 @@ export function buildChapterFocusContent(
 
     case "ncert-notes":
       return {
-        intro: `NCERT-aligned chapter notes for Class ${classNumber} ${subjectName}, Chapter ${chapterNumber}: ${chapterTitle}. Use these points for quick revision before class tests and exams.`,
+        intro: `A general textbook study checklist for Class ${classNumber} ${subjectName}, Chapter ${chapterNumber}: ${chapterTitle}. This page does not replace your prescribed textbook or teacher's notes.`,
         sections: [
           {
             heading: "Chapter Summary",
@@ -153,7 +153,7 @@ export function buildChapterFocusContent(
 
     case "definitions":
       return {
-        intro: `Key definitions, terms, and formulas from "${chapterTitle}" for Class ${classNumber} ${subjectName}. Memorise these for short-answer and objective questions.`,
+        intro: `Use this checklist to create your own definitions, terms, and formulas sheet for "${chapterTitle}" in Class ${classNumber} ${subjectName}.`,
         sections: [
           {
             heading: "Definitions & Terminology",
@@ -178,10 +178,10 @@ export function buildChapterFocusContent(
 
     case "solved-examples":
       return {
-        intro: `Solved examples and practice questions for Class ${classNumber} ${subjectName} — ${chapterTitle}. Work through NCERT examples first, then try similar problems on your own.`,
+        intro: `A practice method for textbook examples in Class ${classNumber} ${subjectName} — ${chapterTitle}. This page does not contain chapter-specific solved answers.`,
         sections: [
           {
-            heading: "NCERT Solved Examples",
+            heading: "Textbook Example Practice",
             content: `Start with every solved example in the NCERT chapter on ${chapterTitle}. Cover the steps, then close the book and try the same problem again without help.`,
           },
           {

@@ -47,13 +47,14 @@ export function SubjectChaptersPage({
     <PageLayout
       badge={`Class ${classNumber}`}
       title={`Class ${classNumber} ${subjectName}`}
-      description={`Complete ${subjectName} syllabus with chapter-wise notes, study material, and homework help for CBSE session ${ACADEMIC_SESSION}.`}
+      description={`Chapter directory and general study links for Class ${classNumber} ${subjectName}, session ${ACADEMIC_SESSION}. Confirm the current syllabus with your school or education board.`}
+      showAds={false}
       backHref={`/classes/${classSlug}`}
       backLabel={`Class ${classNumber} Hub`}
     >
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <p className="text-sm text-slate-500">
-          {chapters.length} chapters · NCERT aligned · Session {ACADEMIC_SESSION}
+          {chapters.length} listed topics · Session {ACADEMIC_SESSION}
         </p>
         <Link
           href={tool.href}

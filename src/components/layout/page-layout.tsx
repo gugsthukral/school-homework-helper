@@ -14,6 +14,7 @@ type PageLayoutProps = {
   title: string;
   description: string;
   showRegionalLanguages?: boolean;
+  showAds?: boolean;
   children: React.ReactNode;
 };
 
@@ -24,6 +25,7 @@ export function PageLayout({
   title,
   description,
   showRegionalLanguages = false,
+  showAds = true,
   children,
 }: PageLayoutProps) {
   return (
@@ -52,11 +54,11 @@ export function PageLayout({
             )}
           </div>
 
-          <AdBanner placement="horizontal" className="mb-8" />
+          {showAds ? <AdBanner placement="horizontal" className="mb-8" /> : null}
 
           {children}
 
-          <AdBanner placement="inArticle" className="mt-10" />
+          {showAds ? <AdBanner placement="inArticle" className="mt-10" /> : null}
         </SiteContainer>
       </main>
       <Footer />

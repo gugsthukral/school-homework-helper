@@ -1,10 +1,8 @@
 import type { MetadataRoute } from "next";
-import { blogPosts } from "@/lib/blog-posts";
-import { getChapterFocusRegistry } from "@/lib/chapter-focus";
+import { approvedBlogPosts } from "@/lib/blog-posts";
 import { chapterRegistry } from "@/lib/chapters";
+import { validateContentQuality, validateSitemapUrls } from "@/lib/content-quality";
 import { aiTools } from "@/lib/data";
-import { keyTopicsRegistry } from "@/lib/key-topics";
-import { seoPages } from "@/lib/seo-pages";
 import { subjectList } from "@/lib/subject-content";
 import { getSiteUrl } from "@/lib/site-url";
 
@@ -27,68 +25,35 @@ const staticRoutes = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  validateContentQuality();
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: now,
     changeFrequency: route === "" ? "daily" : "weekly",
     priority: route === "" ? 1 : route.startsWith("/tools") ? 0.9 : 0.8,
   }));
 
-  const seoEntries: MetadataRoute.Sitemap = seoPages.map((page) => ({
-    url: `${baseUrl}/${page.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
-
-  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+  const blogEntries: MetadataRoute.Sitemap = approvedBlogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.publishedAt),
+    lastModified: new Date(post.updatedAt ?? post.publishedAt),
     changeFrequency: "monthly",
     priority: 0.75,
-  }));
-
-  const chapterEntries: MetadataRoute.Sitemap = chapterRegistry.map((c) => ({
-    url: `${baseUrl}/classes/${c.classSlug}/${c.subjectSlug}/${c.chapterSlug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.65,
   }));
 
   const subjectEntries: MetadataRoute.Sitemap = [
     ...new Set(chapterRegistry.map((c) => `${c.classSlug}/${c.subjectSlug}`)),
   ].map((key) => ({
     url: `${baseUrl}/classes/${key}`,
-    lastModified: now,
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  const keyTopicEntries: MetadataRoute.Sitemap = keyTopicsRegistry.map((t) => ({
-    url: `${baseUrl}/classes/${t.classSlug}/topics/${t.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.72,
-  }));
-
-  const chapterFocusEntries: MetadataRoute.Sitemap = getChapterFocusRegistry(
-    chapterRegistry
-  ).map((item) => ({
-    url: `${baseUrl}/classes/${item.classSlug}/${item.subjectSlug}/${item.chapterSlug}/focus/${item.focusSlug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.68,
-  }));
-
-  return [
+  const entries = [
     ...staticEntries,
-    ...seoEntries,
     ...blogEntries,
     ...subjectEntries,
-    ...keyTopicEntries,
-    ...chapterFocusEntries,
-    ...chapterEntries,
   ];
+
+  validateSitemapUrls(entries.map((entry) => entry.url));
+  return entries;
 }

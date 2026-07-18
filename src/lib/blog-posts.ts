@@ -5,7 +5,7 @@ import { enrichFeaturedPost } from "@/lib/blog/enrich-featured-posts";
 
 const rawFeaturedPosts: BlogPost[] = [  {
     slug: "100-maths-questions-class-5",
-    title: "100 Maths Questions for Class 5",
+    title: "19 Maths Practice Questions for Class 5",
     category: "Mathematics",
     readTime: "5 min read",
     excerpt: "Practice essential Class 5 maths problems covering fractions, decimals, and geometry.",
@@ -15,25 +15,25 @@ const rawFeaturedPosts: BlogPost[] = [  {
       {
         heading: "Why Practice Maths Daily in Class 5?",
         content:
-          "Class 5 is when students move from basic arithmetic to fractions, decimals, and introductory geometry. Regular practice builds confidence before the middle school years. This guide covers 100-style question patterns aligned with the CBSE 2026-27 syllabus.",
+          "Class 5 is when students move from basic arithmetic to fractions, decimals, and introductory geometry. Regular practice builds confidence before the middle school years. This guide provides 19 practice questions across these areas.",
       },
       {
-        heading: "Numbers & Place Value (Questions 1–20)",
+        heading: "Numbers & Place Value",
         content:
           "• Write 45,678 in expanded form\n• Round 3,847 to the nearest hundred\n• Find the predecessor and successor of 9,999\n• Compare: 4.5 ___ 4.50\n• Arrange in ascending order: 2.3, 2.03, 2.33",
       },
       {
-        heading: "Fractions & Decimals (Questions 21–50)",
+        heading: "Fractions & Decimals",
         content:
           "• Add: 2/5 + 1/5\n• Subtract: 7/8 − 3/8\n• Convert 0.75 to a fraction\n• Which is greater: 3/4 or 0.7?\n• A rope is 5/6 m long. How much remains if 1/3 m is cut?",
       },
       {
-        heading: "Geometry & Measurement (Questions 51–75)",
+        heading: "Geometry & Measurement",
         content:
           "• Name the type of angle: 90°\n• Perimeter of a square with side 7 cm\n• Area of a rectangle: length 8 cm, width 5 cm\n• Convert 2.5 km to metres\n• How many edges does a cube have?",
       },
       {
-        heading: "Word Problems (Questions 76–100)",
+        heading: "Word Problems",
         content:
           "• Ravi bought 3 notebooks at ₹25 each. Total cost?\n• A tank holds 500 L. 175 L is used. How much remains?\n• Divide 48 apples equally among 6 children\n• Find the average of 12, 15, and 18",
       },
@@ -206,16 +206,32 @@ const rawFeaturedPosts: BlogPost[] = [  {
   },
 ];
 
-const featuredPosts = rawFeaturedPosts.map(enrichFeaturedPost);
+export const curatedBlogPosts: BlogPost[] = rawFeaturedPosts
+  .map(enrichFeaturedPost)
+  .map((post): BlogPost => ({ ...post, reviewStatus: "editorial-review" }));
 
 const generatedPosts = buildGeneratedBlogPosts();
 
 export const blogPosts: BlogPost[] = [
-  ...featuredPosts,
-  ...generatedPosts.filter((p) => !featuredPosts.some((f) => f.slug === p.slug)),
+  ...curatedBlogPosts,
+  ...generatedPosts.filter((p) => !curatedBlogPosts.some((f) => f.slug === p.slug)),
 ].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 
 export const blogPostMap = new Map(blogPosts.map((p) => [p.slug, p]));
+const curatedBlogSlugs = new Set(curatedBlogPosts.map((post) => post.slug));
+
+export function isCuratedBlogPost(slug: string) {
+  return curatedBlogSlugs.has(slug);
+}
+
+export const approvedBlogPosts = curatedBlogPosts.filter(
+  (post) => post.reviewStatus === "reviewed"
+);
+const approvedBlogSlugs = new Set(approvedBlogPosts.map((post) => post.slug));
+
+export function isApprovedBlogPost(slug: string) {
+  return approvedBlogSlugs.has(slug);
+}
 
 export function getBlogPost(slug: string) {
   return blogPostMap.get(slug);

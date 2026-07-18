@@ -2,13 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SeoPageTemplate } from "@/components/seo/seo-page-template";
 import { buildPageMetadata } from "@/lib/seo-metadata";
-import { getSeoPage, seoPages } from "@/lib/seo-pages";
+import { getSeoPage } from "@/lib/seo-pages";
 
 type Props = { params: Promise<{ slug: string }> };
-
-export async function generateStaticParams() {
-  return seoPages.map((page) => ({ slug: page.slug }));
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -21,6 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: page.keywords,
     path: `/${page.slug}`,
     type: "article",
+    noIndex: true,
     absoluteTitle: page.title.includes("|"),
   });
 }
